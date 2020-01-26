@@ -2054,6 +2054,26 @@ namespace THD.Core.Api.Repository.DataHandler
                 resp.filename13 = report_name_13;
                 resp.filebase1364 = fBase64;
 
+                // Report 14 ----------------------------------------------------------------------------------------------------------
+                rptR14 rpt14 = new rptR14();
+                ObjectDataSource ds14 = new ObjectDataSource();
+                ds14.Constructor = new ObjectConstructorInfo();
+                //ds13.DataSource = rptData;
+
+                string report_name_14 = "meeting_r14_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_full_path_14 = _IEnvironmentConfig.PathReport + report_name_14;
+
+                rpt14.DataSource = ds14;
+                rpt14.ExportToPdf(report_full_path_14);
+
+                if (File.Exists(report_full_path_14))
+                {
+                    string readFileByte = "data:application/pdf;base64," + Convert.ToBase64String(File.ReadAllBytes(report_full_path_14));
+                    fBase64 = readFileByte;
+                }
+                resp.filename14 = report_name_14;
+                resp.filebase1464 = fBase64;
+
             }
             catch (Exception ex)
             {
