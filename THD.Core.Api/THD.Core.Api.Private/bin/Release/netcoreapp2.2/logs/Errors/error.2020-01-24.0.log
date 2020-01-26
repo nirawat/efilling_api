@@ -1,0 +1,304 @@
+2020/01/24 21:17:33.973    45   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.DocMenuB1Repository.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuB1Repository.cs:line 44
+   at THD.Core.Api.Business.DocMenuBService.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuBService.cs:line 37
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.MenuB1InterfaceData(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:19:39.192    30   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.DocMenuB1Repository.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuB1Repository.cs:line 44
+   at THD.Core.Api.Business.DocMenuBService.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuBService.cs:line 37
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.MenuB1InterfaceData(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:19:51.518    30   System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at THD.Core.Api.Repository.DataHandler.DocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(Int32 year) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMeetingRoundRepository.cs:line 50
+   at THD.Core.Api.Repository.DataHandler.DocMenuC1Repository.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuC1Repository.cs:line 66
+   at THD.Core.Api.Business.DocMenuCService.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuCService.cs:line 47
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.MenuC1InterfaceData(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:20:25.544    45   System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at THD.Core.Api.Repository.DataHandler.DocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(Int32 year) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMeetingRoundRepository.cs:line 50
+   at THD.Core.Api.Repository.DataHandler.DocMenuC1Repository.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuC1Repository.cs:line 66
+   at THD.Core.Api.Business.DocMenuCService.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuCService.cs:line 47
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.MenuC1InterfaceData(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:20:34.225    30   System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at THD.Core.Api.Repository.DataHandler.DocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(Int32 year) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMeetingRoundRepository.cs:line 50
+   at THD.Core.Api.Repository.DataHandler.DocMenuC1Repository.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuC1Repository.cs:line 66
+   at THD.Core.Api.Business.DocMenuCService.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuCService.cs:line 47
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.MenuC1InterfaceData(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:21:46.353    27   System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at THD.Core.Api.Repository.DataHandler.DocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(Int32 year) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMeetingRoundRepository.cs:line 50
+   at THD.Core.Api.Repository.DataHandler.DocMenuC1Repository.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuC1Repository.cs:line 66
+   at THD.Core.Api.Business.DocMenuCService.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuCService.cs:line 47
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.MenuC1InterfaceData(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:31:23.609    87   System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at THD.Core.Api.Repository.DataHandler.DocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(Int32 year) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMeetingRoundRepository.cs:line 50
+   at THD.Core.Api.Repository.DataHandler.DocMenuC1Repository.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuC1Repository.cs:line 66
+   at THD.Core.Api.Business.DocMenuCService.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuCService.cs:line 47
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.MenuC1InterfaceData(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:32:01.533    80   System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at THD.Core.Api.Repository.DataHandler.DocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(Int32 year) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMeetingRoundRepository.cs:line 50
+   at THD.Core.Api.Repository.DataHandler.DocMenuC1Repository.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuC1Repository.cs:line 66
+   at THD.Core.Api.Business.DocMenuCService.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuCService.cs:line 47
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.MenuC1InterfaceData(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:32:12.279    80   System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at THD.Core.Api.Repository.DataHandler.DocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(Int32 year) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMeetingRoundRepository.cs:line 50
+   at THD.Core.Api.Repository.DataHandler.DocMenuC1Repository.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuC1Repository.cs:line 66
+   at THD.Core.Api.Business.DocMenuCService.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuCService.cs:line 47
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.MenuC1InterfaceData(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:33:09.859    117   System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at THD.Core.Api.Repository.DataHandler.DocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(Int32 year) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMeetingRoundRepository.cs:line 50
+   at THD.Core.Api.Repository.DataHandler.DocMenuC1Repository.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuC1Repository.cs:line 66
+   at THD.Core.Api.Business.DocMenuCService.MenuC1InterfaceDataAsync(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuCService.cs:line 47
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.MenuC1InterfaceData(String RegisterId) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 21:37:19.289    114   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.DocMenuB1Repository.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuB1Repository.cs:line 44
+   at THD.Core.Api.Business.DocMenuBService.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuBService.cs:line 37
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.MenuB1InterfaceData(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/01/24 22:13:31.409    12   System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsClosed'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.CompleteAsyncExecuteReader()
+   at System.Data.SqlClient.SqlCommand.EndExecuteNonQueryInternal(IAsyncResult asyncResult)
+   at System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(IAsyncResult asyncResult)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncCoreLogic(IAsyncResult iar, Func`2 endFunction, Action`1 endAction, Task`1 promise, Boolean requiresSynchronization)
+--- End of stack trace from previous location where exception was thrown ---
+   at THD.Core.Api.Repository.DataHandler.DocMenuB1Repository.AddDocMenuB1Async(ModelMenuB1 model) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuB1Repository.cs:line 381
+   at THD.Core.Api.Business.DocMenuBService.AddDocMenuB1Async(ModelMenuB1 model) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuBService.cs:line 105
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.AddDocMenuB1(ModelMenuB1 model) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 94
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+ClientConnectionId:c78976ad-a9de-4a0c-90e5-2778960a376d
+Error Number:207,State:1,Class:16
+2020/01/24 22:13:51.192    20   System.Data.SqlClient.SqlException (0x80131904): Invalid column name 'IsClosed'.
+   at System.Data.SqlClient.SqlConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at System.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at System.Data.SqlClient.TdsParser.TryRun(RunBehavior runBehavior, SqlCommand cmdHandler, SqlDataReader dataStream, BulkCopySimpleResultSet bulkCopyHandler, TdsParserStateObject stateObj, Boolean& dataReady)
+   at System.Data.SqlClient.SqlCommand.FinishExecuteReader(SqlDataReader ds, RunBehavior runBehavior, String resetOptionsString)
+   at System.Data.SqlClient.SqlCommand.CompleteAsyncExecuteReader()
+   at System.Data.SqlClient.SqlCommand.EndExecuteNonQueryInternal(IAsyncResult asyncResult)
+   at System.Data.SqlClient.SqlCommand.EndExecuteNonQuery(IAsyncResult asyncResult)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncCoreLogic(IAsyncResult iar, Func`2 endFunction, Action`1 endAction, Task`1 promise, Boolean requiresSynchronization)
+--- End of stack trace from previous location where exception was thrown ---
+   at THD.Core.Api.Repository.DataHandler.DocMenuB1Repository.AddDocMenuB1Async(ModelMenuB1 model) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuB1Repository.cs:line 381
+   at THD.Core.Api.Business.DocMenuBService.AddDocMenuB1Async(ModelMenuB1 model) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuBService.cs:line 105
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.AddDocMenuB1(ModelMenuB1 model) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 94
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+ClientConnectionId:c78976ad-a9de-4a0c-90e5-2778960a376d
+Error Number:207,State:1,Class:16
+2020/01/24 22:15:25.881    24   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.DocMenuB1Repository.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuB1Repository.cs:line 44
+   at THD.Core.Api.Business.DocMenuBService.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Business\DocMenuBService.cs:line 37
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.MenuB1InterfaceData(String userid, String username) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 40
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="19.2.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v19.2, Version=19.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="rptR15_1_2" Margins="50, 50, 50, 50" PaperKind="A4" PageWidth="827" PageHeight="1169" Version="19.2" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Bands>
+    <Item1 Ref="2" ControlType="TopMarginBand" Name="TopMargin" HeightF="50" />
+    <Item2 Ref="3" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="50" />
+    <Item3 Ref="4" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="99.62349">
+      <Controls>
+        <Item1 Ref="5" ControlType="XRLabel" Name="label8" Multiline="true" Text="วาระที่ 1.2" TextAlignment="TopRight" SizeF="711,33" LocationFloat="10.0100832, 0" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="6" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="7" ControlType="XRLabel" Name="label7" Multiline="true" Text="ระเบียบวาระที่ 1.2 เรื่องที่ฝ่ายเลขานุการแจ้งให้ที่ประชุมทราบ" TextAlignment="TopLeft" SizeF="711,33" LocationFloat="10.0100832, 32.9999924" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="8" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="9" ControlType="XRLabel" Name="label1" Multiline="true" Text="วารที่ 1.2.1" TextAlignment="TopLeft" SizeF="711,32.9999924" LocationFloat="10.0100832, 66.6235" Font="TH Sarabun New, 18pt" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="10" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+      </Controls>
+    </Item3>
+    <Item4 Ref="11" ControlType="GroupHeaderBand" Name="GroupHeader1" GroupUnion="WithFirstDetail" HeightF="76.29318">
+      <Controls>
+        <Item1 Ref="12" ControlType="XRLabel" Name="label3" Multiline="true" Text="สรุปเรื่อง" TextAlignment="TopLeft" SizeF="127.666695,32.9999924" LocationFloat="10.0000067, 0" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="13" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="14" ControlType="XRLabel" Name="label2" Multiline="true" Text="มติ" TextAlignment="TopLeft" SizeF="32.8749924,32.9999924" LocationFloat="120.42675, 43.29319" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="15" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+      </Controls>
+    </Item4>
+    <Item5 Ref="16" ControlType="DetailBand" Name="Detail" HeightF="41.79166">
+      <Controls>
+        <Item1 Ref="17" ControlType="XRLine" Name="line1" SizeF="709.375,2.08333325" LocationFloat="11.6350489, 39.70833" />
+      </Controls>
+    </Item5>
+  </Bands>
+  <StyleSheet>
+    <Item1 Ref="18" Name="Title" BorderStyle="Inset" Font="Arial, 14.25pt" ForeColor="255,64,70,80" BackColor="Transparent" BorderColor="Black" Sides="None" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+    <Item2 Ref="19" Name="DetailCaption1" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt, style=Bold" ForeColor="255,64,70,80" BackColor="White" BorderColor="White" Sides="Left" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="2" />
+    <Item3 Ref="20" Name="DetailData1" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt" ForeColor="Black" BorderColor="Transparent" Sides="Left" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="2" />
+    <Item4 Ref="21" Name="DetailData3_Odd" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt" ForeColor="Black" BackColor="255,243,245,248" BorderColor="Transparent" Sides="None" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="1" />
+    <Item5 Ref="22" Name="PageInfo" BorderStyle="Inset" Padding="2,2,0,0,100" Font="Arial, 8.25pt, style=Bold" ForeColor="255,64,70,80" StringFormat="Near;Near;0;None;Character;Default" />
+  </StyleSheet>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.ObjectBinding.ObjectDataSource,DevExpress.DataAccess.v19.2" Name="objectDataSource1" Base64="PE9iamVjdERhdGFTb3VyY2UgTmFtZT0ib2JqZWN0RGF0YVNvdXJjZTEiPjxEYXRhU291cmNlIFR5cGU9IlRIRC5Db3JlLkFwaS5Nb2RlbHMuUmVwb3J0TW9kZWxzLm1vZGVsX0xpc3RBZ2VuZGFEYXRhXzIsIFRIRC5Db3JlLkFwaS5Nb2RlbHMsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsIiAvPjxDb25zdHJ1Y3RvciAvPjwvT2JqZWN0RGF0YVNvdXJjZT4=" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

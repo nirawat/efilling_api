@@ -1,0 +1,239 @@
+﻿using System;
+using System.Collections.Generic;
+using THD.Core.Api.Repository.DataContext;
+using THD.Core.Api.Repository.Interface;
+using Microsoft.Extensions.Configuration;
+using THD.Core.Api.Entities.Tables;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using THD.Core.Api.Helpers;
+using System.Data;
+using THD.Core.Api.Models;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System.Globalization;
+using THD.Core.Api.Models.ReportModels;
+
+namespace THD.Core.Api.Repository.DataHandler
+{
+    public class DocMenuD1Repository : IDocMenuD1Repository
+    {
+        private readonly IConfiguration _configuration;
+        private readonly string ConnectionString;
+        private readonly IRegisterUserRepository _IRegisterUserRepository;
+        private readonly IDocMenuReportRepository _IDocMenuReportRepository;
+        public DocMenuD1Repository(
+            IConfiguration configuration,
+            IRegisterUserRepository IRegisterUserRepository,
+            IDocMenuReportRepository DocMenuReportRepository)
+        {
+            _configuration = configuration;
+            ConnectionString = Encoding.UTF8.GetString(Convert.FromBase64String(_configuration.GetConnectionString("SqlConnection")));
+            _IRegisterUserRepository = IRegisterUserRepository;
+            _IDocMenuReportRepository = DocMenuReportRepository;
+        }
+
+        public async Task<ModelMenuD1_InterfaceData> MenuD1InterfaceDataAsync(string RegisterId)
+        {
+            ModelMenuD1_InterfaceData resp = new ModelMenuD1_InterfaceData();
+
+            resp.ListProjectNumber = new List<ModelSelectOption>();
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M020");
+
+            if (resp.UserPermission != null && resp.UserPermission.alldata == true)
+            {
+                resp.ListProjectNumber = await GetAllProjectForD1Async("", "");
+            }
+            else
+            {
+                resp.ListProjectNumber = await GetAllProjectForD1Async(RegisterId, "");
+            }
+            return resp;
+        }
+
+        public async Task<IList<ModelSelectOption>> GetAllProjectForD1Async(string AssignerCode, string DocProcess)
+        {
+
+            string sql = "SELECT * FROM [dbo].[Doc_Process] " +
+                        "WHERE project_number IS NOT NULL AND project_type='PROJECT' AND doc_process_to NOT IN('CLOSED','D2')";
+
+            if (!string.IsNullOrEmpty(AssignerCode))
+            {
+                sql += " AND project_by='" + Encoding.UTF8.GetString(Convert.FromBase64String(AssignerCode)) + "' ";
+            }
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelSelectOption> e = new List<ModelSelectOption>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelSelectOption item = new ModelSelectOption();
+                            item.value = reader["project_number"].ToString();
+                            item.label = reader["project_number"].ToString() + " : " + reader["project_name_thai"].ToString();
+                            e.Add(item);
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
+        public async Task<ModelMenuD1ProjectNumberData> GetProjectNumberWithDataD1Async(string project_number)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_getdata_for_d1", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 50).Value = project_number;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            ModelMenuD1ProjectNumberData e = new ModelMenuD1ProjectNumberData();
+                            while (await reader.ReadAsync())
+                            {
+                                e.projectnamethai = reader[1].ToString();
+                                e.projectnameeng = reader[2].ToString();
+                                e.projectheadname = reader[3].ToString();
+                                e.facultyname = reader[4].ToString();
+                                e.positionname = reader[5].ToString();
+                                e.certificatetype = reader[6].ToString();
+                                e.advisorsnamethai = "";
+                                e.accepttypenamethai = reader[6].ToString();
+                                e.dateofapproval = Convert.ToDateTime(reader[7]).ToString("dd/MM/yyyy");
+                            }
+                            e.listRenewDate = new List<ModelMenuD1RenewTable>();
+                            e.listRenewDate = await GetListRenewDateAsync(project_number);
+                            return e;
+                        }
+
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return null;
+
+        }
+
+        public async Task<IList<ModelMenuD1RenewTable>> GetListRenewDateAsync(string project_number)
+        {
+
+            string sql = "SELECT * FROM [dbo].[Doc_MenuD1] WHERE project_number='" + project_number + "' ORDER BY doc_id ASC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelMenuD1RenewTable> e = new List<ModelMenuD1RenewTable>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelMenuD1RenewTable item = new ModelMenuD1RenewTable();
+                            item.renewround = Convert.ToInt32(reader["RenewRound"]);
+                            item.acceptdate = Convert.ToDateTime(reader["AcceptDate"]).ToString("dd/MM/yyyy");
+                            item.expiredate = Convert.ToDateTime(reader["ExpireDate"]).ToString("dd/MM/yyyy");
+                            e.Add(item);
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
+        public async Task<ModelResponseMessage> AddDocMenuD1Async(ModelMenuD1 model)
+        {
+
+            var cultureInfo = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            ModelResponseMessage resp = new ModelResponseMessage();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_doc_menu_d1", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@doc_date", SqlDbType.DateTime).Value = model.docdate.ToString("yyyy-MM-dd");
+                        cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 20).Value = ParseDataHelper.ConvertDBNull(model.projectnumber);
+                        cmd.Parameters.Add("@project_head_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectheadname);
+                        cmd.Parameters.Add("@faculty_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.facultyname);
+                        cmd.Parameters.Add("@project_name_thai", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnamethai);
+                        cmd.Parameters.Add("@project_name_eng", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnameeng);
+                        cmd.Parameters.Add("@accept_type_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.accepttypenamethai);
+                        cmd.Parameters.Add("@advisorsNameThai", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.advisorsnamethai);
+                        cmd.Parameters.Add("@acceptProjectNo", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.acceptprojectno);
+                        cmd.Parameters.Add("@acceptResult", SqlDbType.Int).Value = model.acceptresult;
+                        cmd.Parameters.Add("@acceptCondition", SqlDbType.Int).Value = model.acceptcondition;
+                        cmd.Parameters.Add("@acceptDate", SqlDbType.DateTime).Value = Convert.ToDateTime(model.acceptdate);
+
+                        DateTime dtExpire = Convert.ToDateTime(model.acceptdate).AddDays(365);
+                        cmd.Parameters.Add("@expireDate", SqlDbType.DateTime).Value = dtExpire;
+
+                        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                        rStatus.Direction = ParameterDirection.Output;
+                        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                        rMessage.Direction = ParameterDirection.Output;
+                        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
+                        rDocId.Direction = ParameterDirection.Output;
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                        {
+                            resp.Status = true;
+
+                            model_rpt_9_file rpt = await _IDocMenuReportRepository.GetReportR9Async((int)cmd.Parameters["@rDocId"].Value);
+
+                            resp.filename = rpt.filename;
+                            resp.filebase64 = rpt.filebase64;
+                        }
+                        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            return resp;
+        }
+
+    }
+}
