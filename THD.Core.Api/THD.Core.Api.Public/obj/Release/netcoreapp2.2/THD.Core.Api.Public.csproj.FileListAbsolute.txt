@@ -66,3 +66,37 @@ C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\ob
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.csproj.CopyComplete
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.dll
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\nlog.config
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\appsettings.Development.json
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\appsettings.json
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\Properties\launchSettings.json
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Public.deps.json
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Public.runtimeconfig.json
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Public.runtimeconfig.dev.json
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Public.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Public.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Business.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Business.Interface.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Entities.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Helpers.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Models.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Private.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Repository.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Repository.Interface.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Models.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Private.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Business.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Business.Interface.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Entities.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Helpers.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Repository.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Repository.Interface.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.csprojAssemblyReference.cache
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.RazorAssemblyInfo.cache
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.RazorAssemblyInfo.cs
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.AssemblyInfoInputs.cache
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.AssemblyInfo.cs
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.RazorTargetAssemblyInfo.cache
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.csproj.CopyComplete
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.pdb

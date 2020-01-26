@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {}
+    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {}
   },
   "projects": {
-    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj",
+        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj",
         "projectName": "THD.Core.Api.Models",
-        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj",
-        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
-        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\obj\\",
+        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj",
+        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
+        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[2.0.3, )",
               "autoReferenced": true
+            },
+            "System.ComponentModel.Annotations": {
+              "target": "Package",
+              "version": "[4.7.0, )"
             }
           },
           "imports": [
@@ -60,7 +64,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

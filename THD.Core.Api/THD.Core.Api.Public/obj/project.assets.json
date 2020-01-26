@@ -2,12 +2,12 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
-      "DevExpress.Charts/19.2.4": {
+      "DevExpress.Charts/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Charts.Core": "[19.2.4]",
-          "DevExpress.Data": "[19.2.4]",
-          "DevExpress.Printing.Core": "[19.2.4]",
+          "DevExpress.Charts.Core": "[19.2.5]",
+          "DevExpress.Data": "[19.2.5]",
+          "DevExpress.Printing.Core": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.Drawing.Common": "4.5.0"
         },
@@ -18,10 +18,10 @@
           "lib/netstandard2.0/DevExpress.XtraCharts.v19.2.dll": {}
         }
       },
-      "DevExpress.Charts.Core/19.2.4": {
+      "DevExpress.Charts.Core/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
           "NETStandard.Library": "2.0.3"
         },
         "compile": {
@@ -31,10 +31,10 @@
           "lib/netstandard2.0/DevExpress.Charts.v19.2.Core.dll": {}
         }
       },
-      "DevExpress.CodeParser/19.2.4": {
+      "DevExpress.CodeParser/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.CodeDom": "4.4.0"
         },
@@ -45,7 +45,7 @@
           "lib/netstandard2.0/DevExpress.CodeParser.v19.2.dll": {}
         }
       },
-      "DevExpress.Data/19.2.4": {
+      "DevExpress.Data/19.2.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Configuration": "1.1.2",
@@ -67,13 +67,13 @@
           "lib/netstandard2.0/DevExpress.Data.v19.2.dll": {}
         }
       },
-      "DevExpress.DataAccess/19.2.4": {
+      "DevExpress.DataAccess/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.CodeParser": "[19.2.4]",
-          "DevExpress.Data": "[19.2.4]",
-          "DevExpress.Printing.Core": "[19.2.4]",
-          "DevExpress.Xpo": "[19.2.4]",
+          "DevExpress.CodeParser": "[19.2.5]",
+          "DevExpress.Data": "[19.2.5]",
+          "DevExpress.Printing.Core": "[19.2.5]",
+          "DevExpress.Xpo": "[19.2.5]",
           "Microsoft.Extensions.Configuration": "1.1.2",
           "Microsoft.Extensions.Configuration.Json": "1.1.2",
           "Microsoft.Extensions.PlatformAbstractions": "1.1.0",
@@ -90,10 +90,10 @@
           "lib/netstandard2.0/DevExpress.DataAccess.v19.2.dll": {}
         }
       },
-      "DevExpress.Gauges.Core/19.2.4": {
+      "DevExpress.Gauges.Core/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.Drawing.Common": "4.5.0"
         },
@@ -104,12 +104,12 @@
           "lib/netstandard2.0/DevExpress.XtraGauges.v19.2.Core.dll": {}
         }
       },
-      "DevExpress.Office.Core/19.2.4": {
+      "DevExpress.Office.Core/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
-          "DevExpress.Pdf.Core": "[19.2.4]",
-          "DevExpress.Printing.Core": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
+          "DevExpress.Pdf.Core": "[19.2.5]",
+          "DevExpress.Printing.Core": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.Drawing.Common": "4.5.0"
         },
@@ -120,10 +120,10 @@
           "lib/netstandard2.0/DevExpress.Office.v19.2.Core.dll": {}
         }
       },
-      "DevExpress.Pdf.Core/19.2.4": {
+      "DevExpress.Pdf.Core/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.Drawing.Common": "4.5.0",
           "System.Reflection.Emit": "4.3.0",
@@ -136,11 +136,11 @@
           "lib/netstandard2.0/DevExpress.Pdf.v19.2.Core.dll": {}
         }
       },
-      "DevExpress.PivotGrid.Core/19.2.4": {
+      "DevExpress.PivotGrid.Core/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
-          "DevExpress.Printing.Core": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
+          "DevExpress.Printing.Core": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.Drawing.Common": "4.5.0"
         },
@@ -151,11 +151,11 @@
           "lib/netstandard2.0/DevExpress.PivotGrid.v19.2.Core.dll": {}
         }
       },
-      "DevExpress.Printing.Core/19.2.4": {
+      "DevExpress.Printing.Core/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
-          "DevExpress.Pdf.Core": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
+          "DevExpress.Pdf.Core": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.ComponentModel.Annotations": "4.4.0",
           "System.Drawing.Common": "4.5.0",
@@ -170,22 +170,22 @@
           "lib/netstandard2.0/DevExpress.Printing.v19.2.Core.dll": {}
         }
       },
-      "DevExpress.Reporting.Core/19.2.4": {
+      "DevExpress.Reporting.Core/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Charts": "[19.2.4]",
-          "DevExpress.Charts.Core": "[19.2.4]",
-          "DevExpress.CodeParser": "[19.2.4]",
-          "DevExpress.Data": "[19.2.4]",
-          "DevExpress.DataAccess": "[19.2.4]",
-          "DevExpress.Gauges.Core": "[19.2.4]",
-          "DevExpress.Office.Core": "[19.2.4]",
-          "DevExpress.PivotGrid.Core": "[19.2.4]",
-          "DevExpress.Printing.Core": "[19.2.4]",
-          "DevExpress.RichEdit.Core": "[19.2.4]",
-          "DevExpress.RichEdit.Export": "[19.2.4]",
-          "DevExpress.Sparkline.Core": "[19.2.4]",
-          "DevExpress.Xpo": "[19.2.4]",
+          "DevExpress.Charts": "[19.2.5]",
+          "DevExpress.Charts.Core": "[19.2.5]",
+          "DevExpress.CodeParser": "[19.2.5]",
+          "DevExpress.Data": "[19.2.5]",
+          "DevExpress.DataAccess": "[19.2.5]",
+          "DevExpress.Gauges.Core": "[19.2.5]",
+          "DevExpress.Office.Core": "[19.2.5]",
+          "DevExpress.PivotGrid.Core": "[19.2.5]",
+          "DevExpress.Printing.Core": "[19.2.5]",
+          "DevExpress.RichEdit.Core": "[19.2.5]",
+          "DevExpress.RichEdit.Export": "[19.2.5]",
+          "DevExpress.Sparkline.Core": "[19.2.5]",
+          "DevExpress.Xpo": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.CodeDom": "4.4.0",
           "System.Collections.Immutable": "1.5.0",
@@ -200,13 +200,13 @@
           "lib/netstandard2.0/DevExpress.XtraReports.v19.2.dll": {}
         }
       },
-      "DevExpress.RichEdit.Core/19.2.4": {
+      "DevExpress.RichEdit.Core/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
-          "DevExpress.Office.Core": "[19.2.4]",
-          "DevExpress.Pdf.Core": "[19.2.4]",
-          "DevExpress.Printing.Core": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
+          "DevExpress.Office.Core": "[19.2.5]",
+          "DevExpress.Pdf.Core": "[19.2.5]",
+          "DevExpress.Printing.Core": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.Drawing.Common": "4.5.0"
         },
@@ -217,13 +217,13 @@
           "lib/netstandard2.0/DevExpress.RichEdit.v19.2.Core.dll": {}
         }
       },
-      "DevExpress.RichEdit.Export/19.2.4": {
+      "DevExpress.RichEdit.Export/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
-          "DevExpress.Office.Core": "[19.2.4]",
-          "DevExpress.Printing.Core": "[19.2.4]",
-          "DevExpress.RichEdit.Core": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
+          "DevExpress.Office.Core": "[19.2.5]",
+          "DevExpress.Printing.Core": "[19.2.5]",
+          "DevExpress.RichEdit.Core": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.Drawing.Common": "4.5.0"
         },
@@ -234,10 +234,10 @@
           "lib/netstandard2.0/DevExpress.RichEdit.v19.2.Export.dll": {}
         }
       },
-      "DevExpress.Sparkline.Core/19.2.4": {
+      "DevExpress.Sparkline.Core/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
           "NETStandard.Library": "2.0.3",
           "System.Drawing.Common": "4.5.0"
         },
@@ -248,10 +248,10 @@
           "lib/netstandard2.0/DevExpress.Sparkline.v19.2.Core.dll": {}
         }
       },
-      "DevExpress.Xpo/19.2.4": {
+      "DevExpress.Xpo/19.2.5": {
         "type": "package",
         "dependencies": {
-          "DevExpress.Data": "[19.2.4]",
+          "DevExpress.Data": "[19.2.5]",
           "Microsoft.Extensions.DependencyInjection": "2.0.0",
           "NETStandard.Library": "2.0.3",
           "System.Data.SqlClient": "4.5.0",
@@ -3487,7 +3487,7 @@
           "lib/netstandard1.3/System.Collections.Specialized.dll": {}
         }
       },
-      "System.ComponentModel.Annotations/4.6.0": {
+      "System.ComponentModel.Annotations/4.7.0": {
         "type": "package",
         "compile": {
           "ref/netstandard2.0/System.ComponentModel.Annotations.dll": {}
@@ -5054,6 +5054,9 @@
       "THD.Core.Api.Models/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "System.ComponentModel.Annotations": "4.7.0"
+        },
         "compile": {
           "bin/placeholder/THD.Core.Api.Models.dll": {}
         },
@@ -5122,14 +5125,14 @@
     }
   },
   "libraries": {
-    "DevExpress.Charts/19.2.4": {
-      "sha512": "KGB/ecG3e8cdAbG+cgKa7LEkQHKL/yhp1Fg5loa18m1i2IPscDM6rNIoD5oOps4bhWiC9tEGMfA4xj13ag98eg==",
+    "DevExpress.Charts/19.2.5": {
+      "sha512": "647xjxWQfCb+/SS7KbBWOR2SCqB1Oi7NkPCppp5jiup964WMtZ58Of1ToPc1X1H4dp+5FB0aIqmENBbGGD8i8w==",
       "type": "package",
-      "path": "devexpress.charts/19.2.4",
+      "path": "devexpress.charts/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.charts.19.2.4.nupkg.sha512",
+        "devexpress.charts.19.2.5.nupkg.sha512",
         "devexpress.charts.nuspec",
         "lib/net452/DevExpress.XtraCharts.v19.2.dll",
         "lib/net452/DevExpress.XtraCharts.v19.2.xml",
@@ -5137,40 +5140,40 @@
         "lib/netstandard2.0/DevExpress.XtraCharts.v19.2.xml"
       ]
     },
-    "DevExpress.Charts.Core/19.2.4": {
-      "sha512": "IQ8FZif+EnIUnzKVF3DZlJ6hEqqgm1shVIHY+zDxSOsLGtaMXRs+3NNvrF/1ueBRdKNRkiEfjG/wzHTs2oDB9A==",
+    "DevExpress.Charts.Core/19.2.5": {
+      "sha512": "RUFtNQZxUvx0L614pHryiSNWoTmKP9yhUVx3n3IvSJp3qkX1tvF55mmvUSM9/ITR1B6Og0Njn9vNAA2YC6ZECQ==",
       "type": "package",
-      "path": "devexpress.charts.core/19.2.4",
+      "path": "devexpress.charts.core/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.charts.core.19.2.4.nupkg.sha512",
+        "devexpress.charts.core.19.2.5.nupkg.sha512",
         "devexpress.charts.core.nuspec",
         "lib/net452/DevExpress.Charts.v19.2.Core.dll",
         "lib/netstandard2.0/DevExpress.Charts.v19.2.Core.dll"
       ]
     },
-    "DevExpress.CodeParser/19.2.4": {
-      "sha512": "4sW4t93DCYJKWY7Q6WgaiN13DUFi8HhrCcMwrr0j9LmsqvG70x6J+zAXYnbWOmN/DpwXuowPQ4niSX5sVg9fmA==",
+    "DevExpress.CodeParser/19.2.5": {
+      "sha512": "OPcrKB5d0KO0K8XSgTrs7BH1FfRNqzVou+bmJcn/1DyfuS3xYrU89GOr7NUwC8hSqUUZle1GfuIz7xyG+Vz7UA==",
       "type": "package",
-      "path": "devexpress.codeparser/19.2.4",
+      "path": "devexpress.codeparser/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.codeparser.19.2.4.nupkg.sha512",
+        "devexpress.codeparser.19.2.5.nupkg.sha512",
         "devexpress.codeparser.nuspec",
         "lib/net452/DevExpress.CodeParser.v19.2.dll",
         "lib/netstandard2.0/DevExpress.CodeParser.v19.2.dll"
       ]
     },
-    "DevExpress.Data/19.2.4": {
-      "sha512": "ocIr49BtonLNYSKDvq9sPDqCLocvR800ne/eJ61QeI+xWsTjhj7lKy8q+rtrhmRd6pQqMJ3JglWzMjCb5U1lMw==",
+    "DevExpress.Data/19.2.5": {
+      "sha512": "wN99e/SH60jIwwXBCg0rkXI9ZwOYFFSnyxzj/F+MKYDd8FPu4aqFHGYMOcqyxBMeM+NUskpjz6qfG+AwMfMIgQ==",
       "type": "package",
-      "path": "devexpress.data/19.2.4",
+      "path": "devexpress.data/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.data.19.2.4.nupkg.sha512",
+        "devexpress.data.19.2.5.nupkg.sha512",
         "devexpress.data.nuspec",
         "lib/net452/DevExpress.Data.v19.2.dll",
         "lib/net452/DevExpress.Data.v19.2.xml",
@@ -5178,14 +5181,14 @@
         "lib/netstandard2.0/DevExpress.Data.v19.2.xml"
       ]
     },
-    "DevExpress.DataAccess/19.2.4": {
-      "sha512": "ye/VMuROa186fY9Bjw/hjNCBcsXLFZtNoli8dd2z+rB4jQP3Wqi7/WC4W3IgB2a/FEXI0VzQ55bL5DAYU4A8ZQ==",
+    "DevExpress.DataAccess/19.2.5": {
+      "sha512": "KwAlclKfHaF0o7/Aq3x10/rEEW24Ikowp7WjSLpSw4YmGK6GRDVjCgkQfQZytM49sdm+lxOJYXa50ZtuLyeoEg==",
       "type": "package",
-      "path": "devexpress.dataaccess/19.2.4",
+      "path": "devexpress.dataaccess/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.dataaccess.19.2.4.nupkg.sha512",
+        "devexpress.dataaccess.19.2.5.nupkg.sha512",
         "devexpress.dataaccess.nuspec",
         "lib/net452/DevExpress.DataAccess.v19.2.dll",
         "lib/net452/DevExpress.DataAccess.v19.2.xml",
@@ -5193,14 +5196,14 @@
         "lib/netstandard2.0/DevExpress.DataAccess.v19.2.xml"
       ]
     },
-    "DevExpress.Gauges.Core/19.2.4": {
-      "sha512": "gwbzyBEDT7BtjqVm4JCY3F4aLwC4oDaP4jte/UPWK56hRVCK3ReCxGAOTn1K3nAZlwQbZwc419aVYV3HrD3x/Q==",
+    "DevExpress.Gauges.Core/19.2.5": {
+      "sha512": "W9+2Dzmwp/xys/BThYiFL/3y2qVp5QlOfwHEIkfDM/yZRNs4eR93wFGz1U8FdE99h3HUh5eQtTMtoQOqOlUbyw==",
       "type": "package",
-      "path": "devexpress.gauges.core/19.2.4",
+      "path": "devexpress.gauges.core/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.gauges.core.19.2.4.nupkg.sha512",
+        "devexpress.gauges.core.19.2.5.nupkg.sha512",
         "devexpress.gauges.core.nuspec",
         "lib/net452/DevExpress.XtraGauges.v19.2.Core.dll",
         "lib/net452/DevExpress.XtraGauges.v19.2.Core.xml",
@@ -5208,14 +5211,14 @@
         "lib/netstandard2.0/DevExpress.XtraGauges.v19.2.Core.xml"
       ]
     },
-    "DevExpress.Office.Core/19.2.4": {
-      "sha512": "X++3LRBWH9CSVdQ2+wRvoxAPJMPist2cR3tS7fc5IjkQTsYXmdmpI/emXWsG9GTXVbwFLcBMwSG79HuEzn/XqA==",
+    "DevExpress.Office.Core/19.2.5": {
+      "sha512": "9AeCT5fCi8eOWxiQNJm6W8ppYPBx+59cq3A/KGpdscjEV4w5p7q0VsoJumVnsoYqfjwSL33YnqjJTiL6NNdhFg==",
       "type": "package",
-      "path": "devexpress.office.core/19.2.4",
+      "path": "devexpress.office.core/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.office.core.19.2.4.nupkg.sha512",
+        "devexpress.office.core.19.2.5.nupkg.sha512",
         "devexpress.office.core.nuspec",
         "lib/net452/DevExpress.Office.v19.2.Core.dll",
         "lib/net452/DevExpress.Office.v19.2.Core.xml",
@@ -5223,14 +5226,14 @@
         "lib/netstandard2.0/DevExpress.Office.v19.2.Core.xml"
       ]
     },
-    "DevExpress.Pdf.Core/19.2.4": {
-      "sha512": "uaFuj5/1GnA82BlJy9yjMhhss6n1Re0IWXGqSApT2uEoiB07aGg1OI/Oz5A58BjupPzS6Snja8sfUt+SX7kCqg==",
+    "DevExpress.Pdf.Core/19.2.5": {
+      "sha512": "c8fknEaHo1Bhmz8fL2fy/AdPUG2Ekfc7MkdTHidtej+6KEVdLFU53LqhbyoyvW1eoVpKXo+hT4wJUvzeA5Pmow==",
       "type": "package",
-      "path": "devexpress.pdf.core/19.2.4",
+      "path": "devexpress.pdf.core/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.pdf.core.19.2.4.nupkg.sha512",
+        "devexpress.pdf.core.19.2.5.nupkg.sha512",
         "devexpress.pdf.core.nuspec",
         "lib/net452/DevExpress.Pdf.v19.2.Core.dll",
         "lib/net452/DevExpress.Pdf.v19.2.Core.xml",
@@ -5238,14 +5241,14 @@
         "lib/netstandard2.0/DevExpress.Pdf.v19.2.Core.xml"
       ]
     },
-    "DevExpress.PivotGrid.Core/19.2.4": {
-      "sha512": "zM2ASV5yVlcylKKtdPV35nDKtbK2xg1cMLnIdj3/n49SREwWeY1FDE1dMiTElf6z6DlzsjMQC5NRcFMH11cwAA==",
+    "DevExpress.PivotGrid.Core/19.2.5": {
+      "sha512": "MUyvDH5QxB8qtcCZ07dWfaWFIS06gTs0qOMy70anTE1fTggcaC3SvltukXGMhzk2cZdHX3ew10GnNFOmHem5LQ==",
       "type": "package",
-      "path": "devexpress.pivotgrid.core/19.2.4",
+      "path": "devexpress.pivotgrid.core/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.pivotgrid.core.19.2.4.nupkg.sha512",
+        "devexpress.pivotgrid.core.19.2.5.nupkg.sha512",
         "devexpress.pivotgrid.core.nuspec",
         "lib/net452/DevExpress.PivotGrid.v19.2.Core.dll",
         "lib/net452/DevExpress.PivotGrid.v19.2.Core.xml",
@@ -5253,14 +5256,14 @@
         "lib/netstandard2.0/DevExpress.PivotGrid.v19.2.Core.xml"
       ]
     },
-    "DevExpress.Printing.Core/19.2.4": {
-      "sha512": "bvVU93sdnBv0J3eqEmNEREv5Wt992soB/tJmD8kzkFLhRqv3lmCL+fqALJ7tmK3ANARwozwFFwYQfwT0DUH1yg==",
+    "DevExpress.Printing.Core/19.2.5": {
+      "sha512": "PHoY6EXmPbOC6N4Nq37LOTzN3eWOASYcyZ1yIwTvu9yuRTJW9YCR1fThLHmJbABzELNrC8MvhE6UsqCPFi8N6Q==",
       "type": "package",
-      "path": "devexpress.printing.core/19.2.4",
+      "path": "devexpress.printing.core/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.printing.core.19.2.4.nupkg.sha512",
+        "devexpress.printing.core.19.2.5.nupkg.sha512",
         "devexpress.printing.core.nuspec",
         "lib/net452/DevExpress.Printing.v19.2.Core.dll",
         "lib/net452/DevExpress.Printing.v19.2.Core.xml",
@@ -5268,14 +5271,14 @@
         "lib/netstandard2.0/DevExpress.Printing.v19.2.Core.xml"
       ]
     },
-    "DevExpress.Reporting.Core/19.2.4": {
-      "sha512": "kUbFOmGsus9YKM27jXygfgIEUBuEldq59JjykrW0w00zUi8ckZt98LUBHxeczWXImD79lcBCPZ489yvH6yFGxw==",
+    "DevExpress.Reporting.Core/19.2.5": {
+      "sha512": "I/iYhT0Mj9G71/CJVVMoa2uxUy4wjkZCgD41mtkd94rWsQFoDo36kUsTSNjHGddPbpy4BlQCys4fg13AevhYQg==",
       "type": "package",
-      "path": "devexpress.reporting.core/19.2.4",
+      "path": "devexpress.reporting.core/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.reporting.core.19.2.4.nupkg.sha512",
+        "devexpress.reporting.core.19.2.5.nupkg.sha512",
         "devexpress.reporting.core.nuspec",
         "lib/net452/DevExpress.XtraReports.v19.2.dll",
         "lib/net452/DevExpress.XtraReports.v19.2.xml",
@@ -5283,14 +5286,14 @@
         "lib/netstandard2.0/DevExpress.XtraReports.v19.2.xml"
       ]
     },
-    "DevExpress.RichEdit.Core/19.2.4": {
-      "sha512": "P52avYxQmKkmRPgSxUgCxCjd9j0wZxK6iDnWOQ6kC/aCgPS60fn6nc8Mk6PKT1ajrpzNcUuFzwte4BtDrfBTdA==",
+    "DevExpress.RichEdit.Core/19.2.5": {
+      "sha512": "Optg5DZYEdhKfvdWtrPtUqhF2E62lEXWkNr+wG3/wUstTMnNVqVZ276fodsHJJecY2PU3es+tvDvktkHwC8WyQ==",
       "type": "package",
-      "path": "devexpress.richedit.core/19.2.4",
+      "path": "devexpress.richedit.core/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.richedit.core.19.2.4.nupkg.sha512",
+        "devexpress.richedit.core.19.2.5.nupkg.sha512",
         "devexpress.richedit.core.nuspec",
         "lib/net452/DevExpress.RichEdit.v19.2.Core.dll",
         "lib/net452/DevExpress.RichEdit.v19.2.Core.xml",
@@ -5298,27 +5301,27 @@
         "lib/netstandard2.0/DevExpress.RichEdit.v19.2.Core.xml"
       ]
     },
-    "DevExpress.RichEdit.Export/19.2.4": {
-      "sha512": "jGJkXZowNDCPvxlMXZLcZOVDqDTlyIEZ6yRTG50pIEeBNIIFpmMdtf3mvuyeq+W3UorBEzyfcZJO/SkmySdbxg==",
+    "DevExpress.RichEdit.Export/19.2.5": {
+      "sha512": "oMCKRrEpqIXxxOqqelyFVpBL1fC9g+Q96H2peyT56C19XtlYITp6dD2LckiJgYr6mi5BtnogAPDPmDhtX4BQ0Q==",
       "type": "package",
-      "path": "devexpress.richedit.export/19.2.4",
+      "path": "devexpress.richedit.export/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.richedit.export.19.2.4.nupkg.sha512",
+        "devexpress.richedit.export.19.2.5.nupkg.sha512",
         "devexpress.richedit.export.nuspec",
         "lib/net452/DevExpress.RichEdit.v19.2.Export.dll",
         "lib/netstandard2.0/DevExpress.RichEdit.v19.2.Export.dll"
       ]
     },
-    "DevExpress.Sparkline.Core/19.2.4": {
-      "sha512": "Nf4+S4bJrc4U65qzaDmBzCDRIlNB28XmcEAodmT+3EO0mO2b8w07r0L6TDXfV0pfW2XYyEfnDGGeIrvc4kPqZw==",
+    "DevExpress.Sparkline.Core/19.2.5": {
+      "sha512": "xKyU1+dvsC5nid6sTedKeP0Aq7aLydkM9w4OrQ8rYee6XdeO+fRDMMM3olneVVZBPeNjdQb1X8dWuYGU25HQZw==",
       "type": "package",
-      "path": "devexpress.sparkline.core/19.2.4",
+      "path": "devexpress.sparkline.core/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.sparkline.core.19.2.4.nupkg.sha512",
+        "devexpress.sparkline.core.19.2.5.nupkg.sha512",
         "devexpress.sparkline.core.nuspec",
         "lib/net452/DevExpress.Sparkline.v19.2.Core.dll",
         "lib/net452/DevExpress.Sparkline.v19.2.Core.xml",
@@ -5326,14 +5329,14 @@
         "lib/netstandard2.0/DevExpress.Sparkline.v19.2.Core.xml"
       ]
     },
-    "DevExpress.Xpo/19.2.4": {
-      "sha512": "nxgY+4B+XO+/Ea2VnRzUOQhf7kN00fhQpqGQ0Xm+jy4mCZRvJJDuz2Z0Ku+JTtZjVKr+C5xYMTy4UpQwiNXjVg==",
+    "DevExpress.Xpo/19.2.5": {
+      "sha512": "EAj+QoyrBzCNFL8wBkWxzaJAcWjvmWpw5tbJLXoQHR2qnb1MXPvY1FdFT1HbQxQTyiH6PzFb2gg0mwLILQCaIg==",
       "type": "package",
-      "path": "devexpress.xpo/19.2.4",
+      "path": "devexpress.xpo/19.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "devexpress.xpo.19.2.4.nupkg.sha512",
+        "devexpress.xpo.19.2.5.nupkg.sha512",
         "devexpress.xpo.nuspec",
         "lib/net452/DevExpress.Xpo.v19.2.dll",
         "lib/net452/DevExpress.Xpo.v19.2.xml",
@@ -8574,7 +8577,7 @@
       ]
     },
     "runtime.opensuse.13.2-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "zWLOQ77Y4FV/6Vw2g+FYzprbQX5/xKvjoCLe4L9159Aw1bSboQoJ1KRZFNdexDooWRAIsLSdE0ZokkrVkwN8Yw==",
+      "sha512": "b3pthNgxxFcD+Pc0WSEoC0+md3MyhRS6aCEeenvNE3Fdw1HyJ18ZhRFVJJzIeR/O/jpxPboB805Ho0T3Ul7w8A==",
       "type": "package",
       "path": "runtime.opensuse.13.2-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8614,7 +8617,7 @@
       ]
     },
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "/p8IQT2brFMDa7BHMH71LV+w5Tb3OxoLHxhn6+MGqN5xeqhM2HRHmj+7xQGJnaRn73d7ZTvp6yRCFMvolws4wA==",
+      "sha512": "X7IdhILzr4ROXd8mI1BUCQMSHSQwelUlBjF1JyTKCjXaOGn2fB4EKBxQbCK2VjO3WaWIdlXZL3W6TiIVnrhX4g==",
       "type": "package",
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8627,7 +8630,7 @@
       ]
     },
     "runtime.rhel.7-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "T5NvFgmHX0WH4c7lP72krsnk+IJI10vJf2j2twGE+5QBRA4RyRAgD+ZjEgdmpLOjW4B+nZGaadewTCUcR899OQ==",
+      "sha512": "nyFNiCk/r+VOiIqreLix8yN+q3Wga9+SE8BCgkf+2BwEKiNx6DyvFjCgkfV743/grxv8jHJ8gUK4XEQw7yzRYg==",
       "type": "package",
       "path": "runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8640,7 +8643,7 @@
       ]
     },
     "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "JGc0pAWRE8lB4Ucygk2pYSKbUPLlAIq6Bczf5/WF2D/VKJEPtYlVUMxk8fbl1zRfTWzSHi+VcFZlaPlWiNxeKg==",
+      "sha512": "ytoewC6wGorL7KoCAvRfsgoJPJbNq+64k2SqW6JcOAebWsFUvCCYgfzQMrnpvPiEl4OrblUlhF2ji+Q1+SVLrQ==",
       "type": "package",
       "path": "runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8653,7 +8656,7 @@
       ]
     },
     "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "YWzJvhiC+iLWI/IfpPQUIBhYnAHUFQFRDqR7VDNmPj0b3rjW7dArFqKysZ9v0iSBs9Ih4v9GasLpYCSUwADMQQ==",
+      "sha512": "I8bKw2I8k58Wx7fMKQJn2R8lamboCAiHfHeV/pS65ScKWMMI0+wJkLYlEKvgW1D/XvSl/221clBoR2q9QNNM7A==",
       "type": "package",
       "path": "runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8666,7 +8669,7 @@
       ]
     },
     "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "1uVTITQP8/cI6YoO6FqfW1pzP0k2TnDZ3TFD88Bu/9H7ZuTsMY9xmadbGpwPu8w8swcd1ifZJsjD9hF9O6C/tg==",
+      "sha512": "VB5cn/7OzUfzdnC8tqAIMQciVLiq2epm2NrAm1E9OjNRyG4lVhfR61SMcLizejzQP8R8Uf/0l5qOIbUEi+RdEg==",
       "type": "package",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -9115,10 +9118,10 @@
         "system.collections.specialized.nuspec"
       ]
     },
-    "System.ComponentModel.Annotations/4.6.0": {
-      "sha512": "pOd+UhZ3X8xfwKDlgAzowUJNjp8VYVmOHZm++vCd0kq1HZ0zK3mNo2yRXjYgv7Ik/Xi43fmJfND2PLEsQSALCg==",
+    "System.ComponentModel.Annotations/4.7.0": {
+      "sha512": "0YFqjhp/mYkDGpU0Ye1GjE53HMp9UVfGN7seGpAMttAC0C40v5gw598jCgpbBLMmCo0E5YRLBv5Z2doypO49ZQ==",
       "type": "package",
-      "path": "system.componentmodel.annotations/4.6.0",
+      "path": "system.componentmodel.annotations/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9198,7 +9201,7 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.componentmodel.annotations.4.6.0.nupkg.sha512",
+        "system.componentmodel.annotations.4.7.0.nupkg.sha512",
         "system.componentmodel.annotations.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -12229,7 +12232,7 @@
       ]
     },
     "System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "vOYy7Jv9KsG3ld2hLt0GoERd82SZi4BelrbXLwI9yFBYX7kpbvUCWYo4eyevk47cuJXZ9ZLVAryANcc7iY71aA==",
+      "sha512": "h4CEgOgv5PKVF/HwaHzJRiVboL2THYCou97zpmhjghx5frc7fIvlkY1jL+lnIQyChrJDMNEXS6r7byGif8Cy4w==",
       "type": "package",
       "path": "system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -13410,7 +13413,7 @@
       ]
     },
     "System.Xml.XmlSerializer/4.3.0": {
-      "sha512": "VShQJhOxgD/5M2Z1IWm1vMaSqlbjo1zdFf8H7Ahte6bTvSUhUko/gDpAVVhGgGgTDeue4QyNg1fu1Zz2GKSEuQ==",
+      "sha512": "MYoTCP7EZ98RrANESW05J5ZwskKDoN0AuZ06ZflnowE50LTpbR5yRg3tHckTVm5j/m47stuGgCrCHWePyHS70Q==",
       "type": "package",
       "path": "system.xml.xmlserializer/4.3.0",
       "files": [
@@ -13607,23 +13610,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\niraw\\.nuget\\packages\\": {},
+    "C:\\Users\\NPFS040\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
+      "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
       "projectName": "THD.Core.Api.Public",
-      "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
-      "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
-      "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\obj\\",
+      "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
+      "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
+      "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -13638,11 +13641,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+            "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+              "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
             },
-            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj": {
-              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj"
+            "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj": {
+              "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj"
             }
           }
         }
@@ -13688,8 +13691,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "THD.Core.Api.Private depends on DevExpress.Reporting.Core (>= 19.2.4) but DevExpress.Reporting.Core 19.2.4 was not found. An approximate best match of DevExpress.Reporting.Core 19.2.5 was resolved.",
+      "libraryId": "DevExpress.Reporting.Core",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.2"
+      ]
+    }
+  ]
 }
