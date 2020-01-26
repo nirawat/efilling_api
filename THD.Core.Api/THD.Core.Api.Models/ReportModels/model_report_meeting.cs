@@ -17,6 +17,9 @@ namespace THD.Core.Api.Models.ReportModels
         //Report R13 --------------------------------
         public string filename13 { get; set; }
         public string filebase1364 { get; set; }
+        //Report R14 --------------------------------
+        public string filename14 { get; set; }
+        public string filebase1464 { get; set; }
     }
 
 }

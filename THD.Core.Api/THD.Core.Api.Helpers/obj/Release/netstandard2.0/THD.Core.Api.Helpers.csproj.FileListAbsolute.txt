@@ -5,6 +5,7 @@ C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api
 C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.AssemblyInfo.cs
 C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.dll
 C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.pdb
+<<<<<<< HEAD
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\bin\Release\netstandard2.0\THD.Core.Api.Helpers.deps.json
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\bin\Release\netstandard2.0\THD.Core.Api.Helpers.dll
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\bin\Release\netstandard2.0\THD.Core.Api.Helpers.pdb
@@ -12,3 +13,12 @@ D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\obj\Rele
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.AssemblyInfo.cs
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.dll
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.pdb
+=======
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\bin\Release\netstandard2.0\THD.Core.Api.Helpers.deps.json
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\bin\Release\netstandard2.0\THD.Core.Api.Helpers.dll
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\bin\Release\netstandard2.0\THD.Core.Api.Helpers.pdb
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.AssemblyInfoInputs.cache
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.AssemblyInfo.cs
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.dll
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\obj\Release\netstandard2.0\THD.Core.Api.Helpers.pdb
+>>>>>>> 3555d6c91098e15d62d7bbdbecaee0f0a001b1a1
