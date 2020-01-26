@@ -14,6 +14,7 @@ using THD.Core.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Globalization;
+using THD.Core.Api.Models.ReportModels;
 
 namespace THD.Core.Api.Repository.DataHandler
 {
@@ -24,14 +25,21 @@ namespace THD.Core.Api.Repository.DataHandler
         private readonly IDropdownListRepository _IDropdownListRepository;
         private readonly IRegisterUserRepository _IRegisterUserRepository;
         private readonly IDocMeetingRoundRepository _IDocMeetingRoundRepository;
+        private readonly IDocMenuReportRepository _IDocMenuReportRepository;
 
-        public DocMenuC3Repository(IConfiguration configuration, IDropdownListRepository DropdownListRepository, IRegisterUserRepository IRegisterUserRepository, IDocMeetingRoundRepository DocMeetingRoundRepository)
+        public DocMenuC3Repository(
+            IConfiguration configuration,
+            IDropdownListRepository DropdownListRepository,
+            IRegisterUserRepository IRegisterUserRepository,
+            IDocMenuReportRepository DocMenuReportRepository,
+            IDocMeetingRoundRepository DocMeetingRoundRepository)
         {
             _configuration = configuration;
             ConnectionString = Encoding.UTF8.GetString(Convert.FromBase64String(_configuration.GetConnectionString("SqlConnection")));
             _IDropdownListRepository = DropdownListRepository;
             _IRegisterUserRepository = IRegisterUserRepository;
             _IDocMeetingRoundRepository = DocMeetingRoundRepository;
+            _IDocMenuReportRepository = DocMenuReportRepository;
         }
 
 
@@ -291,6 +299,11 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
                             resp.DocId = (int)cmd.Parameters["@rDocId"].Value;
+
+                            model_rpt_15_file rpt = await _IDocMenuReportRepository.GetReportR15Async((int)cmd.Parameters["@rDocId"].Value);
+
+                            resp.filename = rpt.filename;
+                            resp.filebase64 = rpt.filebase64;
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }
@@ -1122,6 +1135,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         if ((int)cmd.Parameters["@rStatus"].Value > 0)
                         {
                             resp.Status = true;
+
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }
@@ -1504,6 +1518,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         if ((int)cmd.Parameters["@rStatus"].Value > 0)
                         {
                             resp.Status = true;
+
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }

@@ -8,8 +8,10 @@ namespace THD.Core.Api.Models.ReportModels
     public class model_rpt_1_file
     {
         public string message { get; set; }
-        public string filename { get; set; }
-        public string filebase64 { get; set; }
+        public string filename1_2 { get; set; }
+        public string filebase1_2_64 { get; set; }
+        public string filename16 { get; set; }
+        public string filebase16_64 { get; set; }
     }
 
     public class model_rpt_1_report

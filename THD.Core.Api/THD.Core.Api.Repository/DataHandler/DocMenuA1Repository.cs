@@ -201,8 +201,10 @@ namespace THD.Core.Api.Repository.DataHandler
 
                             model_rpt_1_file rpt = await _IDocMenuReportRepository.GetReportR1_2Async((int)cmd.Parameters["@rDocId"].Value);
 
-                            resp.filename = rpt.filename;
-                            resp.filebase64 = rpt.filebase64;
+                            resp.filename1and2 = rpt.filename1_2;
+                            resp.filebase1and264 = rpt.filebase1_2_64;
+                            resp.filename16 = rpt.filename16;
+                            resp.filebase1664 = rpt.filebase16_64;
 
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;

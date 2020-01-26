@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {}
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {}
   },
   "projects": {
-    "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj",
         "projectName": "THD.Core.Api.Entities",
-        "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj",
         "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
-        "outputPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Entities\\obj\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

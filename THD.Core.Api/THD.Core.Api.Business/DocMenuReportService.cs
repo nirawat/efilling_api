@@ -78,23 +78,22 @@ namespace THD.Core.Api.Business
         {
             return await _IDocMenReportRepository.GetReportR13Async(doc_id);
         }
-        public async Task<ModelMenuR1ReportFile> GetReportR14Async(int meeting_id)
+        public async Task<model_rpt_14_file> GetReportR14Async(int doc_id)
         {
-            return await _IDocMenReportRepository.GetReportR14Async(meeting_id);
+            return await _IDocMenReportRepository.GetReportR14Async(doc_id);
         }
-        public async Task<ModelMenuR1ReportFile> GetReportR15Async(int meeting_id)
+        public async Task<model_rpt_15_file> GetReportR15Async(int doc_id)
         {
-            return await _IDocMenReportRepository.GetReportR15Async(meeting_id);
-        }
-        public async Task<model_rpt_16_file> GetReportR16Async(int doc_id)
-        {
-            return await _IDocMenReportRepository.GetReportR16Async(doc_id);
+            return await _IDocMenReportRepository.GetReportR15Async(doc_id);
         }
         public async Task<model_rpt_17_file> GetReportR17_18Async(int doc_id)
         {
             return await _IDocMenReportRepository.GetReportR17_18Async(doc_id);
         }
-
+        public async Task<model_rpt_meeting_file> GetAllReportMeetingAsync(int doc_id)
+        {
+            return await _IDocMenReportRepository.GetAllReportMeetingAsync(doc_id);
+        }
 
     }
 }

@@ -141,30 +141,19 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest(e);
         }
 
-        [HttpGet("GetReportR14/{meetingid}")]
-        public async Task<IActionResult> GetReportR14(int meetingid)
+        [HttpGet("GetReportR14/{DocId}")]
+        public async Task<IActionResult> GetReportR14(int DocId)
         {
-            //ModelMenuR1ReportFile e = await _IDocMenuReportService.GetReportR14Async(meetingid);
-
-            //if (e != null) return Ok(e);
-            //else return BadRequest(e);
-
-            return Ok();
-        }
-
-        [HttpGet("GetReportR15/{meetingid}")]
-        public async Task<IActionResult> GetReportR15(int meetingid)
-        {
-            ModelMenuR1ReportFile e = await _IDocMenuReportService.GetReportR15Async(meetingid);
+            model_rpt_14_file e = await _IDocMenuReportService.GetReportR14Async(DocId);
 
             if (e != null) return Ok(e);
             else return BadRequest(e);
         }
 
-        [HttpGet("GetReportR16/{DocId}")]
-        public async Task<IActionResult> GetReportR16(int DocId)
+        [HttpGet("GetReportR15/{DocId}")]
+        public async Task<IActionResult> GetReportR15(int DocId)
         {
-            model_rpt_16_file e = await _IDocMenuReportService.GetReportR16Async(DocId);
+            model_rpt_15_file e = await _IDocMenuReportService.GetReportR15Async(DocId);
 
             if (e != null) return Ok(e);
             else return BadRequest(e);
@@ -179,6 +168,14 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest(e);
         }
 
+        [HttpGet("GetAllReportMeeting/{DocId}")]
+        public async Task<IActionResult> GetAllReportMeeting(int DocId)
+        {
+            model_rpt_meeting_file e = await _IDocMenuReportService.GetAllReportMeetingAsync(DocId);
+
+            if (e != null) return Ok(e);
+            else return BadRequest(e);
+        }
 
     }
 }
