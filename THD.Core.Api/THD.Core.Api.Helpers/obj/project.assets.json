@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
+      "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
       "projectName": "THD.Core.Api.Helpers",
-      "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
+      "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
       "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
-      "outputPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Helpers\\obj\\",
+      "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

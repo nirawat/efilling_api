@@ -13613,11 +13613,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
+      "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
       "projectName": "THD.Core.Api.Public",
-      "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
+      "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
       "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
-      "outputPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Public\\obj\\",
+      "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13638,11 +13638,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-              "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
             },
-            "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj": {
-              "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj"
+            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj"
             }
           }
         }

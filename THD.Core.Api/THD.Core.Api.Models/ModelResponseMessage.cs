@@ -14,6 +14,14 @@ namespace THD.Core.Api.Models
         // Report Return --------------
         public string filename { get; set; }
         public string filebase64 { get; set; }
+        public string filename1and2 { get; set; }
+        public string filebase1and264 { get; set; }
+        public string filename12 { get; set; }
+        public string filebase1264 { get; set; }
+        public string filename13 { get; set; }
+        public string filebase1364 { get; set; }
+        public string filename16 { get; set; }
+        public string filebase1664 { get; set; }
     }
 
     public class ModelResponseMessageRegisterUser

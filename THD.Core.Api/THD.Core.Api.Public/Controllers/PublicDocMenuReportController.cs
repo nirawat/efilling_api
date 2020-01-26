@@ -298,10 +298,10 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
-        [HttpGet("GetReportR14/{meetingid}")]
-        public async Task<IActionResult> GetReportR14(int meetingid)
+        [HttpGet("GetReportR14/{DocId}")]
+        public async Task<IActionResult> GetReportR14(int DocId)
         {
-            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuReport"}/{"GetReportR14"}/{meetingid}";
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuReport"}/{"GetReportR14"}/{DocId}";
             string authHeader = HttpContext.Request?.Headers["Authorization"];
             if (authHeader != null && authHeader.StartsWith("Bearer"))
             {
@@ -321,33 +321,10 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
-        [HttpGet("GetReportR15/{meetingid}")]
-        public async Task<IActionResult> GetReportR15(int meetingid)
+        [HttpGet("GetReportR15/{DocId}")]
+        public async Task<IActionResult> GetReportR15(int DocId)
         {
-            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuReport"}/{"GetReportR15"}/{meetingid}";
-            string authHeader = HttpContext.Request?.Headers["Authorization"];
-            if (authHeader != null && authHeader.StartsWith("Bearer"))
-            {
-                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
-            }
-            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
-            switch (response.StatusCode)
-            {
-                case HttpStatusCode.Unauthorized:
-                    return Unauthorized(response.ContentAsString());
-                case HttpStatusCode.BadRequest:
-                    return BadRequest(response.ContentAsString());
-                case HttpStatusCode.OK:
-                    return Ok(response.ContentAsString());
-                default:
-                    return StatusCode(500);
-            }
-        }
-
-        [HttpGet("GetReportR16/{DocId}")]
-        public async Task<IActionResult> GetReportR16(int DocId)
-        {
-            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuReport"}/{"GetReportR16"}/{DocId}";
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuReport"}/{"GetReportR15"}/{DocId}";
             string authHeader = HttpContext.Request?.Headers["Authorization"];
             if (authHeader != null && authHeader.StartsWith("Bearer"))
             {
@@ -389,6 +366,30 @@ namespace THD.Core.Api.Public.Controllers
                     return StatusCode(500);
             }
         }
+
+        [HttpGet("GetAllReportMeeting/{DocId}")]
+        public async Task<IActionResult> GetAllReportMeeting(int DocId)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuReport"}/{"GetAllReportMeeting"}/{DocId}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+
 
     }
 }

@@ -14,6 +14,7 @@ using THD.Core.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Globalization;
+using THD.Core.Api.Models.ReportModels;
 
 namespace THD.Core.Api.Repository.DataHandler
 {
@@ -290,10 +291,10 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
 
-                            //model_rpt_8_file rpt = await _IDocMenuReportRepository.GetReportR8Async((int)cmd.Parameters["@rDocId"].Value);
+                            model_rpt_10_file rpt = await _IDocMenuReportRepository.GetReportR10Async((int)cmd.Parameters["@rDocId"].Value);
 
-                            //resp.filename = rpt.filename;
-                            //resp.filebase64 = rpt.filebase64;
+                            resp.filename = rpt.filename;
+                            resp.filebase64 = rpt.filebase64;
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }

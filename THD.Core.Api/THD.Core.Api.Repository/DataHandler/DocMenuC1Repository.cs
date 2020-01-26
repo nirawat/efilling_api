@@ -14,6 +14,7 @@ using THD.Core.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Globalization;
+using THD.Core.Api.Models.ReportModels;
 
 namespace THD.Core.Api.Repository.DataHandler
 {
@@ -37,6 +38,7 @@ namespace THD.Core.Api.Repository.DataHandler
             _IDropdownListRepository = DropdownListRepository;
             _IRegisterUserRepository = IRegisterUserRepository;
             _IDocMeetingRoundRepository = DocMeetingRoundRepository;
+            _IDocMenuReportRepository = DocMenuReportRepository;
         }
 
         #region Menu C1
@@ -338,72 +340,66 @@ namespace THD.Core.Api.Repository.DataHandler
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
             ModelResponseC1Message resp = new ModelResponseC1Message();
-            try
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
-                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_doc_menu_c1", conn))
                 {
-                    conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("sp_doc_menu_c1", conn))
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    string assigner_code = Encoding.UTF8.GetString(Convert.FromBase64String(model.assignercode));
+
+                    cmd.Parameters.Add("@assigner_code", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(assigner_code);
+                    cmd.Parameters.Add("@position_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.positionname);
+                    cmd.Parameters.Add("@accept_type", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.accepttype);
+                    cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 20).Value = ParseDataHelper.ConvertDBNull(model.projectnumber);
+                    cmd.Parameters.Add("@project_head_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectheadname);
+                    cmd.Parameters.Add("@faculty_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.facultyname);
+                    cmd.Parameters.Add("@project_name_thai", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnamethai);
+                    cmd.Parameters.Add("@project_name_eng", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnameeng);
+                    cmd.Parameters.Add("@board_code_array", SqlDbType.VarChar).Value = JsonConvert.SerializeObject(model.boardcodearray);
+                    cmd.Parameters.Add("@speciallist_code_array", SqlDbType.VarChar).Value = JsonConvert.SerializeObject(model.speciallistcodearray);
+                    cmd.Parameters.Add("@round_of_meeting", SqlDbType.Int).Value = model.roundofmeeting;
+                    cmd.Parameters.Add("@year_of_meeting", SqlDbType.Int).Value = model.yearofmeeting;
+                    cmd.Parameters.Add("@meeting_date", SqlDbType.DateTime).Value = Convert.ToDateTime(model.meetingdate);
+
+                    int seq = 1;
+                    StringBuilder list_committee_array = new StringBuilder();
+
+                    if (model.boardcodearray != null && model.boardcodearray.Count > 0)
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        string assigner_code = Encoding.UTF8.GetString(Convert.FromBase64String(model.assignercode));
-
-                        cmd.Parameters.Add("@assigner_code", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(assigner_code);
-                        cmd.Parameters.Add("@position_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.positionname);
-                        cmd.Parameters.Add("@accept_type", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.accepttype);
-                        cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 20).Value = ParseDataHelper.ConvertDBNull(model.projectnumber);
-                        cmd.Parameters.Add("@project_head_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectheadname);
-                        cmd.Parameters.Add("@faculty_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.facultyname);
-                        cmd.Parameters.Add("@project_name_thai", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnamethai);
-                        cmd.Parameters.Add("@project_name_eng", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnameeng);
-                        cmd.Parameters.Add("@board_code_array", SqlDbType.VarChar).Value = JsonConvert.SerializeObject(model.boardcodearray);
-                        cmd.Parameters.Add("@speciallist_code_array", SqlDbType.VarChar).Value = JsonConvert.SerializeObject(model.speciallistcodearray);
-                        cmd.Parameters.Add("@round_of_meeting", SqlDbType.Int).Value = model.roundofmeeting;
-                        cmd.Parameters.Add("@year_of_meeting", SqlDbType.Int).Value = model.yearofmeeting;
-                        cmd.Parameters.Add("@meeting_date", SqlDbType.DateTime).Value = Convert.ToDateTime(model.meetingdate);
-
-                        int seq = 1;
-                        StringBuilder list_committee_array = new StringBuilder();
-
-                        if (model.boardcodearray != null && model.boardcodearray.Count > 0)
+                        foreach (var item in model.boardcodearray)
                         {
-                            foreach (var item in model.boardcodearray)
-                            {
-                                list_committee_array.AppendLine(seq.ToString() + ". " + item.label.Trim());
-                                seq++;
-                            }
+                            list_committee_array.AppendLine(seq.ToString() + ". " + item.label.Trim());
+                            seq++;
                         }
-                        cmd.Parameters.Add("@committee_code_array", SqlDbType.NVarChar).Value = list_committee_array.ToString();
-
-                        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
-                        rStatus.Direction = ParameterDirection.Output;
-                        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
-                        rMessage.Direction = ParameterDirection.Output;
-                        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
-                        rDocId.Direction = ParameterDirection.Output;
-
-                        await cmd.ExecuteNonQueryAsync();
-
-                        if ((int)cmd.Parameters["@rStatus"].Value > 0)
-                        {
-                            resp.Status = true;
-
-                            resp.EmailArray = await GetEmailUserAsync(model);
-
-                            //model_rpt_8_file rpt = await _IDocMenuReportRepository.GetReportR8Async((int)cmd.Parameters["@rDocId"].Value);
-
-                            //resp.filename = rpt.filename;
-                            //resp.filebase64 = rpt.filebase64;
-                        }
-                        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }
-                    conn.Close();
+                    cmd.Parameters.Add("@committee_code_array", SqlDbType.NVarChar).Value = list_committee_array.ToString();
+
+                    SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                    rStatus.Direction = ParameterDirection.Output;
+                    SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                    rMessage.Direction = ParameterDirection.Output;
+                    SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
+                    rDocId.Direction = ParameterDirection.Output;
+
+                    await cmd.ExecuteNonQueryAsync();
+
+                    if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                    {
+                        resp.Status = true;
+
+                        resp.EmailArray = await GetEmailUserAsync(model);
+
+                        model_rpt_11_file rpt = await _IDocMenuReportRepository.GetReportR11Async((int)cmd.Parameters["@rDocId"].Value);
+
+                        resp.filename = rpt.filename;
+                        resp.filebase64 = rpt.filebase64;
+                    }
+                    else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                conn.Close();
             }
 
             return resp;

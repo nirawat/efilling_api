@@ -5259,11 +5259,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj",
+      "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj",
       "projectName": "THD.Core.Api.Repository",
-      "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj",
+      "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj",
       "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
-      "outputPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Repository\\obj\\",
+      "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5284,17 +5284,17 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
-              "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
+            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
             },
-            "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
-              "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
+            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
             },
-            "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-              "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
             },
-            "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj": {
-              "projectPath": "C:\\Work Project\\React Project\\eFilling\\EFilling.WebApi\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj"
+            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj"
             }
           }
         }

@@ -22,10 +22,9 @@ namespace THD.Core.Api.Repository.Interface
         Task<model_rpt_11_file> GetReportR11Async(int doc_id);
         Task<model_rpt_12_file> GetReportR12Async(int doc_id);
         Task<model_rpt_13_file> GetReportR13Async(int doc_id);
-        Task<ModelMenuR1ReportFile> GetReportR14Async(int meeting_id);
-        Task<ModelMenuR1ReportFile> GetReportR15Async(int meeting_id);
-        Task<model_rpt_16_file> GetReportR16Async(int doc_id);
+        Task<model_rpt_14_file> GetReportR14Async(int doc_id);
+        Task<model_rpt_15_file> GetReportR15Async(int doc_id);
         Task<model_rpt_17_file> GetReportR17_18Async(int doc_id);
-
+        Task<model_rpt_meeting_file> GetAllReportMeetingAsync(int doc_id);
     }
 }
