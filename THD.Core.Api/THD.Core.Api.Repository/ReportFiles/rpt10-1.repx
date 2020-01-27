@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="19.2.5.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="XtraReport1" Margins="50, 49, 45, 50" PaperKind="A4" PageWidth="827" PageHeight="1169" Version="19.2" Font="TH Sarabun New, 12pt, charSet=0">
+  <Bands>
+    <Item1 Ref="1" ControlType="TopMarginBand" Name="TopMargin" HeightF="45" />
+    <Item2 Ref="2" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="50" />
+    <Item3 Ref="3" ControlType="DetailBand" Name="Detail" HeightF="1079" Font="TH Sarabun New, 12pt, charSet=0">
+      <Controls>
+        <Item1 Ref="4" ControlType="XRLabel" Name="label35" Multiline="true" Text="วันที่                  " TextAlignment="TopLeft" SizeF="37.5,23" LocationFloat="272.5, 850.166748" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="5" UseFont="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="6" ControlType="XRLabel" Name="label34" Multiline="true" Text="(                                                                  )" TextAlignment="TopLeft" SizeF="298.8333,23" LocationFloat="227.5, 827.166748" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="7" UseFont="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="8" ControlType="XRLabel" Name="label33" Multiline="true" Text="คณะกรรมการ ผู้อ่านโครงการ .............................................................................................." TextAlignment="TopLeft" SizeF="459.6667,23" LocationFloat="10, 806.6667" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="9" UseFont="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="10" ControlType="XRLine" Name="line6" SizeF="722.5,13.333374" LocationFloat="5, 793.3333" />
+        <Item5 Ref="11" ControlType="XRCheckBox" Name="checkBox5" Text="ข้อเสนอแนะ" SizeF="198.333344,23" LocationFloat="10, 666.6666" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="12" UseFont="false" />
+        </Item5>
+        <Item6 Ref="13" ControlType="XRLabel" Name="label29" Multiline="true" Text="   ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166769, 689.6666" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="14" UseFont="false" UseTextAlignment="false" />
+        </Item6>
+        <Item7 Ref="15" ControlType="XRLabel" Name="label30" Multiline="true" Text="   ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166769, 712.6666" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="16" UseFont="false" UseTextAlignment="false" />
+        </Item7>
+        <Item8 Ref="17" ControlType="XRLabel" Name="label31" Multiline="true" Text="   ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166666, 735.6666" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="18" UseFont="false" UseTextAlignment="false" />
+        </Item8>
+        <Item9 Ref="19" ControlType="XRLabel" Name="label32" Multiline="true" Text="   ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166666, 758.666565" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="20" UseFont="false" UseTextAlignment="false" />
+        </Item9>
+        <Item10 Ref="21" ControlType="XRLabel" Name="label28" Multiline="true" Text="   ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166666, 643.6666" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="22" UseFont="false" UseTextAlignment="false" />
+        </Item10>
+        <Item11 Ref="23" ControlType="XRLabel" Name="label27" Multiline="true" Text="   ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166666, 620.6666" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="24" UseFont="false" UseTextAlignment="false" />
+        </Item11>
+        <Item12 Ref="25" ControlType="XRLabel" Name="label26" Multiline="true" Text="   ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166769, 597.6667" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="26" UseFont="false" UseTextAlignment="false" />
+        </Item12>
+        <Item13 Ref="27" ControlType="XRLabel" Name="label25" Multiline="true" Text="   ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166769, 574.6667" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="28" UseFont="false" UseTextAlignment="false" />
+        </Item13>
+        <Item14 Ref="29" ControlType="XRCheckBox" Name="checkBox4" Text="ยังไม่รับรองเนื่องจาก" SizeF="198.333344,23" LocationFloat="10, 551.6667" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="30" UseFont="false" />
+        </Item14>
+        <Item15 Ref="31" ControlType="XRLabel" Name="label17" Multiline="true" Text="1.    ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166769, 419.166718" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="32" UseFont="false" UseTextAlignment="false" />
+        </Item15>
+        <Item16 Ref="33" ControlType="XRLabel" Name="label20" Multiline="true" Text="........................................................................................................................................................................................................................" TextAlignment="TopLeft" SizeF="688.8333,16.333374" LocationFloat="29.166769, 442.1667" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="34" UseFont="false" UseTextAlignment="false" />
+        </Item16>
+        <Item17 Ref="35" ControlType="XRLabel" Name="label21" Multiline="true" Text="........................................................................................................................................................................................................................" TextAlignment="TopLeft" SizeF="688.8333,16.333374" LocationFloat="29.166769, 481.5001" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="36" UseFont="false" UseTextAlignment="false" />
+        </Item17>
+        <Item18 Ref="37" ControlType="XRLabel" Name="label22" Multiline="true" Text="2.    ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166769, 458.500061" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="38" UseFont="false" UseTextAlignment="false" />
+        </Item18>
+        <Item19 Ref="39" ControlType="XRLabel" Name="label23" Multiline="true" Text="3.    ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166769, 497.833466" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="40" UseFont="false" UseTextAlignment="false" />
+        </Item19>
+        <Item20 Ref="41" ControlType="XRLabel" Name="label24" Multiline="true" Text="........................................................................................................................................................................................................................" TextAlignment="TopLeft" SizeF="688.8333,16.333374" LocationFloat="29.166769, 520.833435" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="42" UseFont="false" UseTextAlignment="false" />
+        </Item20>
+        <Item21 Ref="43" ControlType="XRLabel" Name="label16" Multiline="true" Text="โดยให้ปรับแก้ / เข้าตรวจประเมินห้องปฏิบัติการ ดังนี้" TextAlignment="TopLeft" SizeF="509.6667,23" LocationFloat="208.333328, 392.5" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="44" UseFont="false" UseTextAlignment="false" />
+        </Item21>
+        <Item22 Ref="45" ControlType="XRCheckBox" Name="checkBox3" Text="เข้าข่ายงานวิจัยประเภทที่..........." SizeF="198.333344,23" LocationFloat="10, 392.5" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="46" UseFont="false" />
+        </Item22>
+        <Item23 Ref="47" ControlType="XRLabel" Name="label18" Multiline="true" Text="........................................................................................................................................................................................................................" TextAlignment="TopLeft" SizeF="688.8333,16.333374" LocationFloat="29.166666, 362.500122" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="48" UseFont="false" UseTextAlignment="false" />
+        </Item23>
+        <Item24 Ref="49" ControlType="XRLabel" Name="label19" Multiline="true" Text="3.    ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166666, 339.500122" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="50" UseFont="false" UseTextAlignment="false" />
+        </Item24>
+        <Item25 Ref="51" ControlType="XRLabel" Name="label14" Multiline="true" Text="2.    ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166666, 300.166748" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="52" UseFont="false" UseTextAlignment="false" />
+        </Item25>
+        <Item26 Ref="53" ControlType="XRLabel" Name="label15" Multiline="true" Text="........................................................................................................................................................................................................................" TextAlignment="TopLeft" SizeF="688.8333,16.333374" LocationFloat="29.166666, 323.166748" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="54" UseFont="false" UseTextAlignment="false" />
+        </Item26>
+        <Item27 Ref="55" ControlType="XRLabel" Name="label13" Multiline="true" Text="........................................................................................................................................................................................................................" TextAlignment="TopLeft" SizeF="688.8333,16.333374" LocationFloat="29.166666, 283.833374" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="56" UseFont="false" UseTextAlignment="false" />
+        </Item27>
+        <Item28 Ref="57" ControlType="XRLabel" Name="label12" Multiline="true" Text="1.    ............................................................................................................................................................................................................." TextAlignment="TopLeft" SizeF="688.8333,23" LocationFloat="29.166666, 260.833374" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="58" UseFont="false" UseTextAlignment="false" />
+        </Item28>
+        <Item29 Ref="59" ControlType="XRCheckBox" Name="checkBox2" Text="รับรองงานวิจัยประเภทที่..........................." SizeF="198.333344,23" LocationFloat="10, 237.833359" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="60" UseFont="false" />
+        </Item29>
+        <Item30 Ref="61" ControlType="XRCheckBox" Name="checkBox1" Text="รับรองงานวิจัยประเภทที่..........................." SizeF="198.333344,23" LocationFloat="10, 214.833344" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="62" UseFont="false" />
+        </Item30>
+        <Item31 Ref="63" ControlType="XRLabel" Name="label11" Multiline="true" Text="หลังจากปรับแก้ดังนี้" TextAlignment="TopLeft" SizeF="128.333328,23.0000076" LocationFloat="208.333328, 237.833359" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+          <StylePriority Ref="64" UseFont="false" UseTextAlignment="false" />
+        </Item31>
+        <Item32 Ref="65" ControlType="XRLabel" Name="label10" Multiline="true" Text="ผลการพิจรณา" TextAlignment="TopLeft" SizeF="128.333328,23.0000076" LocationFloat="10, 190.166672" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="66" UseFont="false" UseTextAlignment="false" />
+        </Item32>
+        <Item33 Ref="67" ControlType="XRLine" Name="line5" LineDirection="Vertical" SizeF="8.33334351,58.5" LocationFloat="360, 131.666672" />
+        <Item34 Ref="68" ControlType="XRLabel" Name="label8" Multiline="true" Text="คณะ/หน่วยงาน" TextAlignment="TopLeft" SizeF="128.333328,23.0000076" LocationFloat="368.333344, 154.6667" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="69" UseFont="false" UseTextAlignment="false" />
+        </Item34>
+        <Item35 Ref="70" ControlType="XRLabel" Name="label9" Multiline="true" Text="คณะ/หน่วยงานนิสิต" TextAlignment="TopLeft" SizeF="128.333328,23.0000076" LocationFloat="368.333344, 131.666672" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="71" UseFont="false" UseTextAlignment="false" />
+        </Item35>
+        <Item36 Ref="72" ControlType="XRLine" Name="line4" SizeF="723.833435,11.333313" LocationFloat="2.5, 178.833359" />
+        <Item37 Ref="73" ControlType="XRLabel" Name="label6" Multiline="true" Text="อาจารย์ที่ปรึกษา" TextAlignment="TopLeft" SizeF="128.333328,23.0000076" LocationFloat="10, 154.6667" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="74" UseFont="false" UseTextAlignment="false" />
+        </Item37>
+        <Item38 Ref="75" ControlType="XRLabel" Name="label7" Multiline="true" Text="หัวหน้าโครงการ" TextAlignment="TopLeft" SizeF="128.333328,23.0000076" LocationFloat="10, 131.666672" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="76" UseFont="false" UseTextAlignment="false" />
+        </Item38>
+        <Item39 Ref="77" ControlType="XRLine" Name="line3" SizeF="726.333435,10.1666336" LocationFloat="0, 121.500038" />
+        <Item40 Ref="78" ControlType="XRLabel" Name="label5" Multiline="true" Text="(ชื่อภาษาอังกฤษ)" TextAlignment="TopLeft" SizeF="128.333328,23.0000076" LocationFloat="10, 98.50004" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="79" UseFont="false" UseTextAlignment="false" />
+        </Item40>
+        <Item41 Ref="80" ControlType="XRLabel" Name="label4" Multiline="true" Text="เรื่อง (ชื่อภาษาไทย)" TextAlignment="TopLeft" SizeF="128.333328,23.0000076" LocationFloat="10, 75.50003" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="81" UseFont="false" UseTextAlignment="false" />
+        </Item41>
+        <Item42 Ref="82" ControlType="XRLine" Name="line2" SizeF="723.833435,2" LocationFloat="2.5, 73.50001" />
+        <Item43 Ref="83" ControlType="XRLabel" Name="label3" Multiline="true" Text="มหาวิทยาลัยนเรศวร" TextAlignment="TopCenter" SizeF="180,23.0000076" LocationFloat="273.333344, 50.5000038" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="84" UseFont="false" UseTextAlignment="false" />
+        </Item43>
+        <Item44 Ref="85" ControlType="XRLabel" Name="label2" Multiline="true" Text="แบบฟอรม์พิจรณารับรองด้านความปลอดภัยทางชีวภาพระดับห้องปฏิบัติการงานแประเภทที่ 1&#xD;&#xA;" TextAlignment="TopCenter" SizeF="598.3334,23.0000038" LocationFloat="65, 27.5" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="86" UseFont="false" UseTextAlignment="false" />
+        </Item44>
+        <Item45 Ref="87" ControlType="XRLabel" Name="label1" Multiline="true" Text="NUIBC MI 62-01-02" TextAlignment="MiddleJustify" SizeF="110.833313,23" LocationFloat="607.166748, 0.333328247" Font="TH Sarabun New, 12pt, style=Bold" Padding="2,2,0,0,100">
+          <StylePriority Ref="88" UseFont="false" UseTextAlignment="false" />
+        </Item45>
+        <Item46 Ref="89" ControlType="XRLine" Name="line1" SizeF="713.833435,4.166666" LocationFloat="2.5, 23.333334" />
+      </Controls>
+      <StylePriority Ref="90" UseFont="false" />
+    </Item3>
+  </Bands>
+  <CrossBandControls>
+    <Item1 Ref="91" ControlType="XRCrossBandBox" Name="crossBandBox1" WidthF="725.5" StartBand="#Ref-3" EndBand="#Ref-3" StartPointFloat="2.5, 0.500005066" EndPointFloat="2.5, 1069" />
+  </CrossBandControls>
+</XtraReportsLayoutSerializer>

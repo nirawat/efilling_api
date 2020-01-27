@@ -32,3 +32,20 @@ C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repositor
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Models.pdb
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Repository.Interface.pdb
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\obj\Release\netstandard2.0\THD.Core.Api.Repository.csproj.CopyComplete
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Repository.deps.json
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Repository.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Repository.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Entities.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Helpers.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Models.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Repository.Interface.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Entities.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Helpers.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Models.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\bin\Release\netstandard2.0\THD.Core.Api.Repository.Interface.pdb
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\obj\Release\netstandard2.0\THD.Core.Api.Repository.csprojAssemblyReference.cache
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\obj\Release\netstandard2.0\THD.Core.Api.Repository.AssemblyInfoInputs.cache
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\obj\Release\netstandard2.0\THD.Core.Api.Repository.AssemblyInfo.cs
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\obj\Release\netstandard2.0\THD.Core.Api.Repository.csproj.CopyComplete
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\obj\Release\netstandard2.0\THD.Core.Api.Repository.dll
+D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Repository\obj\Release\netstandard2.0\THD.Core.Api.Repository.pdb
