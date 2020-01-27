@@ -16,4 +16,3 @@ C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\ob
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.AssemblyInfo.cs
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.dll
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.pdb
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.csprojAssemblyReference.cache

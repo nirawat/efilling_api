@@ -378,7 +378,7 @@ namespace THD.Core.Api.Private.Controllers
             ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC3Async(model);
 
             if (e.Status) return Ok(e);
-            else return BadRequest();
+            else return BadRequest(e);
 
         }
 

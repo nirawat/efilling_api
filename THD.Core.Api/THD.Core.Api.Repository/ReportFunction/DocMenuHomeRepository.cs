@@ -272,10 +272,12 @@ namespace THD.Core.Api.Repository.DataHandler
         public async Task<ModelMenuHome1_ResultNote> GetResultNoteHome1Async(string project_number)
         {
             string sql = "SELECT A.doc_id, ROW_NUMBER() OVER(PARTITION BY A.project_number ORDER BY A.doc_id ASC) as seq, " +
-                        "B.full_name, A.comment_consider " +
+                        "B.full_name, A.comment_consider, C.name_thai " +
                         "FROM Doc_MenuC2 A " +
                         "LEFT OUTER JOIN RegisterUser B " +
                         "ON A.assigner_code = B.register_id " +
+                        "LEFT OUTER JOIN MST_Safety C " +
+                        "ON A.safety_type = C.id " +
                         "WHERE A.project_number='" + project_number + "' " +
                         "ORDER BY A.doc_id ASC";
 
@@ -293,6 +295,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             e.resultNote += "ลำดับที่: " + Convert.ToInt32(reader["seq"]) + "\n" +
                                             "ชื่อกรรมการ: " + reader["full_name"].ToString() + "\n" +
+                                            "ความเห็นการรับรอง: ความเสี่ยง " + reader["name_thai"].ToString() + "\n" +
                                             "ความเห็นประกอบการพิจารณา: " + "\n" +
                                             reader["comment_consider"].ToString() + "\n\n";
                         }
@@ -310,7 +313,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
             ModelPermissionPage user_permission = await _IRegisterUserRepository.GetPermissionPageAsync(search_data.userid, "M001");
 
-            string sql = "SELECT A.*, B.faculty " +
+            string sql = "SELECT A.*, B.faculty, (B.first_name + ' ' + B.full_name) AS project_head_name " +
                         "FROM Transaction_Document A " +
                         "INNER JOIN RegisterUser B ON A.project_head = B.register_id " +
                         "WHERE 1=1 ";
@@ -366,6 +369,7 @@ namespace THD.Core.Api.Repository.DataHandler
                             item.project_name_thai = reader["project_name_thai"].ToString();
                             item.project_name_eng = reader["project_name_eng"].ToString();
                             item.project_number = reader["project_number"].ToString();
+                            item.project_head_name = reader["project_head_name"].ToString();
                             item.acronyms = reader["acronyms"].ToString();
                             item.risk_type = reader["risk_type"].ToString();
                             item.delivery_online_date = reader["delivery_online_date"].ToString();

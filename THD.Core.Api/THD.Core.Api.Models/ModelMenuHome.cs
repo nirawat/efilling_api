@@ -41,6 +41,7 @@ namespace THD.Core.Api.Models
         public string project_request_id { get; set; }
         public string project_name_thai { get; set; }
         public string project_name_eng { get; set; }
+        public string project_head_name { get; set; }
         public string project_number { get; set; }
         public string acronyms { get; set; }
         public string risk_type { get; set; }
