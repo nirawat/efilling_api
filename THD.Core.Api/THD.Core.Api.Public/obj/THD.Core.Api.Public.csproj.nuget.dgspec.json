@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj": {}
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj": {}
   },
   "projects": {
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj",
         "projectName": "THD.Core.Api.Business.Interface",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,11 +32,11 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
               }
             }
           }
@@ -67,24 +67,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj",
         "projectName": "THD.Core.Api.Business",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -99,23 +99,23 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj"
               }
             }
           }
@@ -146,24 +146,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj",
         "projectName": "THD.Core.Api.Entities",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -210,24 +210,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
         "projectName": "THD.Core.Api.Helpers",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -270,24 +270,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj",
         "projectName": "THD.Core.Api.Models",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -334,24 +334,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj",
         "projectName": "THD.Core.Api.Private",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -366,20 +366,20 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj"
               }
             }
           }
@@ -445,24 +445,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
         "projectName": "THD.Core.Api.Public",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\THD.Core.Api.Public.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Public\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -477,11 +477,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj"
               }
             }
           }
@@ -527,24 +527,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj",
         "projectName": "THD.Core.Api.Repository.Interface",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -559,11 +559,11 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
               }
             }
           }
@@ -594,24 +594,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj",
         "projectName": "THD.Core.Api.Repository",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -626,17 +626,17 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Entities\\THD.Core.Api.Entities.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
               },
-              "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj": {
-                "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj"
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository.Interface\\THD.Core.Api.Repository.Interface.csproj"
               }
             }
           }
@@ -687,7 +687,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

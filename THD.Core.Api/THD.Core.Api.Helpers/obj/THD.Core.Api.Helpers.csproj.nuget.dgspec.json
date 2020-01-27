@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {}
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {}
   },
   "projects": {
-    "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
+    "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
+        "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
         "projectName": "THD.Core.Api.Helpers",
-        "projectPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
-        "packagesPath": "C:\\Users\\NPFS040\\.nuget\\packages\\",
-        "outputPath": "D:\\SourceTree_Repository\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\obj\\",
+        "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj",
+        "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
+        "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\NPFS040\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -60,7 +60,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
