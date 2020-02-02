@@ -98,7 +98,33 @@ namespace THD.Core.Api.Public.Controllers
         }
 
 
+        #region "Menu D1 Edit"
 
+        [HttpGet("MenuD1EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuD1EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuD"}/{"MenuD1EditInterfaceData"}/{UserId}/{ProjectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        #endregion
 
 
 

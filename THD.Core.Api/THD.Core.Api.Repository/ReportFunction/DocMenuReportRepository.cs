@@ -70,6 +70,7 @@ namespace THD.Core.Api.Repository.DataHandler
                             while (await reader.ReadAsync())
                             {
                                 rptData1_2.projecttype = reader["project_type"].ToString();
+                                rptData1_2.title = reader["name_thai"].ToString();
                                 rptData1_2.Doc_head_2 = reader["doc_number"].ToString();
                                 rptData1_2.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
                                 rptData1_2.Presenter_name = reader["project_head_name"].ToString();
@@ -139,36 +140,25 @@ namespace THD.Core.Api.Repository.DataHandler
                 }
 
                 rptR1 rpt1 = new rptR1();
-                rptR2 rpt2 = new rptR2();
 
                 ObjectDataSource ds1_2 = new ObjectDataSource();
                 ds1_2.Constructor = new ObjectConstructorInfo();
                 ds1_2.DataSource = rptData1_2;
 
-                string report_nameR1_2 = "A1_R1_2_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_nameR1_2 = "R1_2_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_pathR1_2 = _IEnvironmentConfig.PathReport + report_nameR1_2;
 
-                string R16_title = "";
-                if (rptData1_2 != null && rptData1_2.projecttype == "1")
-                {
-                    rpt1.DataSource = ds1_2;
-                    rpt1.ExportToPdf(report_full_pathR1_2);
-                    R16_title = "ระดับห้องปฏิบัติการ";
-                }
-                if (rptData1_2 != null && rptData1_2.projecttype == "2")
-                {
-                    rpt2.DataSource = ds1_2;
-                    rpt2.ExportToPdf(report_full_pathR1_2);
-                    R16_title = "ระดับภาคสนาม";
-                }
+                rpt1.DataSource = ds1_2;
+                rpt1.ExportToPdf(report_full_pathR1_2);
+
                 string fBase64 = string.Empty;
                 if (File.Exists(report_full_pathR1_2))
                 {
                     string readFileByte = "data:application/pdf;base64," + Convert.ToBase64String(File.ReadAllBytes(report_full_pathR1_2));
                     fBase64 = readFileByte;
                 }
-                resp.filename1_2 = report_nameR1_2;
-                resp.filebase1_2_64 = fBase64;
+                resp.filename1and2 = report_nameR1_2;
+                resp.filebase1and264 = fBase64;
 
 
 
@@ -176,7 +166,12 @@ namespace THD.Core.Api.Repository.DataHandler
                 ObjectDataSource ds16 = new ObjectDataSource();
                 ds16.Constructor = new ObjectConstructorInfo();
                 //ds16.DataSource = rptData16;
-                string report_nameR16 = "A1_R16_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+
+                string R16_title = "";
+                if (rptData1_2 != null && rptData1_2.projecttype == "1") R16_title = "ระดับห้องปฏิบัติการ";
+                if (rptData1_2 != null && rptData1_2.projecttype == "2") R16_title = "ระดับภาคสนาม";
+
+                string report_nameR16 = "R16_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_pathR16 = _IEnvironmentConfig.PathReport + report_nameR16;
                 rpt16.DataSource = ds16;
                 rpt16.ExportToPdf(report_full_pathR16);
@@ -186,7 +181,7 @@ namespace THD.Core.Api.Repository.DataHandler
                     fBase64 = readFileByte;
                 }
                 resp.filename16 = report_nameR16;
-                resp.filebase16_64 = fBase64;
+                resp.filebase1664 = fBase64;
 
 
             }
@@ -208,55 +203,53 @@ namespace THD.Core.Api.Repository.DataHandler
 
             try
             {
-                //model_rpt_2_report rptData = new model_rpt_2_report();
+                model_rpt_3_report rptData = new model_rpt_3_report();
 
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_2", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_report_3", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+                        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
 
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_type"].ToString();
-                //                rptData.Doc_head_2 = reader["doc_number"].ToString();
-                //                rptData.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                //                rptData.Presenter_name = reader["project_head_name"].ToString();
-                //                rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
-                //                rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
-                //                rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
-                //                rptData.Position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
-                //                rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
-                //                rptData.Job_Position = "";
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-                //                rptData.Research_name_thai = reader["project_name_thai"].ToString();
-                //                rptData.Research_name_eng = reader["project_name_eng"].ToString();
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-
-                //                rptData.Advisor_fullname = reader["project_consultant"].ToString();
-                //                rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                //                rptData.co_research_fullname1 = reader["member_project_1"].ToString();
-                //                rptData.co_research_fullname2 = reader["member_project_2"].ToString();
-
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                //rptData.projecttype = reader["project_type"].ToString();
+                                //rptData.Doc_head_2 = reader["doc_number"].ToString();
+                                rptData.Doc_head_4 = Convert.ToDateTime(reader["create_date"]).ToString("dd/MM/yyyy");
+                                rptData.Presenter_name = reader["project_head_name"].ToString();
+                                rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
+                                rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
+                                rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
+                                rptData.Position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
+                                rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
+                                rptData.Job_Position = "";
+                                rptData.Faculty_name = reader["faculty_name"].ToString();
+                                rptData.Research_name_thai = reader["project_name_thai"].ToString();
+                                rptData.Research_name_eng = reader["project_name_eng"].ToString();
+                                rptData.Faculty_name = reader["faculty_name"].ToString();
+                                rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
+                                rptData.certificate_date = reader["Certificate_date"].ToString();
+                                rptData.certificate_month = reader["Certificate_month"].ToString();
+                                rptData.certificate_year = reader["Certificate_year"].ToString();
+                            }
+                        }
+                        reader.Close();
+                    }
+                    conn.Close();
+                }
 
                 rptR3 rpt = new rptR3();
 
                 ObjectDataSource dataSource = new ObjectDataSource();
                 dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
+                dataSource.DataSource = rptData;
 
                 string report_name = "A3_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
@@ -293,55 +286,54 @@ namespace THD.Core.Api.Repository.DataHandler
 
             try
             {
-                //model_rpt_2_report rptData = new model_rpt_2_report();
+                model_rpt_4_report rptData = new model_rpt_4_report();
 
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_2", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_report_4", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+                        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
 
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_type"].ToString();
-                //                rptData.Doc_head_2 = reader["doc_number"].ToString();
-                //                rptData.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                //                rptData.Presenter_name = reader["project_head_name"].ToString();
-                //                rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
-                //                rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
-                //                rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
-                //                rptData.Position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
-                //                rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
-                //                rptData.Job_Position = "";
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-                //                rptData.Research_name_thai = reader["project_name_thai"].ToString();
-                //                rptData.Research_name_eng = reader["project_name_eng"].ToString();
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                //rptData.projecttype = reader["project_type"].ToString();
+                                //rptData.Doc_head_2 = reader["doc_number"].ToString();
+                                rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+                                rptData.presenter_name = reader["project_head_name"].ToString();
+                                rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
+                                rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
+                                rptData.position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
+                                rptData.position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
+                                rptData.position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
+                                rptData.Job_Position = "";
+                                rptData.faculty_name = reader["faculty_name"].ToString();
+                                rptData.research_name_thai = reader["project_name_thai"].ToString();
+                                rptData.research_name_eng = reader["project_name_eng"].ToString();
+                                rptData.headofresearch_fullname = reader["project_head_name"].ToString();
+                                rptData.certificate_date = reader["Certificate_date"].ToString();
+                                rptData.certificate_month = reader["Certificate_month"].ToString();
+                                rptData.certificate_year = reader["Certificate_year"].ToString();
+                                rptData.certificate_type = reader["accept_type_name"].ToString();
 
-                //                rptData.Advisor_fullname = reader["project_consultant"].ToString();
-                //                rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                //                rptData.co_research_fullname1 = reader["member_project_1"].ToString();
-                //                rptData.co_research_fullname2 = reader["member_project_2"].ToString();
-
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
+                            }
+                        }
+                        reader.Close();
+                    }
+                    conn.Close();
+                }
 
                 rptR4 rpt = new rptR4();
 
                 ObjectDataSource dataSource = new ObjectDataSource();
                 dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
+                dataSource.DataSource = rptData;
 
                 string report_name = "A4_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
@@ -378,55 +370,54 @@ namespace THD.Core.Api.Repository.DataHandler
 
             try
             {
-                //model_rpt_2_report rptData = new model_rpt_2_report();
+                model_rpt_5_report rptData = new model_rpt_5_report();
 
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_2", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_report_5", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+                        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
 
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_type"].ToString();
-                //                rptData.Doc_head_2 = reader["doc_number"].ToString();
-                //                rptData.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                //                rptData.Presenter_name = reader["project_head_name"].ToString();
-                //                rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
-                //                rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
-                //                rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
-                //                rptData.Position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
-                //                rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
-                //                rptData.Job_Position = "";
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-                //                rptData.Research_name_thai = reader["project_name_thai"].ToString();
-                //                rptData.Research_name_eng = reader["project_name_eng"].ToString();
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                //rptData.projecttype = reader["project_type"].ToString();
+                                //rptData.Doc_head_2 = reader["doc_number"].ToString();
+                                rptData.doc_head_4 = Convert.ToDateTime(reader["create_date"]).ToString("dd/MM/yyyy");
+                                rptData.presenter_name = reader["project_head_name"].ToString();
+                                rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
+                                rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
+                                rptData.position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
+                                rptData.position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
+                                rptData.position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
+                                rptData.Job_Position = "";
+                                rptData.faculty_name = reader["faculty_name"].ToString();
+                                rptData.research_name_thai = "ขอรายงานความก้าวหน้าโครงการวิจัยเรื่อง " + reader["project_name_thai"].ToString();
+                                rptData.research_name_eng = reader["project_name_eng"].ToString();
+                                rptData.headofresearch_fullname = reader["project_head_name"].ToString();
+                                rptData.certificate_date = reader["Certificate_date"].ToString();
+                                rptData.certificate_month = reader["Certificate_month"].ToString();
+                                rptData.certificate_year = reader["Certificate_year"].ToString();
+                                rptData.certificate_type = reader["accept_type_name"].ToString();
 
-                //                rptData.Advisor_fullname = reader["project_consultant"].ToString();
-                //                rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                //                rptData.co_research_fullname1 = reader["member_project_1"].ToString();
-                //                rptData.co_research_fullname2 = reader["member_project_2"].ToString();
-
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
+                            }
+                        }
+                        reader.Close();
+                    }
+                    conn.Close();
+                }
 
                 rptR5 rpt = new rptR5();
 
                 ObjectDataSource dataSource = new ObjectDataSource();
                 dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
+                dataSource.DataSource = rptData;
 
                 string report_name = "A5_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
@@ -463,55 +454,54 @@ namespace THD.Core.Api.Repository.DataHandler
 
             try
             {
-                //model_rpt_2_report rptData = new model_rpt_2_report();
+                model_rpt_6_report rptData = new model_rpt_6_report();
 
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_2", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_report_6", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+                        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
 
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_type"].ToString();
-                //                rptData.Doc_head_2 = reader["doc_number"].ToString();
-                //                rptData.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                //                rptData.Presenter_name = reader["project_head_name"].ToString();
-                //                rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
-                //                rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
-                //                rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
-                //                rptData.Position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
-                //                rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
-                //                rptData.Job_Position = "";
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-                //                rptData.Research_name_thai = reader["project_name_thai"].ToString();
-                //                rptData.Research_name_eng = reader["project_name_eng"].ToString();
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                //rptData.projecttype = reader["project_type"].ToString();
+                                //rptData.Doc_head_2 = reader["doc_number"].ToString();
+                                rptData.doc_head_4 = Convert.ToDateTime(reader["create_date"]).ToString("dd/MM/yyyy");
+                                rptData.presenter_name = reader["project_head_name"].ToString();
+                                rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
+                                rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
+                                rptData.position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
+                                rptData.position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
+                                rptData.position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
+                                rptData.Job_Position = "";
+                                rptData.faculty_name = reader["faculty_name"].ToString();
+                                rptData.research_name_thai = "ขอปรับแก้โครงการวิจัยเรื่อง " + reader["project_name_thai"].ToString();
+                                rptData.research_name_eng = reader["project_name_eng"].ToString();
+                                rptData.headofresearch_fullname = reader["project_head_name"].ToString();
+                                rptData.certificate_date = reader["Certificate_date"].ToString();
+                                rptData.certificate_month = reader["Certificate_month"].ToString();
+                                rptData.certificate_year = reader["Certificate_year"].ToString();
+                                //rptData.certificate_type = reader["accept_type_name"].ToString();
 
-                //                rptData.Advisor_fullname = reader["project_consultant"].ToString();
-                //                rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                //                rptData.co_research_fullname1 = reader["member_project_1"].ToString();
-                //                rptData.co_research_fullname2 = reader["member_project_2"].ToString();
-
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
+                            }
+                        }
+                        reader.Close();
+                    }
+                    conn.Close();
+                }
 
                 rptR6 rpt = new rptR6();
 
                 ObjectDataSource dataSource = new ObjectDataSource();
                 dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
+                dataSource.DataSource = rptData;
 
                 string report_name = "A6_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
@@ -718,55 +708,47 @@ namespace THD.Core.Api.Repository.DataHandler
 
             try
             {
-                //model_rpt_2_report rptData = new model_rpt_2_report();
+                model_rpt_9_report rptData = new model_rpt_9_report();
 
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_2", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_report_9", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+                        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
 
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_type"].ToString();
-                //                rptData.Doc_head_2 = reader["doc_number"].ToString();
-                //                rptData.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                //                rptData.Presenter_name = reader["project_head_name"].ToString();
-                //                rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
-                //                rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
-                //                rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
-                //                rptData.Position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
-                //                rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
-                //                rptData.Job_Position = "";
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-                //                rptData.Research_name_thai = reader["project_name_thai"].ToString();
-                //                rptData.Research_name_eng = reader["project_name_eng"].ToString();
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                rptData.project_namethai = reader["project_name_thai"].ToString();
+                                rptData.project_nameeng = reader["project_name_eng"].ToString();
+                                rptData.researcher = reader["project_head_name"].ToString();
+                                rptData.advisor = reader["advisorsNameThai"].ToString();
+                                rptData.faculty = reader["faculty_name"].ToString();
+                                rptData.project_no = reader["project_number"].ToString();
+                                rptData.certificate_no = reader["acceptProjectNo"].ToString();
+                                rptData.round = reader["RenewRound"].ToString();
+                                rptData.certificate_date = Convert.ToDateTime(reader["AcceptDate"]).ToString("dd/MM/yyyy");
+                                rptData.expire_date = Convert.ToDateTime(reader["ExpireDate"]).ToString("dd/MM/yyyy");
+                                rptData.projecttype = reader["accept_type_name"].ToString();
 
-                //                rptData.Advisor_fullname = reader["project_consultant"].ToString();
-                //                rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                //                rptData.co_research_fullname1 = reader["member_project_1"].ToString();
-                //                rptData.co_research_fullname2 = reader["member_project_2"].ToString();
-
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
+                            }
+                        }
+                        reader.Close();
+                    }
+                    conn.Close();
+                }
 
                 rptR9 rpt = new rptR9();
 
                 ObjectDataSource dataSource = new ObjectDataSource();
                 dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
+                dataSource.DataSource = rptData;
 
                 string report_name = "D1_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
@@ -1907,6 +1889,11 @@ namespace THD.Core.Api.Repository.DataHandler
                             while (await reader.ReadAsync())
                             {
                                 rptData.projecttype = reader["project_according_type_method"].ToString();
+                                rptData.assessment_agent = "";
+                                rptData.labLocation = reader["build_location"].ToString();
+                                rptData.labboy_name = reader["responsible_person"].ToString();
+                                rptData.room_no = reader["room_tel"].ToString();
+                                rptData.assessment_date = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
                             }
                         }
                         reader.Close();
@@ -1919,9 +1906,9 @@ namespace THD.Core.Api.Repository.DataHandler
 
                 ObjectDataSource dataSource = new ObjectDataSource();
                 dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
+                dataSource.DataSource = rptData;
 
-                string report_name = "A2_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R17_18_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 if (rptData != null && rptData.projecttype == "1")

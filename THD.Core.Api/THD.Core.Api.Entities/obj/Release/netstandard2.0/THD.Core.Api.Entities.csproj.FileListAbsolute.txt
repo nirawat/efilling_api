@@ -1,21 +1,3 @@
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Entities\bin\Release\netstandard2.0\THD.Core.Api.Entities.deps.json
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Entities\bin\Release\netstandard2.0\THD.Core.Api.Entities.dll
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Entities\bin\Release\netstandard2.0\THD.Core.Api.Entities.pdb
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.AssemblyInfoInputs.cache
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.AssemblyInfo.cs
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.dll
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.pdb
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.csprojAssemblyReference.cache
-<<<<<<< HEAD
-D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Entities\bin\Release\netstandard2.0\THD.Core.Api.Entities.deps.json
-D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Entities\bin\Release\netstandard2.0\THD.Core.Api.Entities.dll
-D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Entities\bin\Release\netstandard2.0\THD.Core.Api.Entities.pdb
-D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.csprojAssemblyReference.cache
-D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.AssemblyInfoInputs.cache
-D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.AssemblyInfo.cs
-D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.dll
-D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.pdb
-=======
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Entities\bin\Release\netstandard2.0\THD.Core.Api.Entities.deps.json
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Entities\bin\Release\netstandard2.0\THD.Core.Api.Entities.dll
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Entities\bin\Release\netstandard2.0\THD.Core.Api.Entities.pdb
@@ -23,8 +5,3 @@ C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Entities\
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.AssemblyInfo.cs
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.dll
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.pdb
-<<<<<<< HEAD
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Entities\obj\Release\netstandard2.0\THD.Core.Api.Entities.csprojAssemblyReference.cache
-=======
->>>>>>> 3555d6c91098e15d62d7bbdbecaee0f0a001b1a1
->>>>>>> 7d72abaa47bd6eb8c6f7985438c4c70a58941e9b

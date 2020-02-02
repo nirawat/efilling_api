@@ -9,6 +9,9 @@ namespace THD.Core.Api.Models
     {
         public IList<ModelSelectOption> ListProjectNumber { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
+
+        public string editdatamessage { get; set; }
+        public ModelMenuD1 editdata { get; set; }
     }
 
     public class ModelMenuD1
@@ -24,7 +27,9 @@ namespace THD.Core.Api.Models
         public string projectnameeng { get; set; }
         public string accepttypenamethai { get; set; }
         public int acceptresult { get; set; }
+        public string acceptresultname { get; set; }
         public int acceptcondition { get; set; }
+        public string acceptconditionname { get; set; }
         public string acceptdate { get; set; }
         public IList<ModelMenuD1RenewTable> listRenewDate { get; set; }
     }

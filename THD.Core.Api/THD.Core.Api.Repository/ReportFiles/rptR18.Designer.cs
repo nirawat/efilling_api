@@ -18,23 +18,33 @@ namespace THD.Core.Api.Repository.ReportFiles {
             this.TopMargin = reportInitializer.GetControl<DevExpress.XtraReports.UI.TopMarginBand>("TopMargin");
             this.BottomMargin = reportInitializer.GetControl<DevExpress.XtraReports.UI.BottomMarginBand>("BottomMargin");
             this.Detail = reportInitializer.GetControl<DevExpress.XtraReports.UI.DetailBand>("Detail");
-            this.xrLine1 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLine>("xrLine1");
-            this.xrRichText3 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("xrRichText3");
-            this.xrLine6 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLine>("xrLine6");
-            this.xrLine5 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLine>("xrLine5");
-            this.xrLine4 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLine>("xrLine4");
-            this.xrLine3 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLine>("xrLine3");
+            this.label3 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label3");
+            this.richText6 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText6");
+            this.richText3 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText3");
+            this.richText4 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText4");
+            this.richText2 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText2");
+            this.label2 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label2");
+            this.label5 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label5");
+            this.label1 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label1");
+            this.richText5 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("richText5");
             this.xrRichText1 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRRichText>("xrRichText1");
+
+            // Data Sources
+            this.objectDataSource2 = reportInitializer.GetDataSource<DevExpress.DataAccess.ObjectBinding.ObjectDataSource>("objectDataSource2");
         }
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.DetailBand Detail;
-        private DevExpress.XtraReports.UI.XRLine xrLine1;
-        private DevExpress.XtraReports.UI.XRRichText xrRichText3;
-        private DevExpress.XtraReports.UI.XRLine xrLine6;
-        private DevExpress.XtraReports.UI.XRLine xrLine5;
-        private DevExpress.XtraReports.UI.XRLine xrLine4;
-        private DevExpress.XtraReports.UI.XRLine xrLine3;
+        private DevExpress.XtraReports.UI.XRLabel label3;
+        private DevExpress.XtraReports.UI.XRRichText richText6;
+        private DevExpress.XtraReports.UI.XRRichText richText3;
+        private DevExpress.XtraReports.UI.XRRichText richText4;
+        private DevExpress.XtraReports.UI.XRRichText richText2;
+        private DevExpress.XtraReports.UI.XRLabel label2;
+        private DevExpress.XtraReports.UI.XRLabel label5;
+        private DevExpress.XtraReports.UI.XRLabel label1;
+        private DevExpress.XtraReports.UI.XRRichText richText5;
         private DevExpress.XtraReports.UI.XRRichText xrRichText1;
+        private DevExpress.DataAccess.ObjectBinding.ObjectDataSource objectDataSource2;
     }
 }

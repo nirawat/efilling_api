@@ -389,6 +389,15 @@ namespace THD.Core.Api.Business
 
         #endregion
 
+        #region "MenuA3 Edit"
+
+        public async Task<ModelMenuA3_InterfaceData> MenuA3EditInterfaceDataAsync(string UserId, string ProjectNumber)
+        {
+            return await _IDocMenuA3Repository.MenuA3EditInterfaceDataAsync(UserId, ProjectNumber);
+        }
+
+        #endregion
+
         #region MenuA4
 
         public async Task<ModelMenuA4_InterfaceData> MenuA4InterfaceDataAsync(string RegisterId)
@@ -415,6 +424,15 @@ namespace THD.Core.Api.Business
             }
 
             return resp;
+        }
+
+        #endregion
+
+        #region "MenuA4 Edit"
+
+        public async Task<ModelMenuA4_InterfaceData> MenuA4EditInterfaceDataAsync(string UserId, string ProjectNumber)
+        {
+            return await _IDocMenuA4Repository.MenuA4EditInterfaceDataAsync(UserId, ProjectNumber);
         }
 
         #endregion
@@ -449,6 +467,15 @@ namespace THD.Core.Api.Business
 
         #endregion
 
+        #region "MenuA5 Edit"
+
+        public async Task<ModelMenuA5_InterfaceData> MenuA5EditInterfaceDataAsync(string UserId, string ProjectNumber)
+        {
+            return await _IDocMenuA5Repository.MenuA5EditInterfaceDataAsync(UserId, ProjectNumber);
+        }
+
+        #endregion
+
         #region MenuA6
 
         public async Task<ModelMenuA6_InterfaceData> MenuA6InterfaceDataAsync(string RegisterId)
@@ -476,6 +503,15 @@ namespace THD.Core.Api.Business
             }
 
             return resp;
+        }
+
+        #endregion
+
+        #region "MenuA6 Edit"
+
+        public async Task<ModelMenuA6_InterfaceData> MenuA6EditInterfaceDataAsync(string UserId, string ProjectNumber)
+        {
+            return await _IDocMenuA6Repository.MenuA6EditInterfaceDataAsync(UserId, ProjectNumber);
         }
 
         #endregion
@@ -512,7 +548,14 @@ namespace THD.Core.Api.Business
 
         #endregion
 
+        #region "MenuA7 Edit"
 
+        public async Task<ModelMenuA7_InterfaceData> MenuA7EditInterfaceDataAsync(string UserId, string ProjectNumber)
+        {
+            return await _IDocMenuA7Repository.MenuA7EditInterfaceDataAsync(UserId, ProjectNumber);
+        }
+
+        #endregion
 
 
     }

@@ -115,11 +115,11 @@ namespace THD.Core.Api.Repository.DataHandler
                             ModelMenuA5ProjectNumberData e = new ModelMenuA5ProjectNumberData();
                             while (await reader.ReadAsync())
                             {
-                                e.projectheadname = reader[1].ToString();
-                                e.facultyname = reader[2].ToString();
-                                e.positionname = reader[3].ToString();
-                                e.projectname1 = reader[4].ToString();
-                                e.projectname2 = reader[5].ToString();
+                                e.projectname1 = reader[1].ToString();
+                                e.projectname2 = reader[2].ToString();
+                                e.projectheadname = reader[3].ToString();
+                                e.facultyname = reader[4].ToString();
+                                e.positionname = reader[5].ToString();
                                 e.certificatetype = reader[6].ToString();
                                 e.dateofapproval = Convert.ToDateTime(reader[7]).ToString("dd/MM/yyyy");
                             }
@@ -188,6 +188,63 @@ namespace THD.Core.Api.Repository.DataHandler
             }
             return resp;
         }
+
+
+        #region "Edit"
+        public async Task<ModelMenuA5_InterfaceData> MenuA5EditInterfaceDataAsync(string UserId, string ProjectNumber)
+        {
+            ModelMenuA5_InterfaceData resp = new ModelMenuA5_InterfaceData();
+
+            resp.editdata = new ModelMenuA5();
+            resp.editdata = await GetMenuA5DataEditAsync(ProjectNumber);
+
+            ModelSelectOption defaultProject = new ModelSelectOption();
+            defaultProject.value = resp.editdata.projectnumber;
+            defaultProject.label = resp.editdata.projectnamethai;
+            resp.ListProjectNumber = new List<ModelSelectOption>();
+            resp.ListProjectNumber.Add(defaultProject);
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(UserId, "M007");
+
+            return resp;
+        }
+
+        private async Task<ModelMenuA5> GetMenuA5DataEditAsync(string ProjectNumber)
+        {
+            string sql = "SELECT TOP(1)* FROM Doc_MenuA5 " +
+                         "WHERE project_number='" + ProjectNumber + "' ORDER BY doc_id DESC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuA5 e = new ModelMenuA5();
+                        while (await reader.ReadAsync())
+                        {
+                            e.docid = reader["doc_id"].ToString();
+                            e.projectnumber = reader["project_number"].ToString();
+                            e.projectheadname = reader["project_head_name"].ToString();
+                            e.positionnamethai = reader["position_name_thai"].ToString();
+                            e.facultyname = reader["faculty_name"].ToString();
+                            e.projectnamethai = reader["project_name_thai"].ToString();
+                            e.projectnameeng = reader["project_name_eng"].ToString();
+                            e.accepttypenamethai = reader["accept_type_name"].ToString();
+                            e.conclusiondate = Convert.ToDateTime(reader["conclusion_date"]).ToString("dd/MM/yyyy");
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+        #endregion
 
     }
 }

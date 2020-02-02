@@ -83,6 +83,7 @@ namespace THD.Core.Api.Private
             services.AddScoped(typeof(IDocMenuEService), typeof(DocMenuEService));
             services.AddScoped(typeof(IDocMenuFService), typeof(DocMenuFService));
             services.AddScoped(typeof(IDocMenuRService), typeof(DocMenuRService));
+            services.AddScoped(typeof(IMailTemplateService), typeof(MailTemplateService));
 
             //Add Repository
             services.AddScoped(typeof(IDocMenuHomeRepository), typeof(DocMenuHomeRepository));

@@ -21,4 +21,5 @@ namespace THD.Core.Api.Models
         public DateTime registerdate { get; set; }
         public DateTime registerexpire { get; set; }
     }
+
 }

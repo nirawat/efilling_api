@@ -9,6 +9,9 @@ namespace THD.Core.Api.Models
     {
         public IList<ModelSelectOption> ListProjectNumber { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
+
+        public string editdatamessage { get; set; }
+        public ModelMenuA3 editdata { get; set; }
     }
     public class ModelMenuA3
     {

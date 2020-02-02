@@ -1,8 +1,0 @@
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\obj\Debug\netstandard2.0\THD.Core.Api.Helpers.AssemblyInfoInputs.cache
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\obj\Debug\netstandard2.0\THD.Core.Api.Helpers.AssemblyInfo.cs
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\bin\Debug\netstandard2.0\THD.Core.Api.Helpers.deps.json
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\bin\Debug\netstandard2.0\THD.Core.Api.Helpers.dll
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\bin\Debug\netstandard2.0\THD.Core.Api.Helpers.pdb
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\obj\Debug\netstandard2.0\THD.Core.Api.Helpers.dll
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\obj\Debug\netstandard2.0\THD.Core.Api.Helpers.pdb
-C:\Work Project\React Project\eFilling\EFilling.WebApi\THD.Core.Api\THD.Core.Api.Helpers\obj\Debug\netstandard2.0\THD.Core.Api.Helpers.csprojAssemblyReference.cache

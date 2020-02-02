@@ -14,5 +14,9 @@ namespace THD.Core.Api.Repository.Interface
         Task<ModelMenuA3ProjectNumberData> GetProjectNumberWithDataA3Async(string project_number);
 
         Task<ModelResponseMessage> AddDocMenuA3Async(ModelMenuA3 model);
+
+
+
+        Task<ModelMenuA3_InterfaceData> MenuA3EditInterfaceDataAsync(string UserId, string ProjectNumber);
     }
 }

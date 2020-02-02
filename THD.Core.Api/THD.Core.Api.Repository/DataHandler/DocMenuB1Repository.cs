@@ -435,13 +435,13 @@ namespace THD.Core.Api.Repository.DataHandler
             year_current.label = (thai_year).ToString();
             resp.ListYearOfProject.Add(year_current);
 
-            for (int i = 1; i < 5; i++)
-            {
-                ModelSelectOption year_next = new ModelSelectOption();
-                year_next.value = (thai_year + i).ToString();
-                year_next.label = (thai_year + i).ToString();
-                resp.ListYearOfProject.Add(year_next);
-            }
+            //for (int i = 1; i < 5; i++)
+            //{
+            //    ModelSelectOption year_next = new ModelSelectOption();
+            //    year_next.value = (thai_year + i).ToString();
+            //    year_next.label = (thai_year + i).ToString();
+            //    resp.ListYearOfProject.Add(year_next);
+            //}
 
             // Edit Mode
             resp.editdata = new ModelMenuB1Edit();

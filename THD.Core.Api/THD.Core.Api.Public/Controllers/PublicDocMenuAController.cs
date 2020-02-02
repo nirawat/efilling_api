@@ -264,7 +264,33 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
+        #region "Menu A3 Edit"
 
+        [HttpGet("MenuA3EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA3EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuA"}/{"MenuA3EditInterfaceData"}/{UserId}/{ProjectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        #endregion
 
 
         [HttpGet("MenuA4InterfaceData/{RegisterId}")]
@@ -338,7 +364,33 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
+        #region "Menu A4 Edit"
 
+        [HttpGet("MenuA4EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA4EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuA"}/{"MenuA4EditInterfaceData"}/{UserId}/{ProjectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        #endregion
 
 
         [HttpGet("MenuA5InterfaceData/{RegisterId}")]
@@ -412,7 +464,33 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
+        #region "Menu A5 Edit"
 
+        [HttpGet("MenuA5EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA5EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuA"}/{"MenuA5EditInterfaceData"}/{UserId}/{ProjectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        #endregion
 
 
         [HttpGet("MenuA6InterfaceData/{RegisterId}")]
@@ -486,7 +564,33 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
+        #region "Menu A6 Edit"
 
+        [HttpGet("MenuA6EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA6EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuA"}/{"MenuA6EditInterfaceData"}/{UserId}/{ProjectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        #endregion
 
 
         [HttpGet("MenuA7InterfaceData/{RegisterId}")]
@@ -560,7 +664,33 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
+        #region "Menu A7 Edit"
 
+        [HttpGet("MenuA7EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA7EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuA"}/{"MenuA7EditInterfaceData"}/{UserId}/{ProjectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        #endregion
 
     }
 }

@@ -55,10 +55,13 @@ namespace THD.Core.Api.Models
         public string meeting_approval_date { get; set; }
         public string consider_result { get; set; }
         public string alert_date { get; set; }
+        public string request_edit_meeting_date { get; set; }
         public string request_edit_date { get; set; }
         public string report_status_date { get; set; }
         public string certificate_expire_date { get; set; }
         public string request_renew_date { get; set; }
+        public string close_project_date { get; set; }
+        public string print_certificate_date { get; set; }
     }
 
 

@@ -9,6 +9,9 @@ namespace THD.Core.Api.Models
     {
         public IList<ModelSelectOption> ListProjectNumber { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
+
+        public string editdatamessage { get; set; }
+        public ModelMenuA4 editdata { get; set; }
     }
     public class ModelMenuA4
     {
@@ -31,6 +34,7 @@ namespace THD.Core.Api.Models
         public string facultyname { get; set; }
         public string projectname1 { get; set; }
         public string projectname2 { get; set; }
+        public string positionname { get; set; }
         public string dateofapproval { get; set; }
     }
 }

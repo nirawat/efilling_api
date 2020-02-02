@@ -61,6 +61,16 @@ namespace THD.Core.Api.Business
 
         #endregion
 
+
+        #region "MenuD1 Edit"
+
+        public async Task<ModelMenuD1_InterfaceData> MenuD1EditInterfaceDataAsync(string UserId, string ProjectNumber)
+        {
+            return await _IDocMenuD1Repository.MenuD1EditInterfaceDataAsync(UserId, ProjectNumber);
+        }
+
+        #endregion
+
         #region MenuD2
 
         public async Task<ModelMenuD2_InterfaceData> MenuD2InterfaceDataAsync(string RegisterId)

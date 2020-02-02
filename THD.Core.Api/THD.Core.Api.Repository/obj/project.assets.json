@@ -1468,7 +1468,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
-          "System.ComponentModel.Annotations": "4.6.0"
+          "System.ComponentModel.Annotations": "4.7.0"
         },
         "compile": {
           "bin/placeholder/THD.Core.Api.Entities.dll": {}
@@ -5351,13 +5351,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\obj\\THD.Core.Api.Repository.csproj.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

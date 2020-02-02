@@ -39,10 +39,11 @@ namespace THD.Core.Api.Models.ReportModels
         public string Headoffaculty_fullname { get; set; }
         public string HeadofResearch_signature { get; set; }
         public string HeadofResearch_fullname { get; set; }
-        public string co_research_signature1 { get; set; }
-        public string co_research_fullname1 { get; set; }
-        public string co_research_signature2 { get; set; }
-        public string co_research_fullname2 { get; set; }
+        public string certificate_level { get; set; }
+        public string certificate_date { get; set; }
+        public string certificate_month { get; set; }
+        public string certificate_year { get; set; }
+        public string title { get; set; }
 
     }
 }

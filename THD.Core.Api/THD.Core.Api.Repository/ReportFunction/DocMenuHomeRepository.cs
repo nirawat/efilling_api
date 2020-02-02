@@ -271,13 +271,15 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<ModelMenuHome1_ResultNote> GetResultNoteHome1Async(string project_number)
         {
-            string sql = "SELECT A.doc_id, ROW_NUMBER() OVER(PARTITION BY A.project_number ORDER BY A.doc_id ASC) as seq, " +
-                        "B.full_name, A.comment_consider, C.name_thai " +
+            string sql = "SELECT A.doc_id, ROW_NUMBER() OVER(PARTITION BY A.project_number ORDER BY A.doc_id ASC) as seq, A.doc_date, " +
+                        "B.full_name, A.comment_consider, C.name_thai, (D.name_thai + ' ' + D.name_thai_sub) as approval_name_thai " +
                         "FROM Doc_MenuC2 A " +
                         "LEFT OUTER JOIN RegisterUser B " +
                         "ON A.assigner_code = B.register_id " +
                         "LEFT OUTER JOIN MST_Safety C " +
                         "ON A.safety_type = C.id " +
+                        "LEFT OUTER JOIN MST_ApprovalType D " +
+                        "ON A.approval_type = D.id " +
                         "WHERE A.project_number='" + project_number + "' " +
                         "ORDER BY A.doc_id ASC";
 
@@ -293,10 +295,10 @@ namespace THD.Core.Api.Repository.DataHandler
                         ModelMenuHome1_ResultNote e = new ModelMenuHome1_ResultNote();
                         while (await reader.ReadAsync())
                         {
-                            e.resultNote += "ลำดับที่: " + Convert.ToInt32(reader["seq"]) + "\n" +
+                            e.resultNote += "ลำดับที่: " + Convert.ToInt32(reader["seq"]) + " วันที่: " + Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy") + "\n" +
                                             "ชื่อกรรมการ: " + reader["full_name"].ToString() + "\n" +
-                                            "ความเห็นการรับรอง: ความเสี่ยง " + reader["name_thai"].ToString() + "\n" +
-                                            "ความเห็นประกอบการพิจารณา: " + "\n" +
+                                            "ประเภทความเสี่ยง: " + reader["name_thai"].ToString() + "\n" +
+                                            "ความเห็นการรับรอง: " + reader["approval_name_thai"].ToString() + "\n" +
                                             reader["comment_consider"].ToString() + "\n\n";
                         }
                         return e;
@@ -382,10 +384,13 @@ namespace THD.Core.Api.Repository.DataHandler
                             item.meeting_approval_date = reader["meeting_approval_date"].ToString();
                             item.consider_result = reader["consider_result"].ToString();
                             item.alert_date = reader["alert_date"].ToString();
+                            item.request_edit_meeting_date = reader["request_edit_date"].ToString(); /////
                             item.request_edit_date = reader["request_edit_date"].ToString();
                             item.report_status_date = reader["report_status_date"].ToString();
                             item.certificate_expire_date = reader["certificate_expire_date"].ToString();
                             item.request_renew_date = reader["request_renew_date"].ToString();
+                            item.close_project_date = reader["request_edit_date"].ToString(); /////
+                            item.print_certificate_date = reader["request_edit_date"].ToString(); /////
                             e.Add(item);
                             row_count++;
                         }

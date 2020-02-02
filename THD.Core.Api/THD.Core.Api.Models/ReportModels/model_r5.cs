@@ -15,34 +15,34 @@ namespace THD.Core.Api.Models.ReportModels
     public class model_rpt_5_report
     {
         public string projecttype { get; set; }
-        public string Doc_head_1 { get; set; }
-        public string Doc_head_2 { get; set; }
-        public string Doc_head_3 { get; set; }
-        public string Doc_head_4 { get; set; }
-        public string Presenter_name { get; set; }
-        public bool Position_1 { get; set; }
-        public bool Position_2 { get; set; }
-        public bool Position_3 { get; set; }
-        public bool Position_4 { get; set; }
-        public bool Position_5 { get; set; }
+        public string doc_head_1 { get; set; }
+        public string doc_head_2 { get; set; }
+        public string doc_head_3 { get; set; }
+        public string doc_head_4 { get; set; }
+        public string presenter_name { get; set; }
+        public bool position_1 { get; set; }
+        public bool position_2 { get; set; }
+        public bool position_3 { get; set; }
+        public bool position_4 { get; set; }
+        public bool position_5 { get; set; }
         public string Job_Position { get; set; }
-        public string Faculty_name { get; set; }
-        public string Research_name_thai { get; set; }
-        public string Research_name_eng { get; set; }
-        public string Advisor_signature { get; set; }
-        public string Advisor_fullname { get; set; }
-        public string Dept_comment { get; set; }
-        public string Dept_signature { get; set; }
-        public string Dept_fullname { get; set; }
-        public string Headoffaculty_comment { get; set; }
-        public string Headoffaculty_signature { get; set; }
-        public string Headoffaculty_fullname { get; set; }
-        public string HeadofResearch_signature { get; set; }
-        public string HeadofResearch_fullname { get; set; }
-        public string co_research_signature1 { get; set; }
-        public string co_research_fullname1 { get; set; }
-        public string co_research_signature2 { get; set; }
-        public string co_research_fullname2 { get; set; }
+        public string faculty_name { get; set; }
+        public string research_name_thai { get; set; }
+        public string research_name_eng { get; set; }
+        public string advisor_signature { get; set; }
+        public string advisor_fullname { get; set; }
+        public string dept_comment { get; set; }
+        public string dept_signature { get; set; }
+        public string dept_fullname { get; set; }
+        public string headoffaculty_comment { get; set; }
+        public string headoffaculty_signature { get; set; }
+        public string headoffaculty_fullname { get; set; }
+        public string headofresearch_signature { get; set; }
+        public string headofresearch_fullname { get; set; }
+        public string certificate_type { get; set; }
+        public string certificate_date { get; set; }
+        public string certificate_month { get; set; }
+        public string certificate_year { get; set; }
 
     }
 }

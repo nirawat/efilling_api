@@ -31,9 +31,6 @@
     <Compile Update="ReportFiles\Report15\rptR15_5.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="ReportFiles\rpt10-1.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Update="ReportFiles\rptR1.cs">
       <SubType>Component</SubType>
     </Compile>

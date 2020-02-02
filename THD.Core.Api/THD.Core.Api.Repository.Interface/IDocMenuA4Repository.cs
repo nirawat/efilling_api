@@ -10,9 +10,17 @@ namespace THD.Core.Api.Repository.Interface
     public interface IDocMenuA4Repository
     {
         Task<ModelMenuA4_InterfaceData> MenuA4InterfaceDataAsync(string RegisterId);
-
         Task<ModelMenuA4ProjectNumberData> GetProjectNumberWithDataA4Async(string project_number);
-
         Task<ModelResponseMessage> AddDocMenuA4Async(ModelMenuA4 model);
+
+
+        Task<ModelMenuA4_InterfaceData> MenuA4EditInterfaceDataAsync(string UserId, string ProjectNumber);
+
+
+
+
+
+
+
     }
 }

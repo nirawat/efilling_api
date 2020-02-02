@@ -104,6 +104,8 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
+
+
         [HttpGet("MenuA3InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA3InterfaceData(string RegisterId)
         {
@@ -134,6 +136,18 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
+        #region "Menu A3 Edit"
+
+        [HttpGet("MenuA3EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA3EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            ModelMenuA3_InterfaceData e = await _IDocMenuAService.MenuA3EditInterfaceDataAsync(UserId, ProjectNumber);
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        #endregion
+
         [HttpGet("MenuA4InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA4InterfaceData(string RegisterId)
         {
@@ -163,6 +177,20 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
+        #region "Menu A4 Edit"
+
+        [HttpGet("MenuA4EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA4EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            ModelMenuA4_InterfaceData e = await _IDocMenuAService.MenuA4EditInterfaceDataAsync(UserId, ProjectNumber);
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        #endregion
+
+
+
         [HttpGet("MenuA5InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA5InterfaceData(string RegisterId)
         {
@@ -190,6 +218,18 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest();
 
         }
+
+        #region "Menu A5 Edit"
+
+        [HttpGet("MenuA5EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA5EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            ModelMenuA5_InterfaceData e = await _IDocMenuAService.MenuA5EditInterfaceDataAsync(UserId, ProjectNumber);
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        #endregion
 
         [HttpGet("MenuA6InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA6InterfaceData(string RegisterId)
@@ -221,6 +261,18 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
+        #region "Menu A6 Edit"
+
+        [HttpGet("MenuA6EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA6EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            ModelMenuA6_InterfaceData e = await _IDocMenuAService.MenuA6EditInterfaceDataAsync(UserId, ProjectNumber);
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        #endregion
+
         [HttpGet("MenuA7InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA7InterfaceData(string RegisterId)
         {
@@ -250,7 +302,17 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
+        #region "Menu A7 Edit"
 
+        [HttpGet("MenuA7EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuA7EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            ModelMenuA7_InterfaceData e = await _IDocMenuAService.MenuA7EditInterfaceDataAsync(UserId, ProjectNumber);
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        #endregion
 
 
 

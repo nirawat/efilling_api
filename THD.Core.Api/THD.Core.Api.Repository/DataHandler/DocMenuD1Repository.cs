@@ -202,6 +202,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@acceptDate", SqlDbType.DateTime).Value = Convert.ToDateTime(model.acceptdate);
 
                         DateTime dtExpire = Convert.ToDateTime(model.acceptdate).AddDays(365);
+
                         cmd.Parameters.Add("@expireDate", SqlDbType.DateTime).Value = dtExpire;
 
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
@@ -234,6 +235,74 @@ namespace THD.Core.Api.Repository.DataHandler
 
             return resp;
         }
+
+
+        #region "Edit"
+        public async Task<ModelMenuD1_InterfaceData> MenuD1EditInterfaceDataAsync(string UserId, string ProjectNumber)
+        {
+            ModelMenuD1_InterfaceData resp = new ModelMenuD1_InterfaceData();
+
+            resp.editdata = new ModelMenuD1();
+            resp.editdata = await GetMenuD1DataEditAsync(ProjectNumber);
+
+            ModelSelectOption defaultProject = new ModelSelectOption();
+            defaultProject.value = resp.editdata.projectnumber;
+            defaultProject.label = resp.editdata.projectnamethai;
+            resp.ListProjectNumber = new List<ModelSelectOption>();
+            resp.ListProjectNumber.Add(defaultProject);
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(UserId, "M020");
+
+            return resp;
+        }
+
+        private async Task<ModelMenuD1> GetMenuD1DataEditAsync(string ProjectNumber)
+        {
+
+            string sql = "SELECT TOP(1) A.*, B.name_thai as accept_result_name, " +
+                        "(CASE WHEN A.acceptCondition = 1 THEN 'แบบปีต่อปี' ELSE 'ไม่มีวันหมอายุ' END) as accept_condition_name " +
+                        "FROM Doc_MenuD1 A " +
+                        "LEFT OUTER JOIN MST_AcceptResult B ON A.acceptResult = B.id " +
+                        "WHERE project_number = '" + ProjectNumber + "' ORDER BY doc_id DESC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuD1 e = new ModelMenuD1();
+                        while (await reader.ReadAsync())
+                        {
+                            e.docid = reader["doc_id"].ToString();
+                            e.projectnumber = reader["project_number"].ToString();
+                            e.projectheadname = reader["project_head_name"].ToString();
+                            e.facultyname = reader["faculty_name"].ToString();
+                            e.advisorsnamethai = reader["advisorsNameThai"].ToString();
+                            e.acceptprojectno = reader["acceptProjectNo"].ToString();
+                            e.projectnamethai = reader["project_name_thai"].ToString();
+                            e.projectnameeng = reader["project_name_eng"].ToString();
+                            e.accepttypenamethai = reader["accept_type_name"].ToString();
+                            e.acceptresult = Convert.ToInt16(reader["acceptResult"]);
+                            e.acceptresultname = reader["accept_result_name"].ToString();
+                            e.acceptcondition = Convert.ToInt16(reader["acceptCondition"]);
+                            e.acceptconditionname = reader["accept_condition_name"].ToString();
+                            e.acceptdate = Convert.ToDateTime(reader["AcceptDate"]).ToString("dd/MM/yyyy");
+                        }
+                        e.listRenewDate = new List<ModelMenuD1RenewTable>();
+                        e.listRenewDate = await GetListRenewDateAsync(ProjectNumber);
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+        #endregion
 
     }
 }

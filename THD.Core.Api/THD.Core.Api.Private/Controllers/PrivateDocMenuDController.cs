@@ -60,8 +60,17 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
+        #region "Menu D1 Edit"
 
+        [HttpGet("MenuD1EditInterfaceData/{UserId}/{ProjectNumber}")]
+        public async Task<IActionResult> MenuD1EditInterfaceData(string UserId, string ProjectNumber)
+        {
+            ModelMenuD1_InterfaceData e = await _IDocMenuDService.MenuD1EditInterfaceDataAsync(UserId, ProjectNumber);
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
 
+        #endregion
 
         [HttpGet("MenuD2InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuD2InterfaceData(string RegisterId)

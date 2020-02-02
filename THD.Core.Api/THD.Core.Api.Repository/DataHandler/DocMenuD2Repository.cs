@@ -123,11 +123,11 @@ namespace THD.Core.Api.Repository.DataHandler
                             ModelMenuD2ProjectNumberData e = new ModelMenuD2ProjectNumberData();
                             while (await reader.ReadAsync())
                             {
-                                e.projectheadname = reader[1].ToString();
-                                e.facultyname = reader[2].ToString();
-                                e.positionname = reader[3].ToString();
-                                e.projectname1 = reader[4].ToString();
-                                e.projectname2 = reader[5].ToString();
+                                e.projectname1 = reader[1].ToString();
+                                e.projectname2 = reader[2].ToString();
+                                e.projectheadname = reader[3].ToString();
+                                e.facultyname = reader[4].ToString();
+                                e.positionname = reader[5].ToString();
                                 e.certificatetype = reader[6].ToString();
                                 e.remarkapproval = reader[7].ToString();
                                 e.dateofapproval = Convert.ToDateTime(reader[8]).ToString("dd/MM/yyyy");
