@@ -1,46 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using THD.Core.Api.Models.Config;
 
 namespace THD.Core.Api.Helpers
 {
-    public static class EmailHelper
+    public interface IEmailHelper
     {
-        public async static Task<bool> SentGmail(string to_email, string subject, string content)
+        Task<bool> SentGmail(string to_email, string subject, string content, string base64Attachment);
+    }
+    public class EmailHelper
+    {
+        private readonly IEmailConfig _EmailConfig;
+        public EmailHelper(IEmailConfig EmailConfig)
+        {
+            _EmailConfig = _EmailConfig;
+        }
+
+
+        public async Task<bool> SentGmail(string to_email, string subject, string content, string base64Attachment)
         {
             MailMessage mail = new MailMessage();
             bool resp = false;
-            using (SmtpClient smtp = new SmtpClient())
+
+            string xx = _EmailConfig.Host;
+
+            SmtpClient client = new SmtpClient("smtp-mail.outlook.com");
+
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("efilling.sys@outlook.co.th", "efilling*2020");
+            client.EnableSsl = true;
+            client.Credentials = credentials;
+
+            try
             {
-                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                smtp.UseDefaultCredentials = false;
-                smtp.EnableSsl = true;
-                smtp.Host = "smtp.gmail.com";
-                smtp.Port = 587;
-                smtp.Credentials = new NetworkCredential("efilling.sys@gmail.com", "P@ssw0rd*1981");
+                mail.From = new MailAddress("efilling.sys@outlook.co.th");
+                mail.To.Add(to_email);
+                mail.Subject = subject;
+                mail.Body = content;
+                mail.IsBodyHtml = true;
 
-                try
+                if (!string.IsNullOrEmpty(base64Attachment))
                 {
-                    mail.From = new MailAddress("efilling.sys@gmail.com");
-                    mail.To.Add(to_email);
-                    mail.Subject = subject;
-                    mail.Body = content;
-                    mail.IsBodyHtml = true;
+                    string file_name = "efilling_report.pdf";
+                    string remove_content = "data:application/pdf;base64,";
+                    string fileBase64 = base64Attachment.Replace(remove_content, "");
 
-                    smtp.Send(mail);
-                    resp = true;
+                    var bytes = Convert.FromBase64String(fileBase64);
+                    MemoryStream strm = new MemoryStream(bytes);
+                    Attachment data = new Attachment(strm, file_name);
+                    ContentDisposition disposition = data.ContentDisposition;
+                    data.ContentId = file_name;
+                    data.ContentDisposition.Inline = true;
+                    mail.Attachments.Add(data);
+                }
 
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                mail.Dispose();
-                return resp;
+                client.Send(mail);
+
+                resp = true;
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw ex;
+            }
+            mail.Dispose();
+            return resp;
+
 
         }
 

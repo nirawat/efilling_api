@@ -11,7 +11,8 @@ namespace THD.Core.Api.Models
         public IList<ModelSelectOption> ListProjectNameThai { get; set; }
         public IList<ModelSelectOption> ListYearOfProject { get; set; }
         public IList<ModelSelectOption> ListDownloadFile { get; set; }
-        public string defaultyear { get; set; }
+        public int defaultround { get; set; }
+        public int defaultyear { get; set; }
         public string defaulttypeid { get; set; } = "1";
         public string defaulttypename { get; set; } = "ข้อเสนอโครงการ";
         public string defaultuserid { get; set; }
@@ -74,6 +75,7 @@ namespace THD.Core.Api.Models
         public string yearofmeeting { get; set; }
         public string defaultyear { get; set; }
         public string meetingdate { get; set; }
+        public string createby { get; set; }
     }
 
     public class ModelMenuB1Data

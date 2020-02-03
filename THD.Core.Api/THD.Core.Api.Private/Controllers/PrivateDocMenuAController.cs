@@ -20,15 +20,18 @@ namespace THD.Core.Api.Private.Controllers
         private readonly IDocMenuAService _IDocMenuAService;
         private IHttpContextAccessor _httpContextAccessor;
         private IEnvironmentConfig _EnvironmentConfig;
+        private readonly IMailTemplateService _IMailTemplateService;
 
         public PrivateDocMenuAController(
             IDocMenuAService IDocMenuAService,
             IHttpContextAccessor httpContextAccessor,
-            IEnvironmentConfig EnvironmentConfig)
+            IEnvironmentConfig EnvironmentConfig,
+            IMailTemplateService MailTemplateService)
         {
             _IDocMenuAService = IDocMenuAService;
             _httpContextAccessor = httpContextAccessor;
             _EnvironmentConfig = EnvironmentConfig;
+            _IMailTemplateService = MailTemplateService;
         }
 
         [HttpGet("MenuA1InterfaceData/{Userid}/{Username}")]
@@ -170,10 +173,20 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuA4")]
         public async Task<IActionResult> AddDocMenuA4([FromBody]ModelMenuA4 model)
         {
+            IActionResult _result = BadRequest();
+
             ModelResponseMessage e = await _IDocMenuAService.AddDocMenuA4Async(model);
 
-            if (e.Status) return Ok(e);
-            else return BadRequest();
+            if (e.Status)
+            {
+                _result = Ok(e);
+
+                await _IMailTemplateService.MailTemplate9Async(model.projectnumber, e.filebase64);
+
+            }
+            else _result = BadRequest();
+
+            return _result;
 
         }
 
@@ -212,10 +225,20 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuA5")]
         public async Task<IActionResult> AddDocMenuA5([FromBody]ModelMenuA5 model)
         {
+            IActionResult _result = BadRequest();
+
             ModelResponseMessage e = await _IDocMenuAService.AddDocMenuA5Async(model);
 
-            if (e.Status) return Ok(e);
-            else return BadRequest();
+            if (e.Status)
+            {
+                _result = Ok(e);
+
+                await _IMailTemplateService.MailTemplate8Async(model.projectnumber, e.filebase64);
+
+            }
+            else _result = BadRequest();
+
+            return _result;
 
         }
 

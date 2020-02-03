@@ -251,7 +251,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 dataSource.DataSource = rptData;
 
-                string report_name = "A3_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R3_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -335,7 +335,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 dataSource.DataSource = rptData;
 
-                string report_name = "A4_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R4_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -419,7 +419,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 dataSource.DataSource = rptData;
 
-                string report_name = "A5_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R5_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -503,7 +503,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 dataSource.DataSource = rptData;
 
-                string report_name = "A6_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R6_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -588,7 +588,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 //dataSource.DataSource = rptData;
 
-                string report_name = "A7_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R7_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -673,7 +673,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 //dataSource.DataSource = rptData;
 
-                string report_name = "B1_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R8_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -750,7 +750,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 dataSource.DataSource = rptData;
 
-                string report_name = "D1_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R9_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -835,7 +835,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 //dataSource.DataSource = rptData;
 
-                string report_name = "C2_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R10_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -920,7 +920,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 //dataSource.DataSource = rptData;
 
-                string report_name = "C1_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R11_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -1005,7 +1005,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 //dataSource.DataSource = rptData;
 
-                string report_name = "C3_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R12_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -1090,7 +1090,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 //dataSource.DataSource = rptData;
 
-                string report_name = "C3_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R13_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt.DataSource = dataSource;
@@ -1157,7 +1157,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 //dataSource.DataSource = rptData;
 
-                string report_name = "C_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R14_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt14.DataSource = dataSource;
@@ -1836,7 +1836,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 dataSource.Constructor = new ObjectConstructorInfo();
                 //dataSource.DataSource = rptData;
 
-                string report_name = "C_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name = "R15_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
 
                 rpt15.DataSource = dataSource;
@@ -1986,7 +1986,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 ObjectDataSource ds9 = new ObjectDataSource();
                 ds9.Constructor = new ObjectConstructorInfo();
                 //ds9.DataSource = rptData;
-                string report_name_9 = "meeting_r9_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name_9 = "R9_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path_9 = _IEnvironmentConfig.PathReport + report_name_9;
                 rpt9.DataSource = ds9;
                 rpt9.ExportToPdf(report_full_path_9);
@@ -2006,7 +2006,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 ds12.Constructor = new ObjectConstructorInfo();
                 //ds12.DataSource = rptData;
 
-                string report_name_12 = "meeting_r12_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name_12 = "R12_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path_12 = _IEnvironmentConfig.PathReport + report_name_12;
 
                 rpt12.DataSource = ds12;
@@ -2027,7 +2027,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 ds13.Constructor = new ObjectConstructorInfo();
                 //ds13.DataSource = rptData;
 
-                string report_name_13 = "meeting_r13_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name_13 = "R13_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path_13 = _IEnvironmentConfig.PathReport + report_name_13;
 
                 rpt13.DataSource = ds13;
@@ -2047,7 +2047,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 ds14.Constructor = new ObjectConstructorInfo();
                 //ds13.DataSource = rptData;
 
-                string report_name_14 = "meeting_r14_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                string report_name_14 = "R14_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path_14 = _IEnvironmentConfig.PathReport + report_name_14;
 
                 rpt14.DataSource = ds14;

@@ -130,11 +130,11 @@ namespace THD.Core.Api.Repository.DataHandler
 
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M001");
 
-            ModelMenuHome1_InterfaceData get_data = new ModelMenuHome1_InterfaceData() { userid = RegisterId };
+            ModelMenuHome1_InterfaceData search_data = new ModelMenuHome1_InterfaceData() { userid = RegisterId };
 
             resp.ListReportData = new List<ModelMenuHome1ReportData>();
 
-            resp.ListReportData = await GetAllReportDataHome1Async(get_data);
+            resp.ListReportData = await GetAllReportDataHome1Async(search_data);
 
             return resp;
         }
@@ -324,7 +324,7 @@ namespace THD.Core.Api.Repository.DataHandler
             {
                 string userid = Encoding.UTF8.GetString(Convert.FromBase64String(search_data.userid));
 
-                sql += " AND A.project_by='" + userid + "' ";
+                sql += " AND (A.project_by='" + userid + "' OR A.committee_code_array LIKE '%" + userid + "%') ";
             }
 
             if (search_data != null)
@@ -384,13 +384,13 @@ namespace THD.Core.Api.Repository.DataHandler
                             item.meeting_approval_date = reader["meeting_approval_date"].ToString();
                             item.consider_result = reader["consider_result"].ToString();
                             item.alert_date = reader["alert_date"].ToString();
-                            item.request_edit_meeting_date = reader["request_edit_date"].ToString(); /////
+                            item.request_edit_meeting_date = reader["request_edit_meeting_date"].ToString(); /////
                             item.request_edit_date = reader["request_edit_date"].ToString();
                             item.report_status_date = reader["report_status_date"].ToString();
                             item.certificate_expire_date = reader["certificate_expire_date"].ToString();
                             item.request_renew_date = reader["request_renew_date"].ToString();
-                            item.close_project_date = reader["request_edit_date"].ToString(); /////
-                            item.print_certificate_date = reader["request_edit_date"].ToString(); /////
+                            item.close_project_date = reader["close_project_date"].ToString(); /////
+                            item.print_certificate_date = reader["print_certificate_date"].ToString(); /////
                             e.Add(item);
                             row_count++;
                         }

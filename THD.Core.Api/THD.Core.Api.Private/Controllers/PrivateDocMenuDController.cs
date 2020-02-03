@@ -20,15 +20,18 @@ namespace THD.Core.Api.Private.Controllers
         private readonly IDocMenuDService _IDocMenuDService;
         private IHttpContextAccessor _httpContextAccessor;
         private IEnvironmentConfig _EnvironmentConfig;
+        private readonly IMailTemplateService _IMailTemplateService;
 
         public PrivateDocMenuDController(
             IDocMenuDService IDocMenuDService,
             IHttpContextAccessor httpContextAccessor,
-            IEnvironmentConfig EnvironmentConfig)
+            IEnvironmentConfig EnvironmentConfig,
+            IMailTemplateService MailTemplateService)
         {
             _IDocMenuDService = IDocMenuDService;
             _httpContextAccessor = httpContextAccessor;
             _EnvironmentConfig = EnvironmentConfig;
+            _IMailTemplateService = MailTemplateService;
         }
 
 
@@ -55,7 +58,12 @@ namespace THD.Core.Api.Private.Controllers
         {
             ModelResponseMessage e = await _IDocMenuDService.AddDocMenuD1Async(model);
 
-            if (e.Status) return Ok(e);
+            if (e.Status)
+            {
+                await _IMailTemplateService.MailTemplate2Async(model.projectnumber, e.filebase64);
+
+                return Ok(e);
+            }
             else return BadRequest();
 
         }

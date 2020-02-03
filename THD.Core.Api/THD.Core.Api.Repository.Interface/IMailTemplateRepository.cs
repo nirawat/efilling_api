@@ -9,13 +9,15 @@ namespace THD.Core.Api.Repository.Interface
 {
     public interface IMailTemplateRepository
     {
-        Task<bool> MailTemplate1Async(ModelMenuB1 model);
-        //Task<string> MailTemplate2Async(int DocId);
-        //Task<string> MailTemplate3Async(int DocId);
-        //Task<string> MailTemplate4Async(int DocId);
-        //Task<string> MailTemplate5Async(int DocId);
-        //Task<string> MailTemplate6Async(int DocId);
-        //Task<string> MailTemplate7Async(int DocId);
+        Task<bool> MailTemplate1Async(int DocId, string rptBase64);
+        Task<bool> MailTemplate2Async(string ProjectNumber, string rptBase64);
+        Task<bool> MailTemplate3Async(ModelMenuC1 model, string rptBase64);
+        Task<bool> MailTemplate4Async(string ProjectNumber, string rptBase64);
+        Task<bool> MailTemplate5Async(string ProjectNumber, string rptBase64);
+        Task<bool> MailTemplate6Async(ModelMenuC3 model, string rptBase64);
+        Task<bool> MailTemplate7Async(ModelCloseMeeting model, string rptBase64);
+        Task<bool> MailTemplate8Async(string ProjectNumber, string rptBase64);
+        Task<bool> MailTemplate9Async(string ProjectNumber, string rptBase64);
 
     }
 }

@@ -39,6 +39,9 @@ namespace THD.Core.Api.Private
             services.Configure<EnvironmentConfig>(Configuration.GetSection(nameof(EnvironmentConfig)));
             services.AddSingleton<IEnvironmentConfig>(sp => sp.GetRequiredService<IOptions<EnvironmentConfig>>().Value);
 
+            services.Configure<EmailConfig>(Configuration.GetSection(nameof(EmailConfig)));
+            services.AddSingleton<IEmailConfig>(sp => sp.GetRequiredService<IOptions<EmailConfig>>().Value);
+
             services.AddDbContext<DataContextProvider>(options =>
             {
                 options.UseSqlServer(Encoding.UTF8.GetString(Convert.FromBase64String(Configuration.GetConnectionString("SqlConnection"))));
@@ -92,6 +95,7 @@ namespace THD.Core.Api.Private
             services.AddScoped(typeof(IRegisterUserRepository), typeof(RegisterUserRepository));
             services.AddScoped(typeof(IDropdownListRepository), typeof(DropdownListRepository));
             services.AddScoped(typeof(IDocMeetingRoundRepository), typeof(DocMeetingRoundRepository));
+            services.AddScoped(typeof(IMailTemplateRepository), typeof(MailTemplateRepository));
 
             services.AddScoped(typeof(IDocMenuA1Repository), typeof(DocMenuA1Repository));
             services.AddScoped(typeof(IDocMenuA2Repository), typeof(DocMenuA2Repository));

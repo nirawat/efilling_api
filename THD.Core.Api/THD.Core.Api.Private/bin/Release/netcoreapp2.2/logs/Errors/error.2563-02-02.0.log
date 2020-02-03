@@ -1,0 +1,509 @@
+2020/02/02 10:12:03.801    32   System.FormatException: The string 'รับรองงานวิจัย โดยให้ปรับแก้ไข (ตามมติคณะกรรมการ)' was not recognized as a valid DateTime. There is an unknown word starting at index '0'.
+   at THD.Core.Api.Repository.DataHandler.DocMenuA4Repository.GetProjectNumberWithDataA4Async(String project_number) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuA4Repository.cs:line 137
+   at THD.Core.Api.Business.DocMenuAService.GetProjectNumberWithDataA4Async(String project_number) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\DocMenuAService.cs:line 410
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuAController.GetProjectNumberWithDataA4(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuAController.cs:line 164
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 13:39:08.266    13   System.InvalidOperationException: Unable to resolve service for type 'THD.Core.Api.Repository.Interface.IMailTemplateRepository' while attempting to activate 'THD.Core.Api.Business.MailTemplateService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 13:41:58.945    17   System.InvalidOperationException: Unable to resolve service for type 'THD.Core.Api.Repository.Interface.IMailTemplateRepository' while attempting to activate 'THD.Core.Api.Business.MailTemplateService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 13:43:20.258    5   System.InvalidOperationException: Unable to resolve service for type 'THD.Core.Api.Repository.Interface.IMailTemplateRepository' while attempting to activate 'THD.Core.Api.Business.MailTemplateService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 13:44:30.789    38   System.InvalidOperationException: Unable to resolve service for type 'THD.Core.Api.Repository.Interface.IMailTemplateRepository' while attempting to activate 'THD.Core.Api.Business.MailTemplateService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 13:45:18.008    39   System.InvalidOperationException: Unable to resolve service for type 'THD.Core.Api.Repository.Interface.IMailTemplateRepository' while attempting to activate 'THD.Core.Api.Business.MailTemplateService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 13:46:12.194    12   System.InvalidOperationException: Unable to resolve service for type 'THD.Core.Api.Repository.Interface.IMailTemplateRepository' while attempting to activate 'THD.Core.Api.Business.MailTemplateService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 13:52:23.729    7   System.InvalidOperationException: Unable to resolve service for type 'THD.Core.Api.Repository.Interface.IMailTemplateRepository' while attempting to activate 'THD.Core.Api.Business.MailTemplateService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 13:52:28.290    6   System.InvalidOperationException: Unable to resolve service for type 'THD.Core.Api.Repository.Interface.IMailTemplateRepository' while attempting to activate 'THD.Core.Api.Business.MailTemplateService'.
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateArgumentCallSites(Type serviceType, Type implementationType, CallSiteChain callSiteChain, ParameterInfo[] parameters, Boolean throwIfCallSiteNotFound)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateConstructorCallSite(Type serviceType, Type implementationType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(ServiceDescriptor descriptor, Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.TryCreateExact(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteFactory.CreateCallSite(Type serviceType, CallSiteChain callSiteChain)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.CreateServiceAccessor(Type serviceType)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngine.GetService(Type serviceType, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 13:56:11.234    11   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate1Async(ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 45
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate1Async(ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 26
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.AddDocMenuB1(ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 101
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 20:31:27.515    18   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate1Async(Int32 DocId, ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 43
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate1Async(Int32 DocId, ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 26
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.AddDocMenuB1(ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 101
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 20:41:38.444    12   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 43
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 26
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.AddDocMenuB1(ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 101
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 20:44:41.496    13   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.DocMenuB1Repository.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuB1Repository.cs:line 52
+   at THD.Core.Api.Business.DocMenuBService.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\DocMenuBService.cs:line 37
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.MenuB1InterfaceData(String userid, String username) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 43
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 20:49:01.378    19   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.DocMenuB1Repository.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuB1Repository.cs:line 52
+   at THD.Core.Api.Business.DocMenuBService.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\DocMenuBService.cs:line 37
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.MenuB1InterfaceData(String userid, String username) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 43
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 21:06:36.481    7   System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. Learn more at
+   at THD.Core.Api.Helpers.EmailHelper.SentGmail(String to_email, String subject, String content) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\EmailHelper.cs:line 41
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 59
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 26
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.AddDocMenuB1(ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 97
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 21:10:54.481    15   System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. Learn more at
+   at THD.Core.Api.Helpers.EmailHelper.SentGmail(String to_email, String subject, String content) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\EmailHelper.cs:line 42
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 59
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 26
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.AddDocMenuB1(ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 97
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 21:13:27.378    11   System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. Learn more at
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at THD.Core.Api.Helpers.EmailHelper.SentGmail(String to_email, String subject, String content) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\EmailHelper.cs:line 31
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 59
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 26
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.AddDocMenuB1(ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 97
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 21:17:05.425    7   System.Net.Mail.SmtpException: The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Authentication Required. Learn more at
+   at THD.Core.Api.Helpers.EmailHelper.SentGmail(String to_email, String subject, String content) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\EmailHelper.cs:line 42
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 59
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate1Async(Int32 DocId) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 26
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.AddDocMenuB1(ModelMenuB1 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 97
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 22:05:40.667    7   System.NullReferenceException: Object reference not set to an instance of an object.
+   at THD.Core.Api.Repository.DataHandler.DocMenuB1Repository.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\DocMenuB1Repository.cs:line 52
+   at THD.Core.Api.Business.DocMenuBService.MenuB1InterfaceDataAsync(String userid, String username) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\DocMenuBService.cs:line 37
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuBController.MenuB1InterfaceData(String userid, String username) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuBController.cs:line 43
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 23:11:40.176    14   System.Net.Mail.SmtpException: Transaction failed. The server response was: 5.2.0 STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. [Hostname=TY2PR04MB3071.apcprd04.prod.outlook.com]
+   at THD.Core.Api.Helpers.EmailHelper.SentGmail(String to_email, String subject, String content) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\EmailHelper.cs:line 39
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate4Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 248
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate4Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 41
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuAController.AddDocMenuA5(ModelMenuA5 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuAController.cs:line 227
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 23:23:45.391    6   System.Net.Mail.SmtpException: Transaction failed. The server response was: 5.2.0 STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. [Hostname=TY2PR04MB3071.apcprd04.prod.outlook.com]
+   at THD.Core.Api.Helpers.EmailHelper.SentGmail(String to_email, String subject, String content) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\EmailHelper.cs:line 39
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate9Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 563
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate9Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 66
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.AddDocMenuC33(ModelMenuC33 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 493
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 23:26:41.108    19   System.Net.Mail.SmtpException: Transaction failed. The server response was: 5.2.0 STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. [Hostname=TY2PR04MB3071.apcprd04.prod.outlook.com]
+   at THD.Core.Api.Helpers.EmailHelper.SentGmail(String to_email, String subject, String content) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\EmailHelper.cs:line 39
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate4Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 248
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate4Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 41
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuAController.AddDocMenuA5(ModelMenuA5 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuAController.cs:line 222
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 23:29:35.804    9   System.Net.Mail.SmtpException: Transaction failed. The server response was: 5.2.0 STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. [Hostname=TY2PR04MB3071.apcprd04.prod.outlook.com]
+   at THD.Core.Api.Helpers.EmailHelper.SentGmail(String to_email, String subject, String content) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\EmailHelper.cs:line 39
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate8Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 500
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate8Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 61
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.AddDocMenuC34(ModelMenuC34 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 559
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24
+2020/02/02 23:34:14.239    23   System.Net.Mail.SmtpException: Transaction failed. The server response was: 5.2.0 STOREDRV.Submission.Exception:OutboundSpamException; Failed to process message due to a permanent exception with message WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. OutboundSpamException: WASCL UserAction verdict is not None. Actual verdict is RefuseQuota, ShowTierUpgrade. [Hostname=TY2PR04MB3071.apcprd04.prod.outlook.com]
+   at THD.Core.Api.Helpers.EmailHelper.SentGmail(String to_email, String subject, String content) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Helpers\EmailHelper.cs:line 39
+   at THD.Core.Api.Repository.DataHandler.MailTemplateRepository.MailTemplate9Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Repository\DataHandler\MailTemplateRepository.cs:line 563
+   at THD.Core.Api.Business.MailTemplateService.MailTemplate9Async(String ProjectNumber) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\MailTemplateService.cs:line 66
+   at THD.Core.Api.Private.Controllers.PrivateDocMenuCController.AddDocMenuC33(ModelMenuC33 model) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Controllers\PrivateDocMenuCController.cs:line 493
+   at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at System.Threading.Tasks.ValueTask`1.get_Result()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeNextActionFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Rethrow(ActionExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.InvokeInnerFilterAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeNextResourceFilter()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Rethrow(ResourceExecutedContext context)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeFilterPipelineAsync()
+   at Microsoft.AspNetCore.Mvc.Internal.ResourceInvoker.InvokeAsync()
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.Invoke(HttpContext httpContext)
+   at Microsoft.AspNetCore.Routing.EndpointRoutingMiddleware.Invoke(HttpContext httpContext)
+   at THD.Core.Api.Private.ErrorHandlingMiddleware.Invoke(HttpContext context) in C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Private\Core\ErrorHandlingMiddleware.cs:line 24

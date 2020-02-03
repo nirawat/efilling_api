@@ -20,15 +20,19 @@ namespace THD.Core.Api.Private.Controllers
         private readonly IDocMenuCService _IDocMenuCService;
         private IHttpContextAccessor _httpContextAccessor;
         private IEnvironmentConfig _EnvironmentConfig;
+        private readonly IMailTemplateService _IMailTemplateService;
+
 
         public PrivateDocMenuCController(
             IDocMenuCService IDocMenuCService,
             IHttpContextAccessor httpContextAccessor,
-            IEnvironmentConfig EnvironmentConfig)
+            IEnvironmentConfig EnvironmentConfig,
+            IMailTemplateService MailTemplateService)
         {
             _IDocMenuCService = IDocMenuCService;
             _httpContextAccessor = httpContextAccessor;
             _EnvironmentConfig = EnvironmentConfig;
+            _IMailTemplateService = MailTemplateService;
         }
 
 
@@ -84,16 +88,9 @@ namespace THD.Core.Api.Private.Controllers
             {
                 _result = Ok(e);
 
-                //string serverip = Encoding.UTF8.GetString(Convert.FromBase64String(_EnvironmentConfig.Server));
-
-                //string linkactive = $"{serverip}/{"efilling/log_in"}";
-
-                //string mail_body = "<h3>เรื่อง ขอความร่วมมือพิจารณาโครงการ</h3>" + Environment.NewLine +
-                //                   "<h2>ตามบันทึกไฟล์แนบ</h2></br>" + Environment.NewLine +
-                //                   "<h4>คุณสามารถดูเอกสารไฟล์แนบได้โดย <a href='" + linkactive + "'>คลิ้กเพื่อไปยังหน้าเพจ</a>.</h4>";
-
-                //await EmailHelper.SentGmail(e.EmailArray, "eFilling : ขอความร่วมมือพิจารณาโครงการ", mail_body);
+                await _IMailTemplateService.MailTemplate3Async(model, e.filebase64);
             }
+            else _result = BadRequest();
 
             return _result;
 
@@ -375,20 +372,41 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuC3")]
         public async Task<IActionResult> AddDocMenuC3([FromBody]ModelMenuC3 model)
         {
+            IActionResult _result = BadRequest();
+
             ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC3Async(model);
 
-            if (e.Status) return Ok(e);
-            else return BadRequest(e);
+            if (e.Status)
+            {
+                _result = Ok(e);
+
+                await _IMailTemplateService.MailTemplate6Async(model, e.filebase64);
+
+            }
+            else _result = BadRequest();
+
+            return _result;
 
         }
 
         [HttpPost("CloseMeeting")]
         public async Task<IActionResult> CloseMeeting([FromBody]ModelCloseMeeting model)
         {
+
+            IActionResult _result = BadRequest();
+
             ModelResponseMessage e = await _IDocMenuCService.CloseMeetingAsync(model);
 
-            if (e.Status) return Ok(e);
-            else return BadRequest();
+            if (e.Status)
+            {
+                _result = Ok(e);
+
+                await _IMailTemplateService.MailTemplate7Async(model, e.filebase64);
+
+            }
+            else _result = BadRequest();
+
+            return _result;
 
         }
 
@@ -480,10 +498,26 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuC33")]
         public async Task<IActionResult> AddDocMenuC33([FromBody]ModelMenuC33 model)
         {
+            IActionResult _result = BadRequest();
+
             ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC33Async(model);
 
-            if (e.Status) return Ok(e);
-            else return BadRequest();
+            if (e.Status == true)
+            {
+                _result = Ok(e);
+
+                if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
+                {
+                    await _IMailTemplateService.MailTemplate5Async(model.agenda3projectnumber, e.filebase64);
+                }
+                if (model.agenda3Conclusion == "3")
+                {
+                    await _IMailTemplateService.MailTemplate4Async(model.agenda3projectnumber, e.filebase64);
+                }
+            }
+            else _result = BadRequest();
+
+            return _result;
 
         }
 
@@ -535,22 +569,29 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuC34")]
         public async Task<IActionResult> AddDocMenuC34([FromBody]ModelMenuC34 model)
         {
+
+            IActionResult _result = BadRequest();
+
             ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC34Async(model);
 
-            if (e.Status) return Ok(e);
-            else return BadRequest();
+            if (e.Status == true)
+            {
+                _result = Ok(e);
+
+                if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
+                {
+                    await _IMailTemplateService.MailTemplate5Async(model.agenda4projectnumber, e.filebase64);
+                }
+                if (model.agenda4Conclusion == "3")
+                {
+                    await _IMailTemplateService.MailTemplate4Async(model.agenda4projectnumber, e.filebase64);
+                }
+            }
+            else _result = BadRequest();
+
+            return _result;
 
         }
-
-        //[HttpGet("GetAllApprovalTypeByProjectC22ForTab4/{ProjectNumber}")]
-        //public async Task<IActionResult> GetAllApprovalTypeByProjectC22ForTab4(string ProjectNumber)
-        //{
-        //    IList<ModelSelectOption> e = await _IDocMenuCService.GetAllApprovalTypeByProjectC22ForTab4Async(ProjectNumber);
-
-        //    if (e != null) return Ok(e);
-        //    else return BadRequest();
-
-        //}
 
         [HttpGet("GetProjectNumberWithDataC3Tab4/{Type}/{ProjectNumber}")]
         public async Task<IActionResult> GetProjectNumberWithDataC3Tab4(int type, string ProjectNumber)

@@ -1416,6 +1416,12 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@file1name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.file1name);
                         cmd.Parameters.Add("@isClose", SqlDbType.Bit).Value = (model.agenda4Conclusion == "4") ? true : false;
 
+                        DateTime dtAlertDate = Convert.ToDateTime(DateTime.Now).AddDays(335);
+                        cmd.Parameters.Add("@alert_date", SqlDbType.VarChar, 50).Value = dtAlertDate.ToString("dd/MM/yyyy");
+
+                        DateTime dtExpireDate = Convert.ToDateTime(DateTime.Now).AddDays(365);
+                        cmd.Parameters.Add("@certificate_expire_date", SqlDbType.VarChar, 50).Value = dtExpireDate.ToString("dd/MM/yyyy");
+
                         //Tab 4 Group All
                         IList<ModelMenuC34Tab4GroupAll> list_Tab4_group_all = new List<ModelMenuC34Tab4GroupAll>();
 

@@ -365,17 +365,19 @@ namespace THD.Core.Api.Repository.DataHandler
                     cmd.Parameters.Add("@meeting_date", SqlDbType.DateTime).Value = Convert.ToDateTime(model.meetingdate);
 
                     int seq = 1;
-                    StringBuilder list_committee_array = new StringBuilder();
-
+                    StringBuilder list_committee_code_array = new StringBuilder();
+                    StringBuilder list_committee_name_array = new StringBuilder();
                     if (model.boardcodearray != null && model.boardcodearray.Count > 0)
                     {
                         foreach (var item in model.boardcodearray)
                         {
-                            list_committee_array.AppendLine(seq.ToString() + ". " + item.label.Trim());
+                            list_committee_code_array.AppendLine(Encoding.UTF8.GetString(Convert.FromBase64String(item.value.Trim())) + ", ");
+                            list_committee_name_array.AppendLine(seq.ToString() + ". " + item.label.Trim());
                             seq++;
                         }
                     }
-                    cmd.Parameters.Add("@committee_code_array", SqlDbType.NVarChar).Value = list_committee_array.ToString();
+                    cmd.Parameters.Add("@committee_code_array", SqlDbType.NVarChar).Value = list_committee_code_array.ToString();
+                    cmd.Parameters.Add("@committee_name_array", SqlDbType.NVarChar).Value = list_committee_name_array.ToString();
 
                     SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                     rStatus.Direction = ParameterDirection.Output;

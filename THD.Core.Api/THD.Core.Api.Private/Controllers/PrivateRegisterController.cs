@@ -20,15 +20,18 @@ namespace THD.Core.Api.Private.Controllers
         private readonly IRegisterUserService _IRegisterUserService;
         private IHttpContextAccessor _httpContextAccessor;
         private IEnvironmentConfig _EnvironmentConfig;
+        private readonly IEmailHelper _EmailHelper;
 
         public PrivateRegisterController(
             IRegisterUserService IRegisterUserService,
             IHttpContextAccessor httpContextAccessor,
-            IEnvironmentConfig EnvironmentConfig)
+            IEnvironmentConfig EnvironmentConfig,
+            IEmailHelper EmailHelper)
         {
             _IRegisterUserService = IRegisterUserService;
             _httpContextAccessor = httpContextAccessor;
             _EnvironmentConfig = EnvironmentConfig;
+            _EmailHelper = EmailHelper;
         }
 
         [HttpPost("RegisterUser")]
@@ -52,7 +55,7 @@ namespace THD.Core.Api.Private.Controllers
                                    "<h2>" + e.RegisterId + "</h2>" + Environment.NewLine +
                                    "<h4>หากคุณต้องการยืนยันการลงทะเบียนกรุณาคลิ้ก <a href='" + linkactive + "'>ยืนยันการลงทะเบียน</a>.</h4>";
 
-                await EmailHelper.SentGmail(model.email, "eFilling : แจ้งการลงทะเบียน", mail_body);
+                await _EmailHelper.SentGmail(model.email, "eFilling : แจ้งการลงทะเบียน", mail_body, "");
             }
             return _result;
 
@@ -117,7 +120,7 @@ namespace THD.Core.Api.Private.Controllers
                                        "<h2>อ้างอิงหมายเลข " + register_id + "</h2>" + Environment.NewLine +
                                        "<h4>ทั้งนี้คุณสามารถเข้าใช้งานระบบ ขอให้ท่านสนุกกับการใช้งาน! <a href='" + linkactive + "'>คลิ้กเพื่อเข้าสู่ระบบ</a>.</h4>";
 
-                    await EmailHelper.SentGmail(model.email, "eFilling : แจ้งผลการยืนยันลงทะเบียน", mail_body);
+                    await _EmailHelper.SentGmail(model.email, "eFilling : แจ้งผลการยืนยันลงทะเบียน", mail_body, "");
                 }
                 return _result;
             });

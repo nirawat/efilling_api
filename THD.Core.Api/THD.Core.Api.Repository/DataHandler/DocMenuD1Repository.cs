@@ -202,7 +202,6 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@acceptDate", SqlDbType.DateTime).Value = Convert.ToDateTime(model.acceptdate);
 
                         DateTime dtExpire = Convert.ToDateTime(model.acceptdate).AddDays(365);
-
                         cmd.Parameters.Add("@expireDate", SqlDbType.DateTime).Value = dtExpire;
 
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);

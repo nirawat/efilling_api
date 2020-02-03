@@ -24,15 +24,18 @@ namespace THD.Core.Api.Repository.DataHandler
         private readonly string ConnectionString;
         private readonly IDocMenuReportRepository _IDocMenuReportRepository;
         private readonly IRegisterUserRepository _IRegisterUserRepository;
+        private readonly IDocMeetingRoundRepository _IDocMeetingRoundRepository;
         public DocMenuB1Repository(IConfiguration configuration,
                                    IDropdownListRepository DropdownListRepository,
                                    IRegisterUserRepository IRegisterUserRepository,
-                                   IDocMenuReportRepository DocMenuReportRepository)
+                                   IDocMenuReportRepository DocMenuReportRepository,
+                                   IDocMeetingRoundRepository DocMeetingRoundRepository)
         {
             _configuration = configuration;
             ConnectionString = Encoding.UTF8.GetString(Convert.FromBase64String(_configuration.GetConnectionString("SqlConnection")));
             _IRegisterUserRepository = IRegisterUserRepository;
             _IDocMenuReportRepository = DocMenuReportRepository;
+            _IDocMeetingRoundRepository = DocMeetingRoundRepository;
         }
 
         public async Task<ModelMenuB1_InterfaceData> MenuB1InterfaceDataAsync(string userid, string username)
@@ -61,11 +64,15 @@ namespace THD.Core.Api.Repository.DataHandler
             int thai_year = CommonData.GetYearOfPeriod();
 
             resp.ListYearOfProject = new List<ModelSelectOption>();
-            resp.defaultyear = thai_year.ToString();
+            resp.defaultyear = thai_year;
             ModelSelectOption year_current = new ModelSelectOption();
             year_current.value = (thai_year).ToString();
             year_current.label = (thai_year).ToString();
             resp.ListYearOfProject.Add(year_current);
+
+            ModelCountOfYear round_of_year = new ModelCountOfYear();
+            round_of_year = await _IDocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(resp.defaultyear);
+            resp.defaultround = round_of_year.count;
 
             //for (int i = 1; i < 5; i++)
             //{
@@ -391,6 +398,7 @@ namespace THD.Core.Api.Repository.DataHandler
                     {
                         resp.Status = true;
                         resp.DocNumber = (string)cmd.Parameters["@rMessage"].Value;
+                        resp.DocId = (int)cmd.Parameters["@rDocId"].Value;
 
                         model_rpt_8_file rpt = await _IDocMenuReportRepository.GetReportR8Async((int)cmd.Parameters["@rDocId"].Value);
 
@@ -429,7 +437,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
             int thai_year = CommonData.GetYearOfPeriod();
             resp.ListYearOfProject = new List<ModelSelectOption>();
-            resp.defaultyear = thai_year.ToString();
+            resp.defaultyear = thai_year;
             ModelSelectOption year_current = new ModelSelectOption();
             year_current.value = (thai_year).ToString();
             year_current.label = (thai_year).ToString();

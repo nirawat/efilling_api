@@ -1195,6 +1195,9 @@
         }
       },
       "THD.Core.Api.Helpers/1.0.0": {
+        "dependencies": {
+          "THD.Core.Api.Models": "1.0.0"
+        },
         "runtime": {
           "THD.Core.Api.Helpers.dll": {}
         }

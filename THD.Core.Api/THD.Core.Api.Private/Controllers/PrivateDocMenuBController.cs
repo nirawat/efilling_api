@@ -94,15 +94,21 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuB1")]
         public async Task<IActionResult> AddDocMenuB1([FromBody]ModelMenuB1 model)
         {
+
+            IActionResult _result = BadRequest();
+
             ModelResponseMessageAddDocB1 e = await _IDocMenuBService.AddDocMenuB1Async(model);
 
             if (e.Status)
             {
-                return Ok(e);
+                _result = Ok(e);
 
-                //bool sendmail = await _IMailTemplateService.MailTemplate1Async(model);
+                await _IMailTemplateService.MailTemplate1Async(e.DocId, e.filebase64);
+
             }
-            else return BadRequest();
+            else _result = BadRequest();
+
+            return _result;
 
         }
 

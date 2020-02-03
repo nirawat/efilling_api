@@ -65,6 +65,7 @@ namespace THD.Core.Api.Models
         public bool Status { get; set; }
         public string DocNumber { get; set; }
         public string Message { get; set; }
+        public int DocId { get; set; }
         // Report Return --------------
         public string filename { get; set; }
         public string filebase64 { get; set; }

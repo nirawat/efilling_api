@@ -241,7 +241,11 @@
         },
         "frameworks": {
           "netstandard2.0": {
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+                "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

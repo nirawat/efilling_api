@@ -5044,6 +5044,9 @@
       "THD.Core.Api.Helpers/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "THD.Core.Api.Models": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/THD.Core.Api.Helpers.dll": {}
         },
