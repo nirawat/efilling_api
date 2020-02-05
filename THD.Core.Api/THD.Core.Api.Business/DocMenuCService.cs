@@ -234,7 +234,7 @@ namespace THD.Core.Api.Business
             return resp;
         }
 
-        public async Task<ModelResponseMessage> CloseMeetingAsync(ModelCloseMeeting model)
+        public async Task<ModelResponseMessageCloseMeeting> CloseMeetingAsync(ModelCloseMeeting model)
         {
 
             var resp = await _IDocMenuC3Repository.CloseMeetingAsync(model);
@@ -316,9 +316,20 @@ namespace THD.Core.Api.Business
             return await _IDocMenuC3Repository.MenuC33InterfaceDataAsync(RegisterId);
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC33Async(ModelMenuC33 model)
+        public async Task<ModelResponseC33Message> AddDocMenuC33Async(ModelMenuC33 model)
         {
-            return await _IDocMenuC3Repository.AddDocMenuC33Async(model);
+            ModelResponseC33Message resp = new ModelResponseC33Message();
+
+            if (string.IsNullOrEmpty(model.tab3Group1Seq1Input1))
+            {
+                resp.Status = false;
+                resp.Message = "กรุณาตรวจสอบและลงความเห็นของกรรมการ!";
+            }
+            else
+            {
+                resp = await _IDocMenuC3Repository.AddDocMenuC33Async(model);
+            }
+            return resp;
         }
 
         public async Task<ModelMenuC33Data> GetProjectNumberWithDataC3Tab3Async(string project_number)
@@ -343,12 +354,20 @@ namespace THD.Core.Api.Business
             return await _IDocMenuC3Repository.MenuC34InterfaceDataAsync(RegisterId);
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC34Async(ModelMenuC34 model)
+        public async Task<ModelResponseC34Message> AddDocMenuC34Async(ModelMenuC34 model)
         {
-            model.file1name = string.IsNullOrEmpty(model.file1name) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.file1name);
+            ModelResponseC34Message resp = new ModelResponseC34Message();
 
-            var resp = await _IDocMenuC3Repository.AddDocMenuC34Async(model);
-
+            if (string.IsNullOrEmpty(model.tab4Group1Seq1Input1))
+            {
+                resp.Status = false;
+                resp.Message = "กรุณาตรวจสอบและลงความเห็นของกรรมการ!";
+            }
+            else
+            {
+                model.file1name = string.IsNullOrEmpty(model.file1name) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.file1name);
+                resp = await _IDocMenuC3Repository.AddDocMenuC34Async(model);
+            }
             if (resp.Status)
             {
                 if (!string.IsNullOrEmpty(model.file1base64)) ServerDirectorys.SaveFileFromBase64(_IEnvironmentConfig.PathDocument, FolderDocument.menuC3Tab4, model.file1name, model.file1base64);

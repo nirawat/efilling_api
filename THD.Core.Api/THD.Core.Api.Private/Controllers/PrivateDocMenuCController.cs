@@ -88,7 +88,15 @@ namespace THD.Core.Api.Private.Controllers
             {
                 _result = Ok(e);
 
-                await _IMailTemplateService.MailTemplate3Async(model, e.filebase64);
+                try
+                {
+                    await _IMailTemplateService.MailTemplate3Async(model, e.filebase64);
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
+
             }
             else _result = BadRequest();
 
@@ -121,16 +129,16 @@ namespace THD.Core.Api.Private.Controllers
             {
                 _result = Ok(e);
 
-                //string serverip = Encoding.UTF8.GetString(Convert.FromBase64String(_EnvironmentConfig.Server));
-
-                //string linkactive = $"{serverip}/{"efilling/log_in"}";
-
-                //string mail_body = "<h3>เรื่อง ขอความร่วมมือพิจารณาโครงการ</h3>" + Environment.NewLine +
-                //                   "<h2>ตามบันทึกไฟล์แนบ</h2></br>" + Environment.NewLine +
-                //                   "<h4>คุณสามารถดูเอกสารไฟล์แนบได้โดย <a href='" + linkactive + "'>คลิ้กเพื่อไปยังหน้าเพจ</a>.</h4>";
-
-                //await EmailHelper.SentGmail(e.EmailArray, "eFilling : ขอความร่วมมือพิจารณาโครงการ", mail_body);
+                try
+                {
+                    await _IMailTemplateService.MailTemplate3Async(model, e.filebase64);
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
             }
+            else _result = BadRequest();
 
             return _result;
 
@@ -274,7 +282,7 @@ namespace THD.Core.Api.Private.Controllers
         {
             ModelResponseC2Message e = await _IDocMenuCService.UpdateDocMenuC2EditAsync(model);
 
-            if (e.Status) return Ok();
+            if (e.Status) return Ok(e);
             else return BadRequest();
         }
 
@@ -380,10 +388,17 @@ namespace THD.Core.Api.Private.Controllers
             {
                 _result = Ok(e);
 
-                await _IMailTemplateService.MailTemplate6Async(model, e.filebase64);
+                try
+                {
+                    await _IMailTemplateService.MailTemplate6Async(model, e.filebase64);
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
 
             }
-            else _result = BadRequest();
+            else _result = BadRequest(e);
 
             return _result;
 
@@ -395,14 +410,11 @@ namespace THD.Core.Api.Private.Controllers
 
             IActionResult _result = BadRequest();
 
-            ModelResponseMessage e = await _IDocMenuCService.CloseMeetingAsync(model);
+            ModelResponseMessageCloseMeeting e = await _IDocMenuCService.CloseMeetingAsync(model);
 
             if (e.Status)
             {
                 _result = Ok(e);
-
-                await _IMailTemplateService.MailTemplate7Async(model, e.filebase64);
-
             }
             else _result = BadRequest();
 
@@ -500,22 +512,31 @@ namespace THD.Core.Api.Private.Controllers
         {
             IActionResult _result = BadRequest();
 
-            ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC33Async(model);
+            ModelResponseC33Message e = await _IDocMenuCService.AddDocMenuC33Async(model);
 
             if (e.Status == true)
             {
                 _result = Ok(e);
 
-                if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
+                try
                 {
-                    await _IMailTemplateService.MailTemplate5Async(model.agenda3projectnumber, e.filebase64);
+                    if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
+                    {
+                        await _IMailTemplateService.MailTemplate5Async(model.agenda3projectnumber, e.filebase64);
+                    }
+                    if (model.agenda3Conclusion == "3")
+                    {
+                        await _IMailTemplateService.MailTemplate4Async(model.agenda3projectnumber, e.filebase64);
+                    }
                 }
-                if (model.agenda3Conclusion == "3")
+                catch (Exception ex)
                 {
-                    await _IMailTemplateService.MailTemplate4Async(model.agenda3projectnumber, e.filebase64);
+                    //Keep
                 }
+
+
             }
-            else _result = BadRequest();
+            else _result = BadRequest(e);
 
             return _result;
 
@@ -572,22 +593,29 @@ namespace THD.Core.Api.Private.Controllers
 
             IActionResult _result = BadRequest();
 
-            ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC34Async(model);
+            ModelResponseC34Message e = await _IDocMenuCService.AddDocMenuC34Async(model);
 
             if (e.Status == true)
             {
                 _result = Ok(e);
 
-                if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
+                try
                 {
-                    await _IMailTemplateService.MailTemplate5Async(model.agenda4projectnumber, e.filebase64);
+                    if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
+                    {
+                        await _IMailTemplateService.MailTemplate5Async(model.agenda4projectnumber, e.filebase64);
+                    }
+                    if (model.agenda4Conclusion == "3")
+                    {
+                        await _IMailTemplateService.MailTemplate4Async(model.agenda4projectnumber, e.filebase64);
+                    }
                 }
-                if (model.agenda4Conclusion == "3")
+                catch (Exception ex)
                 {
-                    await _IMailTemplateService.MailTemplate4Async(model.agenda4projectnumber, e.filebase64);
+                    //Keep
                 }
             }
-            else _result = BadRequest();
+            else _result = BadRequest(e);
 
             return _result;
 

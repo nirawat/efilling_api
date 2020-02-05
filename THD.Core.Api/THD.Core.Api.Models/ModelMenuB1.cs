@@ -53,6 +53,8 @@ namespace THD.Core.Api.Models
         public string yearofmeeting { get; set; }
         public int defaultyear { get; set; }
         public string meetingdate { get; set; }
+        public string createby { get; set; }
+        public bool editenable { get; set; }
     }
 
     public class ModelMenuB1Edit
@@ -61,6 +63,7 @@ namespace THD.Core.Api.Models
         public DateTime docdate { get; set; }
         public string accepttype { get; set; }
         public string projecthead { get; set; }
+        public string projectheadname { get; set; }
         public string projectid { get; set; }
         public string projectnamethai { get; set; }
         public string projectnameeng { get; set; }
@@ -76,6 +79,7 @@ namespace THD.Core.Api.Models
         public string defaultyear { get; set; }
         public string meetingdate { get; set; }
         public string createby { get; set; }
+        public bool editenable { get; set; }
     }
 
     public class ModelMenuB1Data

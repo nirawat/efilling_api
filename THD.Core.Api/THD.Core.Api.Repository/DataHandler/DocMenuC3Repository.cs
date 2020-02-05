@@ -286,6 +286,20 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@committees_array", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.committeesarray);
                         cmd.Parameters.Add("@attendees_array", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.attendeesarray);
 
+                        int seq = 1;
+                        StringBuilder meeting_user_code_array = new StringBuilder();
+                        if (model.committeesarray != null && model.committeesarray.Count > 0)
+                        {
+                            foreach (var item in model.committeesarray)
+                            {
+                                meeting_user_code_array.AppendLine(Encoding.UTF8.GetString(Convert.FromBase64String(item.value.Trim())) + ",");
+                                seq++;
+                            }
+                        }
+                        cmd.Parameters.Add("@meeting_user_code_array", SqlDbType.NVarChar).Value = meeting_user_code_array.ToString();
+
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
@@ -321,9 +335,9 @@ namespace THD.Core.Api.Repository.DataHandler
 
         // พิมพ์ร่างและปิดการประชุม -------------------------------------------------------------------------
 
-        public async Task<ModelResponseMessage> CloseMeetingAsync(ModelCloseMeeting model)
+        public async Task<ModelResponseMessageCloseMeeting> CloseMeetingAsync(ModelCloseMeeting model)
         {
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseMessageCloseMeeting resp = new ModelResponseMessageCloseMeeting();
             try
             {
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -343,12 +357,19 @@ namespace THD.Core.Api.Repository.DataHandler
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
                         rMessage.Direction = ParameterDirection.Output;
+                        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
+                        rDocId.Direction = ParameterDirection.Output;
 
                         await cmd.ExecuteNonQueryAsync();
 
                         if ((int)cmd.Parameters["@rStatus"].Value > 0)
                         {
                             resp.Status = true;
+
+                            model_rpt_14_file rpt = await _IDocMenuReportRepository.GetReportR14Async((int)cmd.Parameters["@rDocId"].Value);
+
+                            resp.filename = rpt.filename;
+                            resp.filebase64 = rpt.filebase64;
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }
@@ -696,6 +717,8 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         cmd.Parameters.Add("@tab_1_group_all_json", SqlDbType.VarChar).Value = tab_1_group_all_json;
 
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
@@ -886,6 +909,8 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         cmd.Parameters.Add("@tab_2_group_1_json", SqlDbType.VarChar).Value = tab_2_group_1_json;
 
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
@@ -941,13 +966,13 @@ namespace THD.Core.Api.Repository.DataHandler
             return resp;
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC33Async(ModelMenuC33 model)
+        public async Task<ModelResponseC33Message> AddDocMenuC33Async(ModelMenuC33 model)
         {
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseC33Message resp = new ModelResponseC33Message();
             try
             {
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -1125,16 +1150,35 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         cmd.Parameters.Add("@tab_3_group_all_json", SqlDbType.VarChar).Value = tab_3_group_all_json;
 
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
                         rMessage.Direction = ParameterDirection.Output;
+                        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
+                        rDocId.Direction = ParameterDirection.Output;
 
                         await cmd.ExecuteNonQueryAsync();
 
                         if ((int)cmd.Parameters["@rStatus"].Value > 0)
                         {
                             resp.Status = true;
+
+                            if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
+                            {
+                                model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async((int)cmd.Parameters["@rDocId"].Value);
+
+                                resp.filename = rpt.filename;
+                                resp.filebase64 = rpt.filebase64;
+                            }
+                            if (model.agenda3Conclusion == "3")
+                            {
+                                model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async((int)cmd.Parameters["@rDocId"].Value);
+
+                                resp.filename = rpt.filename;
+                                resp.filebase64 = rpt.filebase64;
+                            }
 
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
@@ -1389,13 +1433,13 @@ namespace THD.Core.Api.Repository.DataHandler
             return resp;
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC34Async(ModelMenuC34 model)
+        public async Task<ModelResponseC34Message> AddDocMenuC34Async(ModelMenuC34 model)
         {
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseC34Message resp = new ModelResponseC34Message();
             try
             {
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -1416,6 +1460,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@file1name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.file1name);
                         cmd.Parameters.Add("@isClose", SqlDbType.Bit).Value = (model.agenda4Conclusion == "4") ? true : false;
 
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                         DateTime dtAlertDate = Convert.ToDateTime(DateTime.Now).AddDays(335);
                         cmd.Parameters.Add("@alert_date", SqlDbType.VarChar, 50).Value = dtAlertDate.ToString("dd/MM/yyyy");
 
@@ -1425,16 +1471,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         //Tab 4 Group All
                         IList<ModelMenuC34Tab4GroupAll> list_Tab4_group_all = new List<ModelMenuC34Tab4GroupAll>();
 
-                        //list_Tab4_group_all.Add(new ModelMenuC34Tab4GroupAll
-                        //{
-                        //    groupdata = "4.1",
-                        //    seq = 1.ToString(),
-                        //    input1 = "A",
-                        //    input2 = "B",
-                        //    input3 = "C",
-                        //});
 
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 3; i++)
                         {
                             string seq = (i + 1).ToString();
                             switch (i + 1)
@@ -1478,32 +1516,6 @@ namespace THD.Core.Api.Repository.DataHandler
                                         });
                                     }
                                     break;
-                                case 4:
-                                    if (!string.IsNullOrEmpty(model.tab4Group1Seq4Input1))
-                                    {
-                                        list_Tab4_group_all.Add(new ModelMenuC34Tab4GroupAll
-                                        {
-                                            groupdata = "4.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq4Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq4Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq4Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 5:
-                                    if (!string.IsNullOrEmpty(model.tab4Group1Seq5Input1))
-                                    {
-                                        list_Tab4_group_all.Add(new ModelMenuC34Tab4GroupAll
-                                        {
-                                            groupdata = "4.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq5Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq5Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq5Input3).ToString(),
-                                        });
-                                    }
-                                    break;
                                 default:
                                     Console.WriteLine("Default case");
                                     break;
@@ -1518,6 +1530,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
                         rMessage.Direction = ParameterDirection.Output;
+                        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
+                        rDocId.Direction = ParameterDirection.Output;
 
                         await cmd.ExecuteNonQueryAsync();
 
@@ -1525,6 +1539,20 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
 
+                            if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
+                            {
+                                model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async((int)cmd.Parameters["@rDocId"].Value);
+
+                                resp.filename = rpt.filename;
+                                resp.filebase64 = rpt.filebase64;
+                            }
+                            if (model.agenda4Conclusion == "3")
+                            {
+                                model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async((int)cmd.Parameters["@rDocId"].Value);
+
+                                resp.filename = rpt.filename;
+                                resp.filebase64 = rpt.filebase64;
+                            }
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }

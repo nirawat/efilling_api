@@ -103,7 +103,14 @@ namespace THD.Core.Api.Private.Controllers
             {
                 _result = Ok(e);
 
-                await _IMailTemplateService.MailTemplate1Async(e.DocId, e.filebase64);
+                try
+                {
+                    await _IMailTemplateService.MailTemplate1Async(e.DocId, e.filebase64);
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
 
             }
             else _result = BadRequest();
@@ -128,10 +135,28 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("UpdateDocMenuB1")]
         public async Task<IActionResult> UpdateDocMenuB1([FromBody]ModelMenuB1Edit model)
         {
+
+            IActionResult _result = BadRequest();
+
             ModelResponseMessageAddDocB1 e = await _IDocMenuBService.UpdateDocMenuB1Async(model);
 
-            if (e.Status) return Ok(e);
-            else return BadRequest();
+            if (e.Status)
+            {
+                _result = Ok(e);
+
+                try
+                {
+                    await _IMailTemplateService.MailTemplate1Async(Convert.ToInt32(model.docid), e.filebase64);
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
+
+            }
+            else _result = BadRequest();
+
+            return _result;
 
         }
 

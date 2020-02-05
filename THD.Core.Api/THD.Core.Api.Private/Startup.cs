@@ -19,7 +19,7 @@ using THD.Core.Api.Business.Interface;
 using THD.Core.Api.Business;
 using Microsoft.Net.Http.Headers;
 using THD.Core.Api.Models.Config;
-
+using THD.Core.Api.Helpers;
 
 namespace THD.Core.Api.Private
 {
@@ -75,6 +75,7 @@ namespace THD.Core.Api.Private
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //Add Service
+            services.AddScoped(typeof(IEmailHelper), typeof(EmailHelper));
             services.AddScoped(typeof(ISystemService), typeof(SystemService));
             services.AddScoped(typeof(IRegisterUserService), typeof(RegisterUserService));
             services.AddScoped(typeof(IDropdownListService), typeof(DropdownListService));

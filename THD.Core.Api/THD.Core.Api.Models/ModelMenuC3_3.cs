@@ -59,7 +59,7 @@ namespace THD.Core.Api.Models
         public string tab3Group2Seq5Input2 { get; set; }
         public string tab3Group2Seq5Input3 { get; set; }
 
-
+        public string createby { get; set; }
 
     }
 

@@ -58,7 +58,7 @@ namespace THD.Core.Api.Repository.DataHandler
         {
 
             string sql = "SELECT * FROM [dbo].[Doc_Process] " +
-                        "WHERE project_number IS NOT NULL AND project_type='PROJECT' AND doc_process_to NOT IN('CLOSED','D2')";
+                        "WHERE project_number IS NOT NULL AND project_type='PROJECT' AND doc_process_to IN('A3,A5,A6,A7')";
 
             if (!string.IsNullOrEmpty(AssignerCode))
             {
@@ -200,6 +200,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@acceptResult", SqlDbType.Int).Value = model.acceptresult;
                         cmd.Parameters.Add("@acceptCondition", SqlDbType.Int).Value = model.acceptcondition;
                         cmd.Parameters.Add("@acceptDate", SqlDbType.DateTime).Value = Convert.ToDateTime(model.acceptdate);
+
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
                         DateTime dtExpire = Convert.ToDateTime(model.acceptdate).AddDays(365);
                         cmd.Parameters.Add("@expireDate", SqlDbType.DateTime).Value = dtExpire;

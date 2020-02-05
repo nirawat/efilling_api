@@ -49,9 +49,6 @@ namespace THD.Core.Api.Repository.DataHandler
 
             ModelMenuC1_InterfaceData resp = new ModelMenuC1_InterfaceData();
 
-            //resp.ListAssigner = new List<ModelSelectOption>();
-            //resp.ListAssigner = await GetAllProjectHeadAsync();
-
             resp.ListAssigner = new List<ModelSelectOption>();
             ModelSelectOption assigner_login = new ModelSelectOption();
             assigner_login.value = userid;
@@ -60,11 +57,9 @@ namespace THD.Core.Api.Repository.DataHandler
             resp.ListAssigner.Add(assigner_login);
 
             resp.ListBoard = new List<ModelSelectOption>();
-
             resp.ListBoard = await GetAllRegisterUserByCharacterAsync("2");
 
             resp.ListSpecialList = new List<ModelSelectOption>();
-
             resp.ListSpecialList = await GetAllRegisterUserByCharacterAsync("2");
 
             int thai_year = CommonData.GetYearOfPeriod();
@@ -75,13 +70,6 @@ namespace THD.Core.Api.Repository.DataHandler
             resp.defaultyear = (thai_year);
             resp.ListYearOfProject.Add(year_current);
 
-            //for (int i = 1; i < 5; i++)
-            //{
-            //    ModelSelectOption year_next = new ModelSelectOption();
-            //    year_next.value = (thai_year + i).ToString();
-            //    year_next.label = (thai_year + i).ToString();
-            //    resp.ListYearOfProject.Add(year_next);
-            //}
             ModelCountOfYear round_of_year = new ModelCountOfYear();
             round_of_year = await _IDocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(resp.defaultyear);
             resp.defaultround = round_of_year.count;
@@ -291,8 +279,6 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-
-
         public async Task<string> GetEmailUserAsync(ModelMenuC1 model)
         {
             if (model != null && model.boardcodearray != null && model.boardcodearray.Count > 0)
@@ -364,6 +350,8 @@ namespace THD.Core.Api.Repository.DataHandler
                     cmd.Parameters.Add("@year_of_meeting", SqlDbType.Int).Value = model.yearofmeeting;
                     cmd.Parameters.Add("@meeting_date", SqlDbType.DateTime).Value = Convert.ToDateTime(model.meetingdate);
 
+                    cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                     int seq = 1;
                     StringBuilder list_committee_code_array = new StringBuilder();
                     StringBuilder list_committee_name_array = new StringBuilder();
@@ -415,17 +403,31 @@ namespace THD.Core.Api.Repository.DataHandler
         {
             ModelMenuC1_InterfaceData resp = new ModelMenuC1_InterfaceData();
 
-            resp.ListAssigner = new List<ModelSelectOption>();
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M011");
 
-            resp.ListAssigner = await GetAllRegisterUserByCharacterAsync("2");
+            resp.editdata = new ModelMenuC1();
+            resp.editdata = await GetMenuC1DataEditAsync(project_number, RegisterId, resp.UserPermission);
+
+            resp.ListAssigner = new List<ModelSelectOption>();
+            ModelSelectOption assigner_login = new ModelSelectOption();
+            assigner_login.value = resp.editdata.assignercode;
+            assigner_login.label = resp.editdata.assignername;
+            resp.default_assigner_name = assigner_login.label;
+            resp.ListAssigner.Add(assigner_login);
 
             resp.ListBoard = new List<ModelSelectOption>();
-
             resp.ListBoard = await GetAllRegisterUserByCharacterAsync("2");
 
-            resp.ListProjectNumber = new List<ModelSelectOption>();
+            resp.ListSpecialList = new List<ModelSelectOption>();
+            resp.ListSpecialList = await GetAllRegisterUserByCharacterAsync("2");
 
-            resp.ListProjectNumber = await GetAllProjectNumberC1Async(null);
+            resp.ListProjectNumber = new List<ModelSelectOption>();
+            ModelSelectOption project_name_default = new ModelSelectOption()
+            {
+                value = resp.editdata.projectnumber,
+                label = resp.editdata.projectnamethai,
+            };
+            resp.ListProjectNumber.Add(project_name_default);
 
             int thai_year = CommonData.GetYearOfPeriod();
             resp.ListYearOfProject = new List<ModelSelectOption>();
@@ -435,27 +437,15 @@ namespace THD.Core.Api.Repository.DataHandler
             resp.defaultyear = (thai_year);
             resp.ListYearOfProject.Add(year_current);
 
-            //for (int i = 1; i < 5; i++)
-            //{
-            //    ModelSelectOption year_next = new ModelSelectOption();
-            //    year_next.value = (thai_year + i).ToString();
-            //    year_next.label = (thai_year + i).ToString();
-            //    resp.ListYearOfProject.Add(year_next);
-            //}
-
-            resp.editdata = new ModelMenuC1();
-            resp.editdata = await GetMenuC1DataEditAsync(project_number);
-
-            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M011");
-
             return resp;
         }
 
-        private async Task<ModelMenuC1> GetMenuC1DataEditAsync(string project_number)
+        private async Task<ModelMenuC1> GetMenuC1DataEditAsync(string project_number, string RegisterId, ModelPermissionPage permission)
         {
-            string sql = "SELECT TOP(1)* , (b.first_name + B.full_name) AS assigner_name " +
+            string sql = "SELECT TOP(1)* , (b.first_name + B.full_name) AS assigner_name, C.committee_comment_date " +
                         "FROM Doc_MenuC1 A " +
                         "LEFT OUTER JOIN RegisterUser B ON A.assigner_code = B.register_id " +
+                        "LEFT OUTER JOIN Transaction_Document C ON A.project_number = C.project_number " +
                         "WHERE A.project_number='" + project_number + "' ORDER BY A.doc_id DESC";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -485,6 +475,21 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.roundofmeeting = reader["round_of_meeting"].ToString();
                             e.yearofmeeting = reader["year_of_meeting"].ToString();
                             e.meetingdate = Convert.ToDateTime(reader["meeting_date"]).ToString("dd/MM/yyyy");
+                            e.createby = reader["create_by"].ToString();
+
+                            //Default Edit False
+                            e.editenable = false;
+                            if (permission.edit == true)
+                            {
+                                if (string.IsNullOrEmpty(reader["committee_comment_date"].ToString()))
+                                {
+                                    string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(RegisterId));
+                                    if (user_id == reader["create_by"].ToString())
+                                    {
+                                        e.editenable = true;
+                                    }
+                                }
+                            }
 
                             e.boardcodearray = JsonConvert.DeserializeObject<List<ModelSelectOption>>(reader["board_code_array"].ToString());
                             e.speciallistcodearray = JsonConvert.DeserializeObject<List<ModelSelectOption>>(reader["speciallist_code_array"].ToString());
@@ -531,6 +536,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@round_of_meeting", SqlDbType.Int).Value = model.roundofmeeting;
                         cmd.Parameters.Add("@year_of_meeting", SqlDbType.Int).Value = model.yearofmeeting;
                         cmd.Parameters.Add("@meeting_date", SqlDbType.DateTime).Value = Convert.ToDateTime(model.meetingdate);
+
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;

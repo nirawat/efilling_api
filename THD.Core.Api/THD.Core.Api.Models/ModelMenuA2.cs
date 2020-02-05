@@ -31,6 +31,7 @@ namespace THD.Core.Api.Models
         public string filename2 { get; set; }
         public string filename2base64 { get; set; }
         public string createby { get; set; }
+        public bool editenable { get; set; }
     }
 
 

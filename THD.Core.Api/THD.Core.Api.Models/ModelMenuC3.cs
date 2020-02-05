@@ -26,8 +26,10 @@ namespace THD.Core.Api.Models
         public string meetinglocation { get; set; }
         public string meetingstart { get; set; }
         public string meetingclose { get; set; }
+        public string createby { get; set; }
         public IList<ModelSelectOption> committeesarray { get; set; }
         public IList<ModelSelectOption> attendeesarray { get; set; }
+
 
     }
 

@@ -107,7 +107,7 @@ namespace THD.Core.Api.Business
             MemberProject member1 = new MemberProject();
             if (!string.IsNullOrEmpty(model.member1projecthead))
             {
-                member1.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member1projecthead));
+                member1.projecthead = model.member1projecthead;
                 member1.facultyname = model.member1facultyname;
                 member1.workphone = model.member1workphone;
                 member1.mobile = model.member1mobile;
@@ -120,7 +120,7 @@ namespace THD.Core.Api.Business
             MemberProject member2 = new MemberProject();
             if (!string.IsNullOrEmpty(model.member2projecthead))
             {
-                member2.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member2projecthead));
+                member2.projecthead = model.member2projecthead;
                 member2.facultyname = model.member2facultyname;
                 member2.workphone = model.member2workphone;
                 member2.mobile = model.member2mobile;
@@ -133,7 +133,7 @@ namespace THD.Core.Api.Business
             MemberProject member3 = new MemberProject();
             if (!string.IsNullOrEmpty(model.member3projecthead))
             {
-                member3.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member3projecthead));
+                member3.projecthead = model.member3projecthead;
                 member3.facultyname = model.member3facultyname;
                 member3.workphone = model.member3workphone;
                 member3.mobile = model.member3mobile;
@@ -141,32 +141,6 @@ namespace THD.Core.Api.Business
                 member3.email = model.member3email;
 
                 model.member3json = member3;
-            }
-            //Member Project 4
-            MemberProject member4 = new MemberProject();
-            if (!string.IsNullOrEmpty(model.member4projecthead))
-            {
-                member4.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member4projecthead));
-                member4.facultyname = model.member4facultyname;
-                member4.workphone = model.member4workphone;
-                member4.mobile = model.member4mobile;
-                member4.fax = model.member4fax;
-                member4.email = model.member4email;
-
-                model.member4json = member4;
-            }
-            //Member Project 5
-            MemberProject member5 = new MemberProject();
-            if (!string.IsNullOrEmpty(model.member5projecthead))
-            {
-                member5.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member5projecthead));
-                member5.facultyname = model.member5facultyname;
-                member5.workphone = model.member5workphone;
-                member5.mobile = model.member5mobile;
-                member5.fax = model.member5fax;
-                member5.email = model.member5email;
-
-                model.member5json = member5;
             }
 
             var resp = await _IDocMenuA1Repository.AddDocMenuA1Async(model);
@@ -254,7 +228,7 @@ namespace THD.Core.Api.Business
             MemberProject member1 = new MemberProject();
             if (!string.IsNullOrEmpty(model.member1projecthead))
             {
-                member1.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member1projecthead));
+                member1.projecthead = model.member1projecthead;
                 member1.facultyname = model.member1facultyname;
                 member1.workphone = model.member1workphone;
                 member1.mobile = model.member1mobile;
@@ -267,7 +241,7 @@ namespace THD.Core.Api.Business
             MemberProject member2 = new MemberProject();
             if (!string.IsNullOrEmpty(model.member2projecthead))
             {
-                member2.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member2projecthead));
+                member2.projecthead = model.member2projecthead;
                 member2.facultyname = model.member2facultyname;
                 member2.workphone = model.member2workphone;
                 member2.mobile = model.member2mobile;
@@ -280,7 +254,7 @@ namespace THD.Core.Api.Business
             MemberProject member3 = new MemberProject();
             if (!string.IsNullOrEmpty(model.member3projecthead))
             {
-                member3.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member3projecthead));
+                member3.projecthead = model.member3projecthead;
                 member3.facultyname = model.member3facultyname;
                 member3.workphone = model.member3workphone;
                 member3.mobile = model.member3mobile;
@@ -289,33 +263,6 @@ namespace THD.Core.Api.Business
 
                 model.member3json = member3;
             }
-            //Member Project 4
-            MemberProject member4 = new MemberProject();
-            if (!string.IsNullOrEmpty(model.member4projecthead))
-            {
-                member4.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member4projecthead));
-                member4.facultyname = model.member4facultyname;
-                member4.workphone = model.member4workphone;
-                member4.mobile = model.member4mobile;
-                member4.fax = model.member4fax;
-                member4.email = model.member4email;
-
-                model.member4json = member4;
-            }
-            //Member Project 5
-            MemberProject member5 = new MemberProject();
-            if (!string.IsNullOrEmpty(model.member5projecthead))
-            {
-                member5.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.member5projecthead));
-                member5.facultyname = model.member5facultyname;
-                member5.workphone = model.member5workphone;
-                member5.mobile = model.member5mobile;
-                member5.fax = model.member5fax;
-                member5.email = model.member5email;
-
-                model.member5json = member5;
-            }
-
             var resp = await _IDocMenuA1Repository.UpdateDocMenuA1EditAsync(model);
 
             if (resp.Status)

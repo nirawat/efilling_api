@@ -22,15 +22,18 @@ namespace THD.Core.Api.Private.Controllers
         private readonly IDocMenuReportService _IDocMenuReportService;
         private IHttpContextAccessor _httpContextAccessor;
         private IEnvironmentConfig _EnvironmentConfig;
+        private readonly IMailTemplateService _IMailTemplateService;
 
         public PrivateDocMenuReportController(
             IDocMenuReportService IDocMenuReportService,
             IHttpContextAccessor httpContextAccessor,
-            IEnvironmentConfig EnvironmentConfig)
+            IEnvironmentConfig EnvironmentConfig,
+            IMailTemplateService MailTemplateService)
         {
             _IDocMenuReportService = IDocMenuReportService;
             _httpContextAccessor = httpContextAccessor;
             _EnvironmentConfig = EnvironmentConfig;
+            _IMailTemplateService = MailTemplateService;
         }
 
         [HttpGet("GetReportR1_2/{DocId}")]
@@ -168,13 +171,23 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest(e);
         }
 
-        [HttpGet("GetAllReportMeeting/{DocId}")]
-        public async Task<IActionResult> GetAllReportMeeting(int DocId)
+        [HttpGet("GetAllReportMeeting/{DocId}/{Round}/{Year}")]
+        public async Task<IActionResult> GetAllReportMeeting(int DocId, string Round, string Year)
         {
+            IActionResult _result = BadRequest();
+
             model_rpt_meeting_file e = await _IDocMenuReportService.GetAllReportMeetingAsync(DocId);
 
-            if (e != null) return Ok(e);
-            else return BadRequest(e);
+            if (e != null)
+            {
+                _result = Ok(e);
+
+                await _IMailTemplateService.MailTemplate7Async(Round, Year, e.filebase1464);
+
+            }
+            else _result = BadRequest();
+
+            return _result;
         }
 
     }

@@ -52,7 +52,6 @@ namespace THD.Core.Api.Repository.DataHandler
             ModelMenuA1_InterfaceData resp = new ModelMenuA1_InterfaceData();
 
             resp.ListCommittees = new List<ModelSelectOption>();
-            //resp.ListCommittees = await GetAllRegisterUserByCharacterAsync();
             ModelSelectOption user_login = new ModelSelectOption();
             user_login.value = userid;
             user_login.label = username + " (เช้าสู่ระบบ)";
@@ -73,7 +72,7 @@ namespace THD.Core.Api.Repository.DataHandler
             }
 
             resp.ListMembers = new List<ModelSelectOption>();
-            resp.ListMembers = await _IDropdownListRepository.GetAllRegisterUserByCharacterAsync(string.Empty);
+            resp.ListMembers = await GetAllRegisterUserByCharacterAsync();
 
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(userid, "M003");
 
@@ -151,7 +150,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@according_type_method", SqlDbType.VarChar, 2).Value = model.accordingtypemethod;
                         cmd.Parameters.Add("@project_other", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectother);
                         cmd.Parameters.Add("@project_according_type_method", SqlDbType.VarChar, 2).Value = model.projectaccordingtypemethod;
-                        cmd.Parameters.Add("@reach_other", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.reachother);
+                        cmd.Parameters.Add("@project_according_other", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectaccordingother);
                         cmd.Parameters.Add("@risk_group_1", SqlDbType.Bit).Value = model.riskgroup1;
                         cmd.Parameters.Add("@risk_group_1_1", SqlDbType.Bit).Value = model.riskgroup11;
                         cmd.Parameters.Add("@risk_group_1_2", SqlDbType.Bit).Value = model.riskgroup12;
@@ -225,21 +224,21 @@ namespace THD.Core.Api.Repository.DataHandler
         #region Menu A1 Edit
         public async Task<ModelMenuA1_InterfaceData> MenuA1InterfaceDataEditAsync(int doc_id, string userid, string username)
         {
-            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
-
             ModelMenuA1_InterfaceData resp = new ModelMenuA1_InterfaceData();
 
+            resp.editdata = new ModelMenuA1();
+            resp.editdata = await GetMenuA1DataEditAsync(doc_id);
+
             resp.ListCommittees = new List<ModelSelectOption>();
-            //resp.ListCommittees = await GetAllRegisterUserByCharacterAsync();
             ModelSelectOption user_login = new ModelSelectOption();
-            user_login.value = userid;
-            user_login.label = username + " (เช้าสู่ระบบ)";
+            user_login.value = resp.editdata.projecthead;
+            user_login.label = resp.editdata.projectheadname;
             resp.ListCommittees.Add(user_login);
-            resp.defaultusername = user_login.label;
-            resp.defaultuserid = userid;
+            resp.defaultusername = resp.editdata.projectheadname;
+            resp.defaultuserid = resp.editdata.projecthead;
 
             ModelRegisterActive user_info = new ModelRegisterActive();
-            user_info = await _IRegisterUserRepository.GetFullRegisterUserByIdAsync(user_id);
+            user_info = await _IRegisterUserRepository.GetFullRegisterUserByIdAsync(resp.editdata.projecthead);
 
             if (user_info != null)
             {
@@ -251,10 +250,7 @@ namespace THD.Core.Api.Repository.DataHandler
             }
 
             resp.ListMembers = new List<ModelSelectOption>();
-            resp.ListMembers = await _IDropdownListRepository.GetAllRegisterUserByCharacterAsync(string.Empty);
-
-            resp.editdata = new ModelMenuA1();
-            resp.editdata = await GetMenuA1DataEditAsync(doc_id);
+            resp.ListMembers = await GetAllRegisterUserByCharacterAsync();
 
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(userid, "M003");
 
@@ -263,10 +259,10 @@ namespace THD.Core.Api.Repository.DataHandler
 
         private async Task<ModelMenuA1> GetMenuA1DataEditAsync(int doc_id)
         {
-            string sql = "SELECT A1.*,Users.full_name AS project_head_name,MST1.name_thai AS project_type_name, " +
+            string sql = "SELECT A1.*,(Users.first_name + Users.full_name) AS project_head_name,MST1.name_thai AS project_type_name, " +
                         "MST2.name_thai AS according_type_method_name, " +
                         "MST3.name_thai AS project_according_type_method_name, " +
-                        "MST4.name_thai AS laboratory_used_name, B1.project_key_number " +
+                        "(MST4.code + ' ' + MST4.name_thai) AS laboratory_used_name, B1.project_key_number " +
                         "FROM [dbo].[Doc_MenuA1] A1 " +
                         "LEFT OUTER JOIN [dbo].[Doc_MenuB1] B1 ON A1.doc_id = B1.project_id " +
                         "LEFT OUTER JOIN [dbo].[RegisterUser] Users ON A1.project_head = Users.register_id " +
@@ -292,13 +288,14 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.docdate = Convert.ToDateTime(reader["doc_date"]);
                             e.projecttype = reader["project_type"].ToString();
                             e.projecttypename = reader["project_type_name"].ToString();
-                            e.projecthead = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["project_head"].ToString())); ;
+                            e.projecthead = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["project_head"].ToString()));
                             e.projectheadname = reader["project_head_name"].ToString();
                             e.facultyname = reader["faculty_name"].ToString();
                             e.workphone = reader["work_phone"].ToString();
                             e.mobile = reader["mobile"].ToString();
                             e.fax = reader["fax"].ToString();
                             e.email = reader["email"].ToString();
+                            e.projectnumber = reader["project_key_number"].ToString();
                             e.projectnamethai = reader["project_name_thai"].ToString();
                             e.projectnameeng = reader["project_name_eng"].ToString();
                             e.budget = reader["budget"].ToString();
@@ -315,7 +312,7 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.projectother = reader["project_other"].ToString();
                             e.projectaccordingtypemethod = reader["project_according_type_method"].ToString();
                             e.projectaccordingtypemethodname = reader["project_according_type_method_name"].ToString();
-                            e.reachother = reader["reach_other"].ToString();
+                            e.projectaccordingother = reader["project_according_other"].ToString();
                             e.riskgroup1 = Convert.ToBoolean(reader["risk_group_1"]);
                             e.riskgroup11 = Convert.ToBoolean(reader["risk_group_1_1"]);
                             e.riskgroup12 = Convert.ToBoolean(reader["risk_group_1_2"]);
@@ -343,6 +340,31 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.riskgroup45 = Convert.ToBoolean(reader["risk_group_4_5"]);
                             e.labothername = reader["lab_other_name"].ToString();
                             e.projeckeynumber = reader["project_key_number"].ToString();
+                            e.createby = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["create_by"].ToString()));
+                            e.member1json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_1"].ToString());
+                            e.member1projecthead = e.member1json.projecthead;
+                            e.member1projectheadname = await GetMemberUserByIdAsync(e.member1json.projecthead);
+                            e.member1facultyname = e.member1json.facultyname;
+                            e.member1workphone = e.member1json.workphone;
+                            e.member1mobile = e.member1json.mobile;
+                            e.member1fax = e.member1json.fax;
+                            e.member1email = e.member1json.email;
+                            e.member2json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_2"].ToString());
+                            e.member2projecthead = e.member2json.projecthead;
+                            e.member2projectheadname = await GetMemberUserByIdAsync(e.member2json.projecthead);
+                            e.member2facultyname = e.member2json.facultyname;
+                            e.member2workphone = e.member2json.workphone;
+                            e.member2mobile = e.member2json.mobile;
+                            e.member2fax = e.member2json.fax;
+                            e.member2email = e.member2json.email;
+                            e.member3json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_3"].ToString());
+                            e.member3projecthead = e.member3json.projecthead;
+                            e.member3projectheadname = await GetMemberUserByIdAsync(e.member3json.projecthead);
+                            e.member3facultyname = e.member3json.facultyname;
+                            e.member3workphone = e.member3json.workphone;
+                            e.member3mobile = e.member3json.mobile;
+                            e.member3fax = e.member3json.fax;
+                            e.member3email = e.member3json.email;
                         }
                         return e;
                     }
@@ -350,6 +372,35 @@ namespace THD.Core.Api.Repository.DataHandler
                 conn.Close();
             }
             return null;
+
+        }
+
+        public async Task<string> GetMemberUserByIdAsync(string registerid)
+        {
+            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(registerid));
+
+            string user_name = "";
+
+            string sql = "SELECT TOP(1) (first_name + ' ' + full_name) as full_name FROM RegisterUser WHERE register_id='" + user_id + "' ";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            user_name = reader["full_name"].ToString();
+                        }
+                    }
+                }
+                conn.Close();
+            }
+            return user_name;
 
         }
 
@@ -444,7 +495,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@according_type_method", SqlDbType.VarChar, 2).Value = model.accordingtypemethod;
                         cmd.Parameters.Add("@project_other", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectother);
                         cmd.Parameters.Add("@project_according_type_method", SqlDbType.VarChar, 2).Value = model.projectaccordingtypemethod;
-                        cmd.Parameters.Add("@reach_other", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.reachother);
+                        cmd.Parameters.Add("@project_according_other", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectaccordingother);
                         cmd.Parameters.Add("@risk_group_1", SqlDbType.Bit).Value = model.riskgroup1;
                         cmd.Parameters.Add("@risk_group_1_1", SqlDbType.Bit).Value = model.riskgroup11;
                         cmd.Parameters.Add("@risk_group_1_2", SqlDbType.Bit).Value = model.riskgroup12;
@@ -487,6 +538,14 @@ namespace THD.Core.Api.Repository.DataHandler
                         if ((int)cmd.Parameters["@rStatus"].Value > 0)
                         {
                             resp.Status = true;
+
+                            model_rpt_1_file rpt = await _IDocMenuReportRepository.GetReportR1_2Async(Convert.ToInt32(model.docid));
+
+                            resp.filename1and2 = rpt.filename1and2;
+                            resp.filebase1and264 = rpt.filebase1and264;
+                            resp.filename16 = rpt.filename16;
+                            resp.filebase1664 = rpt.filebase1664;
+
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }

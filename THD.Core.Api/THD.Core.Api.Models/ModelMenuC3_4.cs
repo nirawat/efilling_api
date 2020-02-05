@@ -83,6 +83,9 @@ namespace THD.Core.Api.Models
         public string tab4Group2Seq5Input5 { get; set; }
 
 
+        public string createby { get; set; }
+
+
     }
 
     public class ModelMenuC34Tab4Data

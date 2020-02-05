@@ -14,7 +14,7 @@ namespace THD.Core.Api.Repository.Interface
         Task<ModelCountOfYearC3> GetDefaultRoundC3Async(int yearof);
         Task<IList<ModelMenuC3_History>> GetAllHistoryDataC3Async();
         Task<ModelResponseMessage> AddDocMenuC3Async(ModelMenuC3 model);
-        Task<ModelResponseMessage> CloseMeetingAsync(ModelCloseMeeting model);
+        Task<ModelResponseMessageCloseMeeting> CloseMeetingAsync(ModelCloseMeeting model);
 
 
         //ระเบียบวาระที่ 1
@@ -34,7 +34,7 @@ namespace THD.Core.Api.Repository.Interface
 
         //ระเบียบวาระที่ 3
         Task<ModelMenuC33_InterfaceData> MenuC33InterfaceDataAsync(string RegisterId);
-        Task<ModelResponseMessage> AddDocMenuC33Async(ModelMenuC33 model);
+        Task<ModelResponseC33Message> AddDocMenuC33Async(ModelMenuC33 model);
         Task<ModelMenuC33Data> GetProjectNumberWithDataC3Tab3Async(string project_number);
         Task<IList<ModelSelectOption>> GetAllApprovalTypeByProjectC2ForTab3Async(string project_number);
         Task<IList<ModelMenuC33HistoryData>> GetAllHistoryDataC3Tab3Async();
@@ -43,7 +43,7 @@ namespace THD.Core.Api.Repository.Interface
 
         //ระเบียบวาระที่ 4
         Task<ModelMenuC34_InterfaceData> MenuC34InterfaceDataAsync(string RegisterId);
-        Task<ModelResponseMessage> AddDocMenuC34Async(ModelMenuC34 model);
+        Task<ModelResponseC34Message> AddDocMenuC34Async(ModelMenuC34 model);
         Task<ModelMenuC34Tab4Data> GetProjectNumberWithDataC3Tab4Async(int type, string project_number);
         Task<IList<ModelSelectOption>> GetAllProjectNumberTab4Async(int type);
 

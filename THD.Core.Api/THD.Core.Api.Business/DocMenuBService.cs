@@ -81,12 +81,6 @@ namespace THD.Core.Api.Business
                 resp.Message = "กรุณาเลือก ชื่อโครงการวิจัยไทย!";
                 return resp;
             }
-            //if (string.IsNullOrWhiteSpace(model.filedownloadname))
-            //{
-            //    resp.Status = false;
-            //    resp.Message = "กรุณาเลือก ดาวน์โลหดข้อเสนอ!";
-            //    return resp;
-            //}
             if (string.IsNullOrWhiteSpace(model.meetingdate))
             {
                 resp.Status = false;
@@ -100,7 +94,6 @@ namespace THD.Core.Api.Business
 
             model.docdate = DateTime.Now;
             model.meetingdate = Convert.ToDateTime(model.meetingdate.Substring(0, 10)).ToString("yyyy-MM-dd");
-            model.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.projecthead));
 
             resp = await _IDocMenuB1Repository.AddDocMenuB1Async(model);
 
@@ -126,12 +119,6 @@ namespace THD.Core.Api.Business
                 resp.Message = "กรุณาเลือก ชื่อโครงการวิจัยไทย!";
                 return resp;
             }
-            //if (string.IsNullOrWhiteSpace(model.filedownloadname))
-            //{
-            //    resp.Status = false;
-            //    resp.Message = "กรุณาเลือก ดาวน์โลหดข้อเสนอ!";
-            //    return resp;
-            //}
             if (string.IsNullOrWhiteSpace(model.meetingdate))
             {
                 resp.Status = false;
@@ -145,8 +132,6 @@ namespace THD.Core.Api.Business
 
             model.docdate = DateTime.Now;
             model.meetingdate = Convert.ToDateTime(model.meetingdate.Substring(0, 10)).ToString("yyyy-MM-dd");
-            //model.meetingdate = Convert.ToDateTime(model.meetingdate.ToString("yyyy-MM-dd"));
-            model.projecthead = Encoding.UTF8.GetString(Convert.FromBase64String(model.projecthead));
 
             resp = await _IDocMenuB1Repository.UpdateDocMenuB1Async(model);
 

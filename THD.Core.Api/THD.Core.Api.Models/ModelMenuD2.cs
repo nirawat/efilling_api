@@ -35,6 +35,9 @@ namespace THD.Core.Api.Models
         public string remarkApproval { get; set; }
         public string conclusiondate { get; set; }
 
+        public string createby { get; set; }
+        public bool editenable { get; set; }
+
     }
 
 

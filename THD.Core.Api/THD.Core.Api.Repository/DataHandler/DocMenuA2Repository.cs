@@ -112,6 +112,8 @@ namespace THD.Core.Api.Repository.DataHandler
                     cmd.Parameters.Add("@FileName2", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.filename2);
                     cmd.Parameters.Add("@create_by", SqlDbType.NVarChar).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
+                    cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                     SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                     rStatus.Direction = ParameterDirection.Output;
                     SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);

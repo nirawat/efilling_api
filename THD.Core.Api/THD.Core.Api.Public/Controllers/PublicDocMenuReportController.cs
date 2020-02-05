@@ -367,10 +367,10 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
-        [HttpGet("GetAllReportMeeting/{DocId}")]
-        public async Task<IActionResult> GetAllReportMeeting(int DocId)
+        [HttpGet("GetAllReportMeeting/{DocId}/{Round}/{Year}")]
+        public async Task<IActionResult> GetAllReportMeeting(int DocId, string Round, string Year)
         {
-            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuReport"}/{"GetAllReportMeeting"}/{DocId}";
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuReport"}/{"GetAllReportMeeting"}/{DocId}/{Round}/{Year}";
             string authHeader = HttpContext.Request?.Headers["Authorization"];
             if (authHeader != null && authHeader.StartsWith("Bearer"))
             {

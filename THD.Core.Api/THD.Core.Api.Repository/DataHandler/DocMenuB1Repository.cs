@@ -40,7 +40,6 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<ModelMenuB1_InterfaceData> MenuB1InterfaceDataAsync(string userid, string username)
         {
-            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
 
             ModelMenuB1_InterfaceData resp = new ModelMenuB1_InterfaceData();
 
@@ -50,16 +49,6 @@ namespace THD.Core.Api.Repository.DataHandler
             all_project_head.value = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes("all"));
             all_project_head.label = "ทั้งหมด";
             resp.ListProjectHead.Add(all_project_head);
-
-            //resp.ListCommittees = await GetAllRegisterUserByCharacterAsync();
-            //ModelSelectOption user_login = new ModelSelectOption();
-            //user_login.value = userid;
-            //user_login.label = username + " (เช้าสู่ระบบ)";
-            //resp.ListProjectHead.Add(user_login);
-
-            //resp.defaultusername = user_login.label;
-            //resp.defaultuserid = userid;
-
 
             int thai_year = CommonData.GetYearOfPeriod();
 
@@ -73,17 +62,6 @@ namespace THD.Core.Api.Repository.DataHandler
             ModelCountOfYear round_of_year = new ModelCountOfYear();
             round_of_year = await _IDocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(resp.defaultyear);
             resp.defaultround = round_of_year.count;
-
-            //for (int i = 1; i < 5; i++)
-            //{
-            //    ModelSelectOption year_next = new ModelSelectOption();
-            //    year_next.value = (thai_year + i).ToString();
-            //    year_next.label = (thai_year + i).ToString();
-            //    resp.ListYearOfProject.Add(year_next);
-            //}
-
-            //resp.ListProjectNameThai = new List<ModelSelectOption>();
-            //resp.ListProjectNameThai = await GetAllProjectNameThaiAsync(user_id);
 
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(userid, "M010");
 
@@ -369,12 +347,14 @@ namespace THD.Core.Api.Repository.DataHandler
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
+                    string project_head = Encoding.UTF8.GetString(Convert.FromBase64String(model.projecthead));
+
                     cmd.Parameters.Add("@doc_date", SqlDbType.DateTime).Value = model.docdate.ToString("yyyy-MM-dd");
                     cmd.Parameters.Add("@accept_type", SqlDbType.VarChar, 2).Value = ParseDataHelper.ConvertDBNull(model.accepttype);
-                    cmd.Parameters.Add("@project_head", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.projecthead);
+                    cmd.Parameters.Add("@project_head", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(project_head);
                     cmd.Parameters.Add("@project_id", SqlDbType.Int).Value = ParseDataHelper.ConvertDBNull(model.projectid);
-                    cmd.Parameters.Add("@project_name_thai", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnamethai);
-                    cmd.Parameters.Add("@project_name_eng", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnameeng);
+                    cmd.Parameters.Add("@project_name_thai", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.projectnamethai);
+                    cmd.Parameters.Add("@project_name_eng", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.projectnameeng);
                     cmd.Parameters.Add("@acronyms", SqlDbType.VarChar, 3).Value = ParseDataHelper.ConvertDBNull(model.acronyms);
                     cmd.Parameters.Add("@initial_result", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.initialresult);
                     cmd.Parameters.Add("@file_download_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.filedownloadname);
@@ -384,6 +364,8 @@ namespace THD.Core.Api.Repository.DataHandler
                     cmd.Parameters.Add("@year_of_meeting", SqlDbType.Int).Value = model.yearofmeeting;
                     cmd.Parameters.Add("@year_of_running", SqlDbType.Int).Value = model.defaultyear;
                     cmd.Parameters.Add("@meeting_date", SqlDbType.DateTime).Value = Convert.ToDateTime(model.meetingdate);
+
+                    cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
                     SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                     rStatus.Direction = ParameterDirection.Output;
@@ -421,18 +403,21 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<ModelMenuB1_InterfaceData> MenuB1InterfaceDataEditAsync(string project_number, string userid, string username)
         {
-            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
 
             ModelMenuB1_InterfaceData resp = new ModelMenuB1_InterfaceData();
 
+            // Edit Mode
+            resp.editdata = new ModelMenuB1Edit();
+            resp.editdata = await GetEditDataB1Async(project_number);
+
             resp.ListProjectHead = new List<ModelSelectOption>();
             ModelSelectOption user_login = new ModelSelectOption();
-            user_login.value = userid;
-            user_login.label = username + " (เข้าสู่ระบบ)";
+            user_login.value = resp.editdata.projecthead;
+            user_login.label = resp.editdata.projectheadname;
             resp.ListProjectHead.Add(user_login);
 
-            resp.defaultusername = user_login.label;
-            resp.defaultuserid = userid;
+            resp.defaultusername = resp.editdata.projectheadname;
+            resp.defaultuserid = resp.editdata.projecthead;
 
 
             int thai_year = CommonData.GetYearOfPeriod();
@@ -443,17 +428,6 @@ namespace THD.Core.Api.Repository.DataHandler
             year_current.label = (thai_year).ToString();
             resp.ListYearOfProject.Add(year_current);
 
-            //for (int i = 1; i < 5; i++)
-            //{
-            //    ModelSelectOption year_next = new ModelSelectOption();
-            //    year_next.value = (thai_year + i).ToString();
-            //    year_next.label = (thai_year + i).ToString();
-            //    resp.ListYearOfProject.Add(year_next);
-            //}
-
-            // Edit Mode
-            resp.editdata = new ModelMenuB1Edit();
-            resp.editdata = await GetEditDataB1Async(project_number);
 
             resp.ListProjectNameThai = new List<ModelSelectOption>();
             ModelSelectOption project_name_default = new ModelSelectOption()
@@ -462,7 +436,6 @@ namespace THD.Core.Api.Repository.DataHandler
                 label = resp.editdata.projectnamethai,
             };
             resp.ListProjectNameThai.Add(project_name_default);
-            //resp.ListProjectNameThai = await GetAllProjectNameThaiAsync(user_id);
 
             resp.ListDownloadFile = new List<ModelSelectOption>();
             resp.ListDownloadFile = await GetAllDownloadFileByProjectIdAsync(resp.editdata.projectid);
@@ -478,11 +451,12 @@ namespace THD.Core.Api.Repository.DataHandler
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            string sql = "SELECT TOP(1)*, A1.project_name_thai, " +
-                        "(MST1.name_thai) AS initial_result_name " +
+            string sql = "SELECT TOP(1)*, A1.project_name_thai, A1.committee_code_array, " +
+                        "(MST1.name_thai) AS initial_result_name, (Users.first_name + ' ' + Users.full_name) as project_head_name " +
                         "FROM Doc_MenuB1 B1 " +
-                        "LEFT OUTER JOIN Doc_MenuA1 A1 ON B1.project_id = A1.doc_id " +
+                        "LEFT OUTER JOIN Transaction_Document A1 ON B1.project_id = A1.project_request_id " +
                         "LEFT OUTER JOIN MST_InitialResult MST1 ON B1.initial_result = MST1.id " +
+                        "LEFT OUTER JOIN RegisterUser Users ON B1.project_head = Users.register_id " +
                         "WHERE project_key_number='" + project_number + "' " +
                         "ORDER BY B1.doc_id DESC";
 
@@ -501,7 +475,8 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.docid = reader["doc_id"].ToString();
                             e.docdate = Convert.ToDateTime(reader["doc_date"]);
                             e.accepttype = reader["accept_type"].ToString();
-                            e.projecthead = reader["project_head"].ToString();
+                            e.projecthead = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["project_head"].ToString()));
+                            e.projectheadname = reader["project_head_name"].ToString();
                             e.projectid = reader["project_id"].ToString();
                             e.projectnamethai = reader["project_name_thai"].ToString();
                             e.projectnameeng = reader["project_name_eng"].ToString();
@@ -516,6 +491,8 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.yearofmeeting = reader["year_of_meeting"].ToString();
                             e.defaultyear = reader["year_of_meeting"].ToString();
                             e.meetingdate = Convert.ToDateTime(reader["meeting_date"]).ToString("dd/MM/yyyy");
+                            e.editenable = (string.IsNullOrEmpty(reader["committee_code_array"].ToString()) ? true : false);
+                            e.createby = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["create_by"].ToString()));
                         }
                         return e;
                     }
@@ -542,11 +519,14 @@ namespace THD.Core.Api.Repository.DataHandler
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
+                        string project_head = Encoding.UTF8.GetString(Convert.FromBase64String(model.projecthead));
+
                         cmd.Parameters.Add("@doc_id", SqlDbType.Int).Value = model.docid;
                         cmd.Parameters.Add("@doc_date", SqlDbType.DateTime).Value = model.docdate.ToString("yyyy-MM-dd");
                         cmd.Parameters.Add("@accept_type", SqlDbType.VarChar, 2).Value = ParseDataHelper.ConvertDBNull(model.accepttype);
-                        cmd.Parameters.Add("@project_head", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.projecthead);
+                        cmd.Parameters.Add("@project_head", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(project_head);
                         cmd.Parameters.Add("@project_id", SqlDbType.Int).Value = ParseDataHelper.ConvertDBNull(model.projectid);
+                        cmd.Parameters.Add("@project_name_thai", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.projectnamethai);
                         cmd.Parameters.Add("@project_name_eng", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnameeng);
                         cmd.Parameters.Add("@acronyms", SqlDbType.VarChar, 3).Value = ParseDataHelper.ConvertDBNull(model.acronyms);
                         cmd.Parameters.Add("@initial_result", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.initialresult);
@@ -559,6 +539,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@year_of_running", SqlDbType.Int).Value = model.defaultyear;
                         cmd.Parameters.Add("@meeting_date", SqlDbType.DateTime).Value = Convert.ToDateTime(model.meetingdate);
 
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
@@ -570,6 +552,11 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
                             resp.DocNumber = (string)cmd.Parameters["@rMessage"].Value;
+
+                            model_rpt_8_file rpt = await _IDocMenuReportRepository.GetReportR8Async(Convert.ToInt32(model.docid));
+
+                            resp.filename = rpt.filename;
+                            resp.filebase64 = rpt.filebase64;
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }

@@ -38,7 +38,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<bool> MailTemplate1Async(int DocId, string rptBase64)
         {
-            string mail_subject = "กองการวิจัยและนวัตกรรม ขอแจ้งผลการพิจารณาเอกสารโครงการวิจัยเรื่อง ";
+            string mail_subject = "กองการวิจัยและนวัตกรรม ขอแจ้งผลการตรวจสอบข้อเสนอโครงการวิจัยเรื่อง ";
 
             ModelMail_Template1 data = await GetData_MailTemplate1_Async(DocId);
 
@@ -54,7 +54,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                await _EmailHelper.SentGmail(data.email, "eFilling : แจ้งผลการพิจารณาเอกสาร", mail_body, rptBase64);
+                await _EmailHelper.SentGmail(data.email, "eFilling : แจ้งผลการตรวจสอบข้อเสนอโครงการ", mail_body, rptBase64);
 
                 return true;
             }
@@ -380,7 +380,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 {
                     string mail_body = "<h3>เรียน " + item.fullname + "</h3>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<p>กองการวิจัยและนวัตกรรม ขอส่งระเบียบวาระการประชุมครั้งที่ <h3>" + model.meetinground + "/" + model.yearofmeeting + "</h3></p>" + Environment.NewLine +
+                       "<p>กองการวิจัยและนวัตกรรม ขอส่งระเบียบวาระการประชุมครั้งที่ <h3>" + model.meetinground + " / " + model.yearofmeeting + "</h3></p>" + Environment.NewLine +
                        "<p>ตามระเบียบวาระการประชุมแนบ ท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ” เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องกับการประชุมได้ตั้งแต่บัดนี้เป็นต้นไป</p>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
@@ -442,9 +442,9 @@ namespace THD.Core.Api.Repository.DataHandler
 
         #region "Mail Template 7"
 
-        public async Task<bool> MailTemplate7Async(ModelCloseMeeting model, string rptBase64)
+        public async Task<bool> MailTemplate7Async(string round, string year, string rptBase64)
         {
-            IList<ModelMail_Template7> email_to = await GetUserMeeting_MailTemplate7_Async(model);
+            IList<ModelMail_Template7> email_to = await GetUserMeeting_MailTemplate7_Async(round, year);
 
             if (email_to != null && email_to.Count > 0)
             {
@@ -452,7 +452,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 {
                     string mail_body = "<h3>เรียน " + item.fullname + "</h3>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<p>กองการวิจัยและนวัตกรรม ขอส่งระเบียบวาระการประชุมครั้งที่ <h3>" + model.meetingofround + "/" + model.meetingofyear + "</h3></p>" + Environment.NewLine +
+                       "<p>กองการวิจัยและนวัตกรรม ขอส่งระเบียบวาระการประชุมครั้งที่ <h3>" + round + " / " + year + "</h3></p>" + Environment.NewLine +
                        "<p>ตามระเบียบวาระการประชุมแนบ ท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ” เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องกับการประชุมได้ตั้งแต่บัดนี้เป็นต้นไป </p> " + Environment.NewLine +
                        "</br>" + Environment.NewLine +
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
@@ -467,26 +467,40 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-        public async Task<IList<ModelMail_Template7>> GetUserMeeting_MailTemplate7_Async(ModelCloseMeeting model)
+        public async Task<IList<ModelMail_Template7>> GetUserMeeting_MailTemplate7_Async(string round, string year)
         {
-            string multi_user = "202001110010";
-
-            //if (model.committeesarray != null && model.committeesarray.Count > 0)
-            //{
-            //    foreach (var item in model.committeesarray)
-            //    {
-            //        multi_user += Encoding.UTF8.GetString(Convert.FromBase64String(item.value)) + "','";
-            //    }
-            //}
-
-            string sql = "SELECT email, (first_name + full_name) as full_name " +
-                         "FROM [dbo].[RegisterUser] " +
-                         "WHERE register_id IN ('" + multi_user + "')";
+            string multi_user = "";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
-                using (SqlCommand command = new SqlCommand(sql, conn))
+
+                string sql1 = "SELECT TOP(1) meeting_user_code_array " +
+                              "FROM Doc_MenuC3 " +
+                              "WHERE meeting_round='" + round + "' AND year_of_meeting='" + year + "' ";
+
+                using (SqlCommand command = new SqlCommand(sql1, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            multi_user += reader["meeting_user_code_array"].ToString();
+                        }
+                    }
+                    reader.Close();
+                }
+
+                // --------------------------------------------------------------------------
+
+
+                string sql2 = "SELECT email, (first_name + full_name) as full_name " +
+                             "FROM [dbo].[RegisterUser] " +
+                             "WHERE register_id IN ('" + multi_user.Replace(",", "','") + "')";
+
+                using (SqlCommand command = new SqlCommand(sql2, conn))
                 {
                     SqlDataReader reader = await command.ExecuteReaderAsync();
 
@@ -502,7 +516,9 @@ namespace THD.Core.Api.Repository.DataHandler
                         }
                         return e;
                     }
+                    reader.Close();
                 }
+
                 conn.Close();
             }
             return null;

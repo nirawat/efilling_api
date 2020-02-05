@@ -37,6 +37,8 @@ namespace THD.Core.Api.Models
         public string roundofmeeting { get; set; }
         public string yearofmeeting { get; set; }
         public string meetingdate { get; set; }
+        public string createby { get; set; }
+        public bool editenable { get; set; }
         public IList<ModelSelectOption> boardcodearray { get; set; }
         public IList<ModelSelectOption> speciallistcodearray { get; set; }
     }

@@ -14,12 +14,12 @@ namespace THD.Core.Api.Helpers
     {
         Task<bool> SentGmail(string to_email, string subject, string content, string base64Attachment);
     }
-    public class EmailHelper
+    public class EmailHelper: IEmailHelper
     {
         private readonly IEmailConfig _EmailConfig;
         public EmailHelper(IEmailConfig EmailConfig)
         {
-            _EmailConfig = _EmailConfig;
+            _EmailConfig = EmailConfig;
         }
 
 
@@ -28,20 +28,18 @@ namespace THD.Core.Api.Helpers
             MailMessage mail = new MailMessage();
             bool resp = false;
 
-            string xx = _EmailConfig.Host;
+            SmtpClient client = new SmtpClient(_EmailConfig.Host);
 
-            SmtpClient client = new SmtpClient("smtp-mail.outlook.com");
-
-            client.Port = 587;
+            client.Port = Convert.ToInt32(_EmailConfig.Port);
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential("efilling.sys@outlook.co.th", "efilling*2020");
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(_EmailConfig.User, _EmailConfig.Pass);
             client.EnableSsl = true;
             client.Credentials = credentials;
 
             try
             {
-                mail.From = new MailAddress("efilling.sys@outlook.co.th");
+                mail.From = new MailAddress(_EmailConfig.User);
                 mail.To.Add(to_email);
                 mail.Subject = subject;
                 mail.Body = content;

@@ -47,6 +47,8 @@ namespace THD.Core.Api.Models
         public string tab5Group1Seq10Input1 { get; set; }
         public string tab5Group1Seq10Input2 { get; set; }
         public string tab5Group1Seq10Input3 { get; set; }
+
+        public string createby { get; set; }
     }
 
     public class ModelMenuC35Tab5Group1

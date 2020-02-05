@@ -32,6 +32,8 @@ namespace THD.Core.Api.Models
         public string tab2Group1Seq3FileInput2Base64 { get; set; }
         public string tab2Group1Seq3Input3 { get; set; }
         public string tab2Group1Seq3Input4 { get; set; }
+
+        public string createby { get; set; }
     }
 
 

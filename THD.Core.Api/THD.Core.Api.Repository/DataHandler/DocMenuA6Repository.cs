@@ -165,6 +165,8 @@ namespace THD.Core.Api.Repository.DataHandler
                     cmd.Parameters.Add("@renew_round", SqlDbType.Int).Value = model.renewround;
                     cmd.Parameters.Add("@file1name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.file1name);
 
+                    cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                     SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                     rStatus.Direction = ParameterDirection.Output;
                     SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);

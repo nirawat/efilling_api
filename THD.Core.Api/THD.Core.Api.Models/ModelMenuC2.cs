@@ -33,6 +33,8 @@ namespace THD.Core.Api.Models
         public string approvaltype { get; set; }
         public string approvaltypename { get; set; }
         public string commentconsider { get; set; }
+        public string createby { get; set; }
+        public bool editenable { get; set; }
     }
 
     public class ModelMenuC2Data

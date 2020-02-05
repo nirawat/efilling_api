@@ -1120,10 +1120,6 @@ namespace THD.Core.Api.Repository.DataHandler
         {
             model_rpt_14_file resp = new model_rpt_14_file();
 
-            var cultureInfo = new CultureInfo("th-TH");
-            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
             try
             {
                 model_rpt_14_report rptData = new model_rpt_14_report();

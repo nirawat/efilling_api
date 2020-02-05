@@ -42,18 +42,15 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<ModelMenuC2_InterfaceData> MenuC2InterfaceDataAsync(string userid, string username)
         {
-            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
 
             ModelMenuC2_InterfaceData resp = new ModelMenuC2_InterfaceData();
 
             resp.ListAssigner = new List<ModelSelectOption>();
-            //resp.ListAssigner = await GetAllAssignerUserAsync();
             ModelSelectOption assigner_login = new ModelSelectOption();
-            int assigner_count = (resp.ListAssigner.Count + 1);
             assigner_login.value = userid;
-            assigner_login.label = assigner_count.ToString() + ". " + username + " (เช้าสู่ระบบ)";
+            assigner_login.label = username + " (เช้าสู่ระบบ)";
             resp.default_assigner_name = assigner_login.label;
-            resp.default_assigner_seq = assigner_count.ToString();
+            resp.default_assigner_seq = "0"; //Default 0 ไม่มีผล
             resp.ListAssigner.Add(assigner_login);
 
             resp.ListProjectNumber = new List<ModelSelectOption>();
@@ -278,6 +275,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@comment_consider", SqlDbType.VarChar).Value = ParseDataHelper.ConvertDBNull(model.commentconsider);
                         cmd.Parameters.Add("@committee_comment_date", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(array_comment_date.ToString());
 
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
@@ -315,39 +314,48 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<ModelMenuC2_InterfaceData> MenuC2InterfaceDataEditAsync(string project_number, string userid, string username)
         {
-            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
 
             ModelMenuC2_InterfaceData resp = new ModelMenuC2_InterfaceData();
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(userid, "M012");
+
+            resp.editdata = new ModelMenuC2();
+            resp.editdata = await GetMenuC2DataEditAsync(project_number, userid, resp.UserPermission);
 
             resp.ListAssigner = new List<ModelSelectOption>();
 
             ModelSelectOption assigner_login = new ModelSelectOption();
-            int assigner_count = (resp.ListAssigner.Count + 1);
-            assigner_login.value = userid;
-            assigner_login.label = assigner_count.ToString() + ". " + username + " (เช้าสู่ระบบ)";
+            assigner_login.value = resp.editdata.assignercode;
+            assigner_login.label = resp.editdata.assignername;
+
             resp.default_assigner_name = assigner_login.label;
-            resp.default_assigner_seq = assigner_count.ToString();
+            resp.default_assigner_seq = "0"; //Default 0 ไม่มีผล
             resp.ListAssigner.Add(assigner_login);
 
             resp.ListProjectNumber = new List<ModelSelectOption>();
-            resp.ListProjectNumber = await GetAllProjectAsync(user_id, "C2,C34");
-
-            resp.editdata = new ModelMenuC2();
-            resp.editdata = await GetMenuC2DataEditAsync(project_number);
-
-            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(userid, "M012");
+            ModelSelectOption project_name_default = new ModelSelectOption()
+            {
+                value = resp.editdata.projectnumber,
+                label = resp.editdata.projectnamethai,
+            };
+            resp.ListProjectNumber.Add(project_name_default);
 
             return resp;
         }
 
-        private async Task<ModelMenuC2> GetMenuC2DataEditAsync(string project_number)
+        private async Task<ModelMenuC2> GetMenuC2DataEditAsync(string project_number, string userid, ModelPermissionPage permission)
         {
-            string sql = "SELECT TOP(1) A.*, D.full_name AS assigner_name, B.name_thai AS safety_type_name, (C.name_thai + ' ' + C.name_thai_sub) AS approval_type_name " +
+            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
+
+            string sql = "SELECT TOP(1) A.*, (D.first_name + ' ' + D.full_name) AS assigner_name, B.name_thai AS safety_type_name, " +
+                        "(C.name_thai + ' ' + C.name_thai_sub) AS approval_type_name, E.meeting_date " +
                         "FROM [dbo].[Doc_MenuC2] A " +
                         "LEFT OUTER JOIN[dbo].[MST_Safety] B ON A.safety_type = B.id " +
                         "LEFT OUTER JOIN[dbo].[MST_ApprovalType] C ON A.approval_type = C.id " +
                         "LEFT OUTER JOIN[dbo].[RegisterUser] D ON A.assigner_code = D.register_id " +
+                        "LEFT OUTER JOIN Transaction_Document E ON A.project_number = E.project_number " +
                         "WHERE A.project_number='" + project_number + "' " +
+                        (permission.alldata == true ? "" : " AND A.create_by = '" + user_id + "'") +
                         "ORDER BY A.doc_id DESC";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -379,6 +387,21 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.approvaltype = reader["approval_type"].ToString();
                             e.approvaltypename = reader["approval_type_name"].ToString();
                             e.commentconsider = reader["comment_consider"].ToString();
+                            e.createby = reader["create_by"].ToString();
+
+                            //Default Edit False
+                            e.editenable = false;
+                            if (permission.edit == true)
+                            {
+                                if (string.IsNullOrEmpty(reader["meeting_date"].ToString()))
+                                {
+                                    if (user_id == reader["create_by"].ToString())
+                                    {
+                                        e.editenable = true;
+                                    }
+                                }
+                            }
+
                         }
                         return e;
                     }
@@ -420,6 +443,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@approval_type", SqlDbType.VarChar, 2).Value = ParseDataHelper.ConvertDBNull(model.approvaltype);
                         cmd.Parameters.Add("@comment_consider", SqlDbType.VarChar).Value = ParseDataHelper.ConvertDBNull(model.commentconsider);
 
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
@@ -430,6 +455,11 @@ namespace THD.Core.Api.Repository.DataHandler
                         if ((int)cmd.Parameters["@rStatus"].Value > 0)
                         {
                             resp.Status = true;
+
+                            model_rpt_10_file rpt = await _IDocMenuReportRepository.GetReportR10Async(Convert.ToInt32(model.docid));
+
+                            resp.filename = rpt.filename;
+                            resp.filebase64 = rpt.filebase64;
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }

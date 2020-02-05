@@ -80,7 +80,7 @@ namespace THD.Core.Api.Private.Controllers
         {
             ModelResponseMessage e = await _IDocMenuAService.UpdateDocMenuA1EditAsync(model);
 
-            if (e.Status) return Ok();
+            if (e.Status) return Ok(e);
             else return BadRequest();
 
         }
@@ -181,7 +181,14 @@ namespace THD.Core.Api.Private.Controllers
             {
                 _result = Ok(e);
 
-                await _IMailTemplateService.MailTemplate9Async(model.projectnumber, e.filebase64);
+                try
+                {
+                    await _IMailTemplateService.MailTemplate9Async(model.projectnumber, e.filebase64);
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
 
             }
             else _result = BadRequest();
@@ -233,7 +240,14 @@ namespace THD.Core.Api.Private.Controllers
             {
                 _result = Ok(e);
 
-                await _IMailTemplateService.MailTemplate8Async(model.projectnumber, e.filebase64);
+                try
+                {
+                    await _IMailTemplateService.MailTemplate8Async(model.projectnumber, e.filebase64);
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
 
             }
             else _result = BadRequest();

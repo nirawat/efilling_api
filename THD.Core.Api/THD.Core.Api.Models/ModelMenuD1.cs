@@ -31,6 +31,10 @@ namespace THD.Core.Api.Models
         public int acceptcondition { get; set; }
         public string acceptconditionname { get; set; }
         public string acceptdate { get; set; }
+
+        public string createby { get; set; }
+        public bool editenable { get; set; }
+
         public IList<ModelMenuD1RenewTable> listRenewDate { get; set; }
     }
 

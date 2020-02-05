@@ -26,6 +26,7 @@ namespace THD.Core.Api.Models
     {
         public string docid { get; set; }
         public DateTime docdate { get; set; }
+        public string projectnumber { get; set; }
         public string docnumber { get; set; }
         public string projectconsultant { get; set; }
         public string projecttype { get; set; }
@@ -61,7 +62,7 @@ namespace THD.Core.Api.Models
         public string projectother { get; set; }
         public string projectaccordingtypemethod { get; set; }
         public string projectaccordingtypemethodname { get; set; }
-        public string reachother { get; set; }
+        public string projectaccordingother { get; set; }
         public bool riskgroup1 { get; set; }
         public bool riskgroup11 { get; set; }
         public bool riskgroup12 { get; set; }
@@ -94,6 +95,7 @@ namespace THD.Core.Api.Models
         //Member Project
         public MemberProject member1json { get; set; }
         public string member1projecthead { get; set; }
+        public string member1projectheadname { get; set; }
         public string member1facultyname { get; set; }
         public string member1workphone { get; set; }
         public string member1mobile { get; set; }
@@ -102,6 +104,7 @@ namespace THD.Core.Api.Models
 
         public MemberProject member2json { get; set; }
         public string member2projecthead { get; set; }
+        public string member2projectheadname { get; set; }
         public string member2facultyname { get; set; }
         public string member2workphone { get; set; }
         public string member2mobile { get; set; }
@@ -110,6 +113,7 @@ namespace THD.Core.Api.Models
 
         public MemberProject member3json { get; set; }
         public string member3projecthead { get; set; }
+        public string member3projectheadname { get; set; }
         public string member3facultyname { get; set; }
         public string member3workphone { get; set; }
         public string member3mobile { get; set; }
@@ -135,6 +139,7 @@ namespace THD.Core.Api.Models
 
 
         public string createby { get; set; }
+        public bool editenable { get; set; }
     }
 
     public class MemberProject

@@ -28,6 +28,8 @@ namespace THD.Core.Api.Models
         public string file1base64 { get; set; }
         public string file2name { get; set; }
         public string file2base64 { get; set; }
+        public string createby { get; set; }
+        public bool editenable { get; set; }
     }
     public class ModelMenuA7ProjectNumberData
     {

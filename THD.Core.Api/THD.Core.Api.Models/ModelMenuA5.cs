@@ -27,6 +27,8 @@ namespace THD.Core.Api.Models
         public string conclusiondate { get; set; }
         public string file1name { get; set; }
         public string file1base64 { get; set; }
+        public string createby { get; set; }
+        public bool editenable { get; set; }
     }
 
     public class ModelMenuA5ProjectNumberData
