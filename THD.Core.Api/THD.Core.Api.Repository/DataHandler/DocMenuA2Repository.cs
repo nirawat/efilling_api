@@ -80,13 +80,13 @@ namespace THD.Core.Api.Repository.DataHandler
 
 
         }
-        public async Task<ModelResponseMessage> AddDocMenuA2Async(ModelMenuA2 model)
+        public async Task<ModelResponseA2Message> AddDocMenuA2Async(ModelMenuA2 model)
         {
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseA2Message resp = new ModelResponseA2Message();
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {

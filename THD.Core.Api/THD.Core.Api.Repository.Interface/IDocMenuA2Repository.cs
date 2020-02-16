@@ -11,6 +11,6 @@ namespace THD.Core.Api.Repository.Interface
     {
         Task<ModelMenuA2_InterfaceData> MenuA2InterfaceDataAsync(string RegisterId);
 
-        Task<ModelResponseMessage> AddDocMenuA2Async(ModelMenuA2 model);
+        Task<ModelResponseA2Message> AddDocMenuA2Async(ModelMenuA2 model);
     }
 }

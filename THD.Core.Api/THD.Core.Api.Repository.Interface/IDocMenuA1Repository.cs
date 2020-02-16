@@ -13,7 +13,7 @@ namespace THD.Core.Api.Repository.Interface
         #region Menu A1
 
         Task<ModelMenuA1_InterfaceData> MenuA1InterfaceDataAsync(string userid, string username);
-        Task<ModelResponseMessage> AddDocMenuA1Async(ModelMenuA1 model);
+        Task<ModelResponseA1Message> AddDocMenuA1Async(ModelMenuA1 model);
 
         #endregion
 
@@ -21,7 +21,7 @@ namespace THD.Core.Api.Repository.Interface
 
         Task<ModelMenuA1_InterfaceData> MenuA1InterfaceDataEditAsync(int doc_id, string userid, string username);
         Task<ModelMenuA1_FileDownload> GetA1DownloadFileByIdAsync(int DocId, int Id);
-        Task<ModelResponseMessage> UpdateDocMenuA1EditAsync(ModelMenuA1 model);
+        Task<ModelResponseA1Message> UpdateDocMenuA1EditAsync(ModelMenuA1 model);
 
 
         #endregion

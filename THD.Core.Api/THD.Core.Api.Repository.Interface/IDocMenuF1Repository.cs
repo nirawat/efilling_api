@@ -19,5 +19,13 @@ namespace THD.Core.Api.Repository.Interface
         Task<ModelResponseMessageUpdateUserRegister> UpdateUserRegisterAsync(ModelRegisterEdit model);
         #endregion
 
+        #region Menu F Account User
+
+        Task<ModelMenuFAccount_InterfaceData> MenuAccountInterfaceDataAsync(string RegisterId);
+
+        Task<ModelResponseMessageUpdateUserRegister> UpdateUserAccountAsync(ModelUpdateAccountUser model);
+
+        #endregion
+
     }
 }

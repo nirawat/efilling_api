@@ -57,10 +57,10 @@ namespace THD.Core.Api.Repository.DataHandler
             resp.ListAssigner.Add(assigner_login);
 
             resp.ListBoard = new List<ModelSelectOption>();
-            resp.ListBoard = await GetAllRegisterUserByCharacterAsync("2");
+            resp.ListBoard = await GetAllRegisterUserByCharacterAsync("");
 
             resp.ListSpecialList = new List<ModelSelectOption>();
-            resp.ListSpecialList = await GetAllRegisterUserByCharacterAsync("2");
+            resp.ListSpecialList = await GetAllRegisterUserByCharacterAsync("");
 
             int thai_year = CommonData.GetYearOfPeriod();
             resp.ListYearOfProject = new List<ModelSelectOption>();
@@ -93,9 +93,6 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<IList<ModelSelectOption>> GetAllProjectNumberC1Async(string project_header)
         {
-
-            //string sql = "SELECT project_number, project_name_thai FROM Doc_Process WHERE doc_process_to='C1'";
-
             string sql = "SELECT A.project_key_number, B.project_name_thai " +
                         "FROM Doc_MenuB1 A " +
                         "INNER JOIN Doc_Process B " +
@@ -211,9 +208,9 @@ namespace THD.Core.Api.Repository.DataHandler
         public async Task<IList<ModelSelectOption>> GetAllRegisterUserByCharacterAsync(string RegisterId)
         {
 
-            string sql = "SELECT register_id, first_name, full_name FROM RegisterUser WHERE 1=1 AND IsActive='1' ";
+            string sql = "SELECT register_id, (first_name + full_name) as full_name FROM RegisterUser WHERE 1=1 AND IsActive='1' ";
 
-            if (string.IsNullOrEmpty(RegisterId)) sql += "AND Character IN ('1','2') ";
+            if (string.IsNullOrEmpty(RegisterId)) sql += "AND Character IN ('2','5','6','7','8') ";
 
             if (!string.IsNullOrEmpty(RegisterId)) sql += "AND Character IN ('" + RegisterId + "') ";
 
@@ -233,7 +230,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             ModelSelectOption item = new ModelSelectOption();
                             item.value = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["register_id"].ToString()));
-                            item.label = reader["first_name"].ToString() + " " + reader["full_name"].ToString();
+                            item.label = reader["full_name"].ToString();
                             e.Add(item);
                         }
                         return e;
@@ -416,25 +413,24 @@ namespace THD.Core.Api.Repository.DataHandler
             resp.ListAssigner.Add(assigner_login);
 
             resp.ListBoard = new List<ModelSelectOption>();
-            resp.ListBoard = await GetAllRegisterUserByCharacterAsync("2");
+            resp.ListBoard = await GetAllRegisterUserByCharacterAsync("");
 
             resp.ListSpecialList = new List<ModelSelectOption>();
-            resp.ListSpecialList = await GetAllRegisterUserByCharacterAsync("2");
+            resp.ListSpecialList = await GetAllRegisterUserByCharacterAsync("");
 
             resp.ListProjectNumber = new List<ModelSelectOption>();
             ModelSelectOption project_name_default = new ModelSelectOption()
             {
                 value = resp.editdata.projectnumber,
-                label = resp.editdata.projectnamethai,
+                label = resp.editdata.projectnumber + " : " + resp.editdata.projectnamethai,
             };
             resp.ListProjectNumber.Add(project_name_default);
 
-            int thai_year = CommonData.GetYearOfPeriod();
             resp.ListYearOfProject = new List<ModelSelectOption>();
             ModelSelectOption year_current = new ModelSelectOption();
-            year_current.value = (thai_year).ToString();
-            year_current.label = (thai_year).ToString();
-            resp.defaultyear = (thai_year);
+            year_current.value = resp.editdata.yearofmeeting;
+            year_current.label = resp.editdata.yearofmeeting;
+            resp.defaultyear = Convert.ToInt32(resp.editdata.yearofmeeting);
             resp.ListYearOfProject.Add(year_current);
 
             return resp;

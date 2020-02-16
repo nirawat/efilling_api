@@ -149,5 +149,14 @@ namespace THD.Core.Api.Private.Controllers
             return BadRequest();
         }
 
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(ModelResetPassword model)
+        {
+            ModelResponseMessageUpdateUserRegister e = await _IRegisterUserService.ResetPasswordAsync(model);
+
+            return Ok(e);
+
+        }
+
     }
 }

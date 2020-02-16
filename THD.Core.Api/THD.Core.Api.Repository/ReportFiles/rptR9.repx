@@ -14,7 +14,7 @@
         <Item3 Ref="9" ControlType="XRLabel" Name="label18" Multiline="true" Text="( ........................................................................)" TextAlignment="TopCenter" SizeF="297.5,25.833313" LocationFloat="215.113022, 684.9684" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
           <StylePriority Ref="10" UseFont="false" UseTextAlignment="false" />
         </Item3>
-        <Item4 Ref="11" ControlType="XRLabel" Name="label17" Multiline="true" Text="ประธานคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ" TextAlignment="TopCenter" SizeF="297.5,25.833313" LocationFloat="215.113022, 726.634949" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
+        <Item4 Ref="11" ControlType="XRLabel" Name="label17" Multiline="true" Text="ประธานคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ" TextAlignment="TopCenter" SizeF="330,25.833313" LocationFloat="199.279678, 726.634949" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
           <StylePriority Ref="12" UseFont="false" UseTextAlignment="false" />
         </Item4>
         <Item5 Ref="13" ControlType="XRLabel" Name="label16" Multiline="true" Text="ลงนาม" TextAlignment="TopRight" SizeF="106.666672,25.8333435" LocationFloat="10, 520.208435" Font="TH Sarabun New, 14pt, style=Bold" Padding="2,2,0,0,100">
@@ -44,7 +44,7 @@
           </ExpressionBindings>
           <StylePriority Ref="27" UseFont="false" />
         </Item10>
-        <Item11 Ref="28" ControlType="XRLabel" Name="label9" Multiline="true" Text="ข้อเสนอการวิจัยนี้ได้ผ่านการพิจารณาและรับรองจากคณะกรรมการเพื่อความปลอดภัยทาง ชีวภาพ มหาวิทยาลัยนเรศวร ครั้งที่    วันที่" SizeF="535.8332,76.33334" LocationFloat="162.499954, 308.333374" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+        <Item11 Ref="28" ControlType="XRLabel" Name="label9" Multiline="true" Text="ข้อเสนอการวิจัยนี้ได้ผ่านการพิจารณาและรับรองจากคณะกรรมการควบคุมความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร ครั้งที่    วันที่" SizeF="535.8332,76.33334" LocationFloat="162.499954, 308.333374" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <StylePriority Ref="29" UseFont="false" />
         </Item11>
         <Item12 Ref="30" ControlType="XRLabel" Name="label8" Multiline="true" Text="label8" SizeF="258.333344,23" LocationFloat="236.666611, 285.333374" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
@@ -83,13 +83,13 @@
           </ExpressionBindings>
           <StylePriority Ref="47" UseFont="false" />
         </Item17>
-        <Item18 Ref="48" ControlType="XRLabel" Name="label2" Multiline="true" Text="label2" SizeF="535.8333,52.33342" LocationFloat="162.4999, 117.999977" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+        <Item18 Ref="48" ControlType="XRLabel" Name="label2" Multiline="true" Text="label2" SizeF="535.8333,41.50009" LocationFloat="162.4999, 128.833313" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <ExpressionBindings>
             <Item1 Ref="49" EventName="BeforePrint" PropertyName="Text" Expression="[project_nameeng]" />
           </ExpressionBindings>
           <StylePriority Ref="50" UseFont="false" />
         </Item18>
-        <Item19 Ref="51" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" SizeF="535.8333,54.66665" LocationFloat="162.499954, 63.3333321" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+        <Item19 Ref="51" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" SizeF="535.8333,49.66664" LocationFloat="162.499954, 68.3333359" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <ExpressionBindings>
             <Item1 Ref="52" EventName="BeforePrint" PropertyName="Text" Expression="[project_namethai]" />
           </ExpressionBindings>

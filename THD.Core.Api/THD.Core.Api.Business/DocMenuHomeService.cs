@@ -56,9 +56,9 @@ namespace THD.Core.Api.Business
 
         }
 
-        public async Task<ModelMenuHome1_ResultNote> GetResultNoteHome1Async(string project_number)
+        public async Task<IList<ResultCommentNote>> GetResultNoteHome1Async(string project_number, string user_id)
         {
-            return await _IDocMenuHomeRepository.GetResultNoteHome1Async(project_number);
+            return await _IDocMenuHomeRepository.GetResultNoteHome1Async(project_number, user_id);
         }
 
         public async Task<IList<ModelMenuHome1ReportData>> GetAllReportDataHome1Async(ModelMenuHome1_InterfaceData search_data)

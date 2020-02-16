@@ -189,7 +189,7 @@ namespace THD.Core.Api.Repository.DataHandler
         {
             string userid = Encoding.UTF8.GetString(Convert.FromBase64String(RegisterId));
 
-            string sql = "SELECT A.register_id,D.* " +
+            string sql = "SELECT A.register_id, (A.first_name + A.full_name) as full_name, D.* " +
                         "FROM [dbo].[RegisterUser] A " +
                         "INNER JOIN[dbo].[SYS_UserRole] B ON A.character = B.code " +
                         "INNER JOIN[dbo].[SYS_UserGroup] C ON B.usergroup = C.code " +
@@ -209,6 +209,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         while (await reader.ReadAsync())
                         {
                             item.registerid = reader["register_id"].ToString();
+                            item.fullname = reader["full_name"].ToString();
                             item.groupcode = reader["user_group_code"].ToString();
                             item.pagecode = reader["menu_page_code"].ToString();
                             item.view = (bool)reader["pm_view"];
@@ -224,6 +225,47 @@ namespace THD.Core.Api.Repository.DataHandler
             }
             return null;
 
+        }
+
+        public async Task<ModelResponseMessageUpdateUserRegister> ResetPasswordAsync(ModelResetPassword model)
+        {
+            ModelResponseMessageUpdateUserRegister resp = new ModelResponseMessageUpdateUserRegister();
+
+            string userid = Encoding.UTF8.GetString(Convert.FromBase64String(model.registerid));
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_reset_password", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@RegisterId", SqlDbType.VarChar, 100).Value = userid;
+
+                    string encrypt_old_passw = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(model.oldpassw));
+
+                    cmd.Parameters.Add("@OldPassword", SqlDbType.VarChar, 100).Value = encrypt_old_passw;
+
+                    string encrypt_passw = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(model.newpassw));
+
+                    cmd.Parameters.Add("@Password", SqlDbType.VarChar, 100).Value = encrypt_passw;
+
+                    SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                    rStatus.Direction = ParameterDirection.Output;
+                    SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                    rMessage.Direction = ParameterDirection.Output;
+
+                    await cmd.ExecuteNonQueryAsync();
+
+                    if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                    {
+                        resp.Status = true;
+                    }
+                    else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                }
+                conn.Close();
+            }
+            return resp;
         }
 
     }

@@ -15,6 +15,7 @@ namespace THD.Core.Api.Models
         public IList<ModelSelectOption> ListAttendees { get; set; }
         public IList<ModelSelectOption> listDownloadFile { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
+        public ModelMenuC3 editdata { get; set; }
     }
     public class ModelMenuC3
     {
@@ -27,6 +28,8 @@ namespace THD.Core.Api.Models
         public string meetingstart { get; set; }
         public string meetingclose { get; set; }
         public string createby { get; set; }
+        public string meetingresolution { get; set; }
+        public bool editenable { get; set; }
         public IList<ModelSelectOption> committeesarray { get; set; }
         public IList<ModelSelectOption> attendeesarray { get; set; }
 
@@ -52,7 +55,7 @@ namespace THD.Core.Api.Models
     }
 
 
-    public class ModelCloseMeeting
+    public class ModelPrintMeeting
     {
         public string meetingofround { get; set; }
         public string meetingofyear { get; set; }

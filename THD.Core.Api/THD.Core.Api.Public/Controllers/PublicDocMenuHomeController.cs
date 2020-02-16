@@ -46,10 +46,10 @@ namespace THD.Core.Api.Public.Controllers
 
         }
 
-        [HttpGet("GetResultNoteHome1/{ProjectNumber}")]
-        public async Task<IActionResult> GetResultNoteHome1(string ProjectNumber)
+        [HttpGet("GetResultNoteHome1/{ProjectNumber}/{UserId}")]
+        public async Task<IActionResult> GetResultNoteHome1(string ProjectNumber, string UserId)
         {
-            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuHome"}/{"GetResultNoteHome1"}/{ProjectNumber}";
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuHome"}/{"GetResultNoteHome1"}/{ProjectNumber}/{UserId}";
             string authHeader = HttpContext.Request?.Headers["Authorization"];
             if (authHeader != null && authHeader.StartsWith("Bearer"))
             {

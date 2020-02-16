@@ -299,7 +299,7 @@ namespace THD.Core.Api.Helpers
                 {
 
                     //File 1
-                    if (FileName1 != null)
+                    if (!string.IsNullOrEmpty(FileName1))
                     {
                         string read_file_1 = $"{dirDocument + "\\" + FileName1.ToString()}";
                         if (File.Exists(read_file_1))
@@ -322,7 +322,7 @@ namespace THD.Core.Api.Helpers
 
 
                     //File 2
-                    if (FileName2 != null)
+                    if (!string.IsNullOrEmpty(FileName2))
                     {
                         string read_file_2 = $"{dirDocument + "\\" + FileName2.ToString()}";
                         if (File.Exists(read_file_2))
@@ -345,7 +345,7 @@ namespace THD.Core.Api.Helpers
 
 
                     //File 3
-                    if (FileName3 != null)
+                    if (!string.IsNullOrEmpty(FileName3))
                     {
                         string read_file_3 = $"{dirDocument + "\\" + FileName3.ToString()}";
                         if (File.Exists(read_file_3))

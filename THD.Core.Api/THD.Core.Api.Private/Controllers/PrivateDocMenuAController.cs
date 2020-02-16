@@ -34,6 +34,8 @@ namespace THD.Core.Api.Private.Controllers
             _IMailTemplateService = MailTemplateService;
         }
 
+        #region A1
+
         [HttpGet("MenuA1InterfaceData/{Userid}/{Username}")]
         public async Task<IActionResult> MenuA1InterfaceData(string userid, string username)
         {
@@ -47,14 +49,16 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuA1")]
         public async Task<IActionResult> AddDocMenuA1([FromBody]ModelMenuA1 model)
         {
-            ModelResponseMessage e = await _IDocMenuAService.AddDocMenuA1Async(model);
+            ModelResponseA1Message e = await _IDocMenuAService.AddDocMenuA1Async(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
 
         }
 
-        #region Menu A1 Edit
+        #endregion
+
+        #region A1 Edit
 
         [HttpGet("MenuA1InterfaceDataEdit/{DocId}/{Userid}/{Username}")]
         public async Task<IActionResult> MenuA1InterfaceDataEdit(int DocId, string userid, string username)
@@ -78,7 +82,7 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("UpdateDocMenuA1Edit")]
         public async Task<IActionResult> UpdateDocMenuA1Edit([FromBody]ModelMenuA1 model)
         {
-            ModelResponseMessage e = await _IDocMenuAService.UpdateDocMenuA1EditAsync(model);
+            ModelResponseA1Message e = await _IDocMenuAService.UpdateDocMenuA1EditAsync(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
@@ -87,6 +91,7 @@ namespace THD.Core.Api.Private.Controllers
 
         #endregion
 
+        #region A2
         [HttpGet("MenuA2InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA2InterfaceData(string RegisterId)
         {
@@ -100,15 +105,16 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuA2")]
         public async Task<IActionResult> AddDocMenuA2([FromBody]ModelMenuA2 model)
         {
-            ModelResponseMessage e = await _IDocMenuAService.AddDocMenuA2Async(model);
+            ModelResponseA2Message e = await _IDocMenuAService.AddDocMenuA2Async(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
 
         }
 
+        #endregion
 
-
+        #region A3
         [HttpGet("MenuA3InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA3InterfaceData(string RegisterId)
         {
@@ -132,14 +138,16 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuA3")]
         public async Task<IActionResult> AddDocMenuA3([FromBody]ModelMenuA3 model)
         {
-            ModelResponseMessage e = await _IDocMenuAService.AddDocMenuA3Async(model);
+            ModelResponseA3Message e = await _IDocMenuAService.AddDocMenuA3Async(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
 
         }
 
-        #region "Menu A3 Edit"
+        #endregion
+
+        #region A3 Edit
 
         [HttpGet("MenuA3EditInterfaceData/{UserId}/{ProjectNumber}")]
         public async Task<IActionResult> MenuA3EditInterfaceData(string UserId, string ProjectNumber)
@@ -149,8 +157,29 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest();
         }
 
+        [HttpGet("GetA3DownloadFileById/{DocId}/{Id}")]
+        public async Task<IActionResult> GetA3DownloadFileById(int DocId, int Id)
+        {
+            ModelMenuA3_FileDownload e = await _IDocMenuAService.GetA3DownloadFileByIdAsync(DocId, Id);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuA3Edit")]
+        public async Task<IActionResult> UpdateDocMenuA3Edit([FromBody]ModelMenuA3 model)
+        {
+            ModelResponseA3Message e = await _IDocMenuAService.UpdateDocMenuA3EditAsync(model);
+
+            if (e.Status) return Ok(e);
+            else return BadRequest();
+
+        }
+
+
         #endregion
 
+        #region A4
         [HttpGet("MenuA4InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA4InterfaceData(string RegisterId)
         {
@@ -175,7 +204,7 @@ namespace THD.Core.Api.Private.Controllers
         {
             IActionResult _result = BadRequest();
 
-            ModelResponseMessage e = await _IDocMenuAService.AddDocMenuA4Async(model);
+            ModelResponseA4Message e = await _IDocMenuAService.AddDocMenuA4Async(model);
 
             if (e.Status)
             {
@@ -197,7 +226,9 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
-        #region "Menu A4 Edit"
+        #endregion
+
+        #region A4 Edit
 
         [HttpGet("MenuA4EditInterfaceData/{UserId}/{ProjectNumber}")]
         public async Task<IActionResult> MenuA4EditInterfaceData(string UserId, string ProjectNumber)
@@ -207,10 +238,45 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest();
         }
 
+        [HttpGet("GetA4DownloadFileById/{DocId}/{Id}")]
+        public async Task<IActionResult> GetA4DownloadFileById(int DocId, int Id)
+        {
+            ModelMenuA4_FileDownload e = await _IDocMenuAService.GetA4DownloadFileByIdAsync(DocId, Id);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuA4Edit")]
+        public async Task<IActionResult> UpdateDocMenuA4Edit([FromBody]ModelMenuA4 model)
+        {
+            IActionResult _result = BadRequest();
+
+            ModelResponseA4Message e = await _IDocMenuAService.UpdateDocMenuA4EditAsync(model);
+
+            if (e.Status)
+            {
+                _result = Ok(e);
+
+                try
+                {
+                    await _IMailTemplateService.MailTemplate9Async(model.projectnumber, e.filebase64);
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
+
+            }
+            else _result = BadRequest();
+
+            return _result;
+
+        }
+
         #endregion
 
-
-
+        #region A5
         [HttpGet("MenuA5InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA5InterfaceData(string RegisterId)
         {
@@ -234,7 +300,7 @@ namespace THD.Core.Api.Private.Controllers
         {
             IActionResult _result = BadRequest();
 
-            ModelResponseMessage e = await _IDocMenuAService.AddDocMenuA5Async(model);
+            ModelResponseA5Message e = await _IDocMenuAService.AddDocMenuA5Async(model);
 
             if (e.Status)
             {
@@ -256,7 +322,9 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
-        #region "Menu A5 Edit"
+        #endregion
+
+        #region A5 Edit
 
         [HttpGet("MenuA5EditInterfaceData/{UserId}/{ProjectNumber}")]
         public async Task<IActionResult> MenuA5EditInterfaceData(string UserId, string ProjectNumber)
@@ -266,8 +334,45 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest();
         }
 
+        [HttpGet("GetA5DownloadFileById/{DocId}/{Id}")]
+        public async Task<IActionResult> GetA5DownloadFileById(int DocId, int Id)
+        {
+            ModelMenuA5_FileDownload e = await _IDocMenuAService.GetA5DownloadFileByIdAsync(DocId, Id);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuA5Edit")]
+        public async Task<IActionResult> UpdateDocMenuA5Edit([FromBody]ModelMenuA5 model)
+        {
+            IActionResult _result = BadRequest();
+
+            ModelResponseA5Message e = await _IDocMenuAService.UpdateDocMenuA5EditAsync(model);
+
+            if (e.Status)
+            {
+                _result = Ok(e);
+
+                try
+                {
+                    await _IMailTemplateService.MailTemplate8Async(model.projectnumber, e.filebase64);
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
+
+            }
+            else _result = BadRequest();
+
+            return _result;
+
+        }
+
         #endregion
 
+        #region A6
         [HttpGet("MenuA6InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA6InterfaceData(string RegisterId)
         {
@@ -291,14 +396,15 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuA6")]
         public async Task<IActionResult> AddDocMenuA6([FromBody]ModelMenuA6 model)
         {
-            ModelResponseMessage e = await _IDocMenuAService.AddDocMenuA6Async(model);
+            ModelResponseA6Message e = await _IDocMenuAService.AddDocMenuA6Async(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
 
         }
+        #endregion
 
-        #region "Menu A6 Edit"
+        #region A6 Edit
 
         [HttpGet("MenuA6EditInterfaceData/{UserId}/{ProjectNumber}")]
         public async Task<IActionResult> MenuA6EditInterfaceData(string UserId, string ProjectNumber)
@@ -308,8 +414,27 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest();
         }
 
+        [HttpGet("GetA6DownloadFileById/{DocId}/{Id}")]
+        public async Task<IActionResult> GetA6DownloadFileById(int DocId, int Id)
+        {
+            ModelMenuA6_FileDownload e = await _IDocMenuAService.GetA6DownloadFileByIdAsync(DocId, Id);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuA6Edit")]
+        public async Task<IActionResult> UpdateDocMenuA6Edit([FromBody]ModelMenuA6 model)
+        {
+            ModelResponseA6Message e = await _IDocMenuAService.UpdateDocMenuA6EditAsync(model);
+
+            if (e.Status) return Ok(e);
+            else return BadRequest();
+
+        }
         #endregion
 
+        #region A7
         [HttpGet("MenuA7InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuA7InterfaceData(string RegisterId)
         {
@@ -332,14 +457,16 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuA7")]
         public async Task<IActionResult> AddDocMenuA7([FromBody]ModelMenuA7 model)
         {
-            ModelResponseMessage e = await _IDocMenuAService.AddDocMenuA7Async(model);
+            ModelResponseA7Message e = await _IDocMenuAService.AddDocMenuA7Async(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
 
         }
 
-        #region "Menu A7 Edit"
+        #endregion
+
+        #region A7 Edit
 
         [HttpGet("MenuA7EditInterfaceData/{UserId}/{ProjectNumber}")]
         public async Task<IActionResult> MenuA7EditInterfaceData(string UserId, string ProjectNumber)
@@ -347,6 +474,25 @@ namespace THD.Core.Api.Private.Controllers
             ModelMenuA7_InterfaceData e = await _IDocMenuAService.MenuA7EditInterfaceDataAsync(UserId, ProjectNumber);
             if (e != null) return Ok(e);
             else return BadRequest();
+        }
+
+        [HttpGet("GetA7DownloadFileById/{DocId}/{Id}")]
+        public async Task<IActionResult> GetA7DownloadFileById(int DocId, int Id)
+        {
+            ModelMenuA7_FileDownload e = await _IDocMenuAService.GetA7DownloadFileByIdAsync(DocId, Id);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuA7Edit")]
+        public async Task<IActionResult> UpdateDocMenuA7Edit([FromBody]ModelMenuA7 model)
+        {
+            ModelResponseA7Message e = await _IDocMenuAService.UpdateDocMenuA7EditAsync(model);
+
+            if (e.Status) return Ok(e);
+            else return BadRequest();
+
         }
 
         #endregion

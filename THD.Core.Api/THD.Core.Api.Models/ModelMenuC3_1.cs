@@ -11,6 +11,8 @@ namespace THD.Core.Api.Models
         public string meetingName { get; set; }
         public IList<ModelSelectOption> ListMeetingId { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
+
+        public ModelMenuC31 editdata { get; set; }
     }
     public class ModelMenuC31
     {
@@ -26,27 +28,7 @@ namespace THD.Core.Api.Models
         public string tab1Group1Seq3Input1 { get; set; }
         public string tab1Group1Seq3Input2 { get; set; }
         public string tab1Group1Seq3Input3 { get; set; }
-        public string tab1Group1Seq4Input1 { get; set; }
-        public string tab1Group1Seq4Input2 { get; set; }
-        public string tab1Group1Seq4Input3 { get; set; }
-        public string tab1Group1Seq5Input1 { get; set; }
-        public string tab1Group1Seq5Input2 { get; set; }
-        public string tab1Group1Seq5Input3 { get; set; }
-        public string tab1Group1Seq6Input1 { get; set; }
-        public string tab1Group1Seq6Input2 { get; set; }
-        public string tab1Group1Seq6Input3 { get; set; }
-        public string tab1Group1Seq7Input1 { get; set; }
-        public string tab1Group1Seq7Input2 { get; set; }
-        public string tab1Group1Seq7Input3 { get; set; }
-        public string tab1Group1Seq8Input1 { get; set; }
-        public string tab1Group1Seq8Input2 { get; set; }
-        public string tab1Group1Seq8Input3 { get; set; }
-        public string tab1Group1Seq9Input1 { get; set; }
-        public string tab1Group1Seq9Input2 { get; set; }
-        public string tab1Group1Seq9Input3 { get; set; }
-        public string tab1Group1Seq10Input1 { get; set; }
-        public string tab1Group1Seq10Input2 { get; set; }
-        public string tab1Group1Seq10Input3 { get; set; }
+
 
 
         //Tab 1 Group 2 
@@ -59,29 +41,11 @@ namespace THD.Core.Api.Models
         public string tab1Group2Seq3Input1 { get; set; }
         public string tab1Group2Seq3Input2 { get; set; }
         public string tab1Group2Seq3Input3 { get; set; }
-        public string tab1Group2Seq4Input1 { get; set; }
-        public string tab1Group2Seq4Input2 { get; set; }
-        public string tab1Group2Seq4Input3 { get; set; }
-        public string tab1Group2Seq5Input1 { get; set; }
-        public string tab1Group2Seq5Input2 { get; set; }
-        public string tab1Group2Seq5Input3 { get; set; }
-        public string tab1Group2Seq6Input1 { get; set; }
-        public string tab1Group2Seq6Input2 { get; set; }
-        public string tab1Group2Seq6Input3 { get; set; }
-        public string tab1Group2Seq7Input1 { get; set; }
-        public string tab1Group2Seq7Input2 { get; set; }
-        public string tab1Group2Seq7Input3 { get; set; }
-        public string tab1Group2Seq8Input1 { get; set; }
-        public string tab1Group2Seq8Input2 { get; set; }
-        public string tab1Group2Seq8Input3 { get; set; }
-        public string tab1Group2Seq9Input1 { get; set; }
-        public string tab1Group2Seq9Input2 { get; set; }
-        public string tab1Group2Seq9Input3 { get; set; }
-        public string tab1Group2Seq10Input1 { get; set; }
-        public string tab1Group2Seq10Input2 { get; set; }
-        public string tab1Group2Seq10Input3 { get; set; }
+
 
         public string createby { get; set; }
+        public bool editenable { get; set; }
+        public string meetingresolution { get; set; }
     }
 
     public class ModelMenuC31Tab1GroupAll

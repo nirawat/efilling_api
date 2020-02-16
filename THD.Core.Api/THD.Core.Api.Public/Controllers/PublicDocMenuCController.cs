@@ -422,10 +422,10 @@ namespace THD.Core.Api.Public.Controllers
 
         #region Menu C2 Edit
 
-        [HttpGet("MenuC2InterfaceDataEdit/{ProjectNumber}/{UserId}/{UserName}")]
-        public async Task<IActionResult> MenuC2InterfaceDataEdit(string ProjectNumber, string userid, string username)
+        [HttpGet("MenuC2InterfaceDataEdit/{DocId}/{UserId}/{UserName}")]
+        public async Task<IActionResult> MenuC2InterfaceDataEdit(int docid, string userid, string username)
         {
-            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"MenuC2InterfaceDataEdit"}/{ProjectNumber}/{userid}/{username}";
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"MenuC2InterfaceDataEdit"}/{docid}/{userid}/{username}";
             string authHeader = HttpContext.Request?.Headers["Authorization"];
             if (authHeader != null && authHeader.StartsWith("Bearer"))
             {
@@ -718,10 +718,38 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
-        [HttpPost("CloseMeeting")]
-        public async Task<IActionResult> CloseMeeting([FromBody]ModelCloseMeeting model)
+
+
+        // บันทึกวาระการประชุม แก้ไข 
+
+        [HttpGet("MenuC3EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC3EditInterfaceData(string UserId, string ProectNumber)
         {
-            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"CloseMeeting"}";
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"MenuC3EditInterfaceData"}/{UserId}/{ProectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        [HttpPost("UpdateDocMenuC3Edit")]
+        public async Task<IActionResult> UpdateDocMenuC3Edit([FromBody]ModelMenuC3 model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"UpdateDocMenuC3Edit"}";
             string authHeader = HttpContext.Request?.Headers["Authorization"];
             if (authHeader != null && authHeader.StartsWith("Bearer"))
             {
@@ -740,7 +768,6 @@ namespace THD.Core.Api.Public.Controllers
                     return StatusCode(500);
             }
         }
-
 
 
 
@@ -793,6 +820,54 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
+        // ระเบียบวาระที่ 1 แก้ไข 
+
+        [HttpGet("MenuC31EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC31EditInterfaceData(string UserId, string ProectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"MenuC31EditInterfaceData"}/{UserId}/{ProectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        [HttpPost("UpdateDocMenuC31Edit")]
+        public async Task<IActionResult> UpdateDocMenuC31Edit([FromBody]ModelMenuC31 model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"UpdateDocMenuC31Edit"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
 
 
         // ระเบียบวาระที่ 2 --------------------------------------------------------------------------------------------
@@ -869,6 +944,30 @@ namespace THD.Core.Api.Public.Controllers
 
         }
 
+        [HttpGet("GetC32DownloadFileById/{meetingid}/{id}")]
+        public async Task<IActionResult> GetC32DownloadFileById(int meetingid, int id)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"GetC32DownloadFileById"}/{meetingid}/{id}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
         [HttpPost("AddDocMenuC32")]
         public async Task<IActionResult> AddDocMenuC32([FromBody]ModelMenuC32 model)
         {
@@ -892,6 +991,54 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
+        // ระเบียบวาระที่ 2 แก้ไข 
+
+        [HttpGet("MenuC32EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC32EditInterfaceData(string UserId, string ProectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"MenuC32EditInterfaceData"}/{UserId}/{ProectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        [HttpPost("UpdateDocMenuC32Edit")]
+        public async Task<IActionResult> UpdateDocMenuC32Edit([FromBody]ModelMenuC32 model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"UpdateDocMenuC32Edit"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
 
 
 
@@ -1016,6 +1163,54 @@ namespace THD.Core.Api.Public.Controllers
 
         }
 
+        // ระเบียบวาระที่ 3 แก้ไข 
+
+        [HttpGet("MenuC33EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC33EditInterfaceData(string UserId, string ProectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"MenuC33EditInterfaceData"}/{UserId}/{ProectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        [HttpPost("UpdateDocMenuC33Edit")]
+        public async Task<IActionResult> UpdateDocMenuC33Edit([FromBody]ModelMenuC33 model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"UpdateDocMenuC33Edit"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
 
 
         // ระเบียบวาระที่ 4 --------------------------------------------------------------------------------------------
@@ -1139,6 +1334,80 @@ namespace THD.Core.Api.Public.Controllers
 
         }
 
+        [HttpGet("GetC34DownloadFileById/{docid}")]
+        public async Task<IActionResult> GetC34DownloadFileById(int docid)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"GetC34DownloadFileById"}/{docid}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+
+        // ระเบียบวาระที่ 4 แก้ไข 
+
+        [HttpGet("MenuC34EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC34EditInterfaceData(string UserId, string ProectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"MenuC34EditInterfaceData"}/{UserId}/{ProectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        [HttpPost("UpdateDocMenuC34Edit")]
+        public async Task<IActionResult> UpdateDocMenuC34Edit([FromBody]ModelMenuC34 model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"UpdateDocMenuC34Edit"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+
 
         // ระเบียบวาระที่ 5 --------------------------------------------------------------------------------------------
 
@@ -1188,6 +1457,156 @@ namespace THD.Core.Api.Public.Controllers
                     return StatusCode(500);
             }
         }
+
+
+        // ระเบียบวาระที่ 5 แก้ไข 
+
+        [HttpGet("MenuC35EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC35EditInterfaceData(string UserId, string ProectNumber)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"MenuC35EditInterfaceData"}/{UserId}/{ProectNumber}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        [HttpPost("UpdateDocMenuC35Edit")]
+        public async Task<IActionResult> UpdateDocMenuC35Edit([FromBody]ModelMenuC35 model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"UpdateDocMenuC35Edit"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+
+
+
+        //พิมพ์วาระการประชุม -------------------------------------------------------
+
+        [HttpGet("PrintReportAgendaDraft/{DocId}/{Round}/{Year}")]
+        public async Task<IActionResult> PrintReportAgendaDraft(int DocId, int Round, int Year)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"PrintReportAgendaDraft"}/{DocId}/{Round}/{Year}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+
+        [HttpPost("PrintReportAgendaReal")]
+        public async Task<IActionResult> PrintReportAgendaReal([FromBody]ModelPrintMeeting model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"PrintReportAgendaReal"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+
+
+        //พิมพ์รายงานการประชุม -------------------------------------------------------
+        [HttpGet("PrintReportMeetingDraft/{DocId}/{Round}/{Year}")]
+        public async Task<IActionResult> PrintReportMeetingDraft(int DocId, int Round, int Year)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"PrintReportMeetingDraft"}/{DocId}/{Round}/{Year}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+
+        [HttpPost("PrintReportMeetingReal")]
+        public async Task<IActionResult> PrintReportMeetingReal([FromBody]ModelPrintMeeting model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuC"}/{"PrintReportMeetingReal"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+
+
 
 
         // History ----------------------------------------------------------------------------------------------
@@ -1243,6 +1662,7 @@ namespace THD.Core.Api.Public.Controllers
 
 
 
+        #region Other Function
         [HttpGet("GetAllProject/{AssignerCode}/{DocProcess}")]
         public async Task<IActionResult> GetAllProject(string AssignerCode, string DocProcess)
         {
@@ -1291,5 +1711,6 @@ namespace THD.Core.Api.Public.Controllers
 
         }
 
+        #endregion
     }
 }

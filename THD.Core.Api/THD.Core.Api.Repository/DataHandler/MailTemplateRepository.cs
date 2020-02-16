@@ -54,7 +54,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                await _EmailHelper.SentGmail(data.email, "eFilling : แจ้งผลการตรวจสอบข้อเสนอโครงการ", mail_body, rptBase64);
+                await _EmailHelper.SentGmail(data.email, "NUIBC : แจ้งผลการตรวจสอบข้อเสนอโครงการ", mail_body, rptBase64);
 
                 return true;
             }
@@ -119,7 +119,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                await _EmailHelper.SentGmail(data.email, "eFilling : ใบรับรองด้านความปลอดภัยทางชีวภาพ", mail_body, rptBase64);
+                await _EmailHelper.SentGmail(data.email, "NUIBC : ใบรับรองด้านความปลอดภัยทางชีวภาพ", mail_body, rptBase64);
 
                 return true;
             }
@@ -186,7 +186,7 @@ namespace THD.Core.Api.Repository.DataHandler
                            "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                            "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                    await _EmailHelper.SentGmail(item.email, "eFilling : ขอความอนุเคราะห์อ่านโครงการ", mail_body, rptBase64);
+                    await _EmailHelper.SentGmail(item.email, "NUIBC : ขอความอนุเคราะห์อ่านโครงการ", mail_body, rptBase64);
                 }
 
                 return true;
@@ -259,7 +259,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                await _EmailHelper.SentGmail(data.email, "eFilling : แจ้งผลการพิจารณา โดยให้แก้ไขโครงการ", mail_body, rptBase64);
+                await _EmailHelper.SentGmail(data.email, "NUIBC : แจ้งผลการพิจารณา โดยให้แก้ไขโครงการ", mail_body, rptBase64);
 
                 return true;
             }
@@ -323,7 +323,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                await _EmailHelper.SentGmail(data.email, "eFilling : แจ้งผลการพิจารณา รับรองโครงการ", mail_body, rptBase64);
+                await _EmailHelper.SentGmail(data.email, "NUIBC : แจ้งผลการพิจารณา รับรองโครงการ", mail_body, rptBase64);
 
                 return true;
             }
@@ -370,9 +370,9 @@ namespace THD.Core.Api.Repository.DataHandler
 
         #region "Mail Template 6"
 
-        public async Task<bool> MailTemplate6Async(ModelMenuC3 model, string rptBase64)
+        public async Task<bool> MailTemplate6Async(string round, string year, string rptBase64)
         {
-            IList<ModelMail_Template6> email_to = await GetUserMeeting_MailTemplate6_Async(model);
+            IList<ModelMail_Template6> email_to = await GetUserMeeting_MailTemplate6_Async(round, year);
 
             if (email_to != null && email_to.Count > 0)
             {
@@ -380,13 +380,13 @@ namespace THD.Core.Api.Repository.DataHandler
                 {
                     string mail_body = "<h3>เรียน " + item.fullname + "</h3>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<p>กองการวิจัยและนวัตกรรม ขอส่งระเบียบวาระการประชุมครั้งที่ <h3>" + model.meetinground + " / " + model.yearofmeeting + "</h3></p>" + Environment.NewLine +
+                       "<p>กองการวิจัยและนวัตกรรม ขอส่งระเบียบวาระการประชุมครั้งที่ <h3>" + round + " / " + year + "</h3></p>" + Environment.NewLine +
                        "<p>ตามระเบียบวาระการประชุมแนบ ท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ” เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องกับการประชุมได้ตั้งแต่บัดนี้เป็นต้นไป</p>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                    await _EmailHelper.SentGmail(item.email, "eFilling : ขอนำส่งระเบียบวาระการประชุม", mail_body, rptBase64);
+                    await _EmailHelper.SentGmail(item.email, "NUIBC : ขอนำส่งระเบียบวาระการประชุม", mail_body, rptBase64);
                 }
 
                 return true;
@@ -395,26 +395,40 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-        public async Task<IList<ModelMail_Template6>> GetUserMeeting_MailTemplate6_Async(ModelMenuC3 model)
+        public async Task<IList<ModelMail_Template6>> GetUserMeeting_MailTemplate6_Async(string round, string year)
         {
             string multi_user = "";
-
-            if (model.committeesarray != null && model.committeesarray.Count > 0)
-            {
-                foreach (var item in model.committeesarray)
-                {
-                    multi_user += Encoding.UTF8.GetString(Convert.FromBase64String(item.value)) + "','";
-                }
-            }
-
-            string sql = "SELECT email, (first_name + full_name) as full_name " +
-                         "FROM [dbo].[RegisterUser] " +
-                         "WHERE register_id IN ('" + multi_user + "')";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
-                using (SqlCommand command = new SqlCommand(sql, conn))
+
+                string sql1 = "SELECT TOP(1) meeting_user_code_array " +
+                              "FROM Doc_MenuC3 " +
+                              "WHERE meeting_round='" + round + "' AND year_of_meeting='" + year + "' ";
+
+                using (SqlCommand command = new SqlCommand(sql1, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            multi_user += reader["meeting_user_code_array"].ToString();
+                        }
+                    }
+                    reader.Close();
+                }
+
+                // --------------------------------------------------------------------------
+
+
+                string sql2 = "SELECT email, (first_name + full_name) as full_name " +
+                             "FROM [dbo].[RegisterUser] " +
+                             "WHERE register_id IN ('" + multi_user.Replace(",", "','") + "')";
+
+                using (SqlCommand command = new SqlCommand(sql2, conn))
                 {
                     SqlDataReader reader = await command.ExecuteReaderAsync();
 
@@ -430,7 +444,9 @@ namespace THD.Core.Api.Repository.DataHandler
                         }
                         return e;
                     }
+                    reader.Close();
                 }
+
                 conn.Close();
             }
             return null;
@@ -452,13 +468,13 @@ namespace THD.Core.Api.Repository.DataHandler
                 {
                     string mail_body = "<h3>เรียน " + item.fullname + "</h3>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<p>กองการวิจัยและนวัตกรรม ขอส่งระเบียบวาระการประชุมครั้งที่ <h3>" + round + " / " + year + "</h3></p>" + Environment.NewLine +
+                       "<p>กองการวิจัยและนวัตกรรม ขอส่งรายงานการประชุมครั้งที่ <h3>" + round + " / " + year + "</h3></p>" + Environment.NewLine +
                        "<p>ตามระเบียบวาระการประชุมแนบ ท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ” เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องกับการประชุมได้ตั้งแต่บัดนี้เป็นต้นไป </p> " + Environment.NewLine +
                        "</br>" + Environment.NewLine +
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                    await _EmailHelper.SentGmail(item.email, "eFilling : ขอนำส่งรายงานการประชุม", mail_body, rptBase64);
+                    await _EmailHelper.SentGmail(item.email, "NUIBC : ขอนำส่งรายงานการประชุม", mail_body, rptBase64);
                 }
 
                 return true;
@@ -543,7 +559,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                await _EmailHelper.SentGmail(data.email, "eFilling : ขอส่งรายงานการแก้ไขโครงการ", mail_body, rptBase64);
+                await _EmailHelper.SentGmail(data.email, "NUIBC : ขอส่งรายงานการแก้ไขโครงการ", mail_body, rptBase64);
 
                 return true;
             }
@@ -605,7 +621,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
-                await _EmailHelper.SentGmail(data.email, "eFilling : ขอส่งรายงานการแก้ไขโครงการตามมติคณะกรรมการ", mail_body, rptBase64);
+                await _EmailHelper.SentGmail(data.email, "NUIBC : ขอส่งรายงานการแก้ไขโครงการตามมติคณะกรรมการ", mail_body, rptBase64);
 
                 return true;
             }

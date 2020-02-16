@@ -22,7 +22,7 @@ namespace THD.Core.Api.Public.Controllers
             _WebApiModel = WebApiModel;
         }
 
-
+        #region D1
 
         [HttpGet("MenuD1InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuD1InterfaceData(string RegisterId)
@@ -97,6 +97,7 @@ namespace THD.Core.Api.Public.Controllers
 
         }
 
+        #endregion
 
         #region "Menu D1 Edit"
 
@@ -124,9 +125,32 @@ namespace THD.Core.Api.Public.Controllers
 
         }
 
+        [HttpPost("UpdateDocMenuD1Edit")]
+        public async Task<IActionResult> UpdateDocMenuD1Edit([FromBody]ModelMenuD1 model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuD"}/{"UpdateDocMenuD1Edit"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+
         #endregion
 
-
+        #region D2
 
         [HttpGet("MenuD2InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuD2InterfaceData(string RegisterId)
@@ -224,5 +248,8 @@ namespace THD.Core.Api.Public.Controllers
 
 
         }
+
+        #endregion
+
     }
 }

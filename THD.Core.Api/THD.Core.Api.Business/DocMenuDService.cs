@@ -43,10 +43,10 @@ namespace THD.Core.Api.Business
 
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuD1Async(ModelMenuD1 model)
+        public async Task<ModelResponseD1Message> AddDocMenuD1Async(ModelMenuD1 model)
         {
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseD1Message resp = new ModelResponseD1Message();
 
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
@@ -61,12 +61,27 @@ namespace THD.Core.Api.Business
 
         #endregion
 
-
         #region "MenuD1 Edit"
 
         public async Task<ModelMenuD1_InterfaceData> MenuD1EditInterfaceDataAsync(string UserId, string ProjectNumber)
         {
             return await _IDocMenuD1Repository.MenuD1EditInterfaceDataAsync(UserId, ProjectNumber);
+        }
+
+        public async Task<ModelResponseD1Message> UpdateDocMenuD1EditAsync(ModelMenuD1 model)
+        {
+
+            ModelResponseD1Message resp = new ModelResponseD1Message();
+
+            var cultureInfo = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            model.docdate = DateTime.Now;
+
+            resp = await _IDocMenuD1Repository.UpdateDocMenuD1EditAsync(model);
+
+            return resp;
         }
 
         #endregion
@@ -96,17 +111,11 @@ namespace THD.Core.Api.Business
             else return null;
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuD2Async(ModelMenuD2 model)
+        public async Task<ModelResponseD2Message> AddDocMenuD2Async(ModelMenuD2 model)
         {
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseD2Message resp = new ModelResponseD2Message();
 
-            //if (string.IsNullOrWhiteSpace(model.filedownloadname))
-            //{
-            //    resp.Status = false;
-            //    resp.Message = "กรุณาเลือก ดาวน์โลหดข้อเสนอ!";
-            //    return resp;
-            //}
 
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;

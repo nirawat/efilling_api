@@ -26,5 +26,13 @@ namespace THD.Core.Api.Business.Interface
 
         #endregion
 
+        #region Menu F Account User
+
+        Task<ModelMenuFAccount_InterfaceData> MenuAccountInterfaceDataAsync(string RegisterId);
+
+        Task<ModelResponseMessageUpdateUserRegister> UpdateUserAccountAsync(ModelUpdateAccountUser model);
+
+        #endregion
+
     }
 }

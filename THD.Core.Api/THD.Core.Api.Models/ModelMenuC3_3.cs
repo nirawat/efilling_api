@@ -12,6 +12,8 @@ namespace THD.Core.Api.Models
         public IList<ModelSelectOption> ListMeetingId { get; set; }
         public IList<ModelSelectOption> ListProjectNumberTab3 { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
+
+        public ModelMenuC33 editdata { get; set; }
     }
     public class ModelMenuC33
     {
@@ -23,7 +25,7 @@ namespace THD.Core.Api.Models
         public string agenda3Conclusion { get; set; }
         public string agenda3ConclusionName { get; set; }
         public string agenda3Suggestion { get; set; }
-
+        public int safetytype { get; set; }
 
         //Tab 3 Group 1
         public string tab3Group1Seq1Input1 { get; set; }
@@ -35,12 +37,7 @@ namespace THD.Core.Api.Models
         public string tab3Group1Seq3Input1 { get; set; }
         public string tab3Group1Seq3Input2 { get; set; }
         public string tab3Group1Seq3Input3 { get; set; }
-        public string tab3Group1Seq4Input1 { get; set; }
-        public string tab3Group1Seq4Input2 { get; set; }
-        public string tab3Group1Seq4Input3 { get; set; }
-        public string tab3Group1Seq5Input1 { get; set; }
-        public string tab3Group1Seq5Input2 { get; set; }
-        public string tab3Group1Seq5Input3 { get; set; }
+
 
         //Tab 3 Group 2
         public string tab3Group2Seq1Input1 { get; set; }
@@ -52,15 +49,11 @@ namespace THD.Core.Api.Models
         public string tab3Group2Seq3Input1 { get; set; }
         public string tab3Group2Seq3Input2 { get; set; }
         public string tab3Group2Seq3Input3 { get; set; }
-        public string tab3Group2Seq4Input1 { get; set; }
-        public string tab3Group2Seq4Input2 { get; set; }
-        public string tab3Group2Seq4Input3 { get; set; }
-        public string tab3Group2Seq5Input1 { get; set; }
-        public string tab3Group2Seq5Input2 { get; set; }
-        public string tab3Group2Seq5Input3 { get; set; }
+
 
         public string createby { get; set; }
-
+        public bool editenable { get; set; }
+        public string meetingresolution { get; set; }
     }
 
     public class ModelMenuC33Data
@@ -81,12 +74,6 @@ namespace THD.Core.Api.Models
         public string tab3Group1Seq3Input1 { get; set; }
         public string tab3Group1Seq3Input2 { get; set; }
         public string tab3Group1Seq3Input3 { get; set; }
-        public string tab3Group1Seq4Input1 { get; set; }
-        public string tab3Group1Seq4Input2 { get; set; }
-        public string tab3Group1Seq4Input3 { get; set; }
-        public string tab3Group1Seq5Input1 { get; set; }
-        public string tab3Group1Seq5Input2 { get; set; }
-        public string tab3Group1Seq5Input3 { get; set; }
     }
 
     public class ModelMenuC33Tab3GroupAll

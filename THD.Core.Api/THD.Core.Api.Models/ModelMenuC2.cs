@@ -13,6 +13,10 @@ namespace THD.Core.Api.Models
         public string default_assigner_seq { get; set; }
         public IList<ModelSelectOption> ListSafetyType { get; set; }
         public IList<ModelSelectOption> ListApprovalType { get; set; }
+        public IList<ModelSelectOption> ListYearOfProject { get; set; }
+        public int defaultround { get; set; }
+        public int defaultyear { get; set; }
+
         public ModelMenuC2 editdata { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
     }
@@ -33,6 +37,8 @@ namespace THD.Core.Api.Models
         public string approvaltype { get; set; }
         public string approvaltypename { get; set; }
         public string commentconsider { get; set; }
+        public string roundofmeeting { get; set; }
+        public string yearofmeeting { get; set; }
         public string createby { get; set; }
         public bool editenable { get; set; }
     }

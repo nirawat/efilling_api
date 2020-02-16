@@ -41,10 +41,10 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
-        [HttpGet("GetResultNoteHome1/{ProjectNumber}")]
-        public async Task<IActionResult> GetResultNoteHome1(string ProjectNumber)
+        [HttpGet("GetResultNoteHome1/{ProjectNumber}/{UserId}")]
+        public async Task<IActionResult> GetResultNoteHome1(string ProjectNumber, string UserId)
         {
-            ModelMenuHome1_ResultNote e = await _IDocMenuHomeService.GetResultNoteHome1Async(ProjectNumber);
+            IList<ResultCommentNote> e = await _IDocMenuHomeService.GetResultNoteHome1Async(ProjectNumber, UserId);
 
             if (e != null) return Ok(e);
             else return BadRequest();

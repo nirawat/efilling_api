@@ -13,7 +13,7 @@ namespace THD.Core.Api.Repository.Interface
 
         Task<ModelMenuA1> GetFileDownloadHome1Async(string project_number);
 
-        Task<ModelMenuHome1_ResultNote> GetResultNoteHome1Async(string project_number);
+        Task<IList<ResultCommentNote>> GetResultNoteHome1Async(string project_number, string user_id);
 
         Task<IList<ModelMenuHome1ReportData>> GetAllReportDataHome1Async(ModelMenuHome1_InterfaceData search_data);
 

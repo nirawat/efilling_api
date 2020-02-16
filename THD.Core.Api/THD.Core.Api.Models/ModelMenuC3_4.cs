@@ -12,18 +12,22 @@ namespace THD.Core.Api.Models
         public IList<ModelSelectOption> ListMeetingId { get; set; }
         public IList<ModelSelectOption> ListProjectNumberTab4 { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
+        public ModelMenuC34 editdata { get; set; }
     }
     public class ModelMenuC34
     {
+        public int docid { get; set; }
         public int meetingid { get; set; } //เอกสารอ้างอิงจากหน้าบันทึกประชุม
 
         public string agenda4term { get; set; }
+        public string agenda4termname { get; set; }
         public string agenda4projectnumber { get; set; }
         public string agenda4projectname1 { get; set; }
         public string agenda4projectname2 { get; set; }
         public string agenda4Conclusion { get; set; }
         public string agenda4ConclusionName { get; set; }
         public string agenda4Suggestion { get; set; }
+        public int safetytype { get; set; }
         public string file1name { get; set; }
         public string file1base64 { get; set; }
 
@@ -32,60 +36,18 @@ namespace THD.Core.Api.Models
         public string tab4Group1Seq1Input1 { get; set; }
         public string tab4Group1Seq1Input2 { get; set; }
         public string tab4Group1Seq1Input3 { get; set; }
-        public string tab4Group1Seq1Input4 { get; set; }
-        public string tab4Group1Seq1Input5 { get; set; }
         public string tab4Group1Seq2Input1 { get; set; }
         public string tab4Group1Seq2Input2 { get; set; }
         public string tab4Group1Seq2Input3 { get; set; }
-        public string tab4Group1Seq2Input4 { get; set; }
-        public string tab4Group1Seq2Input5 { get; set; }
         public string tab4Group1Seq3Input1 { get; set; }
         public string tab4Group1Seq3Input2 { get; set; }
         public string tab4Group1Seq3Input3 { get; set; }
-        public string tab4Group1Seq3Input4 { get; set; }
-        public string tab4Group1Seq3Input5 { get; set; }
-        public string tab4Group1Seq4Input1 { get; set; }
-        public string tab4Group1Seq4Input2 { get; set; }
-        public string tab4Group1Seq4Input3 { get; set; }
-        public string tab4Group1Seq4Input4 { get; set; }
-        public string tab4Group1Seq4Input5 { get; set; }
-        public string tab4Group1Seq5Input1 { get; set; }
-        public string tab4Group1Seq5Input2 { get; set; }
-        public string tab4Group1Seq5Input3 { get; set; }
-        public string tab4Group1Seq5Input4 { get; set; }
-        public string tab4Group1Seq5Input5 { get; set; }
 
-        //Tab 4 Group 2
-        public string tab4Group2Seq1Input1 { get; set; }
-        public string tab4Group2Seq1Input2 { get; set; }
-        public string tab4Group2Seq1Input3 { get; set; }
-        public string tab4Group2Seq1Input4 { get; set; }
-        public string tab4Group2Seq1Input5 { get; set; }
-        public string tab4Group2Seq2Input1 { get; set; }
-        public string tab4Group2Seq2Input2 { get; set; }
-        public string tab4Group2Seq2Input3 { get; set; }
-        public string tab4Group2Seq2Input4 { get; set; }
-        public string tab4Group2Seq2Input5 { get; set; }
-        public string tab4Group2Seq3Input1 { get; set; }
-        public string tab4Group2Seq3Input2 { get; set; }
-        public string tab4Group2Seq3Input3 { get; set; }
-        public string tab4Group2Seq3Input4 { get; set; }
-        public string tab4Group2Seq3Input5 { get; set; }
-        public string tab4Group2Seq4Input1 { get; set; }
-        public string tab4Group2Seq4Input2 { get; set; }
-        public string tab4Group2Seq4Input3 { get; set; }
-        public string tab4Group2Seq4Input4 { get; set; }
-        public string tab4Group2Seq4Input5 { get; set; }
-        public string tab4Group2Seq5Input1 { get; set; }
-        public string tab4Group2Seq5Input2 { get; set; }
-        public string tab4Group2Seq5Input3 { get; set; }
-        public string tab4Group2Seq5Input4 { get; set; }
-        public string tab4Group2Seq5Input5 { get; set; }
 
 
         public string createby { get; set; }
-
-
+        public bool editenable { get; set; }
+        public string docprocessfrom { get; set; }
     }
 
     public class ModelMenuC34Tab4Data
@@ -104,12 +66,6 @@ namespace THD.Core.Api.Models
         public string tab4Group1Seq3Input1 { get; set; }
         public string tab4Group1Seq3Input2 { get; set; }
         public string tab4Group1Seq3Input3 { get; set; }
-        public string tab4Group1Seq4Input1 { get; set; }
-        public string tab4Group1Seq4Input2 { get; set; }
-        public string tab4Group1Seq4Input3 { get; set; }
-        public string tab4Group1Seq5Input1 { get; set; }
-        public string tab4Group1Seq5Input2 { get; set; }
-        public string tab4Group1Seq5Input3 { get; set; }
     }
 
     public class ModelMenuC34Tab4GroupAll
@@ -138,6 +94,12 @@ namespace THD.Core.Api.Models
     public class ModelMenuC34ResultNote
     {
         public string resultNote { get; set; }
+    }
+
+    public class ModelMenuC34_DownloadFile
+    {
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
     }
 
 }

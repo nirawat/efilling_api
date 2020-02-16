@@ -8,13 +8,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace THD.Core.Api.Repository.ReportFiles
-{
-
-    public partial class rptR14 : DevExpress.XtraReports.UI.XtraReport
-    {
-        private void InitializeComponent()
-        {
+namespace THD.Core.Api.Repository.ReportFiles {
+    
+    public partial class rptR14 : DevExpress.XtraReports.UI.XtraReport {
+        private void InitializeComponent() {
             DevExpress.XtraReports.ReportInitializer reportInitializer = new DevExpress.XtraReports.ReportInitializer(this, "THD.Core.Api.Repository.ReportFiles.Report14.rptR14.repx");
 
             // Controls
@@ -53,6 +50,7 @@ namespace THD.Core.Api.Repository.ReportFiles
             this.label24 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label24");
             this.Detail4 = reportInitializer.GetControl<DevExpress.XtraReports.UI.DetailBand>("Detail4");
             this.ReportHeader4 = reportInitializer.GetControl<DevExpress.XtraReports.UI.ReportHeaderBand>("ReportHeader4");
+            this.label59 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label59");
             this.label40 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label40");
             this.label39 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label39");
             this.label38 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label38");
@@ -109,7 +107,11 @@ namespace THD.Core.Api.Repository.ReportFiles
             this.label17 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label17");
             this.label16 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label16");
             this.label15 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label15");
-            this.label59 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label59");
+            this.label60 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label60");
+            this.label61 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label61");
+            this.label62 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label62");
+            this.label63 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label63");
+            this.label64 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label64");
 
             // Data Sources
             this.objectDataSource1 = reportInitializer.GetDataSource<DevExpress.DataAccess.ObjectBinding.ObjectDataSource>("objectDataSource1");
@@ -157,6 +159,7 @@ namespace THD.Core.Api.Repository.ReportFiles
         private DevExpress.XtraReports.UI.XRLabel label24;
         private DevExpress.XtraReports.UI.DetailBand Detail4;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader4;
+        private DevExpress.XtraReports.UI.XRLabel label59;
         private DevExpress.XtraReports.UI.XRLabel label40;
         private DevExpress.XtraReports.UI.XRLabel label39;
         private DevExpress.XtraReports.UI.XRLabel label38;
@@ -218,6 +221,10 @@ namespace THD.Core.Api.Repository.ReportFiles
         private DevExpress.XtraReports.UI.XRControlStyle DetailData1;
         private DevExpress.XtraReports.UI.XRControlStyle DetailData3_Odd;
         private DevExpress.XtraReports.UI.XRControlStyle PageInfo;
-        private DevExpress.XtraReports.UI.XRLabel label59;
+        private DevExpress.XtraReports.UI.XRLabel label60;
+        private DevExpress.XtraReports.UI.XRLabel label61;
+        private DevExpress.XtraReports.UI.XRLabel label62;
+        private DevExpress.XtraReports.UI.XRLabel label63;
+        private DevExpress.XtraReports.UI.XRLabel label64;
     }
 }

@@ -170,14 +170,14 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuD1Async(ModelMenuD1 model)
+        public async Task<ModelResponseD1Message> AddDocMenuD1Async(ModelMenuD1 model)
         {
 
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseD1Message resp = new ModelResponseD1Message();
 
             try
             {
@@ -243,22 +243,25 @@ namespace THD.Core.Api.Repository.DataHandler
         {
             ModelMenuD1_InterfaceData resp = new ModelMenuD1_InterfaceData();
 
-            resp.editdata = new ModelMenuD1();
-            resp.editdata = await GetMenuD1DataEditAsync(ProjectNumber);
-
-            ModelSelectOption defaultProject = new ModelSelectOption();
-            defaultProject.value = resp.editdata.projectnumber;
-            defaultProject.label = resp.editdata.projectnamethai;
-            resp.ListProjectNumber = new List<ModelSelectOption>();
-            resp.ListProjectNumber.Add(defaultProject);
-
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(UserId, "M020");
+
+            resp.editdata = new ModelMenuD1();
+            resp.editdata = await GetMenuD1DataEditAsync(ProjectNumber, UserId, resp.UserPermission);
+
+            resp.ListProjectNumber = new List<ModelSelectOption>();
+            ModelSelectOption project_name_default = new ModelSelectOption()
+            {
+                value = resp.editdata.projectnumber,
+                label = resp.editdata.projectnumber + " : " + resp.editdata.projectnamethai,
+            };
+            resp.ListProjectNumber.Add(project_name_default);
 
             return resp;
         }
 
-        private async Task<ModelMenuD1> GetMenuD1DataEditAsync(string ProjectNumber)
+        private async Task<ModelMenuD1> GetMenuD1DataEditAsync(string ProjectNumber, string userid, ModelPermissionPage permission)
         {
+            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
 
             string sql = "SELECT TOP(1) A.*, B.name_thai as accept_result_name, " +
                         "(CASE WHEN A.acceptCondition = 1 THEN 'แบบปีต่อปี' ELSE 'ไม่มีวันหมอายุ' END) as accept_condition_name " +
@@ -292,9 +295,21 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.acceptcondition = Convert.ToInt16(reader["acceptCondition"]);
                             e.acceptconditionname = reader["accept_condition_name"].ToString();
                             e.acceptdate = Convert.ToDateTime(reader["AcceptDate"]).ToString("dd/MM/yyyy");
+                            e.createby = reader["create_by"].ToString();
                         }
                         e.listRenewDate = new List<ModelMenuD1RenewTable>();
                         e.listRenewDate = await GetListRenewDateAsync(ProjectNumber);
+
+                        //Default Edit False
+                        e.editenable = false;
+                        if (permission.edit == true)
+                        {
+                            if (user_id == e.createby)
+                            {
+                                e.editenable = true;
+                            }
+                        }
+
                         return e;
                     }
                 }
@@ -303,6 +318,64 @@ namespace THD.Core.Api.Repository.DataHandler
             return null;
 
         }
+
+        public async Task<ModelResponseD1Message> UpdateDocMenuD1EditAsync(ModelMenuD1 model)
+        {
+            var cultureInfo = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            ModelResponseD1Message resp = new ModelResponseD1Message();
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_doc_menu_d1_edit", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@doc_id", SqlDbType.Int).Value = model.docid;
+                    cmd.Parameters.Add("@doc_date", SqlDbType.DateTime).Value = model.docdate.ToString("yyyy-MM-dd");
+                    cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 20).Value = ParseDataHelper.ConvertDBNull(model.projectnumber);
+                    cmd.Parameters.Add("@project_head_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectheadname);
+                    cmd.Parameters.Add("@faculty_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.facultyname);
+                    cmd.Parameters.Add("@project_name_thai", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnamethai);
+                    cmd.Parameters.Add("@project_name_eng", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectnameeng);
+                    cmd.Parameters.Add("@accept_type_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.accepttypenamethai);
+                    cmd.Parameters.Add("@advisorsNameThai", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.advisorsnamethai);
+                    cmd.Parameters.Add("@acceptProjectNo", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.acceptprojectno);
+                    cmd.Parameters.Add("@acceptResult", SqlDbType.Int).Value = model.acceptresult;
+                    cmd.Parameters.Add("@acceptCondition", SqlDbType.Int).Value = model.acceptcondition;
+                    cmd.Parameters.Add("@acceptDate", SqlDbType.DateTime).Value = Convert.ToDateTime(model.acceptdate);
+
+                    cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
+                    DateTime dtExpire = Convert.ToDateTime(model.acceptdate).AddDays(365);
+                    cmd.Parameters.Add("@expireDate", SqlDbType.DateTime).Value = dtExpire;
+
+                    SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                    rStatus.Direction = ParameterDirection.Output;
+                    SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                    rMessage.Direction = ParameterDirection.Output;
+
+                    await cmd.ExecuteNonQueryAsync();
+
+                    if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                    {
+                        resp.Status = true;
+
+                        model_rpt_9_file rpt = await _IDocMenuReportRepository.GetReportR9Async(Convert.ToInt32(model.docid));
+
+                        resp.filename = rpt.filename;
+                        resp.filebase64 = rpt.filebase64;
+                    }
+                    else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                }
+                conn.Close();
+            }
+            return resp;
+        }
+
         #endregion
 
     }

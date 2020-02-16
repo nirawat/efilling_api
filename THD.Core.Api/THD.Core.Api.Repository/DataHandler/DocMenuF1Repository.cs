@@ -218,5 +218,121 @@ namespace THD.Core.Api.Repository.DataHandler
 
         #endregion
 
+        #region Menu Account User
+
+        public async Task<ModelMenuFAccount_InterfaceData> MenuAccountInterfaceDataAsync(string RegisterId)
+        {
+            ModelMenuFAccount_InterfaceData resp = new ModelMenuFAccount_InterfaceData();
+
+            resp.account = await GetEditDataAccountAsync(RegisterId);
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M023");
+
+            return resp;
+        }
+
+        private async Task<ModelMenuAccountUser> GetEditDataAccountAsync(string registerid)
+        {
+            string userid = Encoding.UTF8.GetString(Convert.FromBase64String(registerid));
+
+            string sql = "SELECT A.*, (B.name_thai) AS position_name_thai, " +
+                        "(C.name_thai) AS faculty_name_thai, (D.name_thai) AS education_name_thai, " +
+                        "(E.name_thai) AS character_name_thai " +
+                        "FROM RegisterUser A " +
+                        "INNER JOIN MST_Position B ON A.position = B.id " +
+                        "INNER JOIN MST_Faculty C ON A.faculty = C.id " +
+                        "INNER JOIN MST_Education D ON A.education = D.id " +
+                        "INNER JOIN MST_Character E ON A.character = E.id " +
+                        "WHERE 1=1 AND register_id='" + userid + "'";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuAccountUser item = new ModelMenuAccountUser();
+                        while (await reader.ReadAsync())
+                        {
+                            item.registerid = reader["register_id"].ToString();
+                            item.userid = reader["userid"].ToString();
+                            item.firstname = reader["first_name"].ToString();
+                            item.fullname = reader["full_name"].ToString();
+                            item.email = reader["email"].ToString();
+                            item.registerdate = Convert.ToDateTime(reader["register_date"]).ToString("dd/MM/yyyy");
+                            item.registerexpire = Convert.ToDateTime(reader["register_expire"]).ToString("dd/MM/yyyy");
+                            item.position = reader["position"].ToString();
+                            item.positionname = reader["position_name_thai"].ToString();
+                            item.faculty = reader["faculty"].ToString();
+                            item.facultyname = reader["faculty_name_thai"].ToString();
+                            item.education = reader["education"].ToString();
+                            item.educationname = reader["education_name_thai"].ToString();
+                            item.character = reader["character"].ToString();
+                            item.charactername = reader["character_name_thai"].ToString();
+                            item.workphone = reader["work_phone"].ToString();
+                            item.mobile = reader["mobile"].ToString();
+                            item.fax = reader["fax"].ToString();
+                            item.note1 = reader["note1"].ToString();
+                            item.note2 = reader["note2"].ToString();
+                            item.note3 = reader["note3"].ToString();
+                            item.isactive = reader["IsActive"].ToString();
+                        }
+                        return item;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+        }
+
+        public async Task<ModelResponseMessageUpdateUserRegister> UpdateUserAccountAsync(ModelUpdateAccountUser model)
+        {
+            ModelResponseMessageUpdateUserRegister resp = new ModelResponseMessageUpdateUserRegister();
+
+            string userid = Encoding.UTF8.GetString(Convert.FromBase64String(model.registerid));
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_update_user_account", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@RegisterId", SqlDbType.VarChar, 100).Value = userid;
+                    cmd.Parameters.Add("@Email", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.email);
+                    cmd.Parameters.Add("@FirstName", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.firstname);
+                    cmd.Parameters.Add("@FullName", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.fullname);
+                    cmd.Parameters.Add("@WorkPhone", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.workphone);
+                    cmd.Parameters.Add("@Mobile", SqlDbType.VarChar, 20).Value = ParseDataHelper.ConvertDBNull(model.mobile);
+                    cmd.Parameters.Add("@Fax", SqlDbType.VarChar, 20).Value = ParseDataHelper.ConvertDBNull(model.fax);
+                    cmd.Parameters.Add("@Position", SqlDbType.VarChar, 2).Value = model.position;
+                    cmd.Parameters.Add("@Faculty", SqlDbType.VarChar, 2).Value = model.faculty;
+                    cmd.Parameters.Add("@Education", SqlDbType.VarChar, 2).Value = model.education;
+                    cmd.Parameters.Add("@Note1", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.note1);
+                    cmd.Parameters.Add("@Note2", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.note2);
+                    cmd.Parameters.Add("@Note3", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.note3);
+
+                    SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                    rStatus.Direction = ParameterDirection.Output;
+                    SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                    rMessage.Direction = ParameterDirection.Output;
+
+                    await cmd.ExecuteNonQueryAsync();
+
+                    if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                    {
+                        resp.Status = true;
+                    }
+                    else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                }
+                conn.Close();
+            }
+            return resp;
+        }
+        #endregion
+
     }
 }

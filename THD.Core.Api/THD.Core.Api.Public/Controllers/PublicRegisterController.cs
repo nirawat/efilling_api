@@ -160,7 +160,28 @@ namespace THD.Core.Api.Public.Controllers
             }
         }
 
-
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromBody]ModelResetPassword model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateRegister"}/{"ResetPassword"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
 
 
     }

@@ -80,7 +80,19 @@ namespace THD.Core.Api.Business
 
         #endregion
 
+        #region Menu F Account User
 
+        public async Task<ModelMenuFAccount_InterfaceData> MenuAccountInterfaceDataAsync(string RegisterId)
+        {
+            return await _IDocMenuF1Repository.MenuAccountInterfaceDataAsync(RegisterId);
+        }
+
+        public async Task<ModelResponseMessageUpdateUserRegister> UpdateUserAccountAsync(ModelUpdateAccountUser model)
+        {
+            return await _IDocMenuF1Repository.UpdateUserAccountAsync(model);
+        }
+
+        #endregion
     }
 
 }

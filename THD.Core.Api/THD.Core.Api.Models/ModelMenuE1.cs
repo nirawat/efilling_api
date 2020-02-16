@@ -45,6 +45,7 @@ namespace THD.Core.Api.Models
         public string group2paraSit { get; set; }
         public string group2mold { get; set; }
         public string group2protein { get; set; }
+        public bool editenable { get; set; }
 
     }
 

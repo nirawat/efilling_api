@@ -25,17 +25,21 @@ namespace THD.Core.Api.Repository.DataHandler
         private readonly IDropdownListRepository _IDropdownListRepository;
         private readonly IRegisterUserRepository _IRegisterUserRepository;
         private readonly IDocMenuReportRepository _IDocMenuReportRepository;
+        private readonly IDocMeetingRoundRepository _IDocMeetingRoundRepository;
+
         public DocMenuC2Repository(
             IConfiguration configuration,
             IDropdownListRepository DropdownListRepository,
             IDocMenuReportRepository DocMenuReportRepository,
-            IRegisterUserRepository IRegisterUserRepository)
+            IRegisterUserRepository IRegisterUserRepository,
+            IDocMeetingRoundRepository DocMeetingRoundRepository)
         {
             _configuration = configuration;
             ConnectionString = Encoding.UTF8.GetString(Convert.FromBase64String(_configuration.GetConnectionString("SqlConnection")));
             _IDropdownListRepository = DropdownListRepository;
             _IRegisterUserRepository = IRegisterUserRepository;
             _IDocMenuReportRepository = DocMenuReportRepository;
+            _IDocMeetingRoundRepository = DocMeetingRoundRepository;
         }
 
         #region C2
@@ -52,6 +56,18 @@ namespace THD.Core.Api.Repository.DataHandler
             resp.default_assigner_name = assigner_login.label;
             resp.default_assigner_seq = "0"; //Default 0 ไม่มีผล
             resp.ListAssigner.Add(assigner_login);
+
+            int thai_year = CommonData.GetYearOfPeriod();
+            resp.ListYearOfProject = new List<ModelSelectOption>();
+            ModelSelectOption year_current = new ModelSelectOption();
+            year_current.value = (thai_year).ToString();
+            year_current.label = (thai_year).ToString();
+            resp.defaultyear = (thai_year);
+            resp.ListYearOfProject.Add(year_current);
+
+            ModelCountOfYear round_of_year = new ModelCountOfYear();
+            round_of_year = await _IDocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(resp.defaultyear);
+            resp.defaultround = round_of_year.count;
 
             resp.ListProjectNumber = new List<ModelSelectOption>();
 
@@ -274,7 +290,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@approval_type", SqlDbType.VarChar, 2).Value = ParseDataHelper.ConvertDBNull(model.approvaltype);
                         cmd.Parameters.Add("@comment_consider", SqlDbType.VarChar).Value = ParseDataHelper.ConvertDBNull(model.commentconsider);
                         cmd.Parameters.Add("@committee_comment_date", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(array_comment_date.ToString());
-
+                        cmd.Parameters.Add("@round_of_meeting", SqlDbType.Int).Value = model.roundofmeeting;
+                        cmd.Parameters.Add("@year_of_meeting", SqlDbType.Int).Value = model.yearofmeeting;
                         cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
@@ -312,7 +329,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
         #region C2 Edit
 
-        public async Task<ModelMenuC2_InterfaceData> MenuC2InterfaceDataEditAsync(string project_number, string userid, string username)
+        public async Task<ModelMenuC2_InterfaceData> MenuC2InterfaceDataEditAsync(int docid, string userid, string username)
         {
 
             ModelMenuC2_InterfaceData resp = new ModelMenuC2_InterfaceData();
@@ -320,7 +337,7 @@ namespace THD.Core.Api.Repository.DataHandler
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(userid, "M012");
 
             resp.editdata = new ModelMenuC2();
-            resp.editdata = await GetMenuC2DataEditAsync(project_number, userid, resp.UserPermission);
+            resp.editdata = await GetMenuC2DataEditAsync(docid, userid, resp.UserPermission);
 
             resp.ListAssigner = new List<ModelSelectOption>();
 
@@ -336,14 +353,22 @@ namespace THD.Core.Api.Repository.DataHandler
             ModelSelectOption project_name_default = new ModelSelectOption()
             {
                 value = resp.editdata.projectnumber,
-                label = resp.editdata.projectnamethai,
+                label = resp.editdata.projectnumber + " : " + resp.editdata.projectnamethai,
             };
             resp.ListProjectNumber.Add(project_name_default);
+
+            resp.ListYearOfProject = new List<ModelSelectOption>();
+            ModelSelectOption year_current = new ModelSelectOption();
+            year_current.value = resp.editdata.yearofmeeting;
+            year_current.label = resp.editdata.yearofmeeting;
+            resp.defaultyear = Convert.ToInt32(resp.editdata.yearofmeeting);
+            resp.defaultround = Convert.ToInt32(resp.editdata.roundofmeeting);
+            resp.ListYearOfProject.Add(year_current);
 
             return resp;
         }
 
-        private async Task<ModelMenuC2> GetMenuC2DataEditAsync(string project_number, string userid, ModelPermissionPage permission)
+        private async Task<ModelMenuC2> GetMenuC2DataEditAsync(int docid, string userid, ModelPermissionPage permission)
         {
             string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
 
@@ -354,7 +379,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         "LEFT OUTER JOIN[dbo].[MST_ApprovalType] C ON A.approval_type = C.id " +
                         "LEFT OUTER JOIN[dbo].[RegisterUser] D ON A.assigner_code = D.register_id " +
                         "LEFT OUTER JOIN Transaction_Document E ON A.project_number = E.project_number " +
-                        "WHERE A.project_number='" + project_number + "' " +
+                        "WHERE A.doc_id='" + docid + "' " +
                         (permission.alldata == true ? "" : " AND A.create_by = '" + user_id + "'") +
                         "ORDER BY A.doc_id DESC";
 
@@ -387,6 +412,8 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.approvaltype = reader["approval_type"].ToString();
                             e.approvaltypename = reader["approval_type_name"].ToString();
                             e.commentconsider = reader["comment_consider"].ToString();
+                            e.roundofmeeting = reader["round_of_meeting"].ToString();
+                            e.yearofmeeting = reader["year_of_meeting"].ToString();
                             e.createby = reader["create_by"].ToString();
 
                             //Default Edit False
@@ -442,7 +469,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@safety_type", SqlDbType.VarChar, 2).Value = ParseDataHelper.ConvertDBNull(model.safetytype);
                         cmd.Parameters.Add("@approval_type", SqlDbType.VarChar, 2).Value = ParseDataHelper.ConvertDBNull(model.approvaltype);
                         cmd.Parameters.Add("@comment_consider", SqlDbType.VarChar).Value = ParseDataHelper.ConvertDBNull(model.commentconsider);
-
+                        cmd.Parameters.Add("@round_of_meeting", SqlDbType.Int).Value = model.roundofmeeting;
+                        cmd.Parameters.Add("@year_of_meeting", SqlDbType.Int).Value = model.yearofmeeting;
                         cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);

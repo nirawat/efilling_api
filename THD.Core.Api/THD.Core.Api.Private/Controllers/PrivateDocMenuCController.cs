@@ -266,10 +266,10 @@ namespace THD.Core.Api.Private.Controllers
 
         #region Menu C2 Edit
 
-        [HttpGet("MenuC2InterfaceDataEdit/{ProjectNumber}/{UserId}/{UserName}")]
-        public async Task<IActionResult> MenuC2InterfaceDataEdit(string ProjectNumber, string userid, string username)
+        [HttpGet("MenuC2InterfaceDataEdit/{DocId}/{UserId}/{UserName}")]
+        public async Task<IActionResult> MenuC2InterfaceDataEdit(int docid, string userid, string username)
         {
-            ModelMenuC2_InterfaceData e = await _IDocMenuCService.MenuC2InterfaceDataEditAsync(ProjectNumber, userid, username);
+            ModelMenuC2_InterfaceData e = await _IDocMenuCService.MenuC2InterfaceDataEditAsync(docid, userid, username);
 
             if (e != null) return Ok(e);
             else return BadRequest();
@@ -382,21 +382,11 @@ namespace THD.Core.Api.Private.Controllers
         {
             IActionResult _result = BadRequest();
 
-            ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC3Async(model);
+            ModelResponseC3Message e = await _IDocMenuCService.AddDocMenuC3Async(model);
 
             if (e.Status)
             {
                 _result = Ok(e);
-
-                try
-                {
-                    await _IMailTemplateService.MailTemplate6Async(model, e.filebase64);
-                }
-                catch (Exception ex)
-                {
-                    //Keep
-                }
-
             }
             else _result = BadRequest(e);
 
@@ -404,24 +394,36 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
-        [HttpPost("CloseMeeting")]
-        public async Task<IActionResult> CloseMeeting([FromBody]ModelCloseMeeting model)
-        {
 
+
+
+        // ระเบียบวาระที่ 3 แก้ไข --------------------------------------------------------------------------------------------
+
+        [HttpGet("MenuC3EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC3EditInterfaceData(string UserId, string ProectNumber)
+        {
+            ModelMenuC3_InterfaceData e = await _IDocMenuCService.MenuC3EditInterfaceDataAsync(UserId, ProectNumber);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuC3Edit")]
+        public async Task<IActionResult> UpdateDocMenuC3Edit([FromBody]ModelMenuC3 model)
+        {
             IActionResult _result = BadRequest();
 
-            ModelResponseMessageCloseMeeting e = await _IDocMenuCService.CloseMeetingAsync(model);
+            ModelResponseC3Message e = await _IDocMenuCService.UpdateDocMenuC3EditAsync(model);
 
             if (e.Status)
             {
                 _result = Ok(e);
             }
-            else _result = BadRequest();
+            else _result = BadRequest(e);
 
             return _result;
 
         }
-
 
 
         // ระเบียบวาระที่ 1 --------------------------------------------------------------------------------------------
@@ -439,14 +441,32 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuC31")]
         public async Task<IActionResult> AddDocMenuC31([FromBody]ModelMenuC31 model)
         {
-            ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC31Async(model);
+            ModelResponseC31Message e = await _IDocMenuCService.AddDocMenuC31Async(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
 
         }
 
+        // ระเบียบวาระที่ 1 แก้ไข 
+        [HttpGet("MenuC31EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC31EditInterfaceData(string UserId, string ProectNumber)
+        {
+            ModelMenuC31_InterfaceData e = await _IDocMenuCService.MenuC31EditInterfaceDataAsync(UserId, ProectNumber);
 
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuC31Edit")]
+        public async Task<IActionResult> UpdateDocMenuC31Edit([FromBody]ModelMenuC31 model)
+        {
+            ModelResponseC31Message e = await _IDocMenuCService.UpdateDocMenuC31EditAsync(model);
+
+            if (e.Status) return Ok(e);
+            else return BadRequest();
+
+        }
 
 
         // ระเบียบวาระที่ 2 --------------------------------------------------------------------------------------------
@@ -481,11 +501,42 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
+        [HttpGet("GetC32DownloadFileById/{meetingid}/{id}")]
+        public async Task<IActionResult> GetC32DownloadFileById(int meetingid, int id)
+        {
+            ModelMenuC32_DownloadFile e = await _IDocMenuCService.GetC32DownloadFileByIdAsync(meetingid, id);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+
+        }
 
         [HttpPost("AddDocMenuC32")]
         public async Task<IActionResult> AddDocMenuC32([FromBody]ModelMenuC32 model)
         {
-            ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC32Async(model);
+            ModelResponseC32Message e = await _IDocMenuCService.AddDocMenuC32Async(model);
+
+            if (e.Status) return Ok(e);
+            else return BadRequest();
+
+        }
+
+
+
+        // ระเบียบวาระที่ 2 แก้ไข 
+        [HttpGet("MenuC32EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC32EditInterfaceData(string UserId, string ProectNumber)
+        {
+            ModelMenuC32_InterfaceData e = await _IDocMenuCService.MenuC32EditInterfaceDataAsync(UserId, ProectNumber);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuC32Edit")]
+        public async Task<IActionResult> UpdateDocMenuC32Edit([FromBody]ModelMenuC32 model)
+        {
+            ModelResponseC32Message e = await _IDocMenuCService.UpdateDocMenuC32EditAsync(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
@@ -534,7 +585,6 @@ namespace THD.Core.Api.Private.Controllers
                     //Keep
                 }
 
-
             }
             else _result = BadRequest(e);
 
@@ -573,6 +623,50 @@ namespace THD.Core.Api.Private.Controllers
         }
 
 
+        // ระเบียบวาระที่ 3 แก้ไข 
+        [HttpGet("MenuC33EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC33EditInterfaceData(string UserId, string ProectNumber)
+        {
+            ModelMenuC33_InterfaceData e = await _IDocMenuCService.MenuC33EditInterfaceDataAsync(UserId, ProectNumber);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuC33Edit")]
+        public async Task<IActionResult> UpdateDocMenuC33Edit([FromBody]ModelMenuC33 model)
+        {
+            IActionResult _result = BadRequest();
+
+            ModelResponseC33Message e = await _IDocMenuCService.UpdateDocMenuC33EditAsync(model);
+
+            if (e.Status == true)
+            {
+                _result = Ok(e);
+
+                try
+                {
+                    if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
+                    {
+                        await _IMailTemplateService.MailTemplate5Async(model.agenda3projectnumber, e.filebase64);
+                    }
+                    if (model.agenda3Conclusion == "3")
+                    {
+                        await _IMailTemplateService.MailTemplate4Async(model.agenda3projectnumber, e.filebase64);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
+
+
+            }
+            else _result = BadRequest(e);
+
+            return _result;
+
+        }
 
 
         // ระเบียบวาระที่ 4 --------------------------------------------------------------------------------------------
@@ -641,6 +735,61 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
+        [HttpGet("GetC34DownloadFileById/{docid}")]
+        public async Task<IActionResult> GetC34DownloadFileById(int docid)
+        {
+            ModelMenuC34_DownloadFile e = await _IDocMenuCService.GetC34DownloadFileByIdAsync(docid);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+
+        }
+
+
+
+        // ระเบียบวาระที่ 4 แก้ไข 
+        [HttpGet("MenuC34EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC34EditInterfaceData(string UserId, string ProectNumber)
+        {
+            ModelMenuC34_InterfaceData e = await _IDocMenuCService.MenuC34EditInterfaceDataAsync(UserId, ProectNumber);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuC34Edit")]
+        public async Task<IActionResult> UpdateDocMenuC34Edit([FromBody]ModelMenuC34 model)
+        {
+            IActionResult _result = BadRequest();
+
+            ModelResponseC34Message e = await _IDocMenuCService.UpdateDocMenuC34EditAsync(model);
+
+            if (e.Status == true)
+            {
+                _result = Ok(e);
+
+                try
+                {
+                    if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
+                    {
+                        await _IMailTemplateService.MailTemplate5Async(model.agenda4projectnumber, e.filebase64);
+                    }
+                    if (model.agenda4Conclusion == "3")
+                    {
+                        await _IMailTemplateService.MailTemplate4Async(model.agenda4projectnumber, e.filebase64);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Keep
+                }
+            }
+            else _result = BadRequest(e);
+
+            return _result;
+
+        }
+
 
 
         // ระเบียบวาระที่ 5 --------------------------------------------------------------------------------------------
@@ -658,12 +807,119 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuC35")]
         public async Task<IActionResult> AddDocMenuC35([FromBody]ModelMenuC35 model)
         {
-            ModelResponseMessage e = await _IDocMenuCService.AddDocMenuC35Async(model);
+            ModelResponseC35Message e = await _IDocMenuCService.AddDocMenuC35Async(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
 
         }
+
+        // ระเบียบวาระที่ 5 แก้ไข 
+        [HttpGet("MenuC35EditInterfaceData/{UserId}/{ProectNumber}")]
+        public async Task<IActionResult> MenuC35EditInterfaceData(string UserId, string ProectNumber)
+        {
+            ModelMenuC35_InterfaceData e = await _IDocMenuCService.MenuC35EditInterfaceDataAsync(UserId, ProectNumber);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateDocMenuC35Edit")]
+        public async Task<IActionResult> UpdateDocMenuC35Edit([FromBody]ModelMenuC35 model)
+        {
+            ModelResponseC35Message e = await _IDocMenuCService.UpdateDocMenuC35EditAsync(model);
+
+            if (e.Status) return Ok(e);
+            else return BadRequest();
+
+        }
+
+
+
+        //พิมพ์วาระการประชุม -------------------------------------------------------
+        [HttpGet("PrintReportAgendaDraft/{DocId}/{Round}/{Year}")]
+        public async Task<IActionResult> PrintReportAgendaDraft(int DocId, int Round, int Year)
+        {
+
+            IActionResult _result = BadRequest();
+
+            ModelResponseMessageReportAgenda e = await _IDocMenuCService.PrintReportAgendaDraftAsync(DocId, Round, Year);
+
+            if (e.Status)
+            {
+                _result = Ok(e);
+            }
+            else _result = BadRequest();
+
+            return _result;
+
+        }
+
+        [HttpPost("PrintReportAgendaReal")]
+        public async Task<IActionResult> PrintReportAgendaReal([FromBody]ModelPrintMeeting model)
+        {
+
+            IActionResult _result = BadRequest();
+
+            ModelResponseMessageReportAgenda e = await _IDocMenuCService.PrintReportAgendaRealAsync(model);
+
+            if (e.Status)
+            {
+                _result = Ok(e);
+
+                await _IMailTemplateService.MailTemplate6Async(model.meetingofround, model.meetingofyear, e.filebase64);
+
+            }
+            else _result = BadRequest();
+
+            return _result;
+
+        }
+
+
+
+        //พิมพ์รายงานการประชุม -------------------------------------------------------
+
+        [HttpGet("PrintReportMeetingDraft/{DocId}/{Round}/{Year}")]
+        public async Task<IActionResult> PrintReportMeetingDraft(int DocId, int Round, int Year)
+        {
+
+            IActionResult _result = BadRequest();
+
+            ModelResponseMessageReportMeeting e = await _IDocMenuCService.PrintReportMeetingDraftAsync(DocId, Round, Year);
+
+            if (e.Status)
+            {
+                _result = Ok(e);
+            }
+            else _result = BadRequest();
+
+            return _result;
+
+        }
+
+        [HttpPost("PrintReportMeetingReal")]
+        public async Task<IActionResult> PrintReportMeetingReal([FromBody]ModelPrintMeeting model)
+        {
+
+            IActionResult _result = BadRequest();
+
+            ModelResponseMessageReportMeeting e = await _IDocMenuCService.PrintReportMeetingRealAsync(model);
+
+            if (e.Status)
+            {
+                _result = Ok(e);
+
+                await _IMailTemplateService.MailTemplate7Async(model.meetingofround, model.meetingofyear, e.filebase64);
+
+            }
+            else _result = BadRequest();
+
+            return _result;
+
+        }
+
+
 
 
 

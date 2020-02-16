@@ -10,27 +10,6 @@
     <Compile Update="ReportFiles\Report14\rptR14_1.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_1_1.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_1_2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_2.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_3.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_4.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_5.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Update="ReportFiles\rptR1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -55,9 +34,6 @@
     <Compile Update="ReportFiles\rptR18.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Update="ReportFiles\rptR2.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Update="ReportFiles\rptR3.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -77,6 +53,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="ReportFiles\rptR9.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ReportFiles\rptR15.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>

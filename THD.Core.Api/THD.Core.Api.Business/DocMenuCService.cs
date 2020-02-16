@@ -160,9 +160,9 @@ namespace THD.Core.Api.Business
 
         #region Menu C2 Edit
 
-        public async Task<ModelMenuC2_InterfaceData> MenuC2InterfaceDataEditAsync(string project_number, string userid, string username)
+        public async Task<ModelMenuC2_InterfaceData> MenuC2InterfaceDataEditAsync(int docid, string userid, string username)
         {
-            return await _IDocMenuC2Repository.MenuC2InterfaceDataEditAsync(project_number, userid, username);
+            return await _IDocMenuC2Repository.MenuC2InterfaceDataEditAsync(docid, userid, username);
         }
 
         public async Task<ModelResponseC2Message> UpdateDocMenuC2EditAsync(ModelMenuC2 model)
@@ -226,7 +226,7 @@ namespace THD.Core.Api.Business
             return await _IDocMenuC3Repository.GetAllHistoryDataC3Async();
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC3Async(ModelMenuC3 model)
+        public async Task<ModelResponseC3Message> AddDocMenuC3Async(ModelMenuC3 model)
         {
 
             var resp = await _IDocMenuC3Repository.AddDocMenuC3Async(model);
@@ -234,12 +234,17 @@ namespace THD.Core.Api.Business
             return resp;
         }
 
-        public async Task<ModelResponseMessageCloseMeeting> CloseMeetingAsync(ModelCloseMeeting model)
+
+        // บันทึกการประชุม แก้ไข 
+
+        public async Task<ModelMenuC3_InterfaceData> MenuC3EditInterfaceDataAsync(string UserId, string ProectNumber)
         {
+            return await _IDocMenuC3Repository.MenuC3EditInterfaceDataAsync(UserId, ProectNumber);
+        }
 
-            var resp = await _IDocMenuC3Repository.CloseMeetingAsync(model);
-
-            return resp;
+        public async Task<ModelResponseC3Message> UpdateDocMenuC3EditAsync(ModelMenuC3 model)
+        {
+            return await _IDocMenuC3Repository.UpdateDocMenuC3EditAsync(model);
         }
 
 
@@ -250,9 +255,21 @@ namespace THD.Core.Api.Business
             return await _IDocMenuC3Repository.MenuC31InterfaceDataAsync(RegisterId);
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC31Async(ModelMenuC31 model)
+        public async Task<ModelResponseC31Message> AddDocMenuC31Async(ModelMenuC31 model)
         {
             return await _IDocMenuC3Repository.AddDocMenuC31Async(model);
+        }
+
+        // ระเบียบวาระที่ 1 แก้ไข 
+
+        public async Task<ModelMenuC31_InterfaceData> MenuC31EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            return await _IDocMenuC3Repository.MenuC31EditInterfaceDataAsync(UserId, ProectNumber);
+        }
+
+        public async Task<ModelResponseC31Message> UpdateDocMenuC31EditAsync(ModelMenuC31 model)
+        {
+            return await _IDocMenuC3Repository.UpdateDocMenuC31EditAsync(model);
         }
 
 
@@ -286,11 +303,14 @@ namespace THD.Core.Api.Business
                 if (download_file.filebase64 != null) return download_file;
             }
             return null;
-
-
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC32Async(ModelMenuC32 model)
+        public async Task<ModelMenuC32_DownloadFile> GetC32DownloadFileByIdAsync(int meetingid, int Id)
+        {
+            return await _IDocMenuC3Repository.GetC32DownloadFileByIdAsync(meetingid, Id);
+        }
+
+        public async Task<ModelResponseC32Message> AddDocMenuC32Async(ModelMenuC32 model)
         {
             model.tab2Group1Seq1FileInput2 = string.IsNullOrEmpty(model.tab2Group1Seq1FileInput2) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.tab2Group1Seq1FileInput2);
             model.tab2Group1Seq2FileInput2 = string.IsNullOrEmpty(model.tab2Group1Seq2FileInput2) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.tab2Group1Seq2FileInput2);
@@ -306,6 +326,32 @@ namespace THD.Core.Api.Business
             }
             return resp;
         }
+
+
+        // ระเบียบวาระที่ 2 แก้ไข 
+
+        public async Task<ModelMenuC32_InterfaceData> MenuC32EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            return await _IDocMenuC3Repository.MenuC32EditInterfaceDataAsync(UserId, ProectNumber);
+        }
+
+        public async Task<ModelResponseC32Message> UpdateDocMenuC32EditAsync(ModelMenuC32 model)
+        {
+            model.tab2Group1Seq1FileInput2 = string.IsNullOrEmpty(model.tab2Group1Seq1FileInput2) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.tab2Group1Seq1FileInput2);
+            model.tab2Group1Seq2FileInput2 = string.IsNullOrEmpty(model.tab2Group1Seq2FileInput2) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.tab2Group1Seq2FileInput2);
+            model.tab2Group1Seq3FileInput2 = string.IsNullOrEmpty(model.tab2Group1Seq3FileInput2) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.tab2Group1Seq3FileInput2);
+
+            var resp = await _IDocMenuC3Repository.UpdateDocMenuC32EditAsync(model);
+
+            if (resp.Status)
+            {
+                if (!string.IsNullOrEmpty(model.tab2Group1Seq1FileInput2Base64)) ServerDirectorys.SaveFileFromBase64(_IEnvironmentConfig.PathDocument, FolderDocument.menuC3Tab2, model.tab2Group1Seq1FileInput2, model.tab2Group1Seq1FileInput2Base64);
+                if (!string.IsNullOrEmpty(model.tab2Group1Seq2FileInput2Base64)) ServerDirectorys.SaveFileFromBase64(_IEnvironmentConfig.PathDocument, FolderDocument.menuC3Tab2, model.tab2Group1Seq2FileInput2, model.tab2Group1Seq2FileInput2Base64);
+                if (!string.IsNullOrEmpty(model.tab2Group1Seq3FileInput2Base64)) ServerDirectorys.SaveFileFromBase64(_IEnvironmentConfig.PathDocument, FolderDocument.menuC3Tab2, model.tab2Group1Seq3FileInput2, model.tab2Group1Seq3FileInput2Base64);
+            }
+            return resp;
+        }
+
 
 
 
@@ -347,6 +393,21 @@ namespace THD.Core.Api.Business
             return await _IDocMenuC3Repository.GetAllHistoryDataC3Tab3Async();
         }
 
+        // ระเบียบวาระที่ 3 แก้ไข 
+
+        public async Task<ModelMenuC33_InterfaceData> MenuC33EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            return await _IDocMenuC3Repository.MenuC33EditInterfaceDataAsync(UserId, ProectNumber);
+        }
+
+        public async Task<ModelResponseC33Message> UpdateDocMenuC33EditAsync(ModelMenuC33 model)
+        {
+            return await _IDocMenuC3Repository.UpdateDocMenuC33EditAsync(model);
+        }
+
+
+
+
         // ระเบียบวาระที่ 4 ------------------------------------------------------------------------------
 
         public async Task<ModelMenuC34_InterfaceData> MenuC34InterfaceDataAsync(string RegisterId)
@@ -358,20 +419,32 @@ namespace THD.Core.Api.Business
         {
             ModelResponseC34Message resp = new ModelResponseC34Message();
 
-            if (string.IsNullOrEmpty(model.tab4Group1Seq1Input1))
+            switch (model.agenda4term)
             {
-                resp.Status = false;
-                resp.Message = "กรุณาตรวจสอบและลงความเห็นของกรรมการ!";
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "8":
+                case "9":
+                    if (string.IsNullOrEmpty(model.tab4Group1Seq1Input1))
+                    {
+                        resp.Status = false;
+                        resp.Message = "กรุณาตรวจสอบและลงความเห็นของกรรมการ!";
+                        goto gotoRespone;
+                    }
+                    break;
             }
-            else
-            {
-                model.file1name = string.IsNullOrEmpty(model.file1name) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.file1name);
-                resp = await _IDocMenuC3Repository.AddDocMenuC34Async(model);
-            }
+
+            model.file1name = string.IsNullOrEmpty(model.file1name) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.file1name);
+            resp = await _IDocMenuC3Repository.AddDocMenuC34Async(model);
+
             if (resp.Status)
             {
                 if (!string.IsNullOrEmpty(model.file1base64)) ServerDirectorys.SaveFileFromBase64(_IEnvironmentConfig.PathDocument, FolderDocument.menuC3Tab4, model.file1name, model.file1base64);
             }
+
+            gotoRespone:
             return resp;
         }
 
@@ -386,6 +459,54 @@ namespace THD.Core.Api.Business
 
         }
 
+        public async Task<ModelMenuC34_DownloadFile> GetC34DownloadFileByIdAsync(int docid)
+        {
+            return await _IDocMenuC3Repository.GetC34DownloadFileByIdAsync(docid);
+        }
+
+
+        // ระเบียบวาระที่ 4 แก้ไข 
+
+        public async Task<ModelMenuC34_InterfaceData> MenuC34EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            return await _IDocMenuC3Repository.MenuC34EditInterfaceDataAsync(UserId, ProectNumber);
+        }
+
+        public async Task<ModelResponseC34Message> UpdateDocMenuC34EditAsync(ModelMenuC34 model)
+        {
+            ModelResponseC34Message resp = new ModelResponseC34Message();
+
+            switch (model.agenda4term)
+            {
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "8":
+                case "9":
+                    if (string.IsNullOrEmpty(model.tab4Group1Seq1Input1))
+                    {
+                        resp.Status = false;
+                        resp.Message = "กรุณาตรวจสอบและลงความเห็นของกรรมการ!";
+                        goto gotoRespone;
+                    }
+                    break;
+            }
+
+            model.file1name = string.IsNullOrEmpty(model.file1name) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.file1name);
+            resp = await _IDocMenuC3Repository.AddDocMenuC34Async(model);
+
+            if (resp.Status)
+            {
+                if (!string.IsNullOrEmpty(model.file1base64)) ServerDirectorys.SaveFileFromBase64(_IEnvironmentConfig.PathDocument, FolderDocument.menuC3Tab4, model.file1name, model.file1base64);
+            }
+
+            gotoRespone:
+            return resp;
+        }
+
+
+
         // ระเบียบวาระที่ 5 ------------------------------------------------------------------------------
 
         public async Task<ModelMenuC35_InterfaceData> MenuC35InterfaceDataAsync(string RegisterId)
@@ -393,15 +514,62 @@ namespace THD.Core.Api.Business
             return await _IDocMenuC3Repository.MenuC35InterfaceDataAsync(RegisterId);
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC35Async(ModelMenuC35 model)
+        public async Task<ModelResponseC35Message> AddDocMenuC35Async(ModelMenuC35 model)
         {
             return await _IDocMenuC3Repository.AddDocMenuC35Async(model);
         }
 
 
+        // ระเบียบวาระที่ 5 แก้ไข 
+        public async Task<ModelMenuC35_InterfaceData> MenuC35EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            return await _IDocMenuC3Repository.MenuC35EditInterfaceDataAsync(UserId, ProectNumber);
+        }
+
+        public async Task<ModelResponseC35Message> UpdateDocMenuC35EditAsync(ModelMenuC35 model)
+        {
+            return await _IDocMenuC3Repository.UpdateDocMenuC35EditAsync(model);
+        }
 
 
 
+
+        //พิมพ์วาระการประชุม -------------------------------------------------------
+
+        public async Task<ModelResponseMessageReportAgenda> PrintReportAgendaDraftAsync(int DocId, int Round, int Year)
+        {
+
+            var resp = await _IDocMenuC3Repository.PrintReportAgendaDraftAsync(DocId, Round, Year);
+
+            return resp;
+        }
+
+        public async Task<ModelResponseMessageReportAgenda> PrintReportAgendaRealAsync(ModelPrintMeeting model)
+        {
+
+            var resp = await _IDocMenuC3Repository.PrintReportAgendaRealAsync(model);
+
+            return resp;
+        }
+
+
+        //พิมพ์รายงานการประชุม -------------------------------------------------------
+
+        public async Task<ModelResponseMessageReportMeeting> PrintReportMeetingDraftAsync(int DocId, int Round, int Year)
+        {
+
+            var resp = await _IDocMenuC3Repository.PrintReportMeetingDraftAsync(DocId, Round, Year);
+
+            return resp;
+        }
+
+        public async Task<ModelResponseMessageReportMeeting> PrintReportMeetingRealAsync(ModelPrintMeeting model)
+        {
+
+            var resp = await _IDocMenuC3Repository.PrintReportMeetingRealAsync(model);
+
+            return resp;
+        }
 
         #endregion
 
@@ -423,7 +591,7 @@ namespace THD.Core.Api.Business
         #endregion
 
 
-        // Share ...............................
+        // Share -------------------------------------------------------------------------
         public async Task<IList<ModelSelectOption>> GetAllProjectAsync(string AssignerCode, string DocProcess)
         {
             return await _IDocMenuC2Repository.GetAllProjectAsync(AssignerCode, DocProcess);

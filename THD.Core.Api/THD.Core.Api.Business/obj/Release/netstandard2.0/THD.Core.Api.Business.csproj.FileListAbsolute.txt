@@ -40,6 +40,9 @@ D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Rel
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.csproj.CopyComplete
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.dll
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.pdb
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.csprojAssemblyReference.cache
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.AssemblyInfoInputs.cache
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.AssemblyInfo.cs
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\bin\Release\netstandard2.0\THD.Core.Api.Business.deps.json
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\bin\Release\netstandard2.0\THD.Core.Api.Business.dll
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\bin\Release\netstandard2.0\THD.Core.Api.Business.pdb
@@ -55,9 +58,6 @@ C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\bin\Release\netstandard2.0\THD.Core.Api.Models.pdb
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\bin\Release\netstandard2.0\THD.Core.Api.Repository.Interface.pdb
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\bin\Release\netstandard2.0\THD.Core.Api.Repository.pdb
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.csprojAssemblyReference.cache
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.AssemblyInfoInputs.cache
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.AssemblyInfo.cs
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.csproj.CopyComplete
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.dll
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Business\obj\Release\netstandard2.0\THD.Core.Api.Business.pdb

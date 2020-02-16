@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="19.2.4.0" Ref="0" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v19.2, Version=19.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="XtraReport1" Margins="23, 28, 758, 29" PaperKind="A4" PageWidth="827" PageHeight="1169" Version="19.2" Font="Arial, 9.75pt">
+  <Bands>
+    <Item1 Ref="1" ControlType="TopMarginBand" Name="TopMargin" HeightF="758.0416">
+      <Controls>
+        <Item1 Ref="2" ControlType="XRLabel" Name="label5" Multiline="true" Text="ณ ห้องประชุม 202 ชั้น 2 อาคารเอกาทศรถ มหาวิทยาลัยนเรศวร" TextAlignment="TopCenter" SizeF="754.9585,33" LocationFloat="11.0415773, 142" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="3" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="4" ControlType="XRLabel" Name="label4" Multiline="true" Text="เวลา 09.00 น. เป็นต้นไป" TextAlignment="TopCenter" SizeF="754.9585,33" LocationFloat="11.0415773, 108.999985" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="5" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="6" ControlType="XRLabel" Name="label3" Multiline="true" Text="วันอังคารที่ 5 กุมภาพันธ์ 2562" TextAlignment="TopCenter" SizeF="754.9585,33" LocationFloat="11.0415773, 75.99999" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="7" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="8" ControlType="XRLabel" Name="label2" Multiline="true" Text="ครั้งที่ 5/2562" TextAlignment="TopCenter" SizeF="754.9585,33" LocationFloat="11.0415773, 43" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="9" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="10" ControlType="XRLabel" Name="label1" Multiline="true" Text="ระเบียบวาระการประชุมกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร" TextAlignment="TopCenter" SizeF="754.9585,33" LocationFloat="11.0415773, 10.0000067" Font="TH Sarabun New, 20pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="11" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="12" ControlType="XRLabel" Name="label42" Multiline="true" Text="ระเบียบวาระที่ 5 เรื่องอื่นๆ" TextAlignment="TopLeft" SizeF="754.958435,33" LocationFloat="12.0831175, 603.125" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="13" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item6>
+        <Item7 Ref="14" ControlType="XRLabel" Name="label41" Multiline="true" Text="ระเบียบวาระที่ 4 เรื่องเสนอเพื่อพิจารณา" TextAlignment="TopLeft" SizeF="754.958435,33" LocationFloat="12.0831175, 531.25" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="15" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item7>
+        <Item8 Ref="16" ControlType="XRLabel" Name="label31" Multiline="true" Text="ระเบียบวาระที่ 3 เรื่องสืบเนื่อง และเรื่องต่อเนื่องจากการพิจารณาโครงการวิจัย" TextAlignment="TopLeft" SizeF="754.958435,33" LocationFloat="12.0831175, 439.583344" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="17" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item8>
+        <Item9 Ref="18" ControlType="XRLabel" Name="label48" Multiline="true" Text="3.1 โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข" TextAlignment="TopLeft" SizeF="391.833252,33.0000038" LocationFloat="115.624809, 473.000031" Font="TH Sarabun New, 18pt" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="19" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item9>
+        <Item10 Ref="20" ControlType="XRLabel" Name="label27" Multiline="true" Text="ระเบียบวาระที่ 2 เรื่องพิจารณารับรองรายงานการประชุม" TextAlignment="TopLeft" SizeF="754.9585,33" LocationFloat="11.0414505, 360.416656" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="21" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item10>
+        <Item11 Ref="22" ControlType="XRLabel" Name="label29" Multiline="true" Text="1.2 เรื่องที่ฝ่ายเลขานุการแจ้งให้ที่ประชุมทราบ" TextAlignment="TopLeft" SizeF="650.3856,33" LocationFloat="116.655922, 301.041656" Font="TH Sarabun New, 18pt" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="23" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item11>
+        <Item12 Ref="24" ControlType="XRLabel" Name="label28" Multiline="true" Text="ระเบียบวาระที่ 1 เรื่องแจ้งเพื่อทราบ" TextAlignment="TopLeft" SizeF="754.9585,33" LocationFloat="11.0415773, 196.875" Font="TH Sarabun New, 18pt, style=Bold" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="25" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item12>
+        <Item13 Ref="26" ControlType="XRLabel" Name="label44" Multiline="true" Text="1.1 เรื่องที่ประธานแจ้งให้ที่ประชุมทราบ" TextAlignment="TopLeft" SizeF="649.344,33" LocationFloat="116.655922, 230.498413" Font="TH Sarabun New, 18pt" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None">
+          <StylePriority Ref="27" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item13>
+      </Controls>
+    </Item1>
+    <Item2 Ref="28" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="29" />
+    <Item3 Ref="29" ControlType="DetailBand" Name="Detail" HeightF="22.916666" />
+  </Bands>
+</XtraReportsLayoutSerializer>

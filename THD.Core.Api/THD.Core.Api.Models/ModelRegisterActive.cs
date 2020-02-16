@@ -43,6 +43,7 @@ namespace THD.Core.Api.Models
     public class ModelPermissionPage
     {
         public string registerid { get; set; }
+        public string fullname { get; set; }
         public string groupcode { get; set; }
         public string pagecode { get; set; }
         public bool view { get; set; }

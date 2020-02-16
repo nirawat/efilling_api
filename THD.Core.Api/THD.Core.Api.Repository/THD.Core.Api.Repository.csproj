@@ -7,9 +7,6 @@
 
   <ItemGroup>
     <None Remove="ReportFiles\Report14\rptR14_1.repx" />
-    <None Remove="ReportFiles\Report15\rptR15_3.repx" />
-    <None Remove="ReportFiles\Report15\rptR15_4.repx" />
-    <None Remove="ReportFiles\Report15\rptR15_5.repx" />
     <None Remove="ReportFiles\rptR1.repx" />
     <None Remove="ReportFiles\rptR10.repx" />
     <None Remove="ReportFiles\rptR11.repx" />
@@ -22,7 +19,6 @@
     <None Remove="ReportFiles\rptR16.repx" />
     <None Remove="ReportFiles\rptR17.repx" />
     <None Remove="ReportFiles\rptR18.repx" />
-    <None Remove="ReportFiles\rptR2.repx" />
     <None Remove="ReportFiles\rptR3.repx" />
     <None Remove="ReportFiles\rptR4.repx" />
     <None Remove="ReportFiles\rptR5.repx" />
@@ -35,14 +31,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="ReportFiles\Report14\rptR14_1.repx" />
-    <EmbeddedResource Include="ReportFiles\Report15\rptR15.repx" />
     <EmbeddedResource Include="ReportFiles\Report14\rptR14.repx" />
-    <EmbeddedResource Include="ReportFiles\Report15\rptR15_1_1.repx" />
-    <EmbeddedResource Include="ReportFiles\Report15\rptR15_5.repx" />
-    <EmbeddedResource Include="ReportFiles\Report15\rptR15_4.repx" />
-    <EmbeddedResource Include="ReportFiles\Report15\rptR15_3.repx" />
-    <EmbeddedResource Include="ReportFiles\Report15\rptR15_2.repx" />
-    <EmbeddedResource Include="ReportFiles\Report15\rptR15_1_2.repx" />
     <EmbeddedResource Include="ReportFiles\rptR1.repx" />
     <EmbeddedResource Include="ReportFiles\rptR10.repx" />
     <EmbeddedResource Include="ReportFiles\rptR11.repx" />
@@ -51,7 +40,6 @@
     <EmbeddedResource Include="ReportFiles\rptR16.repx" />
     <EmbeddedResource Include="ReportFiles\rptR17.repx" />
     <EmbeddedResource Include="ReportFiles\rptR18.repx" />
-    <EmbeddedResource Include="ReportFiles\rptR2.repx" />
     <EmbeddedResource Include="ReportFiles\rptR3.repx" />
     <EmbeddedResource Include="ReportFiles\rptR4.repx" />
     <EmbeddedResource Include="ReportFiles\rptR5.repx" />
@@ -59,6 +47,7 @@
     <EmbeddedResource Include="ReportFiles\rptR7.repx" />
     <EmbeddedResource Include="ReportFiles\rptR8.repx" />
     <EmbeddedResource Include="ReportFiles\rptR9.repx" />
+    <EmbeddedResource Include="ReportFiles\rptR15.repx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,53 +76,11 @@
     <Compile Update="ReportFiles\Report14\rptR14_1.Designer.cs">
       <DependentUpon>rptR14_1.repx</DependentUpon>
     </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15.cs">
-      <DependentUpon>rptR15.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15.Designer.cs">
-      <DependentUpon>rptR15.repx</DependentUpon>
-    </Compile>
     <Compile Update="ReportFiles\Report14\rptR14.cs">
       <DependentUpon>rptR14.repx</DependentUpon>
     </Compile>
     <Compile Update="ReportFiles\Report14\rptR14.Designer.cs">
       <DependentUpon>rptR14.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_1_1.cs">
-      <DependentUpon>rptR15_1_1.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_1_1.Designer.cs">
-      <DependentUpon>rptR15_1_1.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_5.cs">
-      <DependentUpon>rptR15_5.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_5.Designer.cs">
-      <DependentUpon>rptR15_5.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_4.cs">
-      <DependentUpon>rptR15_4.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_4.Designer.cs">
-      <DependentUpon>rptR15_4.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_3.cs">
-      <DependentUpon>rptR15_3.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_3.Designer.cs">
-      <DependentUpon>rptR15_3.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_2.cs">
-      <DependentUpon>rptR15_2.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_2.Designer.cs">
-      <DependentUpon>rptR15_2.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_1_2.cs">
-      <DependentUpon>rptR15_1_2.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report15\rptR15_1_2.Designer.cs">
-      <DependentUpon>rptR15_1_2.repx</DependentUpon>
     </Compile>
     <Compile Update="ReportFiles\rptR1.cs">
       <DependentUpon>rptR1.repx</DependentUpon>
@@ -183,12 +130,6 @@
     <Compile Update="ReportFiles\rptR18.Designer.cs">
       <DependentUpon>rptR18.repx</DependentUpon>
     </Compile>
-    <Compile Update="ReportFiles\rptR2.cs">
-      <DependentUpon>rptR2.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\rptR2.Designer.cs">
-      <DependentUpon>rptR2.repx</DependentUpon>
-    </Compile>
     <Compile Update="ReportFiles\rptR3.cs">
       <DependentUpon>rptR3.repx</DependentUpon>
     </Compile>
@@ -230,6 +171,12 @@
     </Compile>
     <Compile Update="ReportFiles\rptR9.Designer.cs">
       <DependentUpon>rptR9.repx</DependentUpon>
+    </Compile>
+    <Compile Update="ReportFiles\rptR15.cs">
+      <DependentUpon>rptR15.repx</DependentUpon>
+    </Compile>
+    <Compile Update="ReportFiles\rptR15.Designer.cs">
+      <DependentUpon>rptR15.repx</DependentUpon>
     </Compile>
   </ItemGroup>
 

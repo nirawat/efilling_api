@@ -11,17 +11,6 @@ namespace THD.Core.Api.Models
         public bool Status { get; set; }
         public string Message { get; set; }
         public int DocId { get; set; }
-        // Report Return --------------
-        public string filename { get; set; }
-        public string filebase64 { get; set; }
-        public string filename1and2 { get; set; }
-        public string filebase1and264 { get; set; }
-        public string filename12 { get; set; }
-        public string filebase1264 { get; set; }
-        public string filename13 { get; set; }
-        public string filebase1364 { get; set; }
-        public string filename16 { get; set; }
-        public string filebase1664 { get; set; }
     }
 
     public class ModelResponseMessageRegisterUser
@@ -121,10 +110,127 @@ namespace THD.Core.Api.Models
     }
 
 
-    public class ModelResponseMessageCloseMeeting
+    public class ModelResponseMessageReportMeeting
     {
         public bool Status { get; set; }
         public string DocNumber { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseMessageReportAgenda
+    {
+        public bool Status { get; set; }
+        public string DocNumber { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+
+
+
+
+    public class ModelResponseA1Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename1and2 { get; set; }
+        public string filebase1and264 { get; set; }
+        public string filename16 { get; set; }
+        public string filebase1664 { get; set; }
+    }
+
+    public class ModelResponseA2Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseA3Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseA4Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseA5Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseA6Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseA7Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseC3Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseC31Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseC32Message
+    {
+        public bool Status { get; set; }
         public string Message { get; set; }
         public int DocId { get; set; }
         // Report Return --------------
@@ -136,6 +242,7 @@ namespace THD.Core.Api.Models
     {
         public bool Status { get; set; }
         public string Message { get; set; }
+        public int DocId { get; set; }
         // Report Return --------------
         public string filename { get; set; }
         public string filebase64 { get; set; }
@@ -145,6 +252,38 @@ namespace THD.Core.Api.Models
     {
         public bool Status { get; set; }
         public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseC35Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+
+    public class ModelResponseD1Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
+        // Report Return --------------
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseD2Message
+    {
+        public bool Status { get; set; }
+        public string Message { get; set; }
+        public int DocId { get; set; }
         // Report Return --------------
         public string filename { get; set; }
         public string filebase64 { get; set; }

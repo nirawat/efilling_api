@@ -14,7 +14,7 @@ namespace THD.Core.Api.Helpers
     {
         Task<bool> SentGmail(string to_email, string subject, string content, string base64Attachment);
     }
-    public class EmailHelper: IEmailHelper
+    public class EmailHelper : IEmailHelper
     {
         private readonly IEmailConfig _EmailConfig;
         public EmailHelper(IEmailConfig EmailConfig)
@@ -47,7 +47,7 @@ namespace THD.Core.Api.Helpers
 
                 if (!string.IsNullOrEmpty(base64Attachment))
                 {
-                    string file_name = "efilling_report.pdf";
+                    string file_name = "nuibc_report.pdf";
                     string remove_content = "data:application/pdf;base64,";
                     string fileBase64 = base64Attachment.Replace(remove_content, "");
 

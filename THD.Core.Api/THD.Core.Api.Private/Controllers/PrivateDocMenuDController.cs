@@ -33,7 +33,7 @@ namespace THD.Core.Api.Private.Controllers
             _EnvironmentConfig = EnvironmentConfig;
             _IMailTemplateService = MailTemplateService;
         }
-
+        #region D1
 
         [HttpGet("MenuD1InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuD1InterfaceData(string RegisterId)
@@ -56,7 +56,7 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuD1")]
         public async Task<IActionResult> AddDocMenuD1([FromBody]ModelMenuD1 model)
         {
-            ModelResponseMessage e = await _IDocMenuDService.AddDocMenuD1Async(model);
+            ModelResponseD1Message e = await _IDocMenuDService.AddDocMenuD1Async(model);
 
             if (e.Status)
             {
@@ -68,6 +68,8 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
+        #endregion
+
         #region "Menu D1 Edit"
 
         [HttpGet("MenuD1EditInterfaceData/{UserId}/{ProjectNumber}")]
@@ -78,8 +80,24 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest();
         }
 
+        [HttpPost("UpdateDocMenuD1Edit")]
+        public async Task<IActionResult> UpdateDocMenuD1Edit([FromBody]ModelMenuD1 model)
+        {
+            ModelResponseD1Message e = await _IDocMenuDService.UpdateDocMenuD1EditAsync(model);
+
+            if (e.Status)
+            {
+                await _IMailTemplateService.MailTemplate2Async(model.projectnumber, e.filebase64);
+
+                return Ok(e);
+            }
+            else return BadRequest();
+
+        }
+
         #endregion
 
+        #region D2
         [HttpGet("MenuD2InterfaceData/{RegisterId}")]
         public async Task<IActionResult> MenuD2InterfaceData(string RegisterId)
         {
@@ -110,13 +128,13 @@ namespace THD.Core.Api.Private.Controllers
         [HttpPost("AddDocMenuD2")]
         public async Task<IActionResult> AddDocMenuD2([FromBody]ModelMenuD2 model)
         {
-            ModelResponseMessage e = await _IDocMenuDService.AddDocMenuD2Async(model);
+            ModelResponseD2Message e = await _IDocMenuDService.AddDocMenuD2Async(model);
 
             if (e.Status) return Ok(e);
             else return BadRequest();
 
         }
-
+        #endregion
 
     }
 }

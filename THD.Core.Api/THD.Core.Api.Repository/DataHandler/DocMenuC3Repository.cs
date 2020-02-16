@@ -15,6 +15,9 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Globalization;
 using THD.Core.Api.Models.ReportModels;
+using static THD.Core.Api.Helpers.ServerDirectorys;
+using THD.Core.Api.Models.Config;
+using System.IO;
 
 namespace THD.Core.Api.Repository.DataHandler
 {
@@ -26,13 +29,15 @@ namespace THD.Core.Api.Repository.DataHandler
         private readonly IRegisterUserRepository _IRegisterUserRepository;
         private readonly IDocMeetingRoundRepository _IDocMeetingRoundRepository;
         private readonly IDocMenuReportRepository _IDocMenuReportRepository;
+        private readonly IEnvironmentConfig _IEnvironmentConfig;
 
         public DocMenuC3Repository(
             IConfiguration configuration,
             IDropdownListRepository DropdownListRepository,
             IRegisterUserRepository IRegisterUserRepository,
             IDocMenuReportRepository DocMenuReportRepository,
-            IDocMeetingRoundRepository DocMeetingRoundRepository)
+            IDocMeetingRoundRepository DocMeetingRoundRepository,
+            IEnvironmentConfig EnvironmentConfig)
         {
             _configuration = configuration;
             ConnectionString = Encoding.UTF8.GetString(Convert.FromBase64String(_configuration.GetConnectionString("SqlConnection")));
@@ -40,6 +45,7 @@ namespace THD.Core.Api.Repository.DataHandler
             _IRegisterUserRepository = IRegisterUserRepository;
             _IDocMeetingRoundRepository = DocMeetingRoundRepository;
             _IDocMenuReportRepository = DocMenuReportRepository;
+            _IEnvironmentConfig = EnvironmentConfig;
         }
 
 
@@ -51,31 +57,15 @@ namespace THD.Core.Api.Repository.DataHandler
 
             //คณะกรรมการ
             resp.ListCommittees = new List<ModelSelectOption>();
-
             resp.ListCommittees = await GetAllCommitteesAsync();
 
             //ผู้ร่วมประชุม
             resp.ListAttendees = new List<ModelSelectOption>();
-
             resp.ListAttendees = await GetAllAttendeesAsync();
 
             int thai_year = CommonData.GetYearOfPeriod();
 
             resp.ListYearOfProject = new List<ModelSelectOption>();
-            //ModelSelectOption year_current = new ModelSelectOption();
-            //year_current.value = (thai_year).ToString();
-            //year_current.label = (thai_year).ToString();
-            //resp.defaultyear = (thai_year);
-            //resp.ListYearOfProject.Add(year_current);
-
-            //for (int i = 1; i < 5; i++)
-            //{
-            //    ModelSelectOption year_next = new ModelSelectOption();
-            //    year_next.value = (thai_year + i).ToString();
-            //    year_next.label = (thai_year + i).ToString();
-            //    resp.ListYearOfProject.Add(year_next);
-            //}
-
             resp.ListYearOfProject = await GetListYearOfC3Async();
             ModelSelectOption year_current = new ModelSelectOption() { value = "", label = "" };
             resp.ListYearOfProject.Add(year_current);
@@ -94,7 +84,7 @@ namespace THD.Core.Api.Repository.DataHandler
         public async Task<IList<ModelSelectOption>> GetAllCommitteesAsync()
         {
 
-            string sql = "SELECT register_id, first_name, full_name FROM RegisterUser WHERE IsActive='1' AND Character IN ('2') ORDER BY full_name ASC";
+            string sql = "SELECT register_id, (first_name + full_name) as full_name FROM RegisterUser WHERE IsActive='1' AND Character IN ('2','5','6','7','8') ORDER BY full_name ASC";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -110,7 +100,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             ModelSelectOption item = new ModelSelectOption();
                             item.value = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["register_id"].ToString()));
-                            item.label = reader["first_name"].ToString() + " " + reader["full_name"].ToString();
+                            item.label = reader["full_name"].ToString();
                             e.Add(item);
                         }
                         return e;
@@ -125,7 +115,9 @@ namespace THD.Core.Api.Repository.DataHandler
         public async Task<IList<ModelSelectOption>> GetAllAttendeesAsync()
         {
 
-            string sql = "SELECT register_id, first_name, full_name FROM RegisterUser WHERE IsActive='1' AND Character IN ('2') ORDER BY full_name ASC";
+            string sql = "SELECT register_id, (first_name + full_name) as full_name " +
+                         "FROM RegisterUser WHERE IsActive='1' AND Character IN ('2','5','6','7','8') " +
+                         "ORDER BY full_name ASC";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -141,7 +133,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             ModelSelectOption item = new ModelSelectOption();
                             item.value = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["register_id"].ToString()));
-                            item.label = reader["first_name"].ToString() + " " + reader["full_name"].ToString();
+                            item.label = reader["full_name"].ToString();
                             e.Add(item);
                         }
                         return e;
@@ -260,13 +252,13 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC3Async(ModelMenuC3 model)
+        public async Task<ModelResponseC3Message> AddDocMenuC3Async(ModelMenuC3 model)
         {
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseC3Message resp = new ModelResponseC3Message();
             try
             {
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -333,32 +325,136 @@ namespace THD.Core.Api.Repository.DataHandler
         }
 
 
-        // พิมพ์ร่างและปิดการประชุม -------------------------------------------------------------------------
+        // บันทึกการประชุม 3 แก้ไข
 
-        public async Task<ModelResponseMessageCloseMeeting> CloseMeetingAsync(ModelCloseMeeting model)
+        public async Task<ModelMenuC3_InterfaceData> MenuC3EditInterfaceDataAsync(string UserId, string ProectNumber)
         {
-            ModelResponseMessageCloseMeeting resp = new ModelResponseMessageCloseMeeting();
+            ModelMenuC3_InterfaceData resp = new ModelMenuC3_InterfaceData();
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(UserId, "M013");
+
+            resp.editdata = new ModelMenuC3();
+            resp.editdata = await GetMenuC3DataEditAsync(ProectNumber, UserId, resp.UserPermission);
+
+            //คณะกรรมการ
+            resp.ListCommittees = new List<ModelSelectOption>();
+            resp.ListCommittees = await GetAllCommitteesAsync();
+
+            //ผู้ร่วมประชุม
+            resp.ListAttendees = new List<ModelSelectOption>();
+            resp.ListAttendees = await GetAllAttendeesAsync();
+
+            resp.ListYearOfProject = new List<ModelSelectOption>();
+            ModelSelectOption year_current = new ModelSelectOption()
+            {
+                value = resp.editdata.yearofmeeting,
+                label = resp.editdata.yearofmeeting,
+            };
+            resp.ListYearOfProject.Add(year_current);
+
+            return resp;
+        }
+
+        private async Task<ModelMenuC3> GetMenuC3DataEditAsync(string project_number, string userid, ModelPermissionPage permission)
+        {
+            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_getdata_for_c3", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 50).Value = project_number;
+
+                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuC3 e = new ModelMenuC3();
+                        while (await reader.ReadAsync())
+                        {
+                            e.docid = reader["doc_id"].ToString();
+                            e.meetingrecordid = Convert.ToInt32(reader["meeting_type_id"]);
+                            e.meetinground = reader["meeting_round"].ToString();
+                            e.yearofmeeting = reader["year_of_meeting"].ToString();
+                            e.meetingdate = Convert.ToDateTime(reader["meeting_date"]).ToString("dd/MM/yyyy");
+                            e.meetinglocation = reader["meeting_location"].ToString();
+                            e.meetingstart = reader["meeting_start"].ToString();
+                            e.meetingclose = reader["meeting_close"].ToString();
+                            e.committeesarray = JsonConvert.DeserializeObject<List<ModelSelectOption>>(reader["committees_array"].ToString());
+                            e.attendeesarray = JsonConvert.DeserializeObject<List<ModelSelectOption>>(reader["attendees_array"].ToString());
+                            e.createby = reader["create_by"].ToString();
+                            e.meetingresolution = reader["meeting_resolution"].ToString();
+                        }
+
+                        //Default Edit False
+                        e.editenable = false;
+                        if (permission.edit == true)
+                        {
+                            if (string.IsNullOrEmpty(e.meetingresolution))
+                            {
+                                if (user_id == e.createby)
+                                {
+                                    e.editenable = true;
+                                }
+                            }
+                        }
+                        return e;
+                    }
+
+                }
+                conn.Close();
+            }
+            return null;
+        }
+
+        public async Task<ModelResponseC3Message> UpdateDocMenuC3EditAsync(ModelMenuC3 model)
+        {
+            var cultureInfo = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            ModelResponseC3Message resp = new ModelResponseC3Message();
             try
             {
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
                     conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("sp_close_meeting", conn))
+                    using (SqlCommand cmd = new SqlCommand("sp_doc_menu_c3_edit", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
-                        cmd.Parameters.Add("@YearOfClose", SqlDbType.Int).Value = model.meetingofyear;
-                        cmd.Parameters.Add("@RoundOfClose", SqlDbType.Int).Value = model.meetingofround;
+                        cmd.Parameters.Add("@doc_id", SqlDbType.Int).Value = model.docid;
+                        cmd.Parameters.Add("@meeting_date", SqlDbType.DateTime).Value = Convert.ToDateTime(model.meetingdate);
+                        cmd.Parameters.Add("@meeting_record_id", SqlDbType.Int).Value = model.meetingrecordid;
+                        cmd.Parameters.Add("@meeting_round", SqlDbType.Int).Value = model.meetinground;
+                        cmd.Parameters.Add("@year_of_meeting", SqlDbType.Int).Value = model.yearofmeeting;
+                        cmd.Parameters.Add("@meeting_location", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.meetinglocation);
+                        cmd.Parameters.Add("@meeting_start", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.meetingstart);
+                        cmd.Parameters.Add("@meeting_close", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.meetingclose);
+                        cmd.Parameters.Add("@committees_array", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.committeesarray);
+                        cmd.Parameters.Add("@attendees_array", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.attendeesarray);
 
-                        int current_year = CommonData.GetYearOfPeriod();
-                        cmd.Parameters.Add("@YearOfNew", SqlDbType.Int).Value = current_year;
+                        int seq = 1;
+                        StringBuilder meeting_user_code_array = new StringBuilder();
+                        if (model.committeesarray != null && model.committeesarray.Count > 0)
+                        {
+                            foreach (var item in model.committeesarray)
+                            {
+                                meeting_user_code_array.AppendLine(Encoding.UTF8.GetString(Convert.FromBase64String(item.value.Trim())) + ",");
+                                seq++;
+                            }
+                        }
+                        cmd.Parameters.Add("@meeting_user_code_array", SqlDbType.NVarChar).Value = meeting_user_code_array.ToString();
+
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
                         rMessage.Direction = ParameterDirection.Output;
-                        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
-                        rDocId.Direction = ParameterDirection.Output;
 
                         await cmd.ExecuteNonQueryAsync();
 
@@ -366,7 +462,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
 
-                            model_rpt_14_file rpt = await _IDocMenuReportRepository.GetReportR14Async((int)cmd.Parameters["@rDocId"].Value);
+                            model_rpt_15_file rpt = await _IDocMenuReportRepository.GetReportR15Async(Convert.ToInt32(model.docid));
 
                             resp.filename = rpt.filename;
                             resp.filebase64 = rpt.filebase64;
@@ -383,7 +479,6 @@ namespace THD.Core.Api.Repository.DataHandler
 
             return resp;
         }
-
 
 
 
@@ -408,13 +503,13 @@ namespace THD.Core.Api.Repository.DataHandler
             return resp;
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC31Async(ModelMenuC31 model)
+        public async Task<ModelResponseC31Message> AddDocMenuC31Async(ModelMenuC31 model)
         {
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseC31Message resp = new ModelResponseC31Message();
             try
             {
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -429,7 +524,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         //Tab 1 Group All
                         IList<ModelMenuC31Tab1GroupAll> list_Tab1_group_all = new List<ModelMenuC31Tab1GroupAll>();
 
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 3; i++)
                         {
                             string seq = (i + 1).ToString();
                             switch (i + 1)
@@ -473,97 +568,6 @@ namespace THD.Core.Api.Repository.DataHandler
                                         });
                                     }
                                     break;
-                                case 4:
-                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq4Input1))
-                                    {
-                                        list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
-                                        {
-                                            groupdata = "1.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq4Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq4Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq4Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 5:
-                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq5Input1))
-                                    {
-                                        list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
-                                        {
-                                            groupdata = "1.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq5Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq5Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq5Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 6:
-                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq6Input1))
-                                    {
-                                        list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
-                                        {
-                                            groupdata = "1.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq6Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq6Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq6Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 7:
-                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq7Input1))
-                                    {
-                                        list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
-                                        {
-                                            groupdata = "1.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq7Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq7Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq7Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 8:
-                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq8Input1))
-                                    {
-                                        list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
-                                        {
-                                            groupdata = "1.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq8Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq8Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq8Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 9:
-                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq9Input1))
-                                    {
-                                        list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
-                                        {
-                                            groupdata = "1.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq9Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq9Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq9Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 10:
-                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq10Input1))
-                                    {
-                                        list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
-                                        {
-                                            groupdata = "1.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq10Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq10Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq10Input3).ToString(),
-                                        });
-                                    }
-                                    break;
                                 default:
                                     Console.WriteLine("Default case");
                                     break;
@@ -571,7 +575,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         }
 
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 3; i++)
                         {
                             string seq = (i + 1).ToString();
                             switch (i + 1)
@@ -607,7 +611,7 @@ namespace THD.Core.Api.Repository.DataHandler
                                     {
                                         list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
                                         {
-                                            groupdata = "1.1",
+                                            groupdata = "1.2",
                                             seq = seq,
                                             input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq3Input1).ToString(),
                                             input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq3Input2).ToString(),
@@ -615,94 +619,270 @@ namespace THD.Core.Api.Repository.DataHandler
                                         });
                                     }
                                     break;
-                                case 4:
-                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq4Input1))
+                                default:
+                                    Console.WriteLine("Default case");
+                                    break;
+                            }
+
+                        }
+
+                        string tab_1_group_all_json = JsonConvert.SerializeObject(list_Tab1_group_all);
+
+                        cmd.Parameters.Add("@tab_1_group_all_json", SqlDbType.VarChar).Value = tab_1_group_all_json;
+
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
+                        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                        rStatus.Direction = ParameterDirection.Output;
+                        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                        rMessage.Direction = ParameterDirection.Output;
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                        {
+                            resp.Status = true;
+                        }
+                        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resp;
+        }
+
+
+        // ระเบียบวาระที่ 1 แก้ไข ------------------------------------------------------------------------------
+        public async Task<ModelMenuC31_InterfaceData> MenuC31EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            ModelMenuC31_InterfaceData resp = new ModelMenuC31_InterfaceData();
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(UserId, "M014");
+
+            resp.editdata = new ModelMenuC31();
+            resp.editdata = await GetMenuC31DataEditAsync(ProectNumber, UserId, resp.UserPermission);
+
+            resp.ListMeetingId = new List<ModelSelectOption>();
+            resp.ListMeetingId = await GetMeetingIdAsync(resp.editdata.meetingid.ToString());
+
+            if (resp.ListMeetingId != null)
+            {
+                resp.meetingId = resp.ListMeetingId.FirstOrDefault().value;
+                resp.meetingName = resp.ListMeetingId.FirstOrDefault().label;
+            }
+
+            return resp;
+        }
+
+        private async Task<ModelMenuC31> GetMenuC31DataEditAsync(string project_number, string userid, ModelPermissionPage permission)
+        {
+            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_getdata_for_c3_1", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 50).Value = project_number;
+
+                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuC31 e = new ModelMenuC31();
+                        while (await reader.ReadAsync())
+                        {
+                            e.meetingid = Convert.ToInt32(reader["meeting_id"]);
+
+                            if (reader["group_data"].ToString() == "1.1")
+                            {
+                                if (Convert.ToInt32(reader["seq"]) == 1)
+                                {
+                                    e.tab1Group1Seq1Input1 = reader["input1"].ToString();
+                                    e.tab1Group1Seq1Input2 = reader["input2"].ToString();
+                                    e.tab1Group1Seq1Input3 = reader["input3"].ToString();
+                                }
+                                if (Convert.ToInt32(reader["seq"]) == 2)
+                                {
+                                    e.tab1Group1Seq2Input1 = reader["input1"].ToString();
+                                    e.tab1Group1Seq2Input2 = reader["input2"].ToString();
+                                    e.tab1Group1Seq2Input3 = reader["input3"].ToString();
+                                }
+                                if (Convert.ToInt32(reader["seq"]) == 3)
+                                {
+                                    e.tab1Group1Seq3Input1 = reader["input1"].ToString();
+                                    e.tab1Group1Seq3Input2 = reader["input2"].ToString();
+                                    e.tab1Group1Seq3Input3 = reader["input3"].ToString();
+                                }
+                            }
+
+                            if (reader["group_data"].ToString() == "1.2")
+                            {
+                                if (Convert.ToInt32(reader["seq"]) == 1)
+                                {
+                                    e.tab1Group2Seq1Input1 = reader["input1"].ToString();
+                                    e.tab1Group2Seq1Input2 = reader["input2"].ToString();
+                                    e.tab1Group2Seq1Input3 = reader["input3"].ToString();
+                                }
+                                if (Convert.ToInt32(reader["seq"]) == 2)
+                                {
+                                    e.tab1Group2Seq2Input1 = reader["input1"].ToString();
+                                    e.tab1Group2Seq2Input2 = reader["input2"].ToString();
+                                    e.tab1Group2Seq2Input3 = reader["input3"].ToString();
+                                }
+                                if (Convert.ToInt32(reader["seq"]) == 3)
+                                {
+                                    e.tab1Group2Seq3Input1 = reader["input1"].ToString();
+                                    e.tab1Group2Seq3Input2 = reader["input2"].ToString();
+                                    e.tab1Group2Seq3Input3 = reader["input3"].ToString();
+                                }
+                            }
+
+                            e.createby = reader["create_by"].ToString();
+                            e.meetingresolution = reader["meeting_resolution"].ToString();
+                        }
+
+                        //Default Edit False
+                        e.editenable = false;
+                        if (permission.edit == true)
+                        {
+                            if (string.IsNullOrEmpty(e.meetingresolution))
+                            {
+                                if (user_id == e.createby)
+                                {
+                                    e.editenable = true;
+                                }
+                            }
+                        }
+                        return e;
+                    }
+
+                }
+                conn.Close();
+            }
+            return null;
+        }
+
+        public async Task<ModelResponseC31Message> UpdateDocMenuC31EditAsync(ModelMenuC31 model)
+        {
+            var cultureInfo = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            ModelResponseC31Message resp = new ModelResponseC31Message();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_doc_menu_c3_1_edit", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = model.meetingid;
+
+                        //Tab 1 Group All
+                        IList<ModelMenuC31Tab1GroupAll> list_Tab1_group_all = new List<ModelMenuC31Tab1GroupAll>();
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            string seq = (i + 1).ToString();
+                            switch (i + 1)
+                            {
+                                case 1:
+                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq1Input1))
                                     {
                                         list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
                                         {
-                                            groupdata = "1.2",
+                                            groupdata = "1.1",
                                             seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq4Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq4Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq4Input3).ToString(),
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq1Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq1Input2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq1Input3).ToString(),
                                         });
                                     }
                                     break;
-                                case 5:
-                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq5Input1))
+                                case 2:
+                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq2Input1))
                                     {
                                         list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
                                         {
-                                            groupdata = "1.2",
+                                            groupdata = "1.1",
                                             seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq5Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq5Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq5Input3).ToString(),
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq2Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq2Input2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq2Input3).ToString(),
                                         });
                                     }
                                     break;
-                                case 6:
-                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq6Input1))
+                                case 3:
+                                    if (!string.IsNullOrEmpty(model.tab1Group1Seq3Input1))
                                     {
                                         list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
                                         {
-                                            groupdata = "1.2",
+                                            groupdata = "1.1",
                                             seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq6Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq6Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq6Input3).ToString(),
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq3Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq3Input2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group1Seq3Input3).ToString(),
                                         });
                                     }
                                     break;
-                                case 7:
-                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq7Input1))
+                                default:
+                                    Console.WriteLine("Default case");
+                                    break;
+                            }
+
+                        }
+
+                        for (int i = 0; i < 3; i++)
+                        {
+                            string seq = (i + 1).ToString();
+                            switch (i + 1)
+                            {
+                                case 1:
+                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq1Input1))
                                     {
                                         list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
                                         {
                                             groupdata = "1.2",
                                             seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq7Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq7Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq7Input3).ToString(),
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq1Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq1Input2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq1Input3).ToString(),
                                         });
                                     }
                                     break;
-                                case 8:
-                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq8Input1))
+                                case 2:
+                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq2Input1))
                                     {
                                         list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
                                         {
                                             groupdata = "1.2",
                                             seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq8Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq8Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq8Input3).ToString(),
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq2Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq2Input2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq2Input3).ToString(),
                                         });
                                     }
                                     break;
-                                case 9:
-                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq9Input1))
+                                case 3:
+                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq3Input1))
                                     {
                                         list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
                                         {
                                             groupdata = "1.2",
                                             seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq9Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq9Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq9Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 10:
-                                    if (!string.IsNullOrEmpty(model.tab1Group2Seq10Input1))
-                                    {
-                                        list_Tab1_group_all.Add(new ModelMenuC31Tab1GroupAll
-                                        {
-                                            groupdata = "1.2",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq10Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq10Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq10Input3).ToString(),
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq3Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq3Input2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab1Group2Seq3Input3).ToString(),
                                         });
                                     }
                                     break;
@@ -833,13 +1013,42 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC32Async(ModelMenuC32 model)
+        public async Task<ModelMenuC32_DownloadFile> GetC32DownloadFileByIdAsync(int meetingid, int id)
+        {
+
+            string sql = "SELECT id,input2 FROM Doc_MenuC3_Tab2 WHERE meeting_id='" + meetingid + "' AND seq='" + id + "' ORDER BY id ASC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuC32_DownloadFile e = new ModelMenuC32_DownloadFile();
+                        while (await reader.ReadAsync())
+                        {
+                            e.filebase64 = ServerDirectorys.ReadFileToBase64(_IEnvironmentConfig.PathDocument, FolderDocument.menuC3Tab2, reader["input2"].ToString());
+                            e.filename = "file_download_" + id + Path.GetExtension(reader["input2"].ToString());
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
+        public async Task<ModelResponseC32Message> AddDocMenuC32Async(ModelMenuC32 model)
         {
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseC32Message resp = new ModelResponseC32Message();
             try
             {
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -936,6 +1145,204 @@ namespace THD.Core.Api.Repository.DataHandler
         }
 
 
+        // ระเบียบวาระที่ 2 แก้ไข ------------------------------------------------------------------------------
+        public async Task<ModelMenuC32_InterfaceData> MenuC32EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            ModelMenuC32_InterfaceData resp = new ModelMenuC32_InterfaceData();
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(UserId, "M015");
+
+            resp.editdata = new ModelMenuC32();
+            resp.editdata = await GetMenuC32DataEditAsync(ProectNumber, UserId, resp.UserPermission);
+
+            resp.ListMeetingId = new List<ModelSelectOption>();
+            resp.ListMeetingId = await GetMeetingIdAsync(resp.editdata.meetingid.ToString());
+
+            if (resp.ListMeetingId != null)
+            {
+                resp.meetingId = resp.ListMeetingId.FirstOrDefault().value;
+                resp.meetingName = resp.ListMeetingId.FirstOrDefault().label;
+            }
+
+            return resp;
+        }
+
+        private async Task<ModelMenuC32> GetMenuC32DataEditAsync(string project_number, string userid, ModelPermissionPage permission)
+        {
+            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_getdata_for_c3_2", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 50).Value = project_number;
+
+                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuC32 e = new ModelMenuC32();
+                        while (await reader.ReadAsync())
+                        {
+                            e.meetingid = Convert.ToInt32(reader["meeting_id"]);
+
+                            if (reader["group_data"].ToString() == "2.1")
+                            {
+                                if (Convert.ToInt32(reader["seq"]) == 1)
+                                {
+                                    e.tab2Group1Seq1Input1 = reader["input1"].ToString();
+                                    e.tab2Group1Seq1FileInput2 = reader["input2"].ToString();
+                                    e.tab2Group1Seq1Input3 = reader["input3"].ToString();
+                                    e.tab2Group1Seq1Input4 = reader["input4"].ToString();
+                                }
+                                if (Convert.ToInt32(reader["seq"]) == 2)
+                                {
+                                    e.tab2Group1Seq2Input1 = reader["input1"].ToString();
+                                    e.tab2Group1Seq2FileInput2 = reader["input2"].ToString();
+                                    e.tab2Group1Seq2Input3 = reader["input3"].ToString();
+                                    e.tab2Group1Seq2Input4 = reader["input4"].ToString();
+                                }
+                                if (Convert.ToInt32(reader["seq"]) == 3)
+                                {
+                                    e.tab2Group1Seq3Input1 = reader["input1"].ToString();
+                                    e.tab2Group1Seq3FileInput2 = reader["input2"].ToString();
+                                    e.tab2Group1Seq3Input3 = reader["input3"].ToString();
+                                    e.tab2Group1Seq3Input4 = reader["input4"].ToString();
+                                }
+                            }
+
+                            e.createby = reader["create_by"].ToString();
+                            e.meetingresolution = reader["meeting_resolution"].ToString();
+                        }
+
+                        //Default Edit False
+                        e.editenable = false;
+                        if (permission.edit == true)
+                        {
+                            if (string.IsNullOrEmpty(e.meetingresolution))
+                            {
+                                if (user_id == e.createby)
+                                {
+                                    e.editenable = true;
+                                }
+                            }
+                        }
+                        return e;
+                    }
+
+                }
+                conn.Close();
+            }
+            return null;
+        }
+
+        public async Task<ModelResponseC32Message> UpdateDocMenuC32EditAsync(ModelMenuC32 model)
+        {
+            var cultureInfo = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            ModelResponseC32Message resp = new ModelResponseC32Message();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_doc_menu_c3_2_edit", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = model.meetingid;
+
+                        IList<ModelMenuC32Tab2Group1> list_Tab2_group_1 = new List<ModelMenuC32Tab2Group1>();
+                        for (int i = 0; i < 10; i++)
+                        {
+                            string seq = (i + 1).ToString();
+                            switch (i + 1)
+                            {
+                                case 1:
+                                    if (!string.IsNullOrEmpty(model.tab2Group1Seq1Input1))
+                                    {
+                                        list_Tab2_group_1.Add(new ModelMenuC32Tab2Group1
+                                        {
+                                            groupdata = "2.1",
+                                            seq = seq,
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq1Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq1FileInput2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq1Input3).ToString(),
+                                            input4 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq1Input4).ToString(),
+                                        });
+                                    }
+                                    break;
+                                case 2:
+                                    if (!string.IsNullOrEmpty(model.tab2Group1Seq2Input1))
+                                    {
+                                        list_Tab2_group_1.Add(new ModelMenuC32Tab2Group1
+                                        {
+                                            groupdata = "2.1",
+                                            seq = seq,
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq2Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq2FileInput2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq2Input3).ToString(),
+                                            input4 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq2Input4).ToString(),
+                                        });
+                                    }
+                                    break;
+                                case 3:
+                                    if (!string.IsNullOrEmpty(model.tab2Group1Seq3Input1))
+                                    {
+                                        list_Tab2_group_1.Add(new ModelMenuC32Tab2Group1
+                                        {
+                                            groupdata = "2.1",
+                                            seq = seq,
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq3Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq3FileInput2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq3Input3).ToString(),
+                                            input4 = ParseDataHelper.ConvertDBNull(model.tab2Group1Seq3Input4).ToString(),
+                                        });
+                                    }
+                                    break;
+                                default:
+                                    Console.WriteLine("Default case");
+                                    break;
+                            }
+
+                        }
+                        string tab_2_group_1_json = JsonConvert.SerializeObject(list_Tab2_group_1);
+
+                        cmd.Parameters.Add("@tab_2_group_1_json", SqlDbType.VarChar).Value = tab_2_group_1_json;
+
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
+                        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                        rStatus.Direction = ParameterDirection.Output;
+                        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                        rMessage.Direction = ParameterDirection.Output;
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                        {
+                            resp.Status = true;
+                        }
+                        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resp;
+        }
+
+
+
 
         // ระเบียบวาระที่ 3 ------------------------------------------------------------------------------
         public async Task<ModelMenuC33_InterfaceData> MenuC33InterfaceDataAsync(string RegisterId)
@@ -983,6 +1390,15 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = model.meetingid;
+                        cmd.Parameters.Add("@comment_1_title", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq1Input1);
+                        cmd.Parameters.Add("@comment_1_comittee", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq1Input2);
+                        cmd.Parameters.Add("@comment_1_note", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq1Input3);
+                        cmd.Parameters.Add("@comment_2_title", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq2Input1);
+                        cmd.Parameters.Add("@comment_2_comittee", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq2Input2);
+                        cmd.Parameters.Add("@comment_2_note", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq2Input3);
+                        cmd.Parameters.Add("@comment_3_title", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq3Input1);
+                        cmd.Parameters.Add("@comment_3_comittee", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq3Input2);
+                        cmd.Parameters.Add("@comment_3_note", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq3Input3);
                         cmd.Parameters.Add("@agenda_3_project_count", SqlDbType.Int).Value = model.agenda3projectcount;
                         cmd.Parameters.Add("@agenda_3_project_number", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.agenda3projectnumber);
                         cmd.Parameters.Add("@agenda_3_project_name_thai", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.agenda3projectnamethai);
@@ -990,11 +1406,12 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@agenda_3_conclusion", SqlDbType.Int).Value = model.agenda3Conclusion;
                         cmd.Parameters.Add("@agenda_3_conclusion_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.agenda3ConclusionName);
                         cmd.Parameters.Add("@agenda_3_suggestion", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.agenda3Suggestion);
+                        cmd.Parameters.Add("@safety_type", SqlDbType.Int).Value = model.safetytype;
                         cmd.Parameters.Add("@isClose", SqlDbType.Bit).Value = (model.agenda3Conclusion == "4") ? true : false;
 
                         //Tab 3 Group All
                         IList<ModelMenuC33Tab3GroupAll> list_Tab3_group_all = new List<ModelMenuC33Tab3GroupAll>();
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 3; i++)
                         {
                             string seq = (i + 1).ToString();
                             switch (i + 1)
@@ -1038,39 +1455,13 @@ namespace THD.Core.Api.Repository.DataHandler
                                         });
                                     }
                                     break;
-                                case 4:
-                                    if (!string.IsNullOrEmpty(model.tab3Group1Seq4Input1))
-                                    {
-                                        list_Tab3_group_all.Add(new ModelMenuC33Tab3GroupAll
-                                        {
-                                            groupdata = "3.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq4Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq4Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq4Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 5:
-                                    if (!string.IsNullOrEmpty(model.tab3Group1Seq5Input1))
-                                    {
-                                        list_Tab3_group_all.Add(new ModelMenuC33Tab3GroupAll
-                                        {
-                                            groupdata = "3.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq5Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq5Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab3Group1Seq5Input3).ToString(),
-                                        });
-                                    }
-                                    break;
                                 default:
                                     Console.WriteLine("Default case");
                                     break;
                             }
 
                         }
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 3; i++)
                         {
                             string seq = (i + 1).ToString();
                             switch (i + 1)
@@ -1114,32 +1505,6 @@ namespace THD.Core.Api.Repository.DataHandler
                                         });
                                     }
                                     break;
-                                case 4:
-                                    if (!string.IsNullOrEmpty(model.tab3Group2Seq4Input1))
-                                    {
-                                        list_Tab3_group_all.Add(new ModelMenuC33Tab3GroupAll
-                                        {
-                                            groupdata = "3.2",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab3Group2Seq4Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab3Group2Seq4Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab3Group2Seq4Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 5:
-                                    if (!string.IsNullOrEmpty(model.tab3Group2Seq5Input1))
-                                    {
-                                        list_Tab3_group_all.Add(new ModelMenuC33Tab3GroupAll
-                                        {
-                                            groupdata = "3.2",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab3Group2Seq5Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab3Group2Seq5Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab3Group2Seq5Input3).ToString(),
-                                        });
-                                    }
-                                    break;
                                 default:
                                     Console.WriteLine("Default case");
                                     break;
@@ -1167,14 +1532,14 @@ namespace THD.Core.Api.Repository.DataHandler
 
                             if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
                             {
-                                model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async((int)cmd.Parameters["@rDocId"].Value);
+                                model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async((int)cmd.Parameters["@rDocId"].Value, 3);
 
                                 resp.filename = rpt.filename;
                                 resp.filebase64 = rpt.filebase64;
                             }
                             if (model.agenda3Conclusion == "3")
                             {
-                                model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async((int)cmd.Parameters["@rDocId"].Value);
+                                model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async((int)cmd.Parameters["@rDocId"].Value, 3);
 
                                 resp.filename = rpt.filename;
                                 resp.filebase64 = rpt.filebase64;
@@ -1305,16 +1670,6 @@ namespace THD.Core.Api.Repository.DataHandler
                                     e.tab3Group1Seq3Input2 = reader["name_thai"].ToString();
                                     e.tab3Group1Seq3Input3 = reader["comment_consider"].ToString();
                                     break;
-                                case 4:
-                                    e.tab3Group1Seq4Input1 = reader["approve_name"].ToString();
-                                    e.tab3Group1Seq4Input2 = reader["name_thai"].ToString();
-                                    e.tab3Group1Seq4Input3 = reader["comment_consider"].ToString();
-                                    break;
-                                case 5:
-                                    e.tab3Group1Seq5Input1 = reader["approve_name"].ToString();
-                                    e.tab3Group1Seq5Input2 = reader["name_thai"].ToString();
-                                    e.tab3Group1Seq5Input3 = reader["comment_consider"].ToString();
-                                    break;
                                 default:
                                     Console.WriteLine("Default case");
                                     break;
@@ -1414,6 +1769,42 @@ namespace THD.Core.Api.Repository.DataHandler
 
 
 
+        // ระเบียบวาระที่ 3 แก้ไข ------------------------------------------------------------------------------
+        public async Task<ModelMenuC33_InterfaceData> MenuC33EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            ModelMenuC33_InterfaceData resp = new ModelMenuC33_InterfaceData();
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(UserId, "M016");
+
+            resp.editdata = new ModelMenuC33();
+            resp.editdata = await GetMenuC33DataEditAsync(ProectNumber, UserId, resp.UserPermission);
+
+            resp.ListMeetingId = new List<ModelSelectOption>();
+            resp.ListMeetingId = await GetMeetingIdAsync(resp.editdata.meetingid.ToString());
+
+            if (resp.ListMeetingId != null)
+            {
+                resp.meetingId = resp.ListMeetingId.FirstOrDefault().value;
+                resp.meetingName = resp.ListMeetingId.FirstOrDefault().label;
+            }
+
+            return resp;
+        }
+
+        private async Task<ModelMenuC33> GetMenuC33DataEditAsync(string project_number, string userid, ModelPermissionPage permission)
+        {
+            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
+
+            return null;
+        }
+
+        public async Task<ModelResponseC33Message> UpdateDocMenuC33EditAsync(ModelMenuC33 model)
+        {
+            return null;
+        }
+
+
+
         // ระเบียบวาระที่ 4 ------------------------------------------------------------------------------
         public async Task<ModelMenuC34_InterfaceData> MenuC34InterfaceDataAsync(string RegisterId)
         {
@@ -1450,6 +1841,15 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = model.meetingid;
+                        cmd.Parameters.Add("@comment_1_title", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq1Input1);
+                        cmd.Parameters.Add("@comment_1_comittee", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq1Input2);
+                        cmd.Parameters.Add("@comment_1_note", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq1Input3);
+                        cmd.Parameters.Add("@comment_2_title", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq2Input1);
+                        cmd.Parameters.Add("@comment_2_comittee", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq2Input2);
+                        cmd.Parameters.Add("@comment_2_note", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq2Input3);
+                        cmd.Parameters.Add("@comment_3_title", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq3Input1);
+                        cmd.Parameters.Add("@comment_3_comittee", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq3Input2);
+                        cmd.Parameters.Add("@comment_3_note", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq3Input3);
                         cmd.Parameters.Add("@agenda_4_term", SqlDbType.VarChar, 2).Value = ParseDataHelper.ConvertDBNull(model.agenda4term);
                         cmd.Parameters.Add("@agenda_4_project_number", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.agenda4projectnumber);
                         cmd.Parameters.Add("@agenda_4_project_name_1", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.agenda4projectname1);
@@ -1457,10 +1857,11 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@agenda_4_conclusion", SqlDbType.Int).Value = model.agenda4Conclusion;
                         cmd.Parameters.Add("@agenda_4_conclusion_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.agenda4ConclusionName);
                         cmd.Parameters.Add("@agenda_4_suggestion", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.agenda4Suggestion);
+                        cmd.Parameters.Add("@safety_type", SqlDbType.Int).Value = model.safetytype;
                         cmd.Parameters.Add("@file1name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.file1name);
                         cmd.Parameters.Add("@isClose", SqlDbType.Bit).Value = (model.agenda4Conclusion == "4") ? true : false;
-
                         cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
 
                         DateTime dtAlertDate = Convert.ToDateTime(DateTime.Now).AddDays(335);
                         cmd.Parameters.Add("@alert_date", SqlDbType.VarChar, 50).Value = dtAlertDate.ToString("dd/MM/yyyy");
@@ -1468,63 +1869,6 @@ namespace THD.Core.Api.Repository.DataHandler
                         DateTime dtExpireDate = Convert.ToDateTime(DateTime.Now).AddDays(365);
                         cmd.Parameters.Add("@certificate_expire_date", SqlDbType.VarChar, 50).Value = dtExpireDate.ToString("dd/MM/yyyy");
 
-                        //Tab 4 Group All
-                        IList<ModelMenuC34Tab4GroupAll> list_Tab4_group_all = new List<ModelMenuC34Tab4GroupAll>();
-
-
-                        for (int i = 0; i < 3; i++)
-                        {
-                            string seq = (i + 1).ToString();
-                            switch (i + 1)
-                            {
-                                case 1:
-                                    if (!string.IsNullOrEmpty(model.tab4Group1Seq1Input1))
-                                    {
-                                        list_Tab4_group_all.Add(new ModelMenuC34Tab4GroupAll
-                                        {
-                                            groupdata = "4.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq1Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq1Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq1Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 2:
-                                    if (!string.IsNullOrEmpty(model.tab4Group1Seq2Input1))
-                                    {
-                                        list_Tab4_group_all.Add(new ModelMenuC34Tab4GroupAll
-                                        {
-                                            groupdata = "4.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq2Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq2Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq2Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 3:
-                                    if (!string.IsNullOrEmpty(model.tab4Group1Seq3Input1))
-                                    {
-                                        list_Tab4_group_all.Add(new ModelMenuC34Tab4GroupAll
-                                        {
-                                            groupdata = "4.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq3Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq3Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq3Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                default:
-                                    Console.WriteLine("Default case");
-                                    break;
-                            }
-
-                        }
-                        string tab_4_group_all_json = JsonConvert.SerializeObject(list_Tab4_group_all);
-
-                        cmd.Parameters.Add("@tab_4_group_all_json", SqlDbType.VarChar).Value = tab_4_group_all_json;
 
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
@@ -1541,14 +1885,14 @@ namespace THD.Core.Api.Repository.DataHandler
 
                             if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
                             {
-                                model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async((int)cmd.Parameters["@rDocId"].Value);
+                                model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async((int)cmd.Parameters["@rDocId"].Value, 4);
 
                                 resp.filename = rpt.filename;
                                 resp.filebase64 = rpt.filebase64;
                             }
                             if (model.agenda4Conclusion == "3")
                             {
-                                model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async((int)cmd.Parameters["@rDocId"].Value);
+                                model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async((int)cmd.Parameters["@rDocId"].Value, 4);
 
                                 resp.filename = rpt.filename;
                                 resp.filebase64 = rpt.filebase64;
@@ -1577,16 +1921,15 @@ namespace THD.Core.Api.Repository.DataHandler
                 case 2:
                 case 3:
                 case 4:
-                    sql = "SELECT MIN(doc_id) AS first_approval, A.project_number, " +
-                         "A.project_name_thai, A.project_name_eng,B.safety_type " +
+                    sql = "SELECT MAX(B.safety_type) AS first_approval, A.project_number, " +
+                         "A.project_name_thai, A.project_name_eng " +
                          "FROM [dbo].[Doc_Process] A " +
                          "LEFT OUTER JOIN [dbo].[Doc_MenuC2] B " +
                          "ON A.project_number = B.project_number " +
                          "WHERE A.doc_process_to='C2' " +
                          "AND A.project_type='PROJECT' " +
                          "AND A.revert_type='New' " +
-                         "AND B.safety_type=" + type + " " +
-                         "GROUP BY A.project_number, A.project_name_thai, A.project_name_eng, B.safety_type";
+                         "GROUP BY A.project_number, A.project_name_thai, A.project_name_eng";
                     break;
                 case 8:
                     sql = "SELECT MIN(doc_id) AS first_approval, A.project_number, " +
@@ -1600,17 +1943,17 @@ namespace THD.Core.Api.Repository.DataHandler
                     break;
                 case 5:
                     sql = "SELECT * FROM [dbo].[Doc_Process] " +
-                          "WHERE doc_process_from='A6' AND doc_process_to='C2' AND revert_type='Renew.A6' " + // A6 ขอต่ออายุ
+                          "WHERE doc_process_from='A6' AND doc_process_to='C34' AND revert_type='Renew.A6' " + // A6 ขอต่ออายุ
                           "AND project_type='PROJECT' ";
                     break;
                 case 6:
                     sql = "SELECT * FROM [dbo].[Doc_Process] " +
-                          "WHERE doc_process_from='A5' AND doc_process_to='C2' AND revert_type='Renew.A5' " + // A5 แก้ไขโครงการที่ผ่านการรับรอง
+                          "WHERE doc_process_from='A5' AND doc_process_to='C34' AND revert_type='Renew.A5' " + // A5 แก้ไขโครงการที่ผ่านการรับรอง
                           "AND project_type='PROJECT' ";
                     break;
                 case 7:
                     sql = "SELECT * FROM [dbo].[Doc_Process] " +
-                          "WHERE doc_process_from='A7' AND doc_process_to='C2' AND revert_type='Renew.A7' " + // A7 ปิดโครงการ
+                          "WHERE doc_process_from='A7' AND doc_process_to='C34' AND revert_type='Renew.A7' " + // A7 ปิดโครงการ
                           "AND project_type='PROJECT' ";
                     break;
                 case 9:
@@ -1796,16 +2139,6 @@ namespace THD.Core.Api.Repository.DataHandler
                                     e.tab4Group1Seq3Input2 = reader["name_thai"].ToString();
                                     e.tab4Group1Seq3Input3 = reader["comment_consider"].ToString();
                                     break;
-                                case 4:
-                                    e.tab4Group1Seq4Input1 = reader["approve_name"].ToString();
-                                    e.tab4Group1Seq4Input2 = reader["name_thai"].ToString();
-                                    e.tab4Group1Seq4Input3 = reader["comment_consider"].ToString();
-                                    break;
-                                case 5:
-                                    e.tab4Group1Seq5Input1 = reader["approve_name"].ToString();
-                                    e.tab4Group1Seq5Input2 = reader["name_thai"].ToString();
-                                    e.tab4Group1Seq5Input3 = reader["comment_consider"].ToString();
-                                    break;
                                 default:
                                     Console.WriteLine("Default case");
                                     break;
@@ -1817,6 +2150,241 @@ namespace THD.Core.Api.Repository.DataHandler
                 conn.Close();
             }
         }
+
+        public async Task<ModelMenuC34_DownloadFile> GetC34DownloadFileByIdAsync(int docid)
+        {
+
+            string sql = "SELECT id,file1name FROM Doc_MenuC3_Tab4 WHERE id='" + docid + "'";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuC34_DownloadFile e = new ModelMenuC34_DownloadFile();
+                        while (await reader.ReadAsync())
+                        {
+                            e.filebase64 = ServerDirectorys.ReadFileToBase64(_IEnvironmentConfig.PathDocument, FolderDocument.menuC3Tab4, reader["file1name"].ToString());
+                            e.filename = "เอกสารที่เกี่ยวข้อง" + Path.GetExtension(reader["file1name"].ToString());
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
+        // ระเบียบวาระที่ 4 แก้ไข ------------------------------------------------------------------------------
+        public async Task<ModelMenuC34_InterfaceData> MenuC34EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            ModelMenuC34_InterfaceData resp = new ModelMenuC34_InterfaceData();
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(UserId, "M017");
+
+            resp.editdata = new ModelMenuC34();
+            resp.editdata = await GetMenuC34DataEditAsync(ProectNumber, UserId, resp.UserPermission);
+
+            resp.ListMeetingId = new List<ModelSelectOption>();
+            resp.ListMeetingId = await GetMeetingIdAsync(resp.editdata.meetingid.ToString());
+
+            if (resp.ListMeetingId != null)
+            {
+                resp.meetingId = resp.ListMeetingId.FirstOrDefault().value;
+                resp.meetingName = resp.ListMeetingId.FirstOrDefault().label;
+            }
+
+            return resp;
+        }
+
+        private async Task<ModelMenuC34> GetMenuC34DataEditAsync(string project_number, string userid, ModelPermissionPage permission)
+        {
+            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_getdata_for_c3_4", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 50).Value = project_number;
+
+                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuC34 e = new ModelMenuC34();
+                        while (await reader.ReadAsync())
+                        {
+                            e.docid = Convert.ToInt32(reader["id"]);
+                            e.meetingid = Convert.ToInt32(reader["meeting_id"]);
+
+                            e.agenda4term = reader["agenda_4_term"].ToString();
+
+                            switch (e.agenda4term)
+                            {
+                                case "1":
+                                    e.agenda4termname = "1.โครงการใหม่ที่เป็น-ความเสี่ยงประเภท 1";
+                                    break;
+                                case "2":
+                                    e.agenda4termname = "2.โครงการใหม่ที่เป็น-ความเสี่ยงประเภท 2";
+                                    break;
+                                case "3":
+                                    e.agenda4termname = "3.โครงการใหม่ที่เป็น-ความเสี่ยงประเภท 3";
+                                    break;
+                                case "4":
+                                    e.agenda4termname = "4.โครงการใหม่ที่เป็น-ความเสี่ยงประเภท 4";
+                                    break;
+                                case "5":
+                                    e.agenda4termname = "5.โครงการที่เป็น-แจ้งขอต่ออายุใบรับรอง";
+                                    break;
+                                case "6":
+                                    e.agenda4termname = "6.โครงการที่เป็น-แก้ไขโครงการที่ผ่านการรับรองแล้ว";
+                                    break;
+                                case "7":
+                                    e.agenda4termname = "7.โครงการที่เป็น-แจ้งปิดโครงการ";
+                                    break;
+                                case "8":
+                                    e.agenda4termname = "8.คำขอประเมินห้องปฏิบัติการ";
+                                    break;
+                                case "9":
+                                    e.agenda4termname = "9.ผลการตรวจเยี่ยมติดตามโครงการ";
+                                    break;
+                            }
+
+                            e.agenda4projectnumber = reader["agenda_4_project_number"].ToString();
+                            e.agenda4projectname1 = reader["agenda_4_project_name_1"].ToString();
+                            e.agenda4projectname2 = reader["agenda_4_project_name_2"].ToString();
+                            e.agenda4Conclusion = reader["agenda_4_Conclusion"].ToString();
+                            e.agenda4ConclusionName = reader["agenda_4_Conclusion_Name"].ToString();
+                            e.agenda4Suggestion = reader["agenda_4_Suggestion"].ToString();
+                            e.file1name = reader["file1name"].ToString();
+                            e.tab4Group1Seq1Input1 = reader["comment_1_title"].ToString();
+                            e.tab4Group1Seq1Input2 = reader["comment_1_comittee"].ToString();
+                            e.tab4Group1Seq1Input3 = reader["comment_1_note"].ToString();
+                            e.tab4Group1Seq2Input1 = reader["comment_2_title"].ToString();
+                            e.tab4Group1Seq2Input2 = reader["comment_2_comittee"].ToString();
+                            e.tab4Group1Seq2Input3 = reader["comment_2_note"].ToString();
+                            e.tab4Group1Seq3Input1 = reader["comment_3_title"].ToString();
+                            e.tab4Group1Seq3Input2 = reader["comment_3_comittee"].ToString();
+                            e.tab4Group1Seq3Input3 = reader["comment_3_note"].ToString();
+                            e.createby = reader["create_by"].ToString();
+                            e.docprocessfrom = reader["doc_process_from"].ToString();
+                        }
+
+                        //Default Edit False
+                        e.editenable = false;
+                        if (permission.edit == true)
+                        {
+                            if (!string.IsNullOrEmpty(e.docprocessfrom) && e.docprocessfrom == "C34")
+                            {
+                                if (user_id == e.createby)
+                                {
+                                    e.editenable = true;
+                                }
+                            }
+                        }
+                        return e;
+                    }
+
+                }
+                conn.Close();
+            }
+            return null;
+        }
+
+        public async Task<ModelResponseC34Message> UpdateDocMenuC34EditAsync(ModelMenuC34 model)
+        {
+            var cultureInfo = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            ModelResponseC34Message resp = new ModelResponseC34Message();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_doc_menu_c3_4_edit", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@doc_id", SqlDbType.Int).Value = model.docid;
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = model.meetingid;
+                        cmd.Parameters.Add("@comment_1_title", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq1Input1);
+                        cmd.Parameters.Add("@comment_1_comittee", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq1Input2);
+                        cmd.Parameters.Add("@comment_1_note", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq1Input3);
+                        cmd.Parameters.Add("@comment_2_title", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq2Input1);
+                        cmd.Parameters.Add("@comment_2_comittee", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq2Input2);
+                        cmd.Parameters.Add("@comment_2_note", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq2Input3);
+                        cmd.Parameters.Add("@comment_3_title", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq3Input1);
+                        cmd.Parameters.Add("@comment_3_comittee", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq3Input2);
+                        cmd.Parameters.Add("@comment_3_note", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.tab4Group1Seq3Input3);
+                        cmd.Parameters.Add("@agenda_4_term", SqlDbType.VarChar, 2).Value = ParseDataHelper.ConvertDBNull(model.agenda4term);
+                        cmd.Parameters.Add("@agenda_4_project_number", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.agenda4projectnumber);
+
+                        string[] project_split = model.agenda4projectname1.Split(':');
+                        cmd.Parameters.Add("@agenda_4_project_name_1", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(project_split[1].ToString().Trim());
+                        cmd.Parameters.Add("@agenda_4_project_name_2", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.agenda4projectname2);
+                        cmd.Parameters.Add("@agenda_4_conclusion", SqlDbType.Int).Value = model.agenda4Conclusion;
+                        cmd.Parameters.Add("@agenda_4_conclusion_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.agenda4ConclusionName);
+                        cmd.Parameters.Add("@agenda_4_suggestion", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.agenda4Suggestion);
+                        cmd.Parameters.Add("@safety_type", SqlDbType.Int).Value = model.safetytype;
+                        cmd.Parameters.Add("@file1name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.file1name);
+                        cmd.Parameters.Add("@isClose", SqlDbType.Bit).Value = (model.agenda4Conclusion == "4") ? true : false;
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
+                        DateTime dtAlertDate = Convert.ToDateTime(DateTime.Now).AddDays(335);
+                        cmd.Parameters.Add("@alert_date", SqlDbType.VarChar, 50).Value = dtAlertDate.ToString("dd/MM/yyyy");
+
+                        DateTime dtExpireDate = Convert.ToDateTime(DateTime.Now).AddDays(365);
+                        cmd.Parameters.Add("@certificate_expire_date", SqlDbType.VarChar, 50).Value = dtExpireDate.ToString("dd/MM/yyyy");
+
+                        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                        rStatus.Direction = ParameterDirection.Output;
+                        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                        rMessage.Direction = ParameterDirection.Output;
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                        {
+                            resp.Status = true;
+
+                            if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
+                            {
+                                model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async(model.docid, 4);
+
+                                resp.filename = rpt.filename;
+                                resp.filebase64 = rpt.filebase64;
+                            }
+                            if (model.agenda4Conclusion == "3")
+                            {
+                                model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async(model.docid, 4);
+
+                                resp.filename = rpt.filename;
+                                resp.filebase64 = rpt.filebase64;
+                            }
+                        }
+                        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resp;
+        }
+
 
 
         // ระเบียบวาระที่ 5 ------------------------------------------------------------------------------
@@ -1838,13 +2406,13 @@ namespace THD.Core.Api.Repository.DataHandler
             return resp;
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuC35Async(ModelMenuC35 model)
+        public async Task<ModelResponseC35Message> AddDocMenuC35Async(ModelMenuC35 model)
         {
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseC35Message resp = new ModelResponseC35Message();
             try
             {
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -1858,7 +2426,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         //Tab 5 Group 1
                         IList<ModelMenuC35Tab5Group1> list_tab5_group_1 = new List<ModelMenuC35Tab5Group1>();
-                        for (int i = 0; i < 10; i++)
+                        for (int i = 0; i < 3; i++)
                         {
                             string seq = (i + 1).ToString();
                             switch (i + 1)
@@ -1902,94 +2470,193 @@ namespace THD.Core.Api.Repository.DataHandler
                                         });
                                     }
                                     break;
-                                case 4:
-                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq4Input1))
+                                default:
+                                    Console.WriteLine("Default case");
+                                    break;
+                            }
+
+                        }
+                        string tab_5_group_1_json = JsonConvert.SerializeObject(list_tab5_group_1);
+
+                        cmd.Parameters.Add("@tab_5_group_1_json", SqlDbType.VarChar).Value = tab_5_group_1_json;
+
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
+                        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                        rStatus.Direction = ParameterDirection.Output;
+                        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                        rMessage.Direction = ParameterDirection.Output;
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                        {
+                            resp.Status = true;
+                        }
+                        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resp;
+        }
+
+
+        // ระเบียบวาระที่ 5 แก้ไข ------------------------------------------------------------------------------
+        public async Task<ModelMenuC35_InterfaceData> MenuC35EditInterfaceDataAsync(string UserId, string ProectNumber)
+        {
+            ModelMenuC35_InterfaceData resp = new ModelMenuC35_InterfaceData();
+
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(UserId, "M018");
+
+            resp.editdata = new ModelMenuC35();
+            resp.editdata = await GetMenuC35DataEditAsync(ProectNumber, UserId, resp.UserPermission);
+
+
+            resp.ListMeetingId = new List<ModelSelectOption>();
+            resp.ListMeetingId = await GetMeetingIdAsync(resp.editdata.meetingid.ToString());
+
+            if (resp.ListMeetingId != null)
+            {
+                resp.meetingId = resp.ListMeetingId.FirstOrDefault().value;
+                resp.meetingName = resp.ListMeetingId.FirstOrDefault().label;
+            }
+
+            return resp;
+        }
+
+        private async Task<ModelMenuC35> GetMenuC35DataEditAsync(string project_number, string userid, ModelPermissionPage permission)
+        {
+            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand("sp_getdata_for_c3_5", conn))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 50).Value = project_number;
+
+                    SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelMenuC35 e = new ModelMenuC35();
+                        while (await reader.ReadAsync())
+                        {
+                            e.meetingid = Convert.ToInt32(reader["meeting_id"]);
+
+                            if (Convert.ToInt32(reader["seq"]) == 1)
+                            {
+                                e.tab5Group1Seq1Input1 = reader["input1"].ToString();
+                                e.tab5Group1Seq1Input2 = reader["input2"].ToString();
+                                e.tab5Group1Seq1Input3 = reader["input3"].ToString();
+                            }
+                            if (Convert.ToInt32(reader["seq"]) == 2)
+                            {
+                                e.tab5Group1Seq2Input1 = reader["input1"].ToString();
+                                e.tab5Group1Seq2Input2 = reader["input2"].ToString();
+                                e.tab5Group1Seq2Input3 = reader["input3"].ToString();
+                            }
+                            if (Convert.ToInt32(reader["seq"]) == 3)
+                            {
+                                e.tab5Group1Seq3Input1 = reader["input1"].ToString();
+                                e.tab5Group1Seq3Input2 = reader["input2"].ToString();
+                                e.tab5Group1Seq3Input3 = reader["input3"].ToString();
+                            }
+
+                            e.createby = reader["create_by"].ToString();
+                            e.meetingresolution = reader["meeting_resolution"].ToString();
+                        }
+
+                        //Default Edit False
+                        e.editenable = false;
+                        if (permission.edit == true)
+                        {
+                            if (string.IsNullOrEmpty(e.meetingresolution))
+                            {
+                                if (user_id == e.createby)
+                                {
+                                    e.editenable = true;
+                                }
+                            }
+                        }
+                        return e;
+                    }
+
+                }
+                conn.Close();
+            }
+            return null;
+        }
+
+        public async Task<ModelResponseC35Message> UpdateDocMenuC35EditAsync(ModelMenuC35 model)
+        {
+            var cultureInfo = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+            ModelResponseC35Message resp = new ModelResponseC35Message();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_doc_menu_c3_5_edit", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = model.meetingid;
+
+                        //Tab 5 Group 1
+                        IList<ModelMenuC35Tab5Group1> list_tab5_group_1 = new List<ModelMenuC35Tab5Group1>();
+                        for (int i = 0; i < 3; i++)
+                        {
+                            string seq = (i + 1).ToString();
+                            switch (i + 1)
+                            {
+                                case 1:
+                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq1Input1))
                                     {
                                         list_tab5_group_1.Add(new ModelMenuC35Tab5Group1
                                         {
                                             groupdata = "5.1",
                                             seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq4Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq4Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq4Input3).ToString(),
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq1Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq1Input2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq1Input3).ToString(),
                                         });
                                     }
                                     break;
-                                case 5:
-                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq5Input1))
+                                case 2:
+                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq2Input1))
                                     {
                                         list_tab5_group_1.Add(new ModelMenuC35Tab5Group1
                                         {
                                             groupdata = "5.1",
                                             seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq5Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq5Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq5Input3).ToString(),
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq2Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq2Input2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq2Input3).ToString(),
                                         });
                                     }
                                     break;
-                                case 6:
-                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq6Input1))
+                                case 3:
+                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq3Input1))
                                     {
                                         list_tab5_group_1.Add(new ModelMenuC35Tab5Group1
                                         {
                                             groupdata = "5.1",
                                             seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq6Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq6Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq6Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 7:
-                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq7Input1))
-                                    {
-                                        list_tab5_group_1.Add(new ModelMenuC35Tab5Group1
-                                        {
-                                            groupdata = "5.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq7Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq7Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq7Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 8:
-                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq8Input1))
-                                    {
-                                        list_tab5_group_1.Add(new ModelMenuC35Tab5Group1
-                                        {
-                                            groupdata = "5.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq8Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq8Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq8Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 9:
-                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq9Input1))
-                                    {
-                                        list_tab5_group_1.Add(new ModelMenuC35Tab5Group1
-                                        {
-                                            groupdata = "5.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq9Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq9Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq9Input3).ToString(),
-                                        });
-                                    }
-                                    break;
-                                case 10:
-                                    if (!string.IsNullOrEmpty(model.tab5Group1Seq10Input1))
-                                    {
-                                        list_tab5_group_1.Add(new ModelMenuC35Tab5Group1
-                                        {
-                                            groupdata = "5.1",
-                                            seq = seq,
-                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq10Input1).ToString(),
-                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq10Input2).ToString(),
-                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq10Input3).ToString(),
+                                            input1 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq3Input1).ToString(),
+                                            input2 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq3Input2).ToString(),
+                                            input3 = ParseDataHelper.ConvertDBNull(model.tab5Group1Seq3Input3).ToString(),
                                         });
                                     }
                                     break;
@@ -2003,6 +2670,8 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         cmd.Parameters.Add("@tab_5_group_1_json", SqlDbType.VarChar).Value = tab_5_group_1_json;
 
+                        cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
@@ -2013,6 +2682,229 @@ namespace THD.Core.Api.Repository.DataHandler
                         if ((int)cmd.Parameters["@rStatus"].Value > 0)
                         {
                             resp.Status = true;
+                        }
+                        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resp;
+        }
+
+
+        //พิมพ์รายงานการประชุม -------------------------------------------------------
+        public async Task<ModelResponseMessageReportAgenda> PrintReportAgendaDraftAsync(int DocId, int Round, int Year)
+        {
+            ModelResponseMessageReportAgenda resp = new ModelResponseMessageReportAgenda();
+            try
+            {
+                //using (SqlConnection conn = new SqlConnection(ConnectionString))
+                //{
+                //    conn.Open();
+                //    using (SqlCommand cmd = new SqlCommand("sp_close_meeting", conn))
+                //    {
+                //        cmd.CommandType = CommandType.StoredProcedure;
+
+                //        cmd.Parameters.Add("@YearOfClose", SqlDbType.Int).Value = model.meetingofyear;
+                //        cmd.Parameters.Add("@RoundOfClose", SqlDbType.Int).Value = model.meetingofround;
+
+                //        int current_year = CommonData.GetYearOfPeriod();
+                //        cmd.Parameters.Add("@YearOfNew", SqlDbType.Int).Value = current_year;
+
+                //        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                //        rStatus.Direction = ParameterDirection.Output;
+                //        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                //        rMessage.Direction = ParameterDirection.Output;
+                //        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
+                //        rDocId.Direction = ParameterDirection.Output;
+
+                //        await cmd.ExecuteNonQueryAsync();
+
+                //        if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                //        {
+                //            resp.Status = true;
+
+                //            model_rpt_14_file rpt = await _IDocMenuReportRepository.GetReportR14Async((int)cmd.Parameters["@rDocId"].Value);
+
+                //            resp.filename = rpt.filename;
+                //            resp.filebase64 = rpt.filebase64;
+                //        }
+                //        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                //    }
+                //    conn.Close();
+                //}
+
+                resp.Status = true;
+
+                model_rpt_15_file rpt = await _IDocMenuReportRepository.GetReportR15Async(0);
+
+                resp.filename = rpt.filename;
+                resp.filebase64 = rpt.filebase64;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resp;
+        }
+
+        public async Task<ModelResponseMessageReportAgenda> PrintReportAgendaRealAsync(ModelPrintMeeting model)
+        {
+            ModelResponseMessageReportAgenda resp = new ModelResponseMessageReportAgenda();
+            try
+            {
+                //using (SqlConnection conn = new SqlConnection(ConnectionString))
+                //{
+                //    conn.Open();
+                //    using (SqlCommand cmd = new SqlCommand("sp_close_meeting", conn))
+                //    {
+                //        cmd.CommandType = CommandType.StoredProcedure;
+
+                //        cmd.Parameters.Add("@YearOfClose", SqlDbType.Int).Value = model.meetingofyear;
+                //        cmd.Parameters.Add("@RoundOfClose", SqlDbType.Int).Value = model.meetingofround;
+
+                //        int current_year = CommonData.GetYearOfPeriod();
+                //        cmd.Parameters.Add("@YearOfNew", SqlDbType.Int).Value = current_year;
+
+                //        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                //        rStatus.Direction = ParameterDirection.Output;
+                //        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                //        rMessage.Direction = ParameterDirection.Output;
+                //        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
+                //        rDocId.Direction = ParameterDirection.Output;
+
+                //        await cmd.ExecuteNonQueryAsync();
+
+                //        if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                //        {
+                //            resp.Status = true;
+
+                //            model_rpt_14_file rpt = await _IDocMenuReportRepository.GetReportR14Async((int)cmd.Parameters["@rDocId"].Value);
+
+                //            resp.filename = rpt.filename;
+                //            resp.filebase64 = rpt.filebase64;
+                //        }
+                //        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                //    }
+                //    conn.Close();
+                //}
+
+                resp.Status = true;
+
+                model_rpt_15_file rpt = await _IDocMenuReportRepository.GetReportR15Async(0);
+
+                resp.filename = rpt.filename;
+                resp.filebase64 = rpt.filebase64;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resp;
+        }
+
+
+        //พิมพ์รายงานการประชุม -------------------------------------------------------
+
+        public async Task<ModelResponseMessageReportMeeting> PrintReportMeetingDraftAsync(int DocId, int Round, int Year)
+        {
+            ModelResponseMessageReportMeeting resp = new ModelResponseMessageReportMeeting();
+            try
+            {
+                //using (SqlConnection conn = new SqlConnection(ConnectionString))
+                //{
+                //    conn.Open();
+                //    using (SqlCommand cmd = new SqlCommand("sp_close_meeting", conn))
+                //    {
+                //        cmd.CommandType = CommandType.StoredProcedure;
+
+                //        cmd.Parameters.Add("@YearOfClose", SqlDbType.Int).Value = model.meetingofyear;
+                //        cmd.Parameters.Add("@RoundOfClose", SqlDbType.Int).Value = model.meetingofround;
+
+                //        int current_year = CommonData.GetYearOfPeriod();
+                //        cmd.Parameters.Add("@YearOfNew", SqlDbType.Int).Value = current_year;
+
+                //        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                //        rStatus.Direction = ParameterDirection.Output;
+                //        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                //        rMessage.Direction = ParameterDirection.Output;
+                //        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
+                //        rDocId.Direction = ParameterDirection.Output;
+
+                //        await cmd.ExecuteNonQueryAsync();
+
+                //        if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                //        {
+                //            resp.Status = true;
+
+                //            model_rpt_14_file rpt = await _IDocMenuReportRepository.GetReportR14Async((int)cmd.Parameters["@rDocId"].Value);
+
+                //            resp.filename = rpt.filename;
+                //            resp.filebase64 = rpt.filebase64;
+                //        }
+                //        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
+                //    }
+                //    conn.Close();
+                //}
+
+                resp.Status = true;
+
+                model_rpt_14_file rpt14 = await _IDocMenuReportRepository.GetReportR14Async(0);
+                resp.filename = rpt14.filename;
+                resp.filebase64 = rpt14.filebase64;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return resp;
+        }
+
+        public async Task<ModelResponseMessageReportMeeting> PrintReportMeetingRealAsync(ModelPrintMeeting model)
+        {
+            ModelResponseMessageReportMeeting resp = new ModelResponseMessageReportMeeting();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_print_report_meeting_real", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@YearOfClose", SqlDbType.Int).Value = model.meetingofyear;
+                        cmd.Parameters.Add("@RoundOfClose", SqlDbType.Int).Value = model.meetingofround;
+
+                        int current_year = CommonData.GetYearOfPeriod();
+                        cmd.Parameters.Add("@YearOfNew", SqlDbType.Int).Value = current_year;
+
+                        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
+                        rStatus.Direction = ParameterDirection.Output;
+                        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
+                        rMessage.Direction = ParameterDirection.Output;
+                        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
+                        rDocId.Direction = ParameterDirection.Output;
+
+                        await cmd.ExecuteNonQueryAsync();
+
+                        if ((int)cmd.Parameters["@rStatus"].Value > 0)
+                        {
+                            resp.Status = true;
+
+                            model_rpt_14_file rpt14 = await _IDocMenuReportRepository.GetReportR14Async((int)cmd.Parameters["@rDocId"].Value);
+                            resp.filename = rpt14.filename;
+                            resp.filebase64 = rpt14.filebase64;
+
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }
@@ -2041,6 +2933,43 @@ namespace THD.Core.Api.Repository.DataHandler
                         "FROM Doc_MenuC3 " +
                         "WHERE isClosed=0 " +
                         "ORDER BY meeting_id DESC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelSelectOption> e = new List<ModelSelectOption>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelSelectOption item = new ModelSelectOption();
+                            item.value = reader["meeting_id"].ToString();
+                            item.label = reader["meeting_name"].ToString();
+                            e.Add(item);
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
+        public async Task<IList<ModelSelectOption>> GetMeetingIdAsync(string meeting_id)
+        {
+
+            string sql = "SELECT TOP(5) doc_id as meeting_id, " +
+                        "'ครั้งที่ ' + CONVERT(VARCHAR, meeting_round) + " +
+                        "' ปี ' + CONVERT(VARCHAR, year_of_meeting) + " +
+                        "' วันที่ ' + CONVERT(VARCHAR, meeting_date, 103) as meeting_name " +
+                        "FROM Doc_MenuC3 " +
+                        "WHERE doc_id='" + meeting_id + "' " +
+                        "ORDER BY doc_id DESC";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {

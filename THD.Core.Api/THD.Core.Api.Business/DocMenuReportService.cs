@@ -70,13 +70,13 @@ namespace THD.Core.Api.Business
         {
             return await _IDocMenReportRepository.GetReportR11Async(doc_id);
         }
-        public async Task<model_rpt_12_file> GetReportR12Async(int doc_id)
+        public async Task<model_rpt_12_file> GetReportR12Async(int doc_id, int type)
         {
-            return await _IDocMenReportRepository.GetReportR12Async(doc_id);
+            return await _IDocMenReportRepository.GetReportR12Async(doc_id, type);
         }
-        public async Task<model_rpt_13_file> GetReportR13Async(int doc_id)
+        public async Task<model_rpt_13_file> GetReportR13Async(int doc_id, int type)
         {
-            return await _IDocMenReportRepository.GetReportR13Async(doc_id);
+            return await _IDocMenReportRepository.GetReportR13Async(doc_id, type);
         }
         public async Task<model_rpt_14_file> GetReportR14Async(int doc_id)
         {

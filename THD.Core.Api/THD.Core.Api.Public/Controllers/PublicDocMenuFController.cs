@@ -224,5 +224,55 @@ namespace THD.Core.Api.Public.Controllers
 
         #endregion
 
+        #region Menu F Account User
+
+        [HttpGet("MenuAccountInterfaceData/{RegisterId}")]
+        public async Task<IActionResult> MenuAccountInterfaceData(string RegisterId)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuF"}/{"MenuAccountInterfaceData"}/{RegisterId}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+
+        }
+
+        [HttpPost("UpdateUserAccount")]
+        public async Task<IActionResult> UpdateUserAccount(ModelUpdateAccountUser model)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuF"}/{"UpdateUserAccount"}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+        #endregion
+
     }
 }

@@ -130,6 +130,8 @@ namespace THD.Core.Api.Repository.DataHandler
 
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M001");
 
+            resp.usergroup = (resp.UserPermission.groupcode == "G001" || resp.UserPermission.groupcode == "G005" ? 2 : 1);
+
             ModelMenuHome1_InterfaceData search_data = new ModelMenuHome1_InterfaceData() { userid = RegisterId };
 
             resp.ListReportData = new List<ModelMenuHome1ReportData>();
@@ -269,10 +271,13 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-        public async Task<ModelMenuHome1_ResultNote> GetResultNoteHome1Async(string project_number)
+        public async Task<IList<ResultCommentNote>> GetResultNoteHome1Async(string project_number, string user_id)
         {
+
+            ModelPermissionPage user_permission = await _IRegisterUserRepository.GetPermissionPageAsync(user_id, "M001");
+
             string sql = "SELECT A.doc_id, ROW_NUMBER() OVER(PARTITION BY A.project_number ORDER BY A.doc_id ASC) as seq, A.doc_date, " +
-                        "B.full_name, A.comment_consider, C.name_thai, (D.name_thai + ' ' + D.name_thai_sub) as approval_name_thai " +
+                        "A.assigner_code, B.full_name, A.comment_consider, C.name_thai, (D.name_thai + ' ' + D.name_thai_sub) as approval_name_thai " +
                         "FROM Doc_MenuC2 A " +
                         "LEFT OUTER JOIN RegisterUser B " +
                         "ON A.assigner_code = B.register_id " +
@@ -280,7 +285,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         "ON A.safety_type = C.id " +
                         "LEFT OUTER JOIN MST_ApprovalType D " +
                         "ON A.approval_type = D.id " +
-                        "WHERE A.project_number='" + project_number + "' " +
+                        "WHERE 1=1 " + (user_permission.groupcode == "G002" ? " AND assigner_code='" + user_permission.registerid + "' " : "") +
+                        "AND A.project_number='" + project_number + "' " +
                         "ORDER BY A.doc_id ASC";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -292,14 +298,28 @@ namespace THD.Core.Api.Repository.DataHandler
 
                     if (reader.HasRows)
                     {
-                        ModelMenuHome1_ResultNote e = new ModelMenuHome1_ResultNote();
+                        IList<ResultCommentNote> e = new List<ResultCommentNote>();
                         while (await reader.ReadAsync())
                         {
-                            e.resultNote += "ลำดับที่: " + Convert.ToInt32(reader["seq"]) + " วันที่: " + Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy") + "\n" +
-                                            "ชื่อกรรมการ: " + reader["full_name"].ToString() + "\n" +
-                                            "ประเภทความเสี่ยง: " + reader["name_thai"].ToString() + "\n" +
-                                            "ความเห็นการรับรอง: " + reader["approval_name_thai"].ToString() + "\n" +
-                                            reader["comment_consider"].ToString() + "\n\n";
+                            ResultCommentNote item = new ResultCommentNote();
+
+                            item.docid = Convert.ToInt32(reader["doc_id"]);
+
+                            item.xseq = "ลำดับที่:";
+                            item.xdate = " วันที่:";
+                            item.xassignName = "ชื่อกรรมการ:";
+                            item.xriskName = "ประเภทความเสี่ยง:";
+                            item.xapprovalName = "ความเห็นการรับรอง:";
+                            item.xcommentDetail = "ความเห็นประกอบการพิจารณา:";
+
+                            item.commentDetail = reader["comment_consider"].ToString();
+                            item.seq = Convert.ToInt32(reader["seq"]).ToString();
+                            item.date = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+                            item.assignName = reader["full_name"].ToString();
+                            item.riskName = reader["name_thai"].ToString();
+                            item.approvalName = reader["approval_name_thai"].ToString();
+                            item.commentDetail = reader["comment_consider"].ToString();
+                            e.Add(item);
                         }
                         return e;
                     }
@@ -307,6 +327,39 @@ namespace THD.Core.Api.Repository.DataHandler
                 conn.Close();
             }
             return null;
+
+        }
+
+        public async Task<string> GetCommentDataAsync(string project_number, string user_group, string user_id)
+        {
+            string userid = Encoding.UTF8.GetString(Convert.FromBase64String(user_id));
+
+            StringBuilder comment_date = new StringBuilder();
+
+            string sql = "SELECT * " +
+                        "FROM Doc_MenuC2 " +
+                        "WHERE 1=1 " + (user_group == "G002" ? " AND assigner_code='" + userid + "' " : "") +
+                        "AND project_number='" + project_number + "' " +
+                        "ORDER BY doc_id ASC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            comment_date.AppendLine("วันที่: " + Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy"));
+                        }
+                    }
+                }
+                conn.Close();
+            }
+            return comment_date.ToString();
 
         }
 
@@ -378,11 +431,16 @@ namespace THD.Core.Api.Repository.DataHandler
                             item.review_request_date = reader["review_request_date"].ToString();
                             item.result_doc_review = reader["result_doc_review"].ToString();
                             item.committee_assign_date = reader["committee_assign_date"].ToString();
-                            item.committee_name_array = reader["committee_name_array"].ToString();
-                            item.committee_comment_date = reader["committee_comment_date"].ToString();
+                            item.committee_name_array = (user_permission.groupcode == "G002" ? user_permission.fullname : reader["committee_name_array"].ToString());
+
+                            string comment_date = "";
+                            if (user_permission.groupcode == "G002")
+                                comment_date = await GetCommentDataAsync(reader["project_number"].ToString(), user_permission.groupcode, search_data.userid);
+
+                            item.committee_comment_date = (user_permission.groupcode == "G002" ? comment_date : reader["committee_comment_date"].ToString());
                             item.meeting_date = reader["meeting_date"].ToString();
                             item.meeting_approval_date = reader["meeting_approval_date"].ToString();
-                            item.consider_result = reader["consider_result"].ToString();
+                            item.consider_result = reader["consider_result"].ToString() + (!string.IsNullOrEmpty(reader["consider_result"].ToString()) ? " (" + reader["safety_type"].ToString() + ")" : "");
                             item.alert_date = reader["alert_date"].ToString();
                             item.request_edit_meeting_date = reader["request_edit_meeting_date"].ToString(); /////
                             item.request_edit_date = reader["request_edit_date"].ToString();

@@ -17,6 +17,7 @@ namespace THD.Core.Api.Models
 
         public IList<ModelSelectOption> ListCommittees { get; set; }
         public IList<ModelSelectOption> ListMembers { get; set; }
+        public IList<ModelSelectOption> ListConsultant { get; set; }
 
         public string editdatamessage { get; set; }
         public ModelMenuA1 editdata { get; set; }
@@ -29,6 +30,7 @@ namespace THD.Core.Api.Models
         public string projectnumber { get; set; }
         public string docnumber { get; set; }
         public string projectconsultant { get; set; }
+        public string projectconsultantname { get; set; }
         public string projecttype { get; set; }
         public string projecttypename { get; set; }
         public string projecthead { get; set; }
@@ -122,6 +124,7 @@ namespace THD.Core.Api.Models
 
         public MemberProject member4json { get; set; }
         public string member4projecthead { get; set; }
+        public string member4projectheadname { get; set; }
         public string member4facultyname { get; set; }
         public string member4workphone { get; set; }
         public string member4mobile { get; set; }
@@ -130,13 +133,79 @@ namespace THD.Core.Api.Models
 
         public MemberProject member5json { get; set; }
         public string member5projecthead { get; set; }
+        public string member5projectheadname { get; set; }
         public string member5facultyname { get; set; }
         public string member5workphone { get; set; }
         public string member5mobile { get; set; }
         public string member5fax { get; set; }
         public string member5email { get; set; }
-        public string labothername { get; set; }
 
+
+        public MemberProject member6json { get; set; }
+        public string member6projecthead { get; set; }
+        public string member6projectheadname { get; set; }
+        public string member6facultyname { get; set; }
+        public string member6workphone { get; set; }
+        public string member6mobile { get; set; }
+        public string member6fax { get; set; }
+        public string member6email { get; set; }
+
+        public MemberProject member7json { get; set; }
+        public string member7projecthead { get; set; }
+        public string member7projectheadname { get; set; }
+        public string member7facultyname { get; set; }
+        public string member7workphone { get; set; }
+        public string member7mobile { get; set; }
+        public string member7fax { get; set; }
+        public string member7email { get; set; }
+
+        public MemberProject member8json { get; set; }
+        public string member8projecthead { get; set; }
+        public string member8projectheadname { get; set; }
+        public string member8facultyname { get; set; }
+        public string member8workphone { get; set; }
+        public string member8mobile { get; set; }
+        public string member8fax { get; set; }
+        public string member8email { get; set; }
+
+        public MemberProject member9json { get; set; }
+        public string member9projecthead { get; set; }
+        public string member9projectheadname { get; set; }
+        public string member9facultyname { get; set; }
+        public string member9workphone { get; set; }
+        public string member9mobile { get; set; }
+        public string member9fax { get; set; }
+        public string member9email { get; set; }
+
+        public MemberProject member10json { get; set; }
+        public string member10projecthead { get; set; }
+        public string member10projectheadname { get; set; }
+        public string member10facultyname { get; set; }
+        public string member10workphone { get; set; }
+        public string member10mobile { get; set; }
+        public string member10fax { get; set; }
+        public string member10email { get; set; }
+
+        public MemberProject member11json { get; set; }
+        public string member11projecthead { get; set; }
+        public string member11projectheadname { get; set; }
+        public string member11facultyname { get; set; }
+        public string member11workphone { get; set; }
+        public string member11mobile { get; set; }
+        public string member11fax { get; set; }
+        public string member11email { get; set; }
+
+        public MemberProject member12json { get; set; }
+        public string member12projecthead { get; set; }
+        public string member12projectheadname { get; set; }
+        public string member12facultyname { get; set; }
+        public string member12workphone { get; set; }
+        public string member12mobile { get; set; }
+        public string member12fax { get; set; }
+        public string member12email { get; set; }
+
+
+        public string labothername { get; set; }
 
         public string createby { get; set; }
         public bool editenable { get; set; }
@@ -153,6 +222,36 @@ namespace THD.Core.Api.Models
     }
 
     public class ModelMenuA1_FileDownload
+    {
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelMenuA3_FileDownload
+    {
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelMenuA4_FileDownload
+    {
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelMenuA5_FileDownload
+    {
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelMenuA6_FileDownload
+    {
+        public string filename { get; set; }
+        public string filebase64 { get; set; }
+    }
+
+    public class ModelMenuA7_FileDownload
     {
         public string filename { get; set; }
         public string filebase64 { get; set; }

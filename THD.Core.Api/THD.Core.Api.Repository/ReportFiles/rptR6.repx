@@ -5,7 +5,7 @@
     <Item2 Ref="3" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="50" />
     <Item3 Ref="4" ControlType="DetailBand" Name="Detail" HeightF="813.958252">
       <Controls>
-        <Item1 Ref="5" ControlType="XRLabel" Name="label7" Multiline="true" Text="label7" TextAlignment="TopCenter" SizeF="201.666626,23" LocationFloat="445.4171, 635.5" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,96">
+        <Item1 Ref="5" ControlType="XRLabel" Name="label7" Multiline="true" Text="label7" TextAlignment="TopCenter" SizeF="201.666626,23" LocationFloat="445.4171, 635.5" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <ExpressionBindings>
             <Item1 Ref="6" EventName="BeforePrint" PropertyName="Text" Expression="[faculty_name]" />
           </ExpressionBindings>
@@ -83,7 +83,7 @@
           </ExpressionBindings>
           <StylePriority Ref="43" UseFont="false" />
         </Item13>
-        <Item14 Ref="44" ControlType="XRLabel" Name="label2" Multiline="true" Text="ที่ ศธ  อว 0603.01.13(1)/ว 0101........................&#xD;&#xA;" SizeF="265.5001,23" LocationFloat="41.6666679, 180.999985" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+        <Item14 Ref="44" ControlType="XRLabel" Name="label2" Multiline="true" Text="ที่ ศธ  อว 0603.01.13(1)/NUIBC..........................&#xD;&#xA;" SizeF="265.5001,23" LocationFloat="41.6666679, 180.999985" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <StylePriority Ref="45" UseFont="false" />
         </Item14>
         <Item15 Ref="46" ControlType="XRLabel" Name="label33" Multiline="true" Text="คณะ" SizeF="33.958374,25.50003" LocationFloat="517.7083, 281.3334" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
@@ -131,7 +131,7 @@
         <Item29 Ref="74" ControlType="XRLabel" Name="label12" Multiline="true" Text="เมื่อวันที่..................เดือน..............................................พ.ศ...................................................." SizeF="640.333862,21.333313" LocationFloat="56.2501526, 367.0001" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <StylePriority Ref="75" UseFont="false" />
         </Item29>
-        <Item30 Ref="76" ControlType="XRLabel" Name="label9" Multiline="true" Text="ได้รับการพิจรณาจากคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัย นเรศวร ครั้งที่  ........................." SizeF="646.249634,21.333313" LocationFloat="57.7084846, 345.666779" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+        <Item30 Ref="76" ControlType="XRLabel" Name="label9" Multiline="true" Text="ได้รับการพิจารณาจากคณะกรรมการควบคุมความปลอดภัยทางชีวภาพ มหาวิทยาลัย นเรศวร ครั้งที่  ........................." SizeF="646.249634,21.333313" LocationFloat="57.7084846, 345.666779" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <StylePriority Ref="77" UseFont="false" />
         </Item30>
         <Item31 Ref="78" ControlType="XRLabel" Name="label8" CanGrow="false" Text="label8" SizeF="646.2498,36.333313" LocationFloat="57.7084846, 306.833344" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
@@ -146,7 +146,7 @@
         <Item33 Ref="83" ControlType="XRLabel" Name="label5" Multiline="true" Text="เรียน   ประธานคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร&#xD;&#xA;" SizeF="662.2917,25.50003" LocationFloat="41.6666679, 232.833328" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <StylePriority Ref="84" UseFont="false" />
         </Item33>
-        <Item34 Ref="85" ControlType="XRLabel" Name="label4" Multiline="true" Text="เรื่อง ขอชี้แจง/แก้ไข/โครงการวิจัยตามมติของคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ" SizeF="662.291443,28.8333435" LocationFloat="41.6666679, 203.999985" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+        <Item34 Ref="85" ControlType="XRLabel" Name="label4" Multiline="true" Text="เรื่อง ขอชี้แจ้ง/แก้ไข โครงการวิจัยตามมติของคณะกรรมการควบคุมความปลอดภัยทางชีวภาพ" SizeF="662.291443,28.8333435" LocationFloat="41.6666679, 203.999985" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <StylePriority Ref="86" UseFont="false" />
         </Item34>
         <Item35 Ref="87" ControlType="XRLabel" Name="label3" Multiline="true" Text="วันที่ .......................................................................................&#xD;&#xA;" SizeF="396.7916,23" LocationFloat="307.166748, 180.999985" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">

@@ -43,14 +43,6 @@ namespace THD.Core.Api.Repository.DataHandler
             year_current.label = (thai_year).ToString();
             resp.listYearOfMeeting.Add(year_current);
 
-            //for (int i = 1; i < 5; i++)
-            //{
-            //    ModelSelectOption year_next = new ModelSelectOption();
-            //    year_next.value = (thai_year + i).ToString();
-            //    year_next.label = (thai_year + i).ToString();
-            //    resp.listYearOfMeeting.Add(year_next);
-            //}
-
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M021");
 
             if (resp.UserPermission != null && resp.UserPermission.alldata == true)
@@ -192,14 +184,14 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuD2Async(ModelMenuD2 model)
+        public async Task<ModelResponseD2Message> AddDocMenuD2Async(ModelMenuD2 model)
         {
 
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseD2Message resp = new ModelResponseD2Message();
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {

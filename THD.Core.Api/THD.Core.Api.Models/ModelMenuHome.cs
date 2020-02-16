@@ -21,6 +21,7 @@ namespace THD.Core.Api.Models
         public string faculty { get; set; }
         public string risk { get; set; }
         public string userid { get; set; }
+        public int usergroup { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
     }
     public class ModelMenuHome1_DownloadFile
@@ -31,9 +32,26 @@ namespace THD.Core.Api.Models
 
     public class ModelMenuHome1_ResultNote
     {
-        public int seq { get; set; }
+        public IList<ResultCommentNote> listcomment { get; set; }
+    }
+
+    public class ResultCommentNote
+    {
+        public int docid { get; set; }
+
+        public string xseq { get; set; }
+        public string xdate { get; set; }
+        public string xassignName { get; set; }
+        public string xriskName { get; set; }
+        public string xapprovalName { get; set; }
+        public string xcommentDetail { get; set; }
+
+        public string seq { get; set; }
+        public string date { get; set; }
         public string assignName { get; set; }
-        public string resultNote { get; set; }
+        public string riskName { get; set; }
+        public string approvalName { get; set; }
+        public string commentDetail { get; set; }
     }
 
     public class ModelMenuHome1ReportData

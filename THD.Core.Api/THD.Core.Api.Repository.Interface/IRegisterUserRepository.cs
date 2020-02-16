@@ -15,5 +15,6 @@ namespace THD.Core.Api.Repository.Interface
         Task<ModelRegisterActive> GetFullRegisterUserByIdAsync(string RegisterId);
         Task<EntityRegisterUser> GetRegisterUserInActiveAsync(string RegisterId);
         Task<ModelPermissionPage> GetPermissionPageAsync(string RegisterId, string PageCode);
+        Task<ModelResponseMessageUpdateUserRegister> ResetPasswordAsync(ModelResetPassword model);
     }
 }

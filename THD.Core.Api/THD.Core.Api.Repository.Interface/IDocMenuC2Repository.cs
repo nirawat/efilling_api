@@ -26,7 +26,7 @@ namespace THD.Core.Api.Repository.Interface
 
         #region C2 Edit
 
-        Task<ModelMenuC2_InterfaceData> MenuC2InterfaceDataEditAsync(string project_number, string userid, string username);
+        Task<ModelMenuC2_InterfaceData> MenuC2InterfaceDataEditAsync(int docid, string userid, string username);
 
         Task<ModelResponseC2Message> UpdateDocMenuC2EditAsync(ModelMenuC2 model);
 

@@ -66,6 +66,11 @@ D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Relea
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.csproj.CopyComplete
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.dll
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.pdb
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.csprojAssemblyReference.cache
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.RazorAssemblyInfo.cache
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.RazorAssemblyInfo.cs
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.AssemblyInfoInputs.cache
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.AssemblyInfo.cs
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\nlog.config
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\appsettings.Development.json
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\appsettings.json
@@ -91,11 +96,6 @@ C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\bi
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Helpers.pdb
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Repository.pdb
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\bin\Release\netcoreapp2.2\THD.Core.Api.Repository.Interface.pdb
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.csprojAssemblyReference.cache
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.RazorAssemblyInfo.cache
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.RazorAssemblyInfo.cs
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.AssemblyInfoInputs.cache
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.AssemblyInfo.cs
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.RazorTargetAssemblyInfo.cache
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.csproj.CopyComplete
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Public\obj\Release\netcoreapp2.2\THD.Core.Api.Public.dll

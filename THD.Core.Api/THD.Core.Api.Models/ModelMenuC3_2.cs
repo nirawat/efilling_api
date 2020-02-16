@@ -12,6 +12,8 @@ namespace THD.Core.Api.Models
         public bool isFileAttachment { get; set; }
         public IList<ModelSelectOption> ListMeetingId { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
+
+        public ModelMenuC32 editdata { get; set; }
     }
     public class ModelMenuC32
     {
@@ -34,6 +36,8 @@ namespace THD.Core.Api.Models
         public string tab2Group1Seq3Input4 { get; set; }
 
         public string createby { get; set; }
+        public bool editenable { get; set; }
+        public string meetingresolution { get; set; }
     }
 
 

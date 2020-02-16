@@ -126,19 +126,19 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest(e);
         }
 
-        [HttpGet("GetReportR12/{DocId}")]
-        public async Task<IActionResult> GetReportR12(int DocId)
+        [HttpGet("GetReportR12/{DocId}/{type}")]
+        public async Task<IActionResult> GetReportR12(int DocId, int type)
         {
-            model_rpt_12_file e = await _IDocMenuReportService.GetReportR12Async(DocId);
+            model_rpt_12_file e = await _IDocMenuReportService.GetReportR12Async(DocId, type);
 
             if (e != null) return Ok(e);
             else return BadRequest(e);
         }
 
-        [HttpGet("GetReportR13/{DocId}")]
-        public async Task<IActionResult> GetReportR13(int DocId)
+        [HttpGet("GetReportR13/{DocId}/{type}")]
+        public async Task<IActionResult> GetReportR13(int DocId, int type)
         {
-            model_rpt_13_file e = await _IDocMenuReportService.GetReportR13Async(DocId);
+            model_rpt_13_file e = await _IDocMenuReportService.GetReportR13Async(DocId, type);
 
             if (e != null) return Ok(e);
             else return BadRequest(e);
@@ -171,24 +171,6 @@ namespace THD.Core.Api.Private.Controllers
             else return BadRequest(e);
         }
 
-        [HttpGet("GetAllReportMeeting/{DocId}/{Round}/{Year}")]
-        public async Task<IActionResult> GetAllReportMeeting(int DocId, string Round, string Year)
-        {
-            IActionResult _result = BadRequest();
-
-            model_rpt_meeting_file e = await _IDocMenuReportService.GetAllReportMeetingAsync(DocId);
-
-            if (e != null)
-            {
-                _result = Ok(e);
-
-                await _IMailTemplateService.MailTemplate7Async(Round, Year, e.filebase1464);
-
-            }
-            else _result = BadRequest();
-
-            return _result;
-        }
 
     }
 }

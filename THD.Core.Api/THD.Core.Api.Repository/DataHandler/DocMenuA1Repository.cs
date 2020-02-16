@@ -74,6 +74,9 @@ namespace THD.Core.Api.Repository.DataHandler
             resp.ListMembers = new List<ModelSelectOption>();
             resp.ListMembers = await GetAllRegisterUserByCharacterAsync();
 
+            resp.ListConsultant = new List<ModelSelectOption>();
+            resp.ListConsultant = await GetAllConsultantAsync();
+
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(userid, "M003");
 
             return resp;
@@ -110,13 +113,46 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-        public async Task<ModelResponseMessage> AddDocMenuA1Async(ModelMenuA1 model)
+        public async Task<IList<ModelSelectOption>> GetAllConsultantAsync()
+        {
+
+            string sql = "SELECT register_id, (first_name + full_name) as full_name " +
+                         "FROM RegisterUser WHERE IsActive='1' AND Character IN ('2','5','6','7','8') " +
+                         "ORDER BY full_name ASC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelSelectOption> e = new List<ModelSelectOption>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelSelectOption item = new ModelSelectOption();
+                            item.value = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["register_id"].ToString()));
+                            item.label = reader["full_name"].ToString();
+                            e.Add(item);
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
+        public async Task<ModelResponseA1Message> AddDocMenuA1Async(ModelMenuA1 model)
         {
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseA1Message resp = new ModelResponseA1Message();
 
             try
             {
@@ -129,9 +165,9 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         cmd.Parameters.Add("@doc_date", SqlDbType.DateTime).Value = model.docdate.ToString("yyyy-MM-dd");
                         cmd.Parameters.Add("@doc_number", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.docnumber);
-                        cmd.Parameters.Add("@project_consultant", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.projectconsultant);
                         cmd.Parameters.Add("@project_type", SqlDbType.VarChar, 2).Value = model.projecttype;
                         cmd.Parameters.Add("@project_head", SqlDbType.VarChar, 50).Value = model.projecthead;
+                        cmd.Parameters.Add("@project_consultant", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.projectconsultant));
                         cmd.Parameters.Add("@faculty_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.facultyname);
                         cmd.Parameters.Add("@work_phone", SqlDbType.VarChar, 20).Value = ParseDataHelper.ConvertDBNull(model.workphone);
                         cmd.Parameters.Add("@mobile", SqlDbType.VarChar, 10).Value = ParseDataHelper.ConvertDBNull(model.mobile);
@@ -181,6 +217,13 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@member_project_3", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member3json);
                         cmd.Parameters.Add("@member_project_4", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member4json);
                         cmd.Parameters.Add("@member_project_5", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member5json);
+                        cmd.Parameters.Add("@member_project_6", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member6json);
+                        cmd.Parameters.Add("@member_project_7", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member7json);
+                        cmd.Parameters.Add("@member_project_8", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member8json);
+                        cmd.Parameters.Add("@member_project_9", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member9json);
+                        cmd.Parameters.Add("@member_project_10", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member10json);
+                        cmd.Parameters.Add("@member_project_11", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member11json);
+                        cmd.Parameters.Add("@member_project_12", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member12json);
                         cmd.Parameters.Add("@lab_other_name", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.labothername);
 
                         cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
@@ -252,6 +295,9 @@ namespace THD.Core.Api.Repository.DataHandler
             resp.ListMembers = new List<ModelSelectOption>();
             resp.ListMembers = await GetAllRegisterUserByCharacterAsync();
 
+            resp.ListConsultant = new List<ModelSelectOption>();
+            resp.ListConsultant = await GetAllConsultantAsync();
+
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(userid, "M003");
 
             return resp;
@@ -259,13 +305,17 @@ namespace THD.Core.Api.Repository.DataHandler
 
         private async Task<ModelMenuA1> GetMenuA1DataEditAsync(int doc_id)
         {
-            string sql = "SELECT A1.*,(Users.first_name + Users.full_name) AS project_head_name,MST1.name_thai AS project_type_name, " +
+            string sql = "SELECT A1.*, " +
+                        "(Users.first_name + Users.full_name) AS project_head_name, " +
+                        "(Consult.first_name + Consult.full_name) AS project_consult_name, " +
+                        "MST1.name_thai AS project_type_name, " +
                         "MST2.name_thai AS according_type_method_name, " +
                         "MST3.name_thai AS project_according_type_method_name, " +
                         "(MST4.code + ' ' + MST4.name_thai) AS laboratory_used_name, B1.project_key_number " +
                         "FROM [dbo].[Doc_MenuA1] A1 " +
                         "LEFT OUTER JOIN [dbo].[Doc_MenuB1] B1 ON A1.doc_id = B1.project_id " +
                         "LEFT OUTER JOIN [dbo].[RegisterUser] Users ON A1.project_head = Users.register_id " +
+                        "LEFT OUTER JOIN [dbo].[RegisterUser] Consult ON A1.project_consultant = Consult.register_id " +
                         "LEFT OUTER JOIN [dbo].[MST_ProjectType] MST1 ON A1.project_type = MST1.id " +
                         "LEFT OUTER JOIN [dbo].[MST_AccordingTypeMethod] MST2 ON A1.according_type_method = MST2.id " +
                         "LEFT OUTER JOIN [dbo].[MST_ProjectcAccordingTypeMethod] MST3 ON A1.project_according_type_method = MST3.id " +
@@ -290,6 +340,8 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.projecttypename = reader["project_type_name"].ToString();
                             e.projecthead = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["project_head"].ToString()));
                             e.projectheadname = reader["project_head_name"].ToString();
+                            e.projectconsultant = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["project_consultant"].ToString()));
+                            e.projectconsultantname = reader["project_consult_name"].ToString();
                             e.facultyname = reader["faculty_name"].ToString();
                             e.workphone = reader["work_phone"].ToString();
                             e.mobile = reader["mobile"].ToString();
@@ -341,30 +393,151 @@ namespace THD.Core.Api.Repository.DataHandler
                             e.labothername = reader["lab_other_name"].ToString();
                             e.projeckeynumber = reader["project_key_number"].ToString();
                             e.createby = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(reader["create_by"].ToString()));
+
                             e.member1json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_1"].ToString());
-                            e.member1projecthead = e.member1json.projecthead;
-                            e.member1projectheadname = await GetMemberUserByIdAsync(e.member1json.projecthead);
-                            e.member1facultyname = e.member1json.facultyname;
-                            e.member1workphone = e.member1json.workphone;
-                            e.member1mobile = e.member1json.mobile;
-                            e.member1fax = e.member1json.fax;
-                            e.member1email = e.member1json.email;
+                            if (e.member1json != null)
+                            {
+                                e.member1projecthead = e.member1json.projecthead;
+                                e.member1projectheadname = await GetMemberUserByIdAsync(e.member1json.projecthead);
+                                e.member1facultyname = e.member1json.facultyname;
+                                e.member1workphone = e.member1json.workphone;
+                                e.member1mobile = e.member1json.mobile;
+                                e.member1fax = e.member1json.fax;
+                                e.member1email = e.member1json.email;
+                            }
+
                             e.member2json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_2"].ToString());
-                            e.member2projecthead = e.member2json.projecthead;
-                            e.member2projectheadname = await GetMemberUserByIdAsync(e.member2json.projecthead);
-                            e.member2facultyname = e.member2json.facultyname;
-                            e.member2workphone = e.member2json.workphone;
-                            e.member2mobile = e.member2json.mobile;
-                            e.member2fax = e.member2json.fax;
-                            e.member2email = e.member2json.email;
+                            if (e.member2json != null)
+                            {
+                                e.member2projecthead = e.member2json.projecthead;
+                                e.member2projectheadname = await GetMemberUserByIdAsync(e.member2json.projecthead);
+                                e.member2facultyname = e.member2json.facultyname;
+                                e.member2workphone = e.member2json.workphone;
+                                e.member2mobile = e.member2json.mobile;
+                                e.member2fax = e.member2json.fax;
+                                e.member2email = e.member2json.email;
+                            }
+
                             e.member3json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_3"].ToString());
-                            e.member3projecthead = e.member3json.projecthead;
-                            e.member3projectheadname = await GetMemberUserByIdAsync(e.member3json.projecthead);
-                            e.member3facultyname = e.member3json.facultyname;
-                            e.member3workphone = e.member3json.workphone;
-                            e.member3mobile = e.member3json.mobile;
-                            e.member3fax = e.member3json.fax;
-                            e.member3email = e.member3json.email;
+                            if (e.member3json != null)
+                            {
+                                e.member3projecthead = e.member3json.projecthead;
+                                e.member3projectheadname = await GetMemberUserByIdAsync(e.member3json.projecthead);
+                                e.member3facultyname = e.member3json.facultyname;
+                                e.member3workphone = e.member3json.workphone;
+                                e.member3mobile = e.member3json.mobile;
+                                e.member3fax = e.member3json.fax;
+                                e.member3email = e.member3json.email;
+                            }
+
+                            e.member4json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_4"].ToString());
+                            if (e.member4json != null)
+                            {
+                                e.member4projecthead = e.member4json.projecthead;
+                                e.member4projectheadname = await GetMemberUserByIdAsync(e.member4json.projecthead);
+                                e.member4facultyname = e.member4json.facultyname;
+                                e.member4workphone = e.member4json.workphone;
+                                e.member4mobile = e.member4json.mobile;
+                                e.member4fax = e.member4json.fax;
+                                e.member4email = e.member4json.email;
+                            }
+
+                            e.member5json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_5"].ToString());
+                            if (e.member5json != null)
+                            {
+                                e.member5projecthead = e.member5json.projecthead;
+                                e.member5projectheadname = await GetMemberUserByIdAsync(e.member5json.projecthead);
+                                e.member5facultyname = e.member5json.facultyname;
+                                e.member5workphone = e.member5json.workphone;
+                                e.member5mobile = e.member5json.mobile;
+                                e.member5fax = e.member5json.fax;
+                                e.member5email = e.member5json.email;
+                            }
+
+                            e.member6json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_5"].ToString());
+                            if (e.member6json != null)
+                            {
+                                e.member6projecthead = e.member6json.projecthead;
+                                e.member6projectheadname = await GetMemberUserByIdAsync(e.member6json.projecthead);
+                                e.member6facultyname = e.member6json.facultyname;
+                                e.member6workphone = e.member6json.workphone;
+                                e.member6mobile = e.member6json.mobile;
+                                e.member6fax = e.member6json.fax;
+                                e.member6email = e.member6json.email;
+                            }
+
+                            e.member7json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_7"].ToString());
+                            if (e.member7json != null)
+                            {
+                                e.member7projecthead = e.member7json.projecthead;
+                                e.member7projectheadname = await GetMemberUserByIdAsync(e.member7json.projecthead);
+                                e.member7facultyname = e.member7json.facultyname;
+                                e.member7workphone = e.member7json.workphone;
+                                e.member7mobile = e.member7json.mobile;
+                                e.member7fax = e.member7json.fax;
+                                e.member7email = e.member7json.email;
+                            }
+
+                            e.member8json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_8"].ToString());
+                            if (e.member8json != null)
+                            {
+                                e.member8projecthead = e.member8json.projecthead;
+                                e.member8projectheadname = await GetMemberUserByIdAsync(e.member8json.projecthead);
+                                e.member8facultyname = e.member8json.facultyname;
+                                e.member8workphone = e.member8json.workphone;
+                                e.member8mobile = e.member8json.mobile;
+                                e.member8fax = e.member8json.fax;
+                                e.member8email = e.member8json.email;
+                            }
+
+                            e.member9json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_9"].ToString());
+                            if (e.member9json != null)
+                            {
+                                e.member9projecthead = e.member9json.projecthead;
+                                e.member9projectheadname = await GetMemberUserByIdAsync(e.member9json.projecthead);
+                                e.member9facultyname = e.member9json.facultyname;
+                                e.member9workphone = e.member9json.workphone;
+                                e.member9mobile = e.member9json.mobile;
+                                e.member9fax = e.member9json.fax;
+                                e.member9email = e.member9json.email;
+                            }
+
+                            e.member10json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_10"].ToString());
+                            if (e.member10json != null)
+                            {
+                                e.member10projecthead = e.member10json.projecthead;
+                                e.member10projectheadname = await GetMemberUserByIdAsync(e.member10json.projecthead);
+                                e.member10facultyname = e.member10json.facultyname;
+                                e.member10workphone = e.member10json.workphone;
+                                e.member10mobile = e.member10json.mobile;
+                                e.member10fax = e.member10json.fax;
+                                e.member10email = e.member10json.email;
+                            }
+
+                            e.member11json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_11"].ToString());
+                            if (e.member11json != null)
+                            {
+                                e.member11projecthead = e.member11json.projecthead;
+                                e.member11projectheadname = await GetMemberUserByIdAsync(e.member11json.projecthead);
+                                e.member11facultyname = e.member11json.facultyname;
+                                e.member11workphone = e.member11json.workphone;
+                                e.member11mobile = e.member11json.mobile;
+                                e.member11fax = e.member11json.fax;
+                                e.member11email = e.member11json.email;
+                            }
+
+                            e.member12json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_12"].ToString());
+                            if (e.member12json != null)
+                            {
+                                e.member12projecthead = e.member12json.projecthead;
+                                e.member12projectheadname = await GetMemberUserByIdAsync(e.member12json.projecthead);
+                                e.member12facultyname = e.member12json.facultyname;
+                                e.member12workphone = e.member12json.workphone;
+                                e.member12mobile = e.member12json.mobile;
+                                e.member12fax = e.member12json.fax;
+                                e.member12email = e.member12json.email;
+                            }
+
                         }
                         return e;
                     }
@@ -456,13 +629,13 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
-        public async Task<ModelResponseMessage> UpdateDocMenuA1EditAsync(ModelMenuA1 model)
+        public async Task<ModelResponseA1Message> UpdateDocMenuA1EditAsync(ModelMenuA1 model)
         {
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-            ModelResponseMessage resp = new ModelResponseMessage();
+            ModelResponseA1Message resp = new ModelResponseA1Message();
 
             try
             {
@@ -477,6 +650,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@doc_date", SqlDbType.DateTime).Value = model.docdate.ToString("yyyy-MM-dd");
                         cmd.Parameters.Add("@project_type", SqlDbType.VarChar, 2).Value = model.projecttype;
                         cmd.Parameters.Add("@project_head", SqlDbType.VarChar, 50).Value = model.projecthead;
+                        cmd.Parameters.Add("@project_consultant", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.projectconsultant));
                         cmd.Parameters.Add("@faculty_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.facultyname);
                         cmd.Parameters.Add("@work_phone", SqlDbType.VarChar, 20).Value = ParseDataHelper.ConvertDBNull(model.workphone);
                         cmd.Parameters.Add("@mobile", SqlDbType.VarChar, 10).Value = ParseDataHelper.ConvertDBNull(model.mobile);
@@ -526,6 +700,13 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@member_project_3", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member3json);
                         cmd.Parameters.Add("@member_project_4", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member4json);
                         cmd.Parameters.Add("@member_project_5", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member5json);
+                        cmd.Parameters.Add("@member_project_6", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member6json);
+                        cmd.Parameters.Add("@member_project_7", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member7json);
+                        cmd.Parameters.Add("@member_project_8", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member8json);
+                        cmd.Parameters.Add("@member_project_9", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member9json);
+                        cmd.Parameters.Add("@member_project_10", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member10json);
+                        cmd.Parameters.Add("@member_project_11", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member11json);
+                        cmd.Parameters.Add("@member_project_12", SqlDbType.NVarChar).Value = JsonConvert.SerializeObject(model.member12json);
                         cmd.Parameters.Add("@lab_other_name", SqlDbType.NVarChar).Value = ParseDataHelper.ConvertDBNull(model.labothername);
 
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);

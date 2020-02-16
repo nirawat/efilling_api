@@ -114,5 +114,26 @@ namespace THD.Core.Api.Private.Controllers
 
         #endregion
 
+        #region Menu F Account User
+        [HttpGet("MenuAccountInterfaceData/{RegisterId}")]
+        public async Task<IActionResult> MenuAccountInterfaceData(string RegisterId)
+        {
+            ModelMenuFAccount_InterfaceData e = await _IDocMenuFService.MenuAccountInterfaceDataAsync(RegisterId);
+
+            if (e != null) return Ok(e);
+            else return BadRequest();
+        }
+
+        [HttpPost("UpdateUserAccount")]
+        public async Task<IActionResult> UpdateUserAccount(ModelUpdateAccountUser model)
+        {
+            ModelResponseMessageUpdateUserRegister e = await _IDocMenuFService.UpdateUserAccountAsync(model);
+
+            if (e.Status) return Ok();
+            else return BadRequest();
+
+        }
+        #endregion
+
     }
 }

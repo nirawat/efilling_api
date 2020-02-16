@@ -127,5 +127,36 @@ namespace THD.Core.Api.Business
         {
             return await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, PageCode);
         }
+
+        public async Task<ModelResponseMessageUpdateUserRegister> ResetPasswordAsync(ModelResetPassword model)
+        {
+            ModelResponseMessageUpdateUserRegister resp = new ModelResponseMessageUpdateUserRegister();
+
+            resp.Status = false;
+
+            if (string.IsNullOrEmpty(model.oldpassw))
+            {
+                resp.Message = "กรุณาระบุรหัสผ่านเดิม";
+            }
+            else if (string.IsNullOrEmpty(model.newpassw))
+            {
+                resp.Message = "กรุณาระบุรหัสผ่านใหม่";
+            }
+            else if (string.IsNullOrEmpty(model.confirmpassw))
+            {
+                resp.Message = "กรุณายืนยันรหัสผ่าน";
+            }
+            else if (model.newpassw != model.confirmpassw)
+            {
+                resp.Message = "รหัสผ่านใหม่ไม่ตรงกัน";
+            }
+            else
+            {
+                resp = await _IRegisterUserRepository.ResetPasswordAsync(model);
+            }
+
+            return resp;
+
+        }
     }
 }
