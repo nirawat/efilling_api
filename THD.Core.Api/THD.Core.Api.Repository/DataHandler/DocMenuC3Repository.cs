@@ -2703,47 +2703,12 @@ namespace THD.Core.Api.Repository.DataHandler
             ModelResponseMessageReportAgenda resp = new ModelResponseMessageReportAgenda();
             try
             {
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_close_meeting", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
-
-                //        cmd.Parameters.Add("@YearOfClose", SqlDbType.Int).Value = model.meetingofyear;
-                //        cmd.Parameters.Add("@RoundOfClose", SqlDbType.Int).Value = model.meetingofround;
-
-                //        int current_year = CommonData.GetYearOfPeriod();
-                //        cmd.Parameters.Add("@YearOfNew", SqlDbType.Int).Value = current_year;
-
-                //        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
-                //        rStatus.Direction = ParameterDirection.Output;
-                //        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
-                //        rMessage.Direction = ParameterDirection.Output;
-                //        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
-                //        rDocId.Direction = ParameterDirection.Output;
-
-                //        await cmd.ExecuteNonQueryAsync();
-
-                //        if ((int)cmd.Parameters["@rStatus"].Value > 0)
-                //        {
-                //            resp.Status = true;
-
-                //            model_rpt_14_file rpt = await _IDocMenuReportRepository.GetReportR14Async((int)cmd.Parameters["@rDocId"].Value);
-
-                //            resp.filename = rpt.filename;
-                //            resp.filebase64 = rpt.filebase64;
-                //        }
-                //        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
-                //    }
-                //    conn.Close();
-                //}
-
                 resp.Status = true;
 
-                model_rpt_15_file rpt = await _IDocMenuReportRepository.GetReportR15Async(0);
+                model_rpt_15_file rpt = await _IDocMenuReportRepository.GetReportR15Async(DocId);
 
                 resp.filename = rpt.filename;
+
                 resp.filebase64 = rpt.filebase64;
 
             }
@@ -2819,46 +2784,13 @@ namespace THD.Core.Api.Repository.DataHandler
             ModelResponseMessageReportMeeting resp = new ModelResponseMessageReportMeeting();
             try
             {
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_close_meeting", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
-
-                //        cmd.Parameters.Add("@YearOfClose", SqlDbType.Int).Value = model.meetingofyear;
-                //        cmd.Parameters.Add("@RoundOfClose", SqlDbType.Int).Value = model.meetingofround;
-
-                //        int current_year = CommonData.GetYearOfPeriod();
-                //        cmd.Parameters.Add("@YearOfNew", SqlDbType.Int).Value = current_year;
-
-                //        SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
-                //        rStatus.Direction = ParameterDirection.Output;
-                //        SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
-                //        rMessage.Direction = ParameterDirection.Output;
-                //        SqlParameter rDocId = cmd.Parameters.Add("@rDocId", SqlDbType.Int);
-                //        rDocId.Direction = ParameterDirection.Output;
-
-                //        await cmd.ExecuteNonQueryAsync();
-
-                //        if ((int)cmd.Parameters["@rStatus"].Value > 0)
-                //        {
-                //            resp.Status = true;
-
-                //            model_rpt_14_file rpt = await _IDocMenuReportRepository.GetReportR14Async((int)cmd.Parameters["@rDocId"].Value);
-
-                //            resp.filename = rpt.filename;
-                //            resp.filebase64 = rpt.filebase64;
-                //        }
-                //        else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
-                //    }
-                //    conn.Close();
-                //}
 
                 resp.Status = true;
 
-                model_rpt_14_file rpt14 = await _IDocMenuReportRepository.GetReportR14Async(0);
+                model_rpt_14_file rpt14 = await _IDocMenuReportRepository.GetReportR14Async(DocId);
+
                 resp.filename = rpt14.filename;
+
                 resp.filebase64 = rpt14.filebase64;
 
             }

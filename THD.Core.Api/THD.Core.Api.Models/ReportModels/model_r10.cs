@@ -14,35 +14,34 @@ namespace THD.Core.Api.Models.ReportModels
 
     public class model_rpt_10_report
     {
-        public string projecttype { get; set; }
-        public string Doc_head_1 { get; set; }
-        public string Doc_head_2 { get; set; }
-        public string Doc_head_3 { get; set; }
-        public string Doc_head_4 { get; set; }
-        public string Presenter_name { get; set; }
-        public bool Position_1 { get; set; }
-        public bool Position_2 { get; set; }
-        public bool Position_3 { get; set; }
-        public bool Position_4 { get; set; }
-        public bool Position_5 { get; set; }
-        public string Job_Position { get; set; }
-        public string Faculty_name { get; set; }
-        public string Research_name_thai { get; set; }
-        public string Research_name_eng { get; set; }
-        public string Advisor_signature { get; set; }
-        public string Advisor_fullname { get; set; }
-        public string Dept_comment { get; set; }
-        public string Dept_signature { get; set; }
-        public string Dept_fullname { get; set; }
-        public string Headoffaculty_comment { get; set; }
-        public string Headoffaculty_signature { get; set; }
-        public string Headoffaculty_fullname { get; set; }
-        public string HeadofResearch_signature { get; set; }
-        public string HeadofResearch_fullname { get; set; }
-        public string co_research_signature1 { get; set; }
-        public string co_research_fullname1 { get; set; }
-        public string co_research_signature2 { get; set; }
-        public string co_research_fullname2 { get; set; }
-
+        public string docid { get; set; }
+        public string assignercode { get; set; }
+        public string assignername { get; set; }
+        public string positionname { get; set; }
+        public string assignerseq { get; set; }
+        public string projectnumber { get; set; }
+        public string projectheadname { get; set; }
+        public string facultyname { get; set; }
+        public string projectnamethai { get; set; }
+        public string projectnameeng { get; set; }
+        public string safetytype { get; set; }
+        public string safetytypename { get; set; }
+        public string approvaltype { get; set; }
+        public string approvaltypename { get; set; }
+        public string commentconsider1 { get; set; }
+        public string commentconsider2 { get; set; }
+        public string commentconsider3 { get; set; }
+        public string commentconsider4 { get; set; }
+        public string advisor { get; set; }
+        public string doc_date { get; set; }
+        public bool chkbox1 { get; set; }
+        public bool chkbox2 { get; set; }
+        public bool chkbox3 { get; set; }
+        public bool chkbox4 { get; set; }
+        public bool chkbox5 { get; set; }
+        public string comment { get; set; }
+        public string approvetype1 { get; set; }
+        public string approvetype2 { get; set; }
+        public string approvetype3 { get; set; }
     }
 }

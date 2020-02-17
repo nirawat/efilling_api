@@ -125,7 +125,7 @@ namespace THD.Core.Api.Repository.DataHandler
                                 e.facultyname = reader[4].ToString();
                                 e.positionname = reader[5].ToString();
                                 e.certificatetype = reader[6].ToString();
-                                e.dateofapproval = Convert.ToDateTime(reader[7]).ToString("dd/MM/yyyy");
+                                e.dateofapproval = reader[7].ToString();
                             }
                             return e;
                         }

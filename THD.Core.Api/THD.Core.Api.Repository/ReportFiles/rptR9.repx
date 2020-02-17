@@ -44,7 +44,7 @@
           </ExpressionBindings>
           <StylePriority Ref="27" UseFont="false" />
         </Item10>
-        <Item11 Ref="28" ControlType="XRLabel" Name="label9" Multiline="true" Text="ข้อเสนอการวิจัยนี้ได้ผ่านการพิจารณาและรับรองจากคณะกรรมการควบคุมความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร ครั้งที่    วันที่" SizeF="535.8332,76.33334" LocationFloat="162.499954, 308.333374" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+        <Item11 Ref="28" ControlType="XRLabel" Name="label9" Multiline="true" Text="ข้อเสนอการวิจัยนี้ได้ผ่านการพิจารณาและรับรองจากคณะกรรมการควบคุมความปลอดภัยทางชีวภาพมหาวิทยาลัยนเรศวร ครั้งที่    วันที่" SizeF="535.8332,76.33334" LocationFloat="162.499954, 308.333374" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <StylePriority Ref="29" UseFont="false" />
         </Item11>
         <Item12 Ref="30" ControlType="XRLabel" Name="label8" Multiline="true" Text="label8" SizeF="258.333344,23" LocationFloat="236.666611, 285.333374" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
@@ -83,13 +83,13 @@
           </ExpressionBindings>
           <StylePriority Ref="47" UseFont="false" />
         </Item17>
-        <Item18 Ref="48" ControlType="XRLabel" Name="label2" Multiline="true" Text="label2" SizeF="535.8333,41.50009" LocationFloat="162.4999, 128.833313" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+        <Item18 Ref="48" ControlType="XRLabel" Name="label2" Multiline="true" Text="label2" SizeF="535.8333,41.50009" LocationFloat="162.4998, 108.833313" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <ExpressionBindings>
             <Item1 Ref="49" EventName="BeforePrint" PropertyName="Text" Expression="[project_nameeng]" />
           </ExpressionBindings>
           <StylePriority Ref="50" UseFont="false" />
         </Item18>
-        <Item19 Ref="51" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" SizeF="535.8333,49.66664" LocationFloat="162.499954, 68.3333359" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
+        <Item19 Ref="51" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" SizeF="535.8333,49.66664" LocationFloat="162.499954, 59.1666679" Font="TH Sarabun New, 14pt" Padding="2,2,0,0,100">
           <ExpressionBindings>
             <Item1 Ref="52" EventName="BeforePrint" PropertyName="Text" Expression="[project_namethai]" />
           </ExpressionBindings>

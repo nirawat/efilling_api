@@ -95,11 +95,17 @@ namespace THD.Core.Api.Repository.DataHandler
         public async Task<IList<ModelMenuR1Data>> GetAllReportHistoryDataR1Async(ModelMenuR1_InterfaceData search)
         {
 
-            string sql = "SELECT * FROM Doc_MeetingRound_Project WHERE 1=1 ";
+            string sql = "SELECT B.doc_id, A.meeting_round, A.meeting_year, A.isClose, " +
+                        "B.meeting_date, B.meeting_start, B.meeting_close, B.meeting_location, C.name_thai AS meeting_type_name " +
+                        "FROM Doc_MeetingRound_Project A " +
+                        "LEFT OUTER JOIN [dbo].[Doc_MenuC3] B " +
+                        "ON A.meeting_year = B.year_of_meeting AND A.meeting_round = B.meeting_round " +
+                        "LEFT OUTER JOIN [dbo].[MST_MeetingRecordType] C ON C.id = B.meeting_record_id " +
+                        "WHERE 1=1 ";
 
-            if (search != null && !string.IsNullOrEmpty(search.meetingid)) sql += " AND id='" + search.meetingid + "' ";
+            if (search != null && !string.IsNullOrEmpty(search.meetingid)) sql += " AND B.doc_id='" + search.meetingid + "' ";
 
-            sql += " ORDER BY id DESC";
+            sql += " ORDER BY A.meeting_round DESC";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
             {
@@ -114,13 +120,13 @@ namespace THD.Core.Api.Repository.DataHandler
                         while (await reader.ReadAsync())
                         {
                             ModelMenuR1Data item = new ModelMenuR1Data();
-                            item.docid = reader["id"].ToString();
-                            item.meetingdate = Convert.ToDateTime(reader["meeting_of_date"]).ToString("dd/MM/yyyy");
-                            item.meetinglocation = "";
-                            item.meetingrecordname = "";
+                            item.docid = reader["doc_id"].ToString();
+                            item.meetingdate = (string.IsNullOrEmpty(reader["meeting_date"].ToString()) ? "" : Convert.ToDateTime(reader["meeting_date"]).ToString("dd/MM/yyyy"));
+                            item.meetinglocation = reader["meeting_location"].ToString();
+                            item.meetingstart = reader["meeting_start"].ToString();
+                            item.meetingclose = reader["meeting_close"].ToString();
                             item.meetinground = reader["meeting_round"].ToString();
                             item.yearofmeeting = reader["meeting_year"].ToString();
-                            item.committeesarray = "";
                             item.isclosed = Convert.ToBoolean(reader["isClose"]);
                             e.Add(item);
                         }

@@ -22,5 +22,14 @@ namespace THD.Core.Api.Helpers
 
             return result;
         }
+
+        public static int ConvertYearToThai(int year)
+        {
+
+            int result = (year >= 2500 ? year : (year + 543));
+
+            return result;
+        }
+
     }
 }

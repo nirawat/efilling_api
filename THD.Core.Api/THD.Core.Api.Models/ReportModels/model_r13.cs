@@ -14,14 +14,20 @@ namespace THD.Core.Api.Models.ReportModels
 
     public class model_rpt_13_report
     {
+        public string docno { get; set; }
         public string doc_head_4 { get; set; }
-        public string research_name { get; set; }
+        public string nuibc { get; set; }
+        public string researcher { get; set; }
+        public string research_name_thai { get; set; }
+        public string research_name_eng { get; set; }
         public string round { get; set; }
         public string project_qty { get; set; }
         public string certificate_date { get; set; }
         public string approve_date { get; set; }
+        public string approvetype { get; set; }
         public string vote1 { get; set; }
         public string vote2 { get; set; }
+        public string assignname { get; set; }
 
     }
 }

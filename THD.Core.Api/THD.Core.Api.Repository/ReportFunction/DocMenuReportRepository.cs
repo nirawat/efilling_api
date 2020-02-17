@@ -49,6 +49,7 @@ namespace THD.Core.Api.Repository.DataHandler
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
+
             try
             {
                 model_rpt_1_report rptData1_2 = new model_rpt_1_report();
@@ -84,11 +85,36 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData1_2.Research_name_thai = reader["project_name_thai"].ToString();
                                 rptData1_2.Research_name_eng = reader["project_name_eng"].ToString();
                                 rptData1_2.Faculty_name = reader["faculty_name"].ToString();
-
-                                rptData1_2.Advisor_fullname = reader["project_consultant"].ToString();
                                 rptData1_2.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                                rptData1_2.co_research_fullname1 = reader["member_project_1"].ToString();
-                                rptData1_2.co_research_fullname2 = reader["member_project_2"].ToString();
+                                rptData1_2.Advisor_fullname = reader["project_consult_name"].ToString();
+
+
+                                MemberProject member1json = new MemberProject();
+                                member1json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_1"].ToString());
+                                if (member1json != null)
+                                {
+                                    var member1 = await GetRegisterInforAsync(member1json.projecthead);
+                                    if (member1 != null && member1.Count > 0)
+                                        rptData1_2.co_research_fullname1 = member1.FirstOrDefault().name;
+                                }
+
+                                MemberProject member2json = new MemberProject();
+                                member2json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_2"].ToString());
+                                if (member2json != null)
+                                {
+                                    var member2 = await GetRegisterInforAsync(member2json.projecthead);
+                                    if (member2 != null && member2.Count > 0)
+                                        rptData1_2.co_research_fullname2 = member2.FirstOrDefault().name;
+                                }
+
+                                MemberProject member3json = new MemberProject();
+                                member3json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_3"].ToString());
+                                if (member3json != null)
+                                {
+                                    var member3 = await GetRegisterInforAsync(member3json.projecthead);
+                                    if (member3 != null && member3.Count > 0)
+                                        rptData1_2.co_research_fullname3 = member3.FirstOrDefault().name;
+                                }
 
                             }
                         }
@@ -200,6 +226,7 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -283,6 +310,7 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -367,6 +395,7 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -451,6 +480,7 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -535,6 +565,7 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -619,6 +650,8 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = "";
+            int year = System.DateTime.Now.Year;
 
             try
             {
@@ -627,7 +660,6 @@ namespace THD.Core.Api.Repository.DataHandler
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
                     conn.Open();
-
                     using (SqlCommand cmd = new SqlCommand("sp_report_8", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -640,6 +672,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             while (await reader.ReadAsync())
                             {
+                                rptData.docno = await CreateReportNumberAsync(year, "R8", doc_id, "Doc_MenuB1");
                                 rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
                                 rptData.faculty_name = reader["faculty_name"].ToString();
                                 rptData.research_name_eng = reader["project_name_thai"].ToString() + "   " + reader["project_name_eng"].ToString();
@@ -653,13 +686,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         }
                         reader.Close();
                     }
-
                     conn.Close();
                 }
-
-                //รันเลขที่รายงาน ----------------------------------------------------------------------------------------------
-                string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
-                // ---------------------------------------------------------------------------------------------------------
 
                 rptR8 rpt = new rptR8();
 
@@ -699,6 +727,7 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -776,75 +805,75 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
-                //model_rpt_2_report rptData = new model_rpt_2_report();
+                model_rpt_10_report rptData = new model_rpt_10_report();
 
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_2", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
-
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
-
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
-
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_type"].ToString();
-                //                rptData.Doc_head_2 = reader["doc_number"].ToString();
-                //                rptData.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                //                rptData.Presenter_name = reader["project_head_name"].ToString();
-                //                rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
-                //                rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
-                //                rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
-                //                rptData.Position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
-                //                rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
-                //                rptData.Job_Position = "";
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-                //                rptData.Research_name_thai = reader["project_name_thai"].ToString();
-                //                rptData.Research_name_eng = reader["project_name_eng"].ToString();
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-
-                //                rptData.Advisor_fullname = reader["project_consultant"].ToString();
-                //                rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                //                rptData.co_research_fullname1 = reader["member_project_1"].ToString();
-                //                rptData.co_research_fullname2 = reader["member_project_2"].ToString();
-
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
-
-                rptR10 rpt = new rptR10();
-
-                ObjectDataSource dataSource = new ObjectDataSource();
-                dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
-
-                string report_name = "R10_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
-                string report_full_path = _IEnvironmentConfig.PathReport + report_name;
-
-                rpt.DataSource = dataSource;
-                rpt.ExportToPdf(report_full_path);
-
-                string fBase64 = string.Empty;
-                if (File.Exists(report_full_path))
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
-                    string readFileByte = "data:application/pdf;base64," + Convert.ToBase64String(File.ReadAllBytes(report_full_path));
-                    fBase64 = readFileByte;
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_report_10", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+
+                                rptData.projectnamethai = reader["project_name_thai"].ToString();
+                                rptData.projectnameeng = reader["project_name_eng"].ToString();
+                                rptData.projectheadname = reader["project_head_name"].ToString();
+                                rptData.advisor = reader["consult_name"].ToString();
+                                rptData.facultyname = reader["faculty_name"].ToString();
+                                rptData.chkbox1 = (reader["check_value"].ToString()) == "1" ? true : false;
+                                rptData.chkbox2 = (reader["check_value"].ToString()) == "2" ? true : false;
+                                rptData.chkbox3 = (reader["check_value"].ToString()) == "3" ? true : false;
+                                rptData.chkbox4 = (reader["check_value"].ToString()) == "4" ? true : false;
+                                rptData.approvetype1 = (reader["approval_type"].ToString()) == "1" ? reader["approval_type"].ToString() : "-";
+                                rptData.approvetype2 = (reader["approval_type"].ToString()) == "2" ? reader["approval_type"].ToString() : "-";
+                                rptData.approvetype3 = (reader["approval_type"].ToString()) == "3" ? reader["approval_type"].ToString() : "-";
+                                rptData.assignername = reader["assign_name"].ToString();
+                                rptData.doc_date = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+                                rptData.commentconsider1 = (reader["check_value"].ToString()) == "1" ? reader["comment_consider"].ToString() : "-";
+                                rptData.commentconsider2 = (reader["check_value"].ToString()) == "2" ? reader["comment_consider"].ToString() : "-";
+                                rptData.commentconsider3 = (reader["check_value"].ToString()) == "3" ? reader["comment_consider"].ToString() : "-";
+                                rptData.commentconsider4 = (reader["check_value"].ToString()) == "4" ? reader["comment_consider"].ToString() : "-";
+                            }
+                            reader.Close();
+                        }
+                        conn.Close();
+                    }
+
+                    rptR10 rpt = new rptR10();
+
+                    ObjectDataSource dataSource = new ObjectDataSource();
+                    dataSource.Constructor = new ObjectConstructorInfo();
+                    dataSource.DataSource = rptData;
+
+                    string report_name = "R10_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
+                    string report_full_path = _IEnvironmentConfig.PathReport + report_name;
+
+                    rpt.DataSource = dataSource;
+                    rpt.ExportToPdf(report_full_path);
+
+                    string fBase64 = string.Empty;
+                    if (File.Exists(report_full_path))
+                    {
+                        string readFileByte = "data:application/pdf;base64," + Convert.ToBase64String(File.ReadAllBytes(report_full_path));
+                        fBase64 = readFileByte;
+                    }
+
+                    resp.filename = report_name;
+
+                    resp.filebase64 = fBase64;
                 }
-
-                resp.filename = report_name;
-
-                resp.filebase64 = fBase64;
             }
             catch (Exception ex)
             {
@@ -861,6 +890,7 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -931,6 +961,8 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = "";
+            int year = System.DateTime.Now.Year;
 
             string store_name = "";
 
@@ -966,19 +998,25 @@ namespace THD.Core.Api.Repository.DataHandler
 
                                 if (type == 3)
                                 {
+                                    rptData.docno = await CreateReportNumberAsync(year, "R12", doc_id, "Doc_MenuC3_Tab3");
                                     rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
                                     rptData.sender = reader["sender"].ToString();
                                     rptData.projectno = reader["agenda_3_project_number"].ToString();
                                     rptData.researchname_thai = reader["agenda_3_project_name_thai"].ToString();
                                     rptData.researchname_eng = reader["agenda_3_project_name_eng"].ToString();
+                                    rptData.comment1 = reader["comment_1_comittee"].ToString();
+                                    rptData.comment2 = reader["comment_2_comittee"].ToString();
                                 }
                                 else if (type == 4)
                                 {
+                                    rptData.docno = await CreateReportNumberAsync(year, "R12", doc_id, "Doc_MenuC3_Tab4");
                                     rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
                                     rptData.sender = reader["sender"].ToString();
                                     rptData.projectno = reader["agenda_4_project_number"].ToString();
                                     rptData.researchname_thai = reader["agenda_4_project_name_1"].ToString();
                                     rptData.researchname_eng = reader["agenda_4_project_name_2"].ToString();
+                                    rptData.comment1 = reader["comment_1_comittee"].ToString();
+                                    rptData.comment2 = reader["comment_2_comittee"].ToString();
                                 }
 
                             }
@@ -1026,58 +1064,73 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = "";
+            int year = System.DateTime.Now.Year;
+
+            string store_name = "";
+
+            if (type == 3)
+            {
+                store_name = "sp_report_13";
+            }
+            else if (type == 4)
+            {
+                store_name = "sp_report_13_2";
+            }
 
             try
             {
-                //model_rpt_2_report rptData = new model_rpt_2_report();
+                model_rpt_13_report rptData = new model_rpt_13_report();
 
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_2", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+                    using (SqlCommand cmd = new SqlCommand("sp_report_13", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+                        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
 
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_type"].ToString();
-                //                rptData.Doc_head_2 = reader["doc_number"].ToString();
-                //                rptData.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                //                rptData.Presenter_name = reader["project_head_name"].ToString();
-                //                rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
-                //                rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
-                //                rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
-                //                rptData.Position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
-                //                rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
-                //                rptData.Job_Position = "";
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-                //                rptData.Research_name_thai = reader["project_name_thai"].ToString();
-                //                rptData.Research_name_eng = reader["project_name_eng"].ToString();
-                //                rptData.Faculty_name = reader["faculty_name"].ToString();
-
-                //                rptData.Advisor_fullname = reader["project_consultant"].ToString();
-                //                rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                //                rptData.co_research_fullname1 = reader["member_project_1"].ToString();
-                //                rptData.co_research_fullname2 = reader["member_project_2"].ToString();
-
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                if (type == 3)
+                                {
+                                    rptData.docno = await CreateReportNumberAsync(year, "R13", doc_id, "Doc_MenuC3_Tab3");
+                                    rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+                                    rptData.researcher = reader["sender"].ToString();
+                                    rptData.nuibc = reader["agenda_3_project_number"].ToString();
+                                    rptData.research_name_thai = reader["agenda_3_project_name_thai"].ToString();
+                                    rptData.research_name_eng = reader["agenda_3_project_name_eng"].ToString();
+                                    rptData.round = reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
+                                    rptData.approvetype = reader["agenda_3_conclusion_name"].ToString();
+                                }
+                                else if (type == 4)
+                                {
+                                    rptData.docno = await CreateReportNumberAsync(year, "R13", doc_id, "Doc_MenuC3_Tab4");
+                                    rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+                                    rptData.researcher = reader["sender"].ToString();
+                                    rptData.nuibc = reader["agenda_4_project_number"].ToString();
+                                    rptData.research_name_thai = reader["agenda_4_project_name_1"].ToString();
+                                    rptData.research_name_eng = reader["agenda_4_project_name_2"].ToString();
+                                    rptData.round = reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
+                                    rptData.approvetype = reader["agenda_4_conclusion_name"].ToString();
+                                }
+                            }
+                        }
+                        reader.Close();
+                    }
+                    conn.Close();
+                }
 
                 rptR13 rpt = new rptR13();
 
                 ObjectDataSource dataSource = new ObjectDataSource();
                 dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
+                dataSource.DataSource = rptData;
 
                 string report_name = "R13_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
@@ -1117,34 +1170,427 @@ namespace THD.Core.Api.Repository.DataHandler
             {
                 model_rpt_14_report rptData = new model_rpt_14_report();
 
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_15", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
+                //Default ----------------------------------------------------------
+                rptData.Doc_head_1 = "ระเบียบวารการประชุมคณะกรรมการพิจารณาฯความปลอดภัยทาชีวะภาพ มหาวิทยาลัยนเรศวร";
+                rptData.Doc_head_2 = "ครั้งที่ - ";
+                rptData.Doc_head_3 = "วันที่ -";
+                rptData.Doc_head_4 = "เวลา -";
+                rptData.Doc_head_5 = "สถานที่ -";
 
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+                rptData.list_person_meeting = new List<model_list_person_meeting>();
+                rptData.list_person_out_of_meeting = new List<model_list_person_meeting>();
+                rptData.list_agenda_1_1 = new List<model_list_agenda_1_1>();
+                rptData.list_agenda_1_2 = new List<model_list_agenda_1_2>();
+                rptData.list_agenda_2 = new List<model_list_agenda_2>();
+                rptData.list_agenda_3 = new List<model_list_agenda_3>();
+                rptData.list_agenda_4_1 = new List<model_list_agenda_4>();
+                rptData.list_agenda_4_2 = new List<model_list_agenda_4>();
+                rptData.list_agenda_4_3 = new List<model_list_agenda_4>();
+                rptData.list_agenda_4_4 = new List<model_list_agenda_4>();
+                rptData.list_agenda_4_5 = new List<model_list_agenda_4>();
+                rptData.list_agenda_4_6 = new List<model_list_agenda_4>();
+                rptData.list_agenda_4_7 = new List<model_list_agenda_4>();
+                rptData.list_agenda_4_8 = new List<model_list_agenda_4>();
+                rptData.list_agenda_4_9 = new List<model_list_agenda_4>();
+                rptData.list_agenda_5 = new List<model_list_agenda_5>();
+                //--------------------------------------------------------------------
 
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
 
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_according_type_method"].ToString();
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
+                    // ส่วนหัวเอกสาร
+                    using (SqlCommand cmd = new SqlCommand("sp_report_14", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@doc_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                rptData.Doc_head_1 = reader["meeting_type_name"].ToString() + " มหาวิทยาลัยนเรศวร";
+                                rptData.Doc_head_2 = "ครั้งที่ " + reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
+
+                                int year_meeting = Convert.ToInt32(Convert.ToDateTime(reader["meeting_date"]).ToString("yyyy"));
+                                rptData.Doc_head_3 = "วัน" + Convert.ToDateTime(reader["meeting_date"]).ToString("dddd dd MMM ") + CommonData.ConvertYearToThai(year_meeting);
+
+                                rptData.Doc_head_4 = "เวลา " + ParseDataHelper.ReportEmptyValue(reader["meeting_start"].ToString()) + " เป็นต้นไป";
+                                rptData.Doc_head_5 = ParseDataHelper.ReportEmptyValue(reader["meeting_location"].ToString());
+                                rptData.Doc_head_6 = "เวลา " + ParseDataHelper.ReportEmptyValue(reader["meeting_close"].ToString());
+
+                                var temp_list_person_meeting = JsonConvert.DeserializeObject<IList<model_list_person_meeting>>(reader["committees_array"].ToString());
+                                if (temp_list_person_meeting != null && temp_list_person_meeting.Count > 0)
+                                {
+                                    int seq = 0;
+                                    rptData.list_person_meeting = temp_list_person_meeting;
+                                    foreach (var item in rptData.list_person_meeting)
+                                    {
+                                        var personal = await GetRegisterInforAsync(item.value);
+                                        item.seq = (seq + 1).ToString() + ".";
+                                        item.position = personal != null ? personal.FirstOrDefault().position : "";
+                                        item.department = personal != null ? personal.FirstOrDefault().department : "";
+                                        seq++;
+                                    }
+                                }
+                                else
+                                {
+                                    model_list_person_meeting null_item = new model_list_person_meeting();
+                                    null_item.seq = "-";
+                                    rptData.list_person_meeting.Add(null_item);
+                                }
+
+                                var temp_list_person_out_of_meeting = JsonConvert.DeserializeObject<IList<model_list_person_meeting>>(reader["attendees_array"].ToString());
+                                if (temp_list_person_out_of_meeting != null && temp_list_person_out_of_meeting.Count > 0)
+                                {
+                                    int seq = 0;
+                                    rptData.list_person_out_of_meeting = temp_list_person_out_of_meeting;
+                                    foreach (var item in rptData.list_person_out_of_meeting)
+                                    {
+                                        var personal = await GetRegisterInforAsync(item.value);
+                                        item.seq = (seq + 1).ToString() + ".";
+                                        item.position = personal != null ? personal.FirstOrDefault().position : "";
+                                        item.department = personal != null ? personal.FirstOrDefault().department : "";
+                                        seq++;
+                                    }
+                                }
+                                else
+                                {
+                                    model_list_person_meeting null_item = new model_list_person_meeting();
+                                    null_item.seq = "-";
+                                    rptData.list_person_out_of_meeting.Add(null_item);
+                                }
+
+                            }
+                        }
+                        reader.Close();
+                    }
+
+                    // ระเบียบวารที่ 1
+                    using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_1", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string seq = reader["seq"].ToString();
+                                string title = "ระเบียบวาระที่ " + (reader["group_data"].ToString() == "1.1" ? "1.1." + seq : "1.2." + seq) + " ";
+
+                                if (reader["group_data"].ToString() == "1.1")
+                                {
+                                    model_list_agenda_1_1 agenda_1_1 = new model_list_agenda_1_1()
+                                    {
+                                        subject = title + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString()),
+                                        detail_summary = ParseDataHelper.ReportEmptyValue(reader["input2"].ToString()),
+                                        detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["input3"].ToString()),
+                                    };
+                                    rptData.list_agenda_1_1.Add(agenda_1_1);
+                                }
+
+                                if (reader["group_data"].ToString() == "1.2")
+                                {
+                                    model_list_agenda_1_2 agenda_1_2 = new model_list_agenda_1_2()
+                                    {
+                                        subject = title + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString()),
+                                        detail_summary = ParseDataHelper.ReportEmptyValue(reader["input2"].ToString()),
+                                        detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["input3"].ToString()),
+                                    };
+                                    rptData.list_agenda_1_2.Add(agenda_1_2);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            rptData.list_agenda_1_1.Add(new model_list_agenda_1_1());
+                            rptData.list_agenda_1_2.Add(new model_list_agenda_1_2());
+                        }
+
+                        reader.Close();
+                    }
+
+                    // ระเบียบวารที่ 2
+                    using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_2", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string seq = reader["seq"].ToString();
+                                string title = "ระเบียบวาระที่ 2.1." + seq + " ";
+
+                                model_list_agenda_2 agenda_2 = new model_list_agenda_2()
+                                {
+                                    subject = title + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString()),
+                                    detail_summary = ParseDataHelper.ReportEmptyValue(reader["input3"].ToString()),
+                                    detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["input4"].ToString()),
+                                };
+                                if (reader["group_data"].ToString() == "2.1")
+                                    rptData.list_agenda_2.Add(agenda_2);
+
+                            }
+                        }
+                        else rptData.list_agenda_2.Add(new model_list_agenda_2());
+
+                        reader.Close();
+
+                    }
+
+                    // ระเบียบวารที่ 3 (3.1)
+                    using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_3_1", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            int seq = 0;
+                            while (await reader.ReadAsync())
+                            {
+                                string title = "โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข จำนวน ";
+
+                                model_list_agenda_3 agenda_3 = new model_list_agenda_3();
+
+                                agenda_3.title = title + ParseDataHelper.ReportEmptyValueInt(Convert.ToInt32(reader["count_3"])) + " โครงการ";
+                                agenda_3.subject = (seq + 1).ToString() + ". เรื่อง :";
+                                agenda_3.project_number = ParseDataHelper.ReportEmptyValue(reader["agenda_3_project_number"].ToString());
+                                agenda_3.project_name_thai = ParseDataHelper.ReportEmptyValue(reader["agenda_3_project_name_thai"].ToString());
+                                agenda_3.project_name_eng = ParseDataHelper.ReportEmptyValue(reader["agenda_3_project_name_eng"].ToString());
+                                agenda_3.project_safety_type = ParseDataHelper.ReportEmptyValue(reader["safety_type"].ToString());
+                                agenda_3.consultant_name = ParseDataHelper.ReportEmptyValue(reader["consultant_name"].ToString());
+                                agenda_3.comment_1_name = "1. " + ParseDataHelper.ReportEmptyValue(reader["comment_1_title"].ToString());
+                                agenda_3.comment_2_name = "2. " + ParseDataHelper.ReportEmptyValue(reader["comment_2_title"].ToString());
+                                agenda_3.comment_3_name = "3. " + ParseDataHelper.ReportEmptyValue(reader["comment_3_title"].ToString());
+                                agenda_3.detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["agenda_3_suggestion"].ToString());
+
+                                if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
+                                {
+
+                                    agenda_3.list_researchers = "";
+
+                                    var member1json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_1"].ToString());
+                                    if (member1json != null)
+                                    {
+                                        var member1 = await GetRegisterInforAsync(member1json.projecthead);
+                                        if (member1 != null && member1.Count > 0)
+                                            agenda_3.list_researchers += ("1. " + member1[0].name + Environment.NewLine);
+                                    }
+
+                                    var member2json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_2"].ToString());
+                                    if (member2json != null)
+                                    {
+                                        var member2 = await GetRegisterInforAsync(member2json.projecthead);
+                                        if (member2 != null && member2.Count > 0)
+                                            agenda_3.list_researchers += ("2. " + member2[0].name + Environment.NewLine);
+                                    }
+
+                                    var member3json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_3"].ToString());
+                                    if (member3json != null)
+                                    {
+                                        var member3 = await GetRegisterInforAsync(member3json.projecthead);
+                                        if (member3 != null && member3.Count > 0)
+                                            agenda_3.list_researchers += ("3. " + member3[0].name + Environment.NewLine);
+
+                                    }
+
+                                    var member4json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_4"].ToString());
+                                    if (member4json != null)
+                                    {
+                                        var member4 = await GetRegisterInforAsync(member4json.projecthead);
+                                        if (member4 != null && member4.Count > 0)
+                                            agenda_3.list_researchers += ("4. " + member4[0].name + Environment.NewLine);
+                                    }
+
+                                    var member5json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_5"].ToString());
+                                    if (member5json != null)
+                                    {
+                                        var member5 = await GetRegisterInforAsync(member5json.projecthead);
+                                        if (member5 != null && member5.Count > 0)
+                                            agenda_3.list_researchers += ("5. " + member5[0].name + Environment.NewLine);
+                                    }
+
+                                    var member6json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_6"].ToString());
+                                    if (member6json != null)
+                                    {
+                                        var member6 = await GetRegisterInforAsync(member6json.projecthead);
+                                        if (member6 != null && member6.Count > 0)
+                                            agenda_3.list_researchers += ("6. " + member6[0].name + Environment.NewLine);
+                                    }
+
+                                    var member7json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_7"].ToString());
+                                    if (member7json != null)
+                                    {
+                                        var member7 = await GetRegisterInforAsync(member7json.projecthead);
+                                        if (member7 != null && member7.Count > 0)
+                                            agenda_3.list_researchers += ("7. " + member7[0].name + Environment.NewLine);
+                                    }
+
+                                    var member8json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_8"].ToString());
+                                    if (member8json != null)
+                                    {
+                                        var member8 = await GetRegisterInforAsync(member8json.projecthead);
+                                        if (member8 != null && member8.Count > 0)
+                                            agenda_3.list_researchers += ("8. " + member8[0].name + Environment.NewLine);
+                                    }
+
+                                    var member9json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_9"].ToString());
+                                    if (member9json != null)
+                                    {
+                                        var member9 = await GetRegisterInforAsync(member9json.projecthead);
+                                        if (member9 != null && member9.Count > 0)
+                                            agenda_3.list_researchers += ("9. " + member9[0].name + Environment.NewLine);
+                                    }
+
+                                    var member10json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_10"].ToString());
+                                    if (member10json != null)
+                                    {
+                                        var member10 = await GetRegisterInforAsync(member10json.projecthead);
+                                        if (member10 != null && member10.Count > 0)
+                                            agenda_3.list_researchers += ("10. " + member10[0].name + Environment.NewLine);
+                                    }
+
+                                    var member11json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_11"].ToString());
+                                    if (member11json != null)
+                                    {
+                                        var member11 = await GetRegisterInforAsync(member11json.projecthead);
+                                        if (member11 != null && member11.Count > 0)
+                                            agenda_3.list_researchers += ("11. " + member11[0].name + Environment.NewLine);
+                                    }
+
+                                    var member12json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_12"].ToString());
+                                    if (member12json != null)
+                                    {
+                                        var member12 = await GetRegisterInforAsync(member12json.projecthead);
+                                        if (member12 != null && member12.Count > 0)
+                                            agenda_3.list_researchers += ("12. " + member12[0].name + Environment.NewLine);
+                                    }
+
+                                }
+
+                                rptData.list_agenda_3.Add(agenda_3);
+                                seq++;
+                            }
+                        }
+                        else rptData.list_agenda_3.Add(new model_list_agenda_3());
+
+                        reader.Close();
+
+
+
+                    }
+
+                    // ระเบียบวารที่ 3 (3.2)
+                    if (rptData.list_agenda_3 != null && rptData.list_agenda_3.Count > 0)
+                    {
+                        foreach (var item in rptData.list_agenda_3)
+                        {
+                            item.list_agenda_3_2 = new List<model_list_agenda_3_2>();
+
+                            using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_3_2", conn))
+                            {
+                                cmd.CommandType = CommandType.StoredProcedure;
+
+                                cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+                                cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 50).Value = item.project_number;
+
+                                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                                if (reader.HasRows)
+                                {
+                                    while (await reader.ReadAsync())
+                                    {
+                                        model_list_agenda_3_2 item_3_2 = new model_list_agenda_3_2()
+                                        {
+                                            sequel_title = "3.2." + reader["seq"].ToString() + " " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString()),
+                                            sequel_detail_summary = ParseDataHelper.ReportEmptyValue(reader["input2"].ToString()),
+                                            sequel_detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["input3"].ToString()),
+                                        };
+                                        item.list_agenda_3_2.Add(item_3_2);
+                                    }
+                                }
+                                else item.list_agenda_3_2.Add(new model_list_agenda_3_2());
+                                reader.Close();
+                            }
+                        }
+                    }
+
+                    // ระเบียบวารที่ 4
+                    using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_4", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string string_qty = "จำนวน " + ParseDataHelper.ReportEmptyValueInt(Convert.ToInt32(reader["count_4"])) + " โครงการ";
+
+                            }
+                        }
+                        reader.Close();
+                    }
+
+                    // ระเบียบวารที่ 5
+                    using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_5", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string seq = reader["seq"].ToString();
+                                string title = "ระเบียบวาระที่ 5. " + seq + " ";
+
+                                model_list_agenda_5 agenda_5 = new model_list_agenda_5()
+                                {
+                                    subject = title + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString()),
+                                    detail_summary = ParseDataHelper.ReportEmptyValue(reader["input2"].ToString()),
+                                    detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["input3"].ToString()),
+                                };
+                                if (reader["group_data"].ToString() == "5.1")
+                                    rptData.list_agenda_5.Add(agenda_5);
+
+                            }
+                        }
+                        else rptData.list_agenda_5.Add(new model_list_agenda_5());
+
+                        reader.Close();
+                    }
+
+                    conn.Close();
+                }
 
                 rptR14 rpt14 = new rptR14();
 
                 ObjectDataSource dataSource = new ObjectDataSource();
                 dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
+                dataSource.DataSource = rptData;
 
                 string report_name = "R14_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
@@ -1170,621 +1616,8 @@ namespace THD.Core.Api.Repository.DataHandler
             return resp;
         }
 
-        //public async Task<ModelMenuR1ReportFile> GetReportR14Async(int meeting_id)
-        //{
-        //    ModelMenuR1ReportFile resp = new ModelMenuR1ReportFile();
 
-        //    var close_doc = await CloseDocumentMeetingOfYearAsync(meeting_id);
 
-        //    if (!close_doc.Status)
-        //    {
-        //        resp.message = close_doc.Message;
-        //        return resp;
-        //    }
-
-        //    var cultureInfo = new CultureInfo("th-TH");
-        //    CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-        //    CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
-
-        //    try
-        //    {
-        //        model_r14 rpt_header = new model_r14()
-        //        {
-        //            head_line_1 = "รายงานการประชุมคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร",
-        //            head_line_4 = "เวลา 09.00 น. เป็นต้นไป",
-        //            head_line_6 = "รายนามผู้เข้าประชุม",
-        //            head_line_7 = "รายนามผู้ติดราชการ",
-        //            head_line_8 = "เริ่มประชุม",
-        //            head_line_9 = "-",
-        //            meeting_close = "-"
-        //        };
-
-        //        rpt_header.ListMeetingData = new List<model_ListMeetingName>();
-        //        rpt_header.ListMemberData = new List<model_ListMeetingName>();
-        //        rpt_header.ListAgendaData_1_1 = new List<model_ListAgendaData_1>();
-        //        rpt_header.ListAgendaData_1_2 = new List<model_ListAgendaData_1>();
-        //        rpt_header.ListAgendaData_2 = new List<model_ListAgendaData_2>();
-        //        rpt_header.ListAgendaData_3 = new List<model_ListAgendaData_3_4>();
-        //        rpt_header.ListAgendaData_4 = new List<model_ListAgendaData_3_4>();
-        //        rpt_header.ListAgendaData_5 = new List<model_ListAgendaData_5>();
-
-        //        // Get All User Register
-        //        IList<ModelMenuR1RegisterInfo> list_userinfo = await GetRegisterInforAsync(0);
-
-        //        using (SqlConnection conn = new SqlConnection(ConnectionString))
-        //        {
-        //            conn.Open();
-
-        //            string sql = "SELECT TOP(1) doc_id,year_of_meeting,meeting_round,B.name_thai, " +
-        //                        "meeting_date, meeting_location,meeting_start,meeting_close,committees_array,attendees_array " +
-        //                        "FROM Doc_MenuC3 A " +
-        //                        "LEFT OUTER JOIN MST_MeetingRecordType B " +
-        //                        "ON A.meeting_record_id = B.id " +
-        //                        "WHERE doc_id='" + meeting_id + "' ";
-
-        //            // ส่วนหัวเอกสาร
-        //            using (SqlCommand command = new SqlCommand(sql, conn))
-        //            {
-        //                SqlDataReader reader = await command.ExecuteReaderAsync();
-
-        //                if (reader.HasRows)
-        //                {
-        //                    while (await reader.ReadAsync())
-        //                    {
-        //                        rpt_header.head_line_2 = "ครั้งที่ " + Convert.ToInt32(reader["meeting_round"]) + "/" + Convert.ToInt32(reader["year_of_meeting"]);
-        //                        rpt_header.head_line_3 = "วัน" + Convert.ToDateTime(reader["meeting_date"]).ToString("dddd ที่ MMMM yyyy");
-        //                        rpt_header.head_line_5 = reader["meeting_location"].ToString();
-        //                        rpt_header.head_line_9 = reader["meeting_start"].ToString();
-        //                        rpt_header.meeting_close = reader["meeting_close"].ToString();
-
-        //                        // Meeting Committees
-        //                        List<ModelSelectOption> list_committees = JsonConvert.DeserializeObject<List<ModelSelectOption>>(reader["committees_array"].ToString());
-        //                        if (list_committees != null && list_committees.Count > 0)
-        //                        {
-        //                            int ir = 1;
-        //                            foreach (var item in list_committees)
-        //                            {
-        //                                var user_id = Encoding.UTF8.GetString(Convert.FromBase64String(item.value));
-        //                                var user_info = list_userinfo.FirstOrDefault(e => e.registerid == user_id);
-
-        //                                model_ListMeetingName data = new model_ListMeetingName()
-        //                                {
-        //                                    seq = ir.ToString() + ".",
-        //                                    name = (user_info != null) ? user_info.name : "",
-        //                                    position = (user_info != null) ? user_info.position : "",
-        //                                    department = (user_info != null) ? "(" + user_info.faculty + ")" : "",
-        //                                };
-        //                                rpt_header.ListMeetingData.Add(data);
-        //                                ir++;
-        //                            }
-        //                        }
-
-        //                        // Meeting Attendees
-        //                        List<ModelSelectOption> list_attendees = JsonConvert.DeserializeObject<List<ModelSelectOption>>(reader["attendees_array"].ToString());
-        //                        if (list_attendees != null && list_attendees.Count > 0)
-        //                        {
-        //                            int ir = 1;
-        //                            foreach (var item in list_attendees)
-        //                            {
-        //                                var user_id = Encoding.UTF8.GetString(Convert.FromBase64String(item.value));
-        //                                var user_info = list_userinfo.FirstOrDefault(e => e.registerid == user_id);
-
-        //                                model_ListMeetingName data = new model_ListMeetingName()
-        //                                {
-        //                                    seq = ir.ToString() + ".",
-        //                                    name = (user_info != null) ? user_info.name : "",
-        //                                    position = (user_info != null) ? user_info.position : "",
-        //                                    department = (user_info != null) ? "(" + user_info.faculty + ")" : "",
-        //                                };
-        //                                rpt_header.ListMemberData.Add(data);
-        //                                ir++;
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //                reader.Close();
-        //            }
-
-
-        //            // ระเบียบวาระที่ 1.1 -------------------------------------------------------------------------------------
-
-        //            string sql_1_1 = "SELECT * FROM Doc_MenuC3_Tab1 WHERE meeting_id='" + meeting_id + "' AND group_data='1.1' ORDER BY group_data,id ASC";
-
-        //            using (SqlCommand cmd_1_1 = new SqlCommand(sql_1_1, conn))
-        //            {
-        //                SqlDataReader reader_1_1 = await cmd_1_1.ExecuteReaderAsync();
-
-        //                if (reader_1_1.HasRows)
-        //                {
-        //                    int ir = 1;
-        //                    while (await reader_1_1.ReadAsync())
-        //                    {
-        //                        model_ListAgendaData_1 rpt_data_1_1 = new model_ListAgendaData_1()
-        //                        {
-        //                            subject_line_1 = "ระเบียบวาระที่ 1.1." + ir + " เรื่อง " + reader_1_1["input1"].ToString(),
-        //                            detail_summary = reader_1_1["input2"].ToString(),
-        //                            detail_conclusion = reader_1_1["input3"].ToString(),
-        //                        };
-        //                        rpt_header.ListAgendaData_1_1.Add(rpt_data_1_1);
-        //                        ir += 1;
-        //                    }
-        //                }
-        //                reader_1_1.Close();
-        //            }
-
-        //            // ระเบียบวาระที่ 1.2 -------------------------------------------------------------------------------------
-
-        //            string sql_1_2 = "SELECT * FROM Doc_MenuC3_Tab1 WHERE meeting_id='" + meeting_id + "' AND group_data='1.2' ORDER BY group_data,id ASC";
-
-        //            using (SqlCommand cmd_1_2 = new SqlCommand(sql_1_2, conn))
-        //            {
-        //                SqlDataReader reader_1_2 = await cmd_1_2.ExecuteReaderAsync();
-
-        //                if (reader_1_2.HasRows)
-        //                {
-        //                    int ir = 1;
-        //                    while (await reader_1_2.ReadAsync())
-        //                    {
-        //                        model_ListAgendaData_1 rpt_data_1_2 = new model_ListAgendaData_1()
-        //                        {
-        //                            subject_line_1 = "ระเบียบวาระที่ 1.2." + ir + " เรื่อง " + reader_1_2["input1"].ToString(),
-        //                            detail_summary = reader_1_2["input2"].ToString(),
-        //                            detail_conclusion = reader_1_2["input3"].ToString(),
-        //                        };
-        //                        rpt_header.ListAgendaData_1_2.Add(rpt_data_1_2);
-        //                        ir += 1;
-        //                    }
-        //                }
-        //                reader_1_2.Close();
-        //            }
-
-        //            // ระเบียบวาระที่ 2 -------------------------------------------------------------------------------------
-
-        //            string sql_2 = "SELECT * FROM Doc_MenuC3_Tab2 WHERE meeting_id='" + meeting_id + "' ORDER BY id ASC";
-
-        //            using (SqlCommand cmd_2 = new SqlCommand(sql_2, conn))
-        //            {
-        //                SqlDataReader reader_2 = await cmd_2.ExecuteReaderAsync();
-
-        //                if (reader_2.HasRows)
-        //                {
-        //                    int ir = 1;
-        //                    while (await reader_2.ReadAsync())
-        //                    {
-        //                        model_ListAgendaData_2 rpt_data_2 = new model_ListAgendaData_2()
-        //                        {
-        //                            subject = "ระเบียบวาระที่ 2." + ir + " เรื่อง " + reader_2["input1"].ToString(),
-        //                            detail_summary = reader_2["input3"].ToString(),
-        //                            attachmen_name = reader_2["input2"].ToString(),
-        //                            detail_conclusion = reader_2["input4"].ToString(),
-        //                        };
-        //                        rpt_header.ListAgendaData_2.Add(rpt_data_2);
-        //                        ir += 1;
-        //                    }
-        //                }
-        //                reader_2.Close();
-        //            }
-
-
-        //            // ระเบียบวาระที่ 5 -------------------------------------------------------------------------------------
-
-        //            model_ListAgendaData_5 rpt_data_5_default = new model_ListAgendaData_5()
-        //            {
-        //                subject = "ระเบียบวารที่ 5.1",
-        //            };
-
-        //            string sql_5 = "SELECT * FROM Doc_MenuC3_Tab5 WHERE meeting_id='" + meeting_id + "' ORDER BY ID ASC";
-
-        //            using (SqlCommand cmd_5 = new SqlCommand(sql_5, conn))
-        //            {
-        //                SqlDataReader reader_5 = await cmd_5.ExecuteReaderAsync();
-
-        //                if (reader_5.HasRows)
-        //                {
-        //                    int ir = 1;
-        //                    while (await reader_5.ReadAsync())
-        //                    {
-        //                        model_ListAgendaData_5 rpt_data_5 = new model_ListAgendaData_5()
-        //                        {
-        //                            subject = "ระเบียบวาระที่ 5." + ir + " เรื่อง " + reader_5["input1"].ToString(),
-        //                            detail_summary = reader_5["input2"].ToString(),
-        //                            detail_conclusion = reader_5["input3"].ToString(),
-        //                        };
-        //                        rpt_header.ListAgendaData_5.Add(rpt_data_5);
-        //                        ir += 1;
-        //                    }
-        //                }
-        //                else rpt_header.ListAgendaData_5.Add(rpt_data_5_default);
-        //                reader_5.Close();
-        //            }
-
-
-        //            // ผู้เซ็นต์เอกสาร ----------------------------------------------------------------------------
-        //            rpt_header.signature_1 = new model_signature()
-        //            {
-        //                name = "(นางสาวปรางทิพย์ แก้วประสิทธิ์)",
-        //                position_name = "เจ้าหน้าที่บริหารงานทั่วไป",
-        //                assign_name = "ผู้จัดทำรายงานการประชุม",
-        //            };
-        //            rpt_header.signature_2 = new model_signature()
-        //            {
-        //                name = "(นายยงยุทธ บ่อแก้ว)",
-        //                position_name = "หัวหน้างานจัดการมาตรฐานและเครือข่าย",
-        //                assign_name = "ผู้ตรวจรายงานการประชุม",
-        //            };
-        //            rpt_header.signature_3 = new model_signature()
-        //            {
-        //                name = "(ดร.วิสาข์ สุพรรณไพบูลย์)",
-        //                position_name = "ประธานคณะกรรมการเพือความปลอดภัยทางชีวภาพ",
-        //                assign_name = "มหาวิทยาลัยนเรศวร",
-        //            };
-
-        //            conn.Close();
-        //        }
-
-        //        rptR14 rpt = new rptR14();
-
-        //        ObjectDataSource dataSource = new ObjectDataSource();
-
-        //        dataSource.Constructor = new ObjectConstructorInfo();
-
-        //        dataSource.DataSource = rpt_header;
-
-        //        rpt.DataSource = dataSource;
-
-        //        string report_name = meeting_id + DateTime.Now.ToString("_yyyyMMddHHmmss_r14").ToString() + ".pdf";
-
-        //        string report_full_path = _IEnvironmentConfig.PathReport + report_name;
-
-        //        rpt.ExportToPdf(report_full_path);
-
-        //        string fBase64 = string.Empty;
-        //        if (File.Exists(report_full_path))
-        //        {
-        //            string readFileByte = "data:application/pdf;base64," + Convert.ToBase64String(File.ReadAllBytes(report_full_path));
-        //            fBase64 = readFileByte;
-        //        }
-
-        //        resp.filename = report_name;
-
-        //        resp.filebase64 = fBase64;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        resp.message = ex.Message.ToString();
-        //    }
-        //    return resp;
-        //}
-
-        // Report 15 --------------------------------------------------------------------------
-        //public async Task<ModelMenuR1ReportFile> GetReportR15Async(int meeting_id)
-        //{
-        //    var cultureInfo = new CultureInfo("th-TH");
-        //    CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
-        //    CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
-        //    ModelMenuR1ReportFile resp = new ModelMenuR1ReportFile();
-        //    try
-        //    {
-        //        model_r14 rpt_header = new model_r14()
-        //        {
-        //            head_line_1 = "รายงานการประชุมคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร",
-        //            head_line_4 = "เวลา 09.00 น. เป็นต้นไป",
-        //            head_line_6 = "รายนามผู้เข้าประชุม",
-        //            head_line_7 = "รายนามผู้ติดตาม",
-        //            head_line_8 = "เริ่มประชุม",
-        //            head_line_9 = "-",
-        //            meeting_close = "-"
-        //        };
-
-        //        rpt_header.ListMeetingData = new List<model_ListMeetingName>();
-        //        rpt_header.ListMemberData = new List<model_ListMeetingName>();
-        //        rpt_header.ListAgendaData_1_1 = new List<model_ListAgendaData_1>();
-        //        rpt_header.ListAgendaData_1_2 = new List<model_ListAgendaData_1>();
-        //        rpt_header.ListAgendaData_2 = new List<model_ListAgendaData_2>();
-        //        rpt_header.ListAgendaData_3 = new List<model_ListAgendaData_3_4>();
-        //        rpt_header.ListAgendaData_4 = new List<model_ListAgendaData_3_4>();
-        //        rpt_header.ListAgendaData_5 = new List<model_ListAgendaData_5>();
-
-        //        // Get All User Register
-        //        IList<ModelMenuR1RegisterInfo> list_userinfo = await GetRegisterInforAsync(0);
-
-        //        using (SqlConnection conn = new SqlConnection(ConnectionString))
-        //        {
-        //            conn.Open();
-
-        //            string sql = "SELECT TOP(1) doc_id,year_of_meeting,meeting_round,B.name_thai, " +
-        //                        "meeting_date, meeting_location,meeting_start,meeting_close,committees_array,attendees_array " +
-        //                        "FROM Doc_MenuC3 A " +
-        //                        "LEFT OUTER JOIN MST_MeetingRecordType B " +
-        //                        "ON A.meeting_record_id = B.id " +
-        //                        "WHERE doc_id='" + meeting_id + "' ";
-
-        //            // ส่วนหัวเอกสาร
-        //            using (SqlCommand command = new SqlCommand(sql, conn))
-        //            {
-        //                SqlDataReader reader = await command.ExecuteReaderAsync();
-
-        //                if (reader.HasRows)
-        //                {
-        //                    while (await reader.ReadAsync())
-        //                    {
-        //                        rpt_header.head_line_2 = "ครั้งที่ " + Convert.ToInt32(reader["meeting_round"]) + "/" + Convert.ToInt32(reader["year_of_meeting"]);
-        //                        rpt_header.head_line_3 = "วัน" + Convert.ToDateTime(reader["meeting_date"]).ToString("dddd ที่ MMMM yyyy");
-        //                        rpt_header.head_line_5 = reader["meeting_location"].ToString();
-        //                        rpt_header.head_line_9 = reader["meeting_start"].ToString();
-        //                        rpt_header.meeting_close = reader["meeting_close"].ToString();
-
-        //                        // Meeting Committees
-        //                        List<ModelSelectOption> list_committees = JsonConvert.DeserializeObject<List<ModelSelectOption>>(reader["committees_array"].ToString());
-        //                        if (list_committees != null && list_committees.Count > 0)
-        //                        {
-        //                            int ir = 1;
-        //                            foreach (var item in list_committees)
-        //                            {
-        //                                var user_id = Encoding.UTF8.GetString(Convert.FromBase64String(item.value));
-        //                                var user_info = list_userinfo.FirstOrDefault(e => e.registerid == user_id);
-
-        //                                model_ListMeetingName data = new model_ListMeetingName()
-        //                                {
-        //                                    seq = ir.ToString() + ".",
-        //                                    name = (user_info != null) ? user_info.name : "",
-        //                                    position = (user_info != null) ? user_info.position : "",
-        //                                    department = (user_info != null) ? "(" + user_info.faculty + ")" : "",
-        //                                };
-        //                                rpt_header.ListMeetingData.Add(data);
-        //                                ir++;
-        //                            }
-        //                        }
-
-        //                        // Meeting Attendees
-        //                        List<ModelSelectOption> list_attendees = JsonConvert.DeserializeObject<List<ModelSelectOption>>(reader["attendees_array"].ToString());
-        //                        if (list_attendees != null && list_attendees.Count > 0)
-        //                        {
-        //                            int ir = 1;
-        //                            foreach (var item in list_attendees)
-        //                            {
-        //                                var user_id = Encoding.UTF8.GetString(Convert.FromBase64String(item.value));
-        //                                var user_info = list_userinfo.FirstOrDefault(e => e.registerid == user_id);
-
-        //                                model_ListMeetingName data = new model_ListMeetingName()
-        //                                {
-        //                                    seq = ir.ToString() + ".",
-        //                                    name = (user_info != null) ? user_info.name : "",
-        //                                    position = (user_info != null) ? user_info.position : "",
-        //                                    department = (user_info != null) ? "(" + user_info.faculty + ")" : "",
-        //                                };
-        //                                rpt_header.ListMemberData.Add(data);
-        //                                ir++;
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //                reader.Close();
-        //            }
-
-
-        //            // ระเบียบวาระที่ 1.1 -------------------------------------------------------------------------------------
-
-        //            string sql_1_1 = "SELECT * FROM Doc_MenuC3_Tab1 WHERE meeting_id='" + meeting_id + "' AND group_data='1.1' ORDER BY group_data,id ASC";
-
-        //            using (SqlCommand cmd_1_1 = new SqlCommand(sql_1_1, conn))
-        //            {
-        //                SqlDataReader reader_1_1 = await cmd_1_1.ExecuteReaderAsync();
-
-        //                if (reader_1_1.HasRows)
-        //                {
-        //                    int ir = 1;
-        //                    while (await reader_1_1.ReadAsync())
-        //                    {
-        //                        model_ListAgendaData_1 rpt_data_1_1 = new model_ListAgendaData_1()
-        //                        {
-        //                            subject_line_1 = "1.1." + ir + " เรื่อง " + reader_1_1["input1"].ToString(),
-        //                            detail_summary = reader_1_1["input2"].ToString(),
-        //                            detail_conclusion = reader_1_1["input3"].ToString(),
-        //                        };
-        //                        rpt_header.ListAgendaData_1_1.Add(rpt_data_1_1);
-        //                        ir += 1;
-        //                    }
-        //                }
-        //                reader_1_1.Close();
-        //            }
-
-        //            // ระเบียบวาระที่ 1.2 -------------------------------------------------------------------------------------
-
-        //            string sql_1_2 = "SELECT * FROM Doc_MenuC3_Tab1 WHERE meeting_id='" + meeting_id + "' AND group_data='1.2' ORDER BY group_data,id ASC";
-
-        //            using (SqlCommand cmd_1_2 = new SqlCommand(sql_1_2, conn))
-        //            {
-        //                SqlDataReader reader_1_2 = await cmd_1_2.ExecuteReaderAsync();
-
-        //                if (reader_1_2.HasRows)
-        //                {
-        //                    int ir = 1;
-        //                    while (await reader_1_2.ReadAsync())
-        //                    {
-        //                        model_ListAgendaData_1 rpt_data_1_2 = new model_ListAgendaData_1()
-        //                        {
-        //                            subject_line_1 = "1.2." + ir + " เรื่อง " + reader_1_2["input1"].ToString(),
-        //                            detail_summary = reader_1_2["input2"].ToString(),
-        //                            detail_conclusion = reader_1_2["input3"].ToString(),
-        //                        };
-        //                        rpt_header.ListAgendaData_1_2.Add(rpt_data_1_2);
-        //                        ir += 1;
-        //                    }
-        //                }
-        //                reader_1_2.Close();
-        //            }
-
-        //            // ระเบียบวาระที่ 2 -------------------------------------------------------------------------------------
-
-        //            string sql_2 = "SELECT * FROM Doc_MenuC3_Tab2 WHERE meeting_id='" + meeting_id + "' ORDER BY id ASC";
-
-        //            using (SqlCommand cmd_2 = new SqlCommand(sql_2, conn))
-        //            {
-        //                SqlDataReader reader_2 = await cmd_2.ExecuteReaderAsync();
-
-        //                if (reader_2.HasRows)
-        //                {
-        //                    int ir = 1;
-        //                    while (await reader_2.ReadAsync())
-        //                    {
-        //                        model_ListAgendaData_2 rpt_data_2 = new model_ListAgendaData_2()
-        //                        {
-        //                            subject = "2." + ir + " เรื่อง " + reader_2["input1"].ToString(),
-        //                            detail_summary = reader_2["input3"].ToString(),
-        //                            attachmen_name = reader_2["input2"].ToString(),
-        //                            detail_conclusion = reader_2["input4"].ToString(),
-        //                        };
-        //                        rpt_header.ListAgendaData_2.Add(rpt_data_2);
-        //                        ir += 1;
-        //                    }
-        //                }
-        //                reader_2.Close();
-        //            }
-
-
-        //            // ระเบียบวาระที่ 5 -------------------------------------------------------------------------------------
-
-        //            model_ListAgendaData_5 rpt_data_5_default = new model_ListAgendaData_5()
-        //            {
-        //                subject = "5.1",
-        //            };
-
-        //            string sql_5 = "SELECT * FROM Doc_MenuC3_Tab5 WHERE meeting_id='" + meeting_id + "' ORDER BY ID ASC";
-
-        //            using (SqlCommand cmd_5 = new SqlCommand(sql_5, conn))
-        //            {
-        //                SqlDataReader reader_5 = await cmd_5.ExecuteReaderAsync();
-
-        //                if (reader_5.HasRows)
-        //                {
-        //                    int ir = 1;
-        //                    while (await reader_5.ReadAsync())
-        //                    {
-        //                        model_ListAgendaData_5 rpt_data_5 = new model_ListAgendaData_5()
-        //                        {
-        //                            subject = "5." + ir + " เรื่อง " + reader_5["input1"].ToString(),
-        //                            detail_summary = reader_5["input2"].ToString(),
-        //                            detail_conclusion = reader_5["input3"].ToString(),
-        //                        };
-        //                        rpt_header.ListAgendaData_5.Add(rpt_data_5);
-        //                        ir += 1;
-        //                    }
-        //                }
-        //                else rpt_header.ListAgendaData_5.Add(rpt_data_5_default);
-        //                reader_5.Close();
-        //            }
-
-
-        //            // ผู้เซ็นต์เอกสาร ----------------------------------------------------------------------------
-        //            rpt_header.signature_1 = new model_signature()
-        //            {
-        //                name = "(นางสาวปรางทิพย์ แก้วประสิทธิ์)",
-        //                position_name = "เจ้าหน้าที่บริหารงานทั่วไป",
-        //                assign_name = "ผู้จัดทำรายงานการประชุม",
-        //            };
-        //            rpt_header.signature_2 = new model_signature()
-        //            {
-        //                name = "(นายยงยุทธ บ่อแก้ว)",
-        //                position_name = "หัวหน้างานจัดการมาตรฐานและเครือข่าย",
-        //                assign_name = "ผู้ตรวจรายงานการประชุม",
-        //            };
-        //            rpt_header.signature_3 = new model_signature()
-        //            {
-        //                name = "(ดร.วิสาข์ สุพรรณไพบูลย์)",
-        //                position_name = "ประธานคณะกรรมการเพือความปลอดภัยทางชีวภาพ",
-        //                assign_name = "มหาวิทยาลัยนเรศวร",
-        //            };
-
-        //            conn.Close();
-        //        }
-
-        //        //----------------------------------------------------
-        //        rptR15 rpt_15 = new rptR15();
-
-        //        ObjectDataSource dts15 = new ObjectDataSource();
-
-        //        dts15.Constructor = new ObjectConstructorInfo();
-
-        //        dts15.DataSource = rpt_header;
-
-        //        rpt_15.DataSource = dts15;
-
-        //        //----------------------------------------------------
-
-        //        //----------------------------------------------------
-
-        //        string report_name = meeting_id + DateTime.Now.ToString("_yyyyMMddHHmmss_r14").ToString() + ".pdf";
-
-        //        string report_full_path = _IEnvironmentConfig.PathReport + report_name;
-
-        //        rpt_15.ExportToPdf(report_full_path);
-
-        //        string fBase64 = string.Empty;
-        //        if (File.Exists(report_full_path))
-        //        {
-        //            string readFileByte = "data:application/pdf;base64," + Convert.ToBase64String(File.ReadAllBytes(report_full_path));
-        //            fBase64 = readFileByte;
-        //        }
-
-        //        resp.filename = report_name;
-
-        //        resp.filebase64 = fBase64;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        resp.message = ex.Message.ToString();
-        //    }
-        //    return resp;
-        //}
-
-        // Report 13 --------------------------------------------------------------------------
-
-        public async Task<IList<ModelMenuR1RegisterInfo>> GetRegisterInforAsync(int user_id)
-        {
-
-            string sql = "SELECT A.register_id,A.email, " +
-                        "(A.first_name + A.full_name) as full_name, B.name_thai as position, C.name_thai as faculty " +
-                        "FROM RegisterUser A " +
-                        "LEFT OUTER JOIN MST_Position B ON A.position = B.id " +
-                        "LEFT OUTER JOIN MST_Faculty C ON A.faculty = C.id " +
-                        "WHERE 1=1 ";
-
-            if (user_id > 0)
-            {
-                sql += " AND A.register_id ='" + user_id + "'";
-            }
-
-            using (SqlConnection conn = new SqlConnection(ConnectionString))
-            {
-                conn.Open();
-                using (SqlCommand command = new SqlCommand(sql, conn))
-                {
-                    SqlDataReader reader = await command.ExecuteReaderAsync();
-
-                    if (reader.HasRows)
-                    {
-                        IList<ModelMenuR1RegisterInfo> list = new List<ModelMenuR1RegisterInfo>();
-                        while (await reader.ReadAsync())
-                        {
-                            ModelMenuR1RegisterInfo e = new ModelMenuR1RegisterInfo();
-                            e.registerid = reader["register_id"].ToString();
-                            e.email = reader["email"].ToString();
-                            e.name = reader["full_name"].ToString();
-                            e.position = reader["position"].ToString();
-                            e.faculty = reader["faculty"].ToString();
-                            list.Add(e);
-                        }
-                        return list;
-                    }
-                }
-                conn.Close();
-            }
-            return null;
-
-        }
 
         public async Task<model_rpt_15_file> GetReportR15Async(int doc_id)
         {
@@ -1798,34 +1631,292 @@ namespace THD.Core.Api.Repository.DataHandler
             {
                 model_rpt_15_report rptData = new model_rpt_15_report();
 
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_15", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
+                //Default ----------------------------------------------------------
+                rptData.Doc_head_1 = "ระเบียบวารการประชุมคณะกรรมการพิจารณาฯความปลอดภัยทาชีวะภาพ มหาวิทยาลัยนเรศวร";
+                rptData.Doc_head_2 = "ครั้งที่ - ";
+                rptData.Doc_head_3 = "วันที่ -";
+                rptData.Doc_head_4 = "เวลา -";
+                rptData.Doc_head_5 = "สถานที่ -";
 
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+                rptData.subject_1_1 = "1.1 เรื่องที่ประธานแจ้งให้ที่ประชุมทราบ";
+                rptData.item_1_1_1 = "1.1.1 -";
+                rptData.item_1_1_2 = "1.1.2 -";
+                rptData.item_1_1_3 = "1.1.3 -";
 
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                rptData.subject_1_2 = "1.2 เรื่องที่ฝ่ายเลขานุการแจ้งให้ที่ประชุมทราบ";
+                rptData.item_1_2_1 = "1.2.1 -";
+                rptData.item_1_2_2 = "1.2.2 -";
+                rptData.item_1_2_3 = "1.2.3 -";
 
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_according_type_method"].ToString();
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
+                rptData.item_2_1_1 = "2.1 -";
+                rptData.item_2_1_2 = "2.2 -";
+                rptData.item_2_1_3 = "2.3 -";
+
+                rptData.subject_3_1 = "3.1 โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข";
+                rptData.subject_3_1_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.subject_3_2 = "3.2 เรื่องสืบเนื่อง";
+                rptData.item_3_2_1 = "3.2.1 -";
+                rptData.item_3_2_2 = "3.2.2 -";
+                rptData.item_3_2_3 = "3.2.3 -";
+
+                rptData.item_4_1_1 = "4.1 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 1";
+                rptData.item_4_1_2 = "4.2 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 2";
+                rptData.item_4_1_3 = "4.3 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 3";
+                rptData.item_4_1_4 = "4.4 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 4";
+                rptData.item_4_1_5 = "4.5 โครงการวิจัยที่แจ้งขอต่ออายุใบรับรอง";
+                rptData.item_4_1_6 = "4.6 โครงการวิจัยที่ขอแก้ไขโครงการหลังผ่านการรับรองแล้ว";
+                rptData.item_4_1_7 = "4.7 โครงการวิจัยที่ขอแจ้งปิดโครงการ";
+                rptData.item_4_1_8 = "4.8 คำขอประเมิณห้องปฏิบัติการ";
+                rptData.item_4_1_9 = "4.9 ผลการตรวจเยี่ยมติดตามโครงการ";
+
+                rptData.item_4_1_1_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.item_4_1_2_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.item_4_1_3_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.item_4_1_4_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.item_4_1_5_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.item_4_1_6_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.item_4_1_7_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.item_4_1_8_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.item_4_1_9_qty = "จำนวน " + 0 + " โครงการ";
+
+                rptData.item_5_1_1 = "5.1 -";
+                rptData.item_5_1_2 = "5.2 -";
+                rptData.item_5_1_3 = "5.3 -";
+
+                //--------------------------------------------------------------------
+
+                using (SqlConnection conn = new SqlConnection(ConnectionString))
+                {
+                    conn.Open();
+
+                    // ส่วนหัวเอกสาร
+                    using (SqlCommand cmd = new SqlCommand("sp_report_15", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@doc_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                rptData.Doc_head_1 = reader["meeting_type_name"].ToString() + " มหาวิทยาลัยนเรศวร";
+                                rptData.Doc_head_2 = "ครั้งที่ " + reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
+
+                                int year_meeting = Convert.ToInt32(Convert.ToDateTime(reader["meeting_date"]).ToString("yyyy"));
+                                rptData.Doc_head_3 = "วัน" + Convert.ToDateTime(reader["meeting_date"]).ToString("dddd dd MMM ") + CommonData.ConvertYearToThai(year_meeting);
+
+                                rptData.Doc_head_4 = "เวลา " + ParseDataHelper.ReportEmptyValue(reader["meeting_start"].ToString()) + " เป็นต้นไป";
+                                rptData.Doc_head_5 = ParseDataHelper.ReportEmptyValue(reader["meeting_location"].ToString());
+
+                            }
+                        }
+                        reader.Close();
+                    }
+
+                    // ระเบียบวารที่ 1
+                    using (SqlCommand cmd = new SqlCommand("sp_report_15_detail_1", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string string_value = ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+
+                                rptData.subject_1_1 = "1.1 เรื่องที่ประธานแจ้งให้ที่ประชุมทราบ";
+
+                                if (reader["group_data"].ToString() == "1.1")
+                                {
+                                    if (reader["seq"].ToString() == "1")
+                                        rptData.item_1_1_1 = "1.1.1 " + string_value;
+
+                                    if (reader["seq"].ToString() == "2")
+                                        rptData.item_1_1_2 = "1.1.2 " + string_value;
+
+                                    if (reader["seq"].ToString() == "3")
+                                        rptData.item_1_1_3 = "1.1.3 " + string_value;
+                                }
+
+                                rptData.subject_1_2 = "1.2 เรื่องที่ฝ่ายเลขานุการแจ้งให้ที่ประชุมทราบ";
+                                if (reader["group_data"].ToString() == "1.2")
+                                {
+                                    if (reader["seq"].ToString() == "1")
+                                        rptData.item_1_2_1 = "1.2.1 " + string_value;
+
+                                    if (reader["seq"].ToString() == "2")
+                                        rptData.item_1_2_2 = "1.2.2 " + string_value;
+
+                                    if (reader["seq"].ToString() == "3")
+                                        rptData.item_1_2_3 = "1.2.3 " + string_value;
+                                }
+                            }
+                        }
+                        reader.Close();
+                    }
+
+                    // ระเบียบวารที่ 2
+                    using (SqlCommand cmd = new SqlCommand("sp_report_15_detail_2", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                if (reader["group_data"].ToString() == "2.1")
+                                {
+                                    if (reader["seq"].ToString() == "1")
+                                        rptData.item_2_1_1 = "2.1 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+
+                                    if (reader["seq"].ToString() == "2")
+                                        rptData.item_2_1_2 = "2.2 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+
+                                    if (reader["seq"].ToString() == "3")
+                                        rptData.item_2_1_3 = "2.3 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                }
+                            }
+                        }
+                        reader.Close();
+
+
+
+                    }
+
+                    // ระเบียบวารที่ 3
+                    using (SqlCommand cmd = new SqlCommand("sp_report_15_detail_3", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                rptData.subject_3_1 = "3.1 โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข";
+                                if (reader["group_data"].ToString() == "3.1")
+                                {
+                                    rptData.subject_3_1_qty = "จำนวน " + ParseDataHelper.ReportEmptyValueInt(Convert.ToInt32(reader["count_3"])) + " โครงการ";
+                                }
+
+                                rptData.subject_3_2 = "3.2 เรื่องสืบเนื่อง";
+                                if (reader["group_data"].ToString() == "3.2")
+                                {
+                                    if (reader["seq"].ToString() == "1")
+                                        rptData.item_3_2_1 = "3.2.1 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+
+                                    if (reader["seq"].ToString() == "2")
+                                        rptData.item_3_2_2 = "3.2.2 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+
+                                    if (reader["seq"].ToString() == "3")
+                                        rptData.item_3_2_3 = "3.2.3 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                }
+                            }
+                        }
+                        reader.Close();
+                    }
+
+                    // ระเบียบวารที่ 4
+                    using (SqlCommand cmd = new SqlCommand("sp_report_15_detail_4", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                string string_qty = "จำนวน " + ParseDataHelper.ReportEmptyValueInt(Convert.ToInt32(reader["count_4"])) + " โครงการ";
+
+                                switch (reader["agenda_4_term"].ToString())
+                                {
+                                    case "1":
+                                        rptData.item_4_1_1_qty = string_qty;
+                                        break;
+                                    case "2":
+                                        rptData.item_4_1_2_qty = string_qty;
+                                        break;
+                                    case "3":
+                                        rptData.item_4_1_3_qty = string_qty;
+                                        break;
+                                    case "4":
+                                        rptData.item_4_1_4_qty = string_qty;
+                                        break;
+                                    case "5":
+                                        rptData.item_4_1_5_qty = string_qty;
+                                        break;
+                                    case "6":
+                                        rptData.item_4_1_6_qty = string_qty;
+                                        break;
+                                    case "7":
+                                        rptData.item_4_1_7_qty = string_qty;
+                                        break;
+                                    case "8":
+                                        rptData.item_4_1_8_qty = string_qty;
+                                        break;
+                                    case "9":
+                                        rptData.item_4_1_9_qty = string_qty;
+                                        break;
+                                }
+                            }
+                        }
+                        reader.Close();
+                    }
+
+                    // ระเบียบวารที่ 5
+                    using (SqlCommand cmd = new SqlCommand("sp_report_15_detail_5", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                if (reader["group_data"].ToString() == "5.1")
+                                {
+                                    if (reader["seq"].ToString() == "1")
+                                        rptData.item_5_1_1 = "5.1 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+
+                                    if (reader["seq"].ToString() == "2")
+                                        rptData.item_5_1_2 = "5.2 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+
+                                    if (reader["seq"].ToString() == "3")
+                                        rptData.item_5_1_3 = "5.3 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                }
+                            }
+                        }
+                        reader.Close();
+                    }
+
+                    conn.Close();
+                }
 
                 rptR15 rpt15 = new rptR15();
 
                 ObjectDataSource dataSource = new ObjectDataSource();
                 dataSource.Constructor = new ObjectConstructorInfo();
-                //dataSource.DataSource = rptData;
+                dataSource.DataSource = rptData;
 
                 string report_name = "R15_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_path = _IEnvironmentConfig.PathReport + report_name;
@@ -1859,6 +1950,7 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -1933,6 +2025,53 @@ namespace THD.Core.Api.Repository.DataHandler
         }
 
 
+        public async Task<IList<ModelMenuR1RegisterInfo>> GetRegisterInforAsync(string user_id)
+        {
+
+            string sql = "SELECT A.register_id,A.email, " +
+                        "(A.first_name + A.full_name) as full_name, B.name_thai as position, C.name_thai as faculty " +
+                        "FROM RegisterUser A " +
+                        "LEFT OUTER JOIN MST_Position B ON A.position = B.id " +
+                        "LEFT OUTER JOIN MST_Faculty C ON A.faculty = C.id " +
+                        "WHERE 1=1 ";
+
+            if (!string.IsNullOrEmpty(user_id))
+            {
+                string userid = Encoding.UTF8.GetString(Convert.FromBase64String(user_id));
+
+                sql += " AND A.register_id ='" + userid + "'";
+            }
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelMenuR1RegisterInfo> list = new List<ModelMenuR1RegisterInfo>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelMenuR1RegisterInfo e = new ModelMenuR1RegisterInfo();
+                            e.registerid = reader["register_id"].ToString();
+                            e.email = reader["email"].ToString();
+                            e.name = reader["full_name"].ToString();
+                            e.position = reader["position"].ToString();
+                            e.department = reader["faculty"].ToString();
+                            e.faculty = reader["faculty"].ToString();
+                            list.Add(e);
+                        }
+                        return list;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
         // รายงานหลังจากบันทึกมติที่ประชุมครบเรียบร้อย -----------------------------------------------------
         public async Task<model_rpt_meeting_file> GetAllReportMeetingAsync(int doc_id)
         {
@@ -1944,31 +2083,6 @@ namespace THD.Core.Api.Repository.DataHandler
 
             try
             {
-                //model_rpt_17_report rptData = new model_rpt_17_report();
-
-                //using (SqlConnection conn = new SqlConnection(ConnectionString))
-                //{
-                //    conn.Open();
-                //    using (SqlCommand cmd = new SqlCommand("sp_report_17_18", conn))
-                //    {
-                //        cmd.CommandType = CommandType.StoredProcedure;
-
-                //        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
-
-                //        SqlDataReader reader = await cmd.ExecuteReaderAsync();
-
-                //        if (reader.HasRows)
-                //        {
-                //            while (await reader.ReadAsync())
-                //            {
-                //                rptData.projecttype = reader["project_according_type_method"].ToString();
-                //            }
-                //        }
-                //        reader.Close();
-                //    }
-                //    conn.Close();
-                //}
-
 
                 string fBase64 = string.Empty;
 
@@ -2060,8 +2174,6 @@ namespace THD.Core.Api.Repository.DataHandler
             return resp;
         }
 
-
-        // สร้างเลขที่รายงาน ------------------------------------------------------------------------
         private async Task<string> CreateReportNumberAsync(int year, string report_type, int doc_id, string doc_type)
         {
 
@@ -2123,8 +2235,6 @@ namespace THD.Core.Api.Repository.DataHandler
 
             return report_no;
         }
-
-
     }
 
 }

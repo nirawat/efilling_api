@@ -4,12 +4,6 @@
     <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Update="ReportFiles\Report14\rptR14.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Update="ReportFiles\Report14\rptR14_1.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Update="ReportFiles\rptR1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -56,6 +50,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="ReportFiles\rptR15.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ReportFiles\rptR14.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>

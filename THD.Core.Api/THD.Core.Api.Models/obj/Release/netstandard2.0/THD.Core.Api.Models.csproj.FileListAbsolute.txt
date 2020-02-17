@@ -16,11 +16,10 @@ D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Relea
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.AssemblyInfo.cs
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.dll
 D:\SourceTree_Repository\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.pdb
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.AssemblyInfoInputs.cache
+C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.AssemblyInfo.cs
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\bin\Release\netstandard2.0\THD.Core.Api.Models.deps.json
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\bin\Release\netstandard2.0\THD.Core.Api.Models.dll
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\bin\Release\netstandard2.0\THD.Core.Api.Models.pdb
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.AssemblyInfoInputs.cache
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.AssemblyInfo.cs
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.dll
 C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.pdb
-C:\Work Project\GitHub\Efilling\efilling_api\THD.Core.Api\THD.Core.Api.Models\obj\Release\netstandard2.0\THD.Core.Api.Models.csprojAssemblyReference.cache

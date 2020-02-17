@@ -14,6 +14,7 @@ namespace THD.Core.Api.Models.ReportModels
 
     public class model_rpt_8_report
     {
+        public string docno { get; set; }
         public string projecttype { get; set; }
         public string doc_head_1 { get; set; }
         public string doc_head_2 { get; set; }
@@ -28,6 +29,5 @@ namespace THD.Core.Api.Models.ReportModels
         public string renew_round { get; set; }
         public string month_project { get; set; }
         public string year_project { get; set; }
-
     }
 }

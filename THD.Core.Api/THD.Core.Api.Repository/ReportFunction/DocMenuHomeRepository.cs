@@ -440,7 +440,10 @@ namespace THD.Core.Api.Repository.DataHandler
                             item.committee_comment_date = (user_permission.groupcode == "G002" ? comment_date : reader["committee_comment_date"].ToString());
                             item.meeting_date = reader["meeting_date"].ToString();
                             item.meeting_approval_date = reader["meeting_approval_date"].ToString();
-                            item.consider_result = reader["consider_result"].ToString() + (!string.IsNullOrEmpty(reader["consider_result"].ToString()) ? " (" + reader["safety_type"].ToString() + ")" : "");
+
+                            string consider_result = reader["consider_result"].ToString() + (!string.IsNullOrEmpty(reader["consider_result"].ToString()) ? " (" + reader["safety_type"].ToString() + ")" : "");
+                            item.consider_result = (reader["safety_type"].ToString() == "5" ? "-" : consider_result);
+
                             item.alert_date = reader["alert_date"].ToString();
                             item.request_edit_meeting_date = reader["request_edit_meeting_date"].ToString(); /////
                             item.request_edit_date = reader["request_edit_date"].ToString();

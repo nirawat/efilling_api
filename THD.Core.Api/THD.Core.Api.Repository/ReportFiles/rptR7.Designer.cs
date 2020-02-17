@@ -18,6 +18,7 @@ namespace THD.Core.Api.Repository.ReportFiles {
             this.TopMargin = reportInitializer.GetControl<DevExpress.XtraReports.UI.TopMarginBand>("TopMargin");
             this.BottomMargin = reportInitializer.GetControl<DevExpress.XtraReports.UI.BottomMarginBand>("BottomMargin");
             this.Detail = reportInitializer.GetControl<DevExpress.XtraReports.UI.DetailBand>("Detail");
+            this.label12 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label12");
             this.label38 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label38");
             this.label37 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label37");
             this.label36 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label36");
@@ -70,6 +71,7 @@ namespace THD.Core.Api.Repository.ReportFiles {
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.DetailBand Detail;
+        private DevExpress.XtraReports.UI.XRLabel label12;
         private DevExpress.XtraReports.UI.XRLabel label38;
         private DevExpress.XtraReports.UI.XRLabel label37;
         private DevExpress.XtraReports.UI.XRLabel label36;

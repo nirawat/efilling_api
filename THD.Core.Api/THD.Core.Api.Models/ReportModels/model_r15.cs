@@ -14,35 +14,82 @@ namespace THD.Core.Api.Models.ReportModels
 
     public class model_rpt_15_report
     {
-        public string projecttype { get; set; }
         public string Doc_head_1 { get; set; }
         public string Doc_head_2 { get; set; }
         public string Doc_head_3 { get; set; }
         public string Doc_head_4 { get; set; }
-        public string Presenter_name { get; set; }
-        public bool Position_1 { get; set; }
-        public bool Position_2 { get; set; }
-        public bool Position_3 { get; set; }
-        public bool Position_4 { get; set; }
-        public bool Position_5 { get; set; }
-        public string Job_Position { get; set; }
-        public string Faculty_name { get; set; }
-        public string Research_name_thai { get; set; }
-        public string Research_name_eng { get; set; }
-        public string Advisor_signature { get; set; }
-        public string Advisor_fullname { get; set; }
-        public string Dept_comment { get; set; }
-        public string Dept_signature { get; set; }
-        public string Dept_fullname { get; set; }
-        public string Headoffaculty_comment { get; set; }
-        public string Headoffaculty_signature { get; set; }
-        public string Headoffaculty_fullname { get; set; }
-        public string HeadofResearch_signature { get; set; }
-        public string HeadofResearch_fullname { get; set; }
-        public string co_research_signature1 { get; set; }
-        public string co_research_fullname1 { get; set; }
-        public string co_research_signature2 { get; set; }
-        public string co_research_fullname2 { get; set; }
+        public string Doc_head_5 { get; set; }
+
+        // วาระที่ 1 ----------------------------
+        public string title_1 { get; set; }
+
+        public string subject_1_1 { get; set; }
+        public string item_1_1_1 { get; set; }
+        public string item_1_1_2 { get; set; }
+        public string item_1_1_3 { get; set; }
+
+        public string subject_1_2 { get; set; }
+        public string item_1_2_1 { get; set; }
+        public string item_1_2_2 { get; set; }
+        public string item_1_2_3 { get; set; }
+
+        // วาระที่ 2 ----------------------------
+        public string title_2 { get; set; }
+
+        public string subject_2_1 { get; set; }
+        public string item_2_1_1 { get; set; }
+        public string item_2_1_2 { get; set; }
+        public string item_2_1_3 { get; set; }
+
+
+        // วาระที่ 3 ----------------------------
+        public string title_3 { get; set; }
+
+        public string subject_3_1 { get; set; }
+        public string subject_3_1_qty { get; set; }
+        public string item_3_1_1 { get; set; }
+        public string item_3_1_2 { get; set; }
+        public string item_3_1_3 { get; set; }
+
+        public string subject_3_2 { get; set; }
+        public string item_3_2_1 { get; set; }
+        public string item_3_2_2 { get; set; }
+        public string item_3_2_3 { get; set; }
+
+
+
+        // วาระที่ 4 ----------------------------
+        public string title_4 { get; set; }
+
+        public string subject_4_1 { get; set; }
+        public string item_4_1_1 { get; set; }
+        public string item_4_1_2 { get; set; }
+        public string item_4_1_3 { get; set; }
+        public string item_4_1_4 { get; set; }
+        public string item_4_1_5 { get; set; }
+        public string item_4_1_6 { get; set; }
+        public string item_4_1_7 { get; set; }
+        public string item_4_1_8 { get; set; }
+        public string item_4_1_9 { get; set; }
+
+        public string item_4_1_1_qty { get; set; }
+        public string item_4_1_2_qty { get; set; }
+        public string item_4_1_3_qty { get; set; }
+        public string item_4_1_4_qty { get; set; }
+        public string item_4_1_5_qty { get; set; }
+        public string item_4_1_6_qty { get; set; }
+        public string item_4_1_7_qty { get; set; }
+        public string item_4_1_8_qty { get; set; }
+        public string item_4_1_9_qty { get; set; }
+
+
+        // วาระที่ 5 ----------------------------
+        public string title_5 { get; set; }
+
+        public string subject_5_1 { get; set; }
+        public string item_5_1_1 { get; set; }
+        public string item_5_1_2 { get; set; }
+        public string item_5_1_3 { get; set; }
 
     }
 }

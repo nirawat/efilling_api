@@ -14,6 +14,7 @@ namespace THD.Core.Api.Models.ReportModels
 
     public class model_rpt_12_report
     {
+        public string docno { get; set; }
         public string doc_head_4 { get; set; }
         public string projectno { get; set; }
         public string researchname_thai { get; set; }

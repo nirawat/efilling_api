@@ -6,12 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ReportFiles\Report14\rptR14_1.repx" />
     <None Remove="ReportFiles\rptR1.repx" />
     <None Remove="ReportFiles\rptR10.repx" />
     <None Remove="ReportFiles\rptR11.repx" />
     <None Remove="ReportFiles\rptR12.repx" />
     <None Remove="ReportFiles\rptR13.repx" />
+    <None Remove="ReportFiles\rptR14.repx" />
     <None Remove="ReportFiles\rptR15.repx" />
     <None Remove="ReportFiles\rptR15_1_1.repx" />
     <None Remove="ReportFiles\rptR15_1_2.repx" />
@@ -30,8 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="ReportFiles\Report14\rptR14_1.repx" />
-    <EmbeddedResource Include="ReportFiles\Report14\rptR14.repx" />
     <EmbeddedResource Include="ReportFiles\rptR1.repx" />
     <EmbeddedResource Include="ReportFiles\rptR10.repx" />
     <EmbeddedResource Include="ReportFiles\rptR11.repx" />
@@ -48,6 +46,7 @@
     <EmbeddedResource Include="ReportFiles\rptR8.repx" />
     <EmbeddedResource Include="ReportFiles\rptR9.repx" />
     <EmbeddedResource Include="ReportFiles\rptR15.repx" />
+    <EmbeddedResource Include="ReportFiles\rptR14.repx" />
   </ItemGroup>
 
   <ItemGroup>
@@ -70,18 +69,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ReportFiles\Report14\rptR14_1.cs">
-      <DependentUpon>rptR14_1.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report14\rptR14_1.Designer.cs">
-      <DependentUpon>rptR14_1.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report14\rptR14.cs">
-      <DependentUpon>rptR14.repx</DependentUpon>
-    </Compile>
-    <Compile Update="ReportFiles\Report14\rptR14.Designer.cs">
-      <DependentUpon>rptR14.repx</DependentUpon>
-    </Compile>
     <Compile Update="ReportFiles\rptR1.cs">
       <DependentUpon>rptR1.repx</DependentUpon>
     </Compile>
@@ -177,6 +164,12 @@
     </Compile>
     <Compile Update="ReportFiles\rptR15.Designer.cs">
       <DependentUpon>rptR15.repx</DependentUpon>
+    </Compile>
+    <Compile Update="ReportFiles\rptR14.cs">
+      <DependentUpon>rptR14.repx</DependentUpon>
+    </Compile>
+    <Compile Update="ReportFiles\rptR14.Designer.cs">
+      <DependentUpon>rptR14.repx</DependentUpon>
     </Compile>
   </ItemGroup>
 

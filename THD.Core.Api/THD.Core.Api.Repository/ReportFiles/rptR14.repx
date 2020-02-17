@@ -1,0 +1,638 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="19.2.4.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v19.2, Version=19.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="XtraReport1" Margins="45, 36, 26, 37" PageWidth="850" PageHeight="1100" Version="19.2" DataSource="#Ref-0" Font="TH Sarabun New, 16pt">
+  <Bands>
+    <Item1 Ref="2" ControlType="TopMarginBand" Name="TopMargin" HeightF="26.041666" />
+    <Item2 Ref="3" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="37.1256523" />
+    <Item3 Ref="4" ControlType="DetailBand" Name="Detail" HeightF="0" Font="TH Sarabun New, 16pt">
+      <StylePriority Ref="5" UseFont="false" />
+    </Item3>
+    <Item4 Ref="6" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="181.250031">
+      <Controls>
+        <Item1 Ref="7" ControlType="XRLine" Name="line1" SizeF="352.0833,7.708359" LocationFloat="198.749985, 160.416672" />
+        <Item2 Ref="8" ControlType="XRLabel" Name="label5" Multiline="true" Text="label5" TextAlignment="TopCenter" SizeF="768.999939,30.2916489" LocationFloat="3.17891427E-05, 121.166672" Font="TH Sarabun New, 18pt, style=Bold" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="9" EventName="BeforePrint" PropertyName="Text" Expression="[Doc_head_5]" />
+          </ExpressionBindings>
+          <StylePriority Ref="10" UseFont="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="11" ControlType="XRLabel" Name="label4" Multiline="true" Text="label4" TextAlignment="TopCenter" SizeF="768.999939,30.2916641" LocationFloat="3.17891427E-05, 90.87499" Font="TH Sarabun New, 18pt, style=Bold" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="12" EventName="BeforePrint" PropertyName="Text" Expression="[Doc_head_4]" />
+          </ExpressionBindings>
+          <StylePriority Ref="13" UseFont="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="14" ControlType="XRLabel" Name="label3" Multiline="true" Text="label3" TextAlignment="TopCenter" SizeF="768.999939,30.29166" LocationFloat="0, 60.5833359" Font="TH Sarabun New, 18pt, style=Bold" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="15" EventName="BeforePrint" PropertyName="Text" Expression="[Doc_head_3]" />
+          </ExpressionBindings>
+          <StylePriority Ref="16" UseFont="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="17" ControlType="XRLabel" Name="label2" Multiline="true" Text="label2" TextAlignment="TopCenter" SizeF="768.999939,30.29167" LocationFloat="3.17891427E-05, 30.2916679" Font="TH Sarabun New, 18pt, style=Bold" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="18" EventName="BeforePrint" PropertyName="Text" Expression="[Doc_head_2]" />
+          </ExpressionBindings>
+          <StylePriority Ref="19" UseFont="false" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="20" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" TextAlignment="TopCenter" SizeF="768.999939,30.2916679" LocationFloat="0, 0" Font="TH Sarabun New, 18pt, style=Bold" Padding="2,2,0,0,100">
+          <ExpressionBindings>
+            <Item1 Ref="21" EventName="BeforePrint" PropertyName="Text" Expression="[Doc_head_1]" />
+          </ExpressionBindings>
+          <StylePriority Ref="22" UseFont="false" UseTextAlignment="false" />
+        </Item6>
+      </Controls>
+    </Item4>
+    <Item5 Ref="23" ControlType="DetailReportBand" Name="DetailReport2" Level="2">
+      <Bands>
+        <Item1 Ref="24" ControlType="DetailBand" Name="Detail3" HeightF="0" />
+        <Item2 Ref="25" ControlType="GroupHeaderBand" Name="GroupHeader19" HeightF="51.2917824">
+          <Controls>
+            <Item1 Ref="26" ControlType="XRLabel" Name="label55" Multiline="true" Text="label55" SizeF="669.791931,28.2083511" LocationFloat="99.20826, 9.999974" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="27" EventName="BeforePrint" PropertyName="Text" Expression="[Doc_head_4]" />
+              </ExpressionBindings>
+            </Item1>
+            <Item2 Ref="28" ControlType="XRLabel" Name="label45" Multiline="true" Text="เริ่มประชุม" SizeF="99.20826,28.2083187" LocationFloat="0, 9.999974" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="29" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item5>
+    <Item6 Ref="30" ControlType="DetailReportBand" Name="DetailReport5" Level="7">
+      <Bands>
+        <Item1 Ref="31" ControlType="DetailBand" Name="Detail6" HeightF="73.70834" />
+        <Item2 Ref="32" ControlType="ReportHeaderBand" Name="ReportHeader1" HeightF="39.2066956">
+          <Controls>
+            <Item1 Ref="33" ControlType="XRLabel" Name="label15" Multiline="true" Text="ระเบียบวาระที่ 4 เรื่องเสนอเพื่อพิจารณา" SizeF="768.999939,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt, style=Bold" BackColor="Gainsboro" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="34" UseFont="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+          </Controls>
+        </Item2>
+        <Item3 Ref="35" ControlType="GroupHeaderBand" Name="GroupHeader10" HeightF="78.04178">
+          <Controls>
+            <Item1 Ref="36" ControlType="XRLabel" Name="label17" Multiline="true" Text="โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 1 จำนวน 0 โครงการ ดังนี้" SizeF="769.000061,28.20832" LocationFloat="0, 38.6249542" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="37" UseFont="false" />
+            </Item1>
+            <Item2 Ref="38" ControlType="XRLabel" Name="label16" Multiline="true" Text="ระเบียบวาระที่ 4.1 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 1" SizeF="769.000061,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="39" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item2>
+          </Controls>
+        </Item3>
+      </Bands>
+    </Item6>
+    <Item7 Ref="40" ControlType="DetailReportBand" Name="DetailReport6" Level="8">
+      <Bands>
+        <Item1 Ref="41" ControlType="DetailBand" Name="Detail7" />
+        <Item2 Ref="42" ControlType="GroupHeaderBand" Name="GroupHeader9" HeightF="77.7499542">
+          <Controls>
+            <Item1 Ref="43" ControlType="XRLabel" Name="label18" Multiline="true" Text="ระเบียบวาระที่ 4.2 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 2" SizeF="769.0002,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="44" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="45" ControlType="XRLabel" Name="label19" Multiline="true" Text="โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 2 จำนวน 0 โครงการ ดังนี้" SizeF="769.0002,22.9999542" LocationFloat="0, 39.2916374" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="46" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item7>
+    <Item8 Ref="47" ControlType="DetailReportBand" Name="DetailReport7" Level="9">
+      <Bands>
+        <Item1 Ref="48" ControlType="DetailBand" Name="Detail8" />
+        <Item2 Ref="49" ControlType="GroupHeaderBand" Name="GroupHeader11" HeightF="82.0418">
+          <Controls>
+            <Item1 Ref="50" ControlType="XRLabel" Name="label20" Multiline="true" Text="ระเบียบวาระที่ 4.3 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 3" SizeF="768.999939,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="51" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="52" ControlType="XRLabel" Name="label21" Multiline="true" Text="โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 3 จำนวน 0 โครงการ ดังนี้" SizeF="768.999939,31.3332863" LocationFloat="0, 40.70851" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="53" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item8>
+    <Item9 Ref="54" ControlType="DetailReportBand" Name="DetailReport8" Level="10">
+      <Bands>
+        <Item1 Ref="55" ControlType="DetailBand" Name="Detail9" />
+        <Item2 Ref="56" ControlType="GroupHeaderBand" Name="GroupHeader12" HeightF="78.49922">
+          <Controls>
+            <Item1 Ref="57" ControlType="XRLabel" Name="label22" Multiline="true" Text="ระเบียบวาระที่ 4.4 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 4" SizeF="769.0002,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="58" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="59" ControlType="XRLabel" Name="label23" Multiline="true" Text="โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 4 จำนวน 0 โครงการ ดังนี้" SizeF="769.0002,34.04172" LocationFloat="0, 39.9164848" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="60" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item9>
+    <Item10 Ref="61" ControlType="DetailReportBand" Name="DetailReport9" Level="11">
+      <Bands>
+        <Item1 Ref="62" ControlType="DetailBand" Name="Detail10" />
+        <Item2 Ref="63" ControlType="GroupHeaderBand" Name="GroupHeader13" HeightF="74.00055">
+          <Controls>
+            <Item1 Ref="64" ControlType="XRLabel" Name="label24" Multiline="true" Text="ระเบียบวาระที่ 4.5 โครงการวิจัยที่แจ้งขอต่ออายุใบรับรอง" SizeF="769.0002,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="65" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="66" ControlType="XRLabel" Name="label25" Multiline="true" Text="โครงการวิจัยที่แจ้งขอต่ออายุใบรับรอง จำนวน 0 โครงการ ดังนี้" SizeF="769.0002,34.3338" LocationFloat="0, 39.666748" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="67" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item10>
+    <Item11 Ref="68" ControlType="DetailReportBand" Name="DetailReport10" Level="12">
+      <Bands>
+        <Item1 Ref="69" ControlType="DetailBand" Name="Detail11" />
+        <Item2 Ref="70" ControlType="GroupHeaderBand" Name="GroupHeader14" HeightF="77.70834">
+          <Controls>
+            <Item1 Ref="71" ControlType="XRLabel" Name="label26" Multiline="true" Text="ระเบียบวาระที่ 4.6 โครงการวิจัยที่ขอแก้ไขโครงการหลังผ่านการรับรองแล้ว" SizeF="769.0002,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="72" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="73" ControlType="XRLabel" Name="label27" Multiline="true" Text="โครงการวิจัยที่ขอแก้ไขโครงการหลังผ่านการรับรองแล้ว จำนวน 0 โครงการ ดังนี้" SizeF="769.0002,29.0832558" LocationFloat="0, 38.62508" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="74" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item11>
+    <Item12 Ref="75" ControlType="DetailReportBand" Name="DetailReport11" Level="13">
+      <Bands>
+        <Item1 Ref="76" ControlType="DetailBand" Name="Detail12" />
+        <Item2 Ref="77" ControlType="GroupHeaderBand" Name="GroupHeader15" HeightF="78.12487">
+          <Controls>
+            <Item1 Ref="78" ControlType="XRLabel" Name="label28" Multiline="true" Text="ระเบียบวาระที่ 4.7 โครงการวิจัยที่ขอแจ้งปิดโครงการ" SizeF="769.0002,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="79" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="80" ControlType="XRLabel" Name="label29" Multiline="true" Text="โครงการวิจัยที่ขอแจ้งปิดโครงการ จำนวน 0 โครงการ ดังนี้" SizeF="768.999939,26.37482" LocationFloat="0, 41.75008" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="81" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item12>
+    <Item13 Ref="82" ControlType="DetailReportBand" Name="DetailReport12" Level="14">
+      <Bands>
+        <Item1 Ref="83" ControlType="DetailBand" Name="Detail13" />
+        <Item2 Ref="84" ControlType="GroupHeaderBand" Name="GroupHeader16" HeightF="76.2914047">
+          <Controls>
+            <Item1 Ref="85" ControlType="XRLabel" Name="label30" Multiline="true" Text="ระเบียบวาระที่ 4.8 คำขอประเมิณห้องปฏิบัติการ" SizeF="768.999939,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="86" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="87" ControlType="XRLabel" Name="label31" Multiline="true" Text="คำขอประเมิณห้องปฏิบัติการ จำนวน 0 โครงการ ดังนี้" SizeF="768.999939,36.6246567" LocationFloat="0, 39.666748" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="88" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item13>
+    <Item14 Ref="89" ControlType="DetailReportBand" Name="DetailReport13" Level="15">
+      <Bands>
+        <Item1 Ref="90" ControlType="DetailBand" Name="Detail14" />
+        <Item2 Ref="91" ControlType="GroupHeaderBand" Name="GroupHeader17" HeightF="72.99957">
+          <Controls>
+            <Item1 Ref="92" ControlType="XRLabel" Name="label32" Multiline="true" Text="ระเบียบวาระที่ 4.9 ผลการตรวจเยี่ยมติดตามโครงการ" SizeF="769.0002,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="93" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="94" ControlType="XRLabel" Name="label33" Multiline="true" Text="ผลการตรวจเยี่ยมติดตามโครงการ จำนวน 0 โครงการ ดังนี้" SizeF="769.0002,34.3744926" LocationFloat="0, 38.62508" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="95" UseFont="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item14>
+    <Item15 Ref="96" ControlType="DetailReportBand" Name="DetailReport17" Level="0" DataMember="list_person_meeting" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="97" ControlType="DetailBand" Name="Detail18" HeightF="45.9999847">
+          <Controls>
+            <Item1 Ref="98" ControlType="XRLabel" Name="label47" Multiline="true" Text="label47" SizeF="218.16687,23" LocationFloat="550.8333, 0" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="99" EventName="BeforePrint" PropertyName="Text" Expression="[position]" />
+              </ExpressionBindings>
+            </Item1>
+            <Item2 Ref="100" ControlType="XRLabel" Name="label49" Multiline="true" Text="label49" SizeF="683.3334,22.9999981" LocationFloat="85.6665955, 22.9999866" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="101" EventName="BeforePrint" PropertyName="Text" Expression="[department]" />
+              </ExpressionBindings>
+            </Item2>
+            <Item3 Ref="102" ControlType="XRLabel" Name="label48" Multiline="true" Text="label48" SizeF="36.9166069,23" LocationFloat="48.74999, 0" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="103" EventName="BeforePrint" PropertyName="Text" Expression="[seq]" />
+              </ExpressionBindings>
+            </Item3>
+            <Item4 Ref="104" ControlType="XRLabel" Name="label46" Multiline="true" Text="label46" SizeF="465.166718,23" LocationFloat="85.6665955, 0" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="105" EventName="BeforePrint" PropertyName="Text" Expression="[label]" />
+              </ExpressionBindings>
+            </Item4>
+          </Controls>
+        </Item1>
+        <Item2 Ref="106" ControlType="GroupHeaderBand" Name="GroupHeader21" HeightF="38.6249542">
+          <Controls>
+            <Item1 Ref="107" ControlType="XRLabel" Name="label6" Multiline="true" Text="รายนามผู้เข้าประชุม" SizeF="768.999939,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="108" UseFont="false" />
+            </Item1>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item15>
+    <Item16 Ref="109" ControlType="DetailReportBand" Name="DetailReport" Level="1" DataMember="list_person_out_of_meeting" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="110" ControlType="DetailBand" Name="Detail1" HeightF="45.9999847">
+          <Controls>
+            <Item1 Ref="111" ControlType="XRLabel" Name="label53" Multiline="true" Text="label53" SizeF="218.16687,23" LocationFloat="550.8333, 0" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="112" EventName="BeforePrint" PropertyName="Text" Expression="[position]" />
+              </ExpressionBindings>
+            </Item1>
+            <Item2 Ref="113" ControlType="XRLabel" Name="label52" Multiline="true" Text="label52" SizeF="465.166718,22.9999981" LocationFloat="85.6665955, 22.9999866" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="114" EventName="BeforePrint" PropertyName="Text" Expression="[department]" />
+              </ExpressionBindings>
+            </Item2>
+            <Item3 Ref="115" ControlType="XRLabel" Name="label51" Multiline="true" Text="label51" SizeF="465.166718,23" LocationFloat="85.6665955, 0" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="116" EventName="BeforePrint" PropertyName="Text" Expression="[label]" />
+              </ExpressionBindings>
+            </Item3>
+            <Item4 Ref="117" ControlType="XRLabel" Name="label50" Multiline="true" Text="label50" SizeF="36.9166069,23" LocationFloat="48.74999, 0" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="118" EventName="BeforePrint" PropertyName="Text" Expression="[seq]" />
+              </ExpressionBindings>
+            </Item4>
+          </Controls>
+        </Item1>
+        <Item2 Ref="119" ControlType="GroupHeaderBand" Name="GroupHeader1" HeightF="48.4166451">
+          <Controls>
+            <Item1 Ref="120" ControlType="XRLabel" Name="label7" Multiline="true" Text="รายนามผู้ที่ติดราชการ" SizeF="769.0002,28.20832" LocationFloat="0, 9.999974" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="121" UseFont="false" />
+            </Item1>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item16>
+    <Item17 Ref="122" ControlType="DetailReportBand" Name="DetailReport1" Level="3" DataMember="list_agenda_1_1" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="123" ControlType="DetailBand" Name="Detail2" HeightF="151.541641">
+          <Controls>
+            <Item1 Ref="124" ControlType="XRLabel" Name="label60" Multiline="true" Text="label60" SizeF="720.2502,23" LocationFloat="48.75, 117" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="125" EventName="BeforePrint" PropertyName="Text" Expression="[detail_conclusion]" />
+              </ExpressionBindings>
+            </Item1>
+            <Item2 Ref="126" ControlType="XRLabel" Name="label59" Multiline="true" Text="label59" SizeF="720.2502,23.0000038" LocationFloat="48.74999, 61.7083244" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="127" EventName="BeforePrint" PropertyName="Text" Expression="[detail_summary]" />
+              </ExpressionBindings>
+            </Item2>
+            <Item3 Ref="128" ControlType="XRLabel" Name="label58" Multiline="true" Text="label58" SizeF="769.0002,23.0000076" LocationFloat="0, 90.00002" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="129" EventName="BeforePrint" PropertyName="Text" Expression="[subject_conclusion]" />
+              </ExpressionBindings>
+              <StylePriority Ref="130" UseFont="false" />
+            </Item3>
+            <Item4 Ref="131" ControlType="XRLabel" Name="label57" Multiline="true" Text="label57" SizeF="769.0002,23" LocationFloat="0, 33.4166832" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="132" EventName="BeforePrint" PropertyName="Text" Expression="[subject_summary]" />
+              </ExpressionBindings>
+              <StylePriority Ref="133" UseFont="false" />
+            </Item4>
+            <Item5 Ref="134" ControlType="XRLabel" Name="label56" Multiline="true" Text="label56" SizeF="769.0002,26" LocationFloat="0, 0" Padding="2,2,0,0,100" BorderColor="DarkGray" Borders="All">
+              <ExpressionBindings>
+                <Item1 Ref="135" EventName="BeforePrint" PropertyName="Text" Expression="[subject]" />
+              </ExpressionBindings>
+              <StylePriority Ref="136" UseBorderColor="false" UseBorders="false" />
+            </Item5>
+          </Controls>
+        </Item1>
+        <Item2 Ref="137" ControlType="GroupHeaderBand" Name="GroupHeader2" HeightF="77.74976">
+          <Controls>
+            <Item1 Ref="138" ControlType="XRLabel" Name="label8" Multiline="true" Text="ระเบียบวาระที่ 1 เรื่องแจ้งเพื่อทราบ" SizeF="768.999939,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt, style=Bold" BackColor="Gainsboro" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="139" UseFont="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="140" ControlType="XRLabel" Name="label9" Multiline="true" Text="ระเบียบวาระที่ 1.1 เรื่องที่ประธานแจ้งให้ที่ประชุมทราบ" SizeF="769.0002,28.2083168" LocationFloat="0, 38.5416679" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="141" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item17>
+    <Item18 Ref="142" ControlType="DetailReportBand" Name="DetailReport16" Level="4" DataMember="list_agenda_1_2" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="143" ControlType="DetailBand" Name="Detail17" HeightF="165.45842">
+          <Controls>
+            <Item1 Ref="144" ControlType="XRLabel" Name="label65" Multiline="true" Text="label65" SizeF="720.2502,22.9999847" LocationFloat="48.74999, 130.083344" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="145" EventName="BeforePrint" PropertyName="Text" Expression="[detail_conclusion]" />
+              </ExpressionBindings>
+            </Item1>
+            <Item2 Ref="146" ControlType="XRLabel" Name="label64" Multiline="true" Text="label64" SizeF="720.2502,23" LocationFloat="48.74999, 65" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="147" EventName="BeforePrint" PropertyName="Text" Expression="[detail_summary]" />
+              </ExpressionBindings>
+            </Item2>
+            <Item3 Ref="148" ControlType="XRLabel" Name="label63" Multiline="true" Text="label63" SizeF="769.0002,23" LocationFloat="0, 96.75001" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="149" EventName="BeforePrint" PropertyName="Text" Expression="[subject_conclusion]" />
+              </ExpressionBindings>
+              <StylePriority Ref="150" UseFont="false" />
+            </Item3>
+            <Item4 Ref="151" ControlType="XRLabel" Name="label62" Multiline="true" Text="label62" SizeF="769.000061,23" LocationFloat="3.17891427E-05, 33.20834" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="152" EventName="BeforePrint" PropertyName="Text" Expression="[subject_summary]" />
+              </ExpressionBindings>
+              <StylePriority Ref="153" UseFont="false" />
+            </Item4>
+            <Item5 Ref="154" ControlType="XRLabel" Name="label61" Multiline="true" Text="label61" SizeF="767.1252,26" LocationFloat="1.87498724, 0" Padding="2,2,0,0,100" BorderColor="DarkGray" Borders="All">
+              <ExpressionBindings>
+                <Item1 Ref="155" EventName="BeforePrint" PropertyName="Text" Expression="[subject]" />
+              </ExpressionBindings>
+              <StylePriority Ref="156" UseBorderColor="false" UseBorders="false" />
+            </Item5>
+          </Controls>
+        </Item1>
+        <Item2 Ref="157" ControlType="GroupHeaderBand" Name="GroupHeader20" HeightF="48.1667824">
+          <Controls>
+            <Item1 Ref="158" ControlType="XRLabel" Name="label10" Multiline="true" Text="ระเบียบวาระที่ 1.2 เรื่องที่ฝ่ายเลขานุการแจ้งให้ที่ประชุมทราบ" SizeF="768.999939,28.20832" LocationFloat="0, 9.958458" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="159" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item18>
+    <Item19 Ref="160" ControlType="DetailReportBand" Name="DetailReport18" Level="5" DataMember="list_agenda_2" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="161" ControlType="DetailBand" Name="Detail19" HeightF="171.875">
+          <Controls>
+            <Item1 Ref="162" ControlType="XRLabel" Name="label70" Multiline="true" Text="label70" SizeF="720.249939,23" LocationFloat="48.74999, 135.374954" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="163" EventName="BeforePrint" PropertyName="Text" Expression="[detail_conclusion]" />
+              </ExpressionBindings>
+            </Item1>
+            <Item2 Ref="164" ControlType="XRLabel" Name="label69" Multiline="true" Text="label69" SizeF="767.124939,22.9999924" LocationFloat="1.87498724, 102.041626" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="165" EventName="BeforePrint" PropertyName="Text" Expression="[subject_conclusion]" />
+              </ExpressionBindings>
+              <StylePriority Ref="166" UseFont="false" />
+            </Item2>
+            <Item3 Ref="167" ControlType="XRLabel" Name="label68" Multiline="true" Text="label68" SizeF="720.2502,22.9999924" LocationFloat="48.74999, 67.666626" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="168" EventName="BeforePrint" PropertyName="Text" Expression="[detail_summary]" />
+              </ExpressionBindings>
+            </Item3>
+            <Item4 Ref="169" ControlType="XRLabel" Name="label67" Multiline="true" Text="label67" SizeF="769.0002,23.0000038" LocationFloat="0, 33.291626" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="170" EventName="BeforePrint" PropertyName="Text" Expression="[subject_summary]" />
+              </ExpressionBindings>
+              <StylePriority Ref="171" UseFont="false" />
+            </Item4>
+            <Item5 Ref="172" ControlType="XRLabel" Name="label66" Multiline="true" Text="label66" SizeF="769.0002,23" LocationFloat="0, 0" Padding="2,2,0,0,100" BorderColor="DarkGray" Borders="All">
+              <ExpressionBindings>
+                <Item1 Ref="173" EventName="BeforePrint" PropertyName="Text" Expression="[subject]" />
+              </ExpressionBindings>
+              <StylePriority Ref="174" UseBorderColor="false" UseBorders="false" />
+            </Item5>
+          </Controls>
+        </Item1>
+        <Item2 Ref="175" ControlType="GroupHeaderBand" Name="GroupHeader3" HeightF="39.2499275">
+          <Controls>
+            <Item1 Ref="176" ControlType="XRLabel" Name="label11" Multiline="true" Text="ระเบียบวาระที่ 2 เรื่องพิจารณารับรองรายงานการประชุม" SizeF="769.0002,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt, style=Bold" BackColor="Gainsboro" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="177" UseFont="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item19>
+    <Item20 Ref="178" ControlType="DetailReportBand" Name="DetailReport3" Level="16" DataMember="list_agenda_5" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="179" ControlType="DetailBand" Name="Detail4" HeightF="182.409668">
+          <Controls>
+            <Item1 Ref="180" ControlType="XRLabel" Name="label75" Multiline="true" Text="label75" SizeF="720.249939,23" LocationFloat="48.74999, 145.329788" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="181" EventName="BeforePrint" PropertyName="Text" Expression="[detail_conclusion]" />
+              </ExpressionBindings>
+            </Item1>
+            <Item2 Ref="182" ControlType="XRLabel" Name="label74" Multiline="true" Text="label74" SizeF="768.9998,23.0000076" LocationFloat="3.17891427E-05, 109.913124" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="183" EventName="BeforePrint" PropertyName="Text" Expression="[subject_conclusion]" />
+              </ExpressionBindings>
+              <StylePriority Ref="184" UseFont="false" />
+            </Item2>
+            <Item3 Ref="185" ControlType="XRLabel" Name="label73" Multiline="true" Text="label73" SizeF="720.2502,23" LocationFloat="48.74999, 73.4547958" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="186" EventName="BeforePrint" PropertyName="Text" Expression="[detail_summary]" />
+              </ExpressionBindings>
+            </Item3>
+            <Item4 Ref="187" ControlType="XRLabel" Name="label72" Multiline="true" Text="label72" SizeF="769.0002,22.9999962" LocationFloat="0, 38.0381279" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="188" EventName="BeforePrint" PropertyName="Text" Expression="[subject_summary]" />
+              </ExpressionBindings>
+              <StylePriority Ref="189" UseFont="false" />
+            </Item4>
+            <Item5 Ref="190" ControlType="XRLabel" Name="label71" Multiline="true" Text="label71" SizeF="768.999939,26" LocationFloat="0, 0" Padding="2,2,0,0,100" BorderColor="DarkGray" Borders="All">
+              <ExpressionBindings>
+                <Item1 Ref="191" EventName="BeforePrint" PropertyName="Text" Expression="[subject]" />
+              </ExpressionBindings>
+              <StylePriority Ref="192" UseBorderColor="false" UseBorders="false" />
+            </Item5>
+          </Controls>
+        </Item1>
+        <Item2 Ref="193" ControlType="GroupHeaderBand" Name="GroupHeader4" HeightF="40.75511">
+          <Controls>
+            <Item1 Ref="194" ControlType="XRLabel" Name="label34" Multiline="true" Text="ระเบียบวาระที่ 5 เรื่องอื่นๆ" SizeF="768.999939,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt, style=Bold" BackColor="Gainsboro" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="195" UseFont="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item20>
+    <Item21 Ref="196" ControlType="DetailReportBand" Name="DetailReport19" Level="17">
+      <Bands>
+        <Item1 Ref="197" ControlType="DetailBand" Name="Detail20" HeightF="0" />
+        <Item2 Ref="198" ControlType="GroupHeaderBand" Name="GroupHeader5" HeightF="436.271149">
+          <Controls>
+            <Item1 Ref="199" ControlType="XRLabel" Name="label54" Multiline="true" Text="label54" SizeF="669.791931,28.2083511" LocationFloat="99.20826, 0" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="200" EventName="BeforePrint" PropertyName="Text" Expression="[Doc_head_6]" />
+              </ExpressionBindings>
+            </Item1>
+            <Item2 Ref="201" ControlType="XRLine" Name="line4" LineStyle="Dot" SizeF="318.541718,2.08334351" LocationFloat="430.208282, 313.792419" />
+            <Item3 Ref="202" ControlType="XRLabel" Name="label42" Multiline="true" Text="มหาวิทยาลัยนเรศวร" TextAlignment="TopCenter" SizeF="318.541718,28.208313" LocationFloat="430.208282, 388.959259" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="203" UseFont="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="204" ControlType="XRLabel" Name="label43" Multiline="true" Text="ประธานคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ" TextAlignment="TopCenter" SizeF="318.541718,28.2083435" LocationFloat="430.208282, 360.750824" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="205" UseFont="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="206" ControlType="XRLabel" Name="label44" Multiline="true" Text="(นายยงยุทธ บ่อแก้ว)" TextAlignment="TopCenter" SizeF="318.541718,28.208313" LocationFloat="430.208282, 332.542419" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="207" UseFont="false" UseTextAlignment="false" />
+            </Item5>
+            <Item6 Ref="208" ControlType="XRLabel" Name="label39" Multiline="true" Text="(นายยงยุทธ บ่อแก้ว)" TextAlignment="TopCenter" SizeF="318.541718,28.208313" LocationFloat="430.208282, 139.208984" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="209" UseFont="false" UseTextAlignment="false" />
+            </Item6>
+            <Item7 Ref="210" ControlType="XRLabel" Name="label40" Multiline="true" Text="หัวหน้างานจัดการมาตรฐานและเครือข่าย" TextAlignment="TopCenter" SizeF="318.541718,28.208313" LocationFloat="430.208282, 167.4174" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="211" UseFont="false" UseTextAlignment="false" />
+            </Item7>
+            <Item8 Ref="212" ControlType="XRLabel" Name="label41" Multiline="true" Text="ผู้ตรวจรายงานการประชุม" TextAlignment="TopCenter" SizeF="318.541718,28.208313" LocationFloat="430.208282, 195.625809" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="213" UseFont="false" UseTextAlignment="false" />
+            </Item8>
+            <Item9 Ref="214" ControlType="XRLabel" Name="label38" Multiline="true" Text="ผู้จัดทำรายงานการประชุม" TextAlignment="TopCenter" SizeF="325.8333,28.208313" LocationFloat="0, 195.625809" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="215" UseFont="false" UseTextAlignment="false" />
+            </Item9>
+            <Item10 Ref="216" ControlType="XRLabel" Name="label37" Multiline="true" Text="เจ้าหน้าที่บริหารงานทั่วไป" TextAlignment="TopCenter" SizeF="325.8333,28.208313" LocationFloat="0, 167.4174" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="217" UseFont="false" UseTextAlignment="false" />
+            </Item10>
+            <Item11 Ref="218" ControlType="XRLabel" Name="label36" Multiline="true" Text="(นางสาวปรางทิพย์ แก้วประสิทธฺิ์)" TextAlignment="TopCenter" SizeF="325.8333,28.208313" LocationFloat="0, 139.208984" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100">
+              <StylePriority Ref="219" UseFont="false" UseTextAlignment="false" />
+            </Item11>
+            <Item12 Ref="220" ControlType="XRLine" Name="line3" LineStyle="Dot" SizeF="318.541718,4.166664" LocationFloat="430.208282, 120.458984" />
+            <Item13 Ref="221" ControlType="XRLine" Name="line2" LineStyle="Dot" SizeF="323.9583,4.166664" LocationFloat="1.87498724, 120.458984" />
+            <Item14 Ref="222" ControlType="XRLabel" Name="label35" Multiline="true" Text="ปิดประชุม" SizeF="99.20826,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="223" UseFont="false" />
+            </Item14>
+          </Controls>
+        </Item2>
+      </Bands>
+    </Item21>
+    <Item22 Ref="224" ControlType="DetailReportBand" Name="DetailReport14" Level="6" DataMember="list_agenda_3" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="225" ControlType="DetailBand" Name="Detail15" HeightF="330.125061">
+          <Controls>
+            <Item1 Ref="226" ControlType="XRLabel" Name="label90" Multiline="true" Text="label90" SizeF="585.8754,26" LocationFloat="182.083313, 82.24996" Padding="2,2,0,0,96">
+              <ExpressionBindings>
+                <Item1 Ref="227" EventName="BeforePrint" PropertyName="Text" Expression="[list_researchers]" />
+              </ExpressionBindings>
+            </Item1>
+            <Item2 Ref="228" ControlType="XRLabel" Name="label91" Multiline="true" Text="label91" SizeF="654.166931,23" LocationFloat="114.83326, 296.249756" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="229" EventName="BeforePrint" PropertyName="Text" Expression="[detail_conclusion]" />
+              </ExpressionBindings>
+            </Item2>
+            <Item3 Ref="230" ControlType="XRLabel" Name="label89" Multiline="true" Text="label89" SizeF="586.915,26" LocationFloat="182.083313, 108.250046" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="231" EventName="BeforePrint" PropertyName="Text" Expression="[project_safety_type]" />
+              </ExpressionBindings>
+            </Item3>
+            <Item4 Ref="232" ControlType="XRLabel" Name="label88" Multiline="true" Text="label88" SizeF="586.915,26" LocationFloat="182.083313, 134.25" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="233" EventName="BeforePrint" PropertyName="Text" Expression="[consultant_name]" />
+              </ExpressionBindings>
+            </Item4>
+            <Item5 Ref="234" ControlType="XRLabel" Name="label87" Multiline="true" Text="มติ :" SizeF="173.958344,26" LocationFloat="48.74999, 270.249817" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="235" UseFont="false" />
+            </Item5>
+            <Item6 Ref="236" ControlType="XRLabel" Name="label86" Multiline="true" Text="label86" SizeF="654.1687,26" LocationFloat="114.831482, 238.249847" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="237" EventName="BeforePrint" PropertyName="Text" Expression="[comment_3_name]" />
+              </ExpressionBindings>
+            </Item6>
+            <Item7 Ref="238" ControlType="XRLabel" Name="label85" Multiline="true" Text="label85" SizeF="654.168457,26" LocationFloat="114.831734, 212.249878" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="239" EventName="BeforePrint" PropertyName="Text" Expression="[comment_2_name]" />
+              </ExpressionBindings>
+            </Item7>
+            <Item8 Ref="240" ControlType="XRLabel" Name="label84" Multiline="true" Text="label84" SizeF="654.1687,26" LocationFloat="114.831482, 186.249924" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="241" EventName="BeforePrint" PropertyName="Text" Expression="[comment_1_name]" />
+              </ExpressionBindings>
+            </Item8>
+            <Item9 Ref="242" ControlType="XRLabel" Name="label83" Multiline="true" Text="พิจารณาโดย :" SizeF="133.333328,26" LocationFloat="48.74999, 160.249969" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="243" UseFont="false" />
+            </Item9>
+            <Item10 Ref="244" ControlType="XRLabel" Name="label82" Multiline="true" Text="ที่ปรึกษา :" SizeF="133.333328,26" LocationFloat="48.74999, 134.25" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="245" UseFont="false" />
+            </Item10>
+            <Item11 Ref="246" ControlType="XRLabel" Name="label81" Multiline="true" Text="งานวิจัยประเภทที่ :" SizeF="133.333328,26" LocationFloat="48.74999, 108.250046" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="247" UseFont="false" />
+            </Item11>
+            <Item12 Ref="248" ControlType="XRLabel" Name="label92" Multiline="true" Text="label92" SizeF="543.16,26" LocationFloat="225.833328, 56.25" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="249" EventName="BeforePrint" PropertyName="Text" Expression="[project_number]" />
+              </ExpressionBindings>
+            </Item12>
+            <Item13 Ref="250" ControlType="XRLabel" Name="label80" Multiline="true" Text="ผู้วิจัย :" SizeF="133.333328,26" LocationFloat="48.74999, 82.25005" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="251" UseFont="false" />
+            </Item13>
+            <Item14 Ref="252" ControlType="XRLabel" Name="label79" Multiline="true" Text="หมายเลขสำคัญโครงการ :" SizeF="173.958344,26" LocationFloat="48.74999, 56.25" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <StylePriority Ref="253" UseFont="false" />
+            </Item14>
+            <Item15 Ref="254" ControlType="XRLabel" Name="label78" Multiline="true" Text="label78" SizeF="654.166931,23.0000076" LocationFloat="114.83326, 22.9999542" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="255" EventName="BeforePrint" PropertyName="Text" Expression="[project_name_eng]" />
+              </ExpressionBindings>
+            </Item15>
+            <Item16 Ref="256" ControlType="XRLabel" Name="label76" Multiline="true" Text="label76" SizeF="66.08327,23" LocationFloat="48.74999, 0" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="257" EventName="BeforePrint" PropertyName="Text" Expression="[subject]" />
+              </ExpressionBindings>
+              <StylePriority Ref="258" UseFont="false" />
+            </Item16>
+            <Item17 Ref="259" ControlType="XRLabel" Name="label14" Multiline="true" Text="label14" SizeF="653.1255,22.9999981" LocationFloat="114.83326, 0" Padding="2,2,0,0,100">
+              <ExpressionBindings>
+                <Item1 Ref="260" EventName="BeforePrint" PropertyName="Text" Expression="[project_name_thai]" />
+              </ExpressionBindings>
+            </Item17>
+          </Controls>
+        </Item1>
+        <Item2 Ref="261" ControlType="GroupHeaderBand" Name="GroupHeader6" HeightF="78.125">
+          <Controls>
+            <Item1 Ref="262" ControlType="XRLabel" Name="label77" Multiline="true" Text="label77" SizeF="769.0002,26" LocationFloat="0, 40.0000267" Padding="2,2,0,0,100" BorderColor="DarkGray" Borders="All">
+              <ExpressionBindings>
+                <Item1 Ref="263" EventName="BeforePrint" PropertyName="Text" Expression="[title]" />
+              </ExpressionBindings>
+              <StylePriority Ref="264" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+            <Item2 Ref="265" ControlType="XRLabel" Name="label13" Multiline="true" Text="ระเบียบวาระที่ 3.1 โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข" SizeF="769.000061,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="266" UseFont="false" UseBorderColor="false" UseBorders="false" />
+            </Item2>
+          </Controls>
+        </Item2>
+        <Item3 Ref="267" ControlType="GroupHeaderBand" Name="GroupHeader18" Level="1" HeightF="39.5833321">
+          <Controls>
+            <Item1 Ref="268" ControlType="XRLabel" Name="label12" Multiline="true" Text="ระเบียบวาระที่ 3 เรื่องสืบเนื่องและเรื่องต่อเนื่องจากการพิจารณาโครงการวิจัย" SizeF="769.0002,28.2083187" LocationFloat="0, 0" Font="TH Sarabun New, 16pt, style=Bold" BackColor="Gainsboro" Padding="2,2,0,0,100" BorderColor="Gray" Borders="All">
+              <StylePriority Ref="269" UseFont="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" />
+            </Item1>
+          </Controls>
+        </Item3>
+        <Item4 Ref="270" ControlType="DetailReportBand" Name="DetailReport4" Level="0" DataMember="list_agenda_3.list_agenda_3_2" DataSource="#Ref-0">
+          <Bands>
+            <Item1 Ref="271" ControlType="DetailBand" Name="Detail5" HeightF="142.708328">
+              <Controls>
+                <Item1 Ref="272" ControlType="XRLabel" Name="label96" Multiline="true" Text="label96" SizeF="654.1687,26.0000076" LocationFloat="114.831482, 103.99984" Padding="2,2,0,0,100">
+                  <ExpressionBindings>
+                    <Item1 Ref="273" EventName="BeforePrint" PropertyName="Text" Expression="[sequel_detail_conclusion]" />
+                  </ExpressionBindings>
+                </Item1>
+                <Item2 Ref="274" ControlType="XRLabel" Name="label95" Multiline="true" Text="label95" SizeF="653.127258,25.9999962" LocationFloat="114.831482, 51.99992" Padding="2,2,0,0,100">
+                  <ExpressionBindings>
+                    <Item1 Ref="275" EventName="BeforePrint" PropertyName="Text" Expression="[sequel_detail_summary]" />
+                  </ExpressionBindings>
+                </Item2>
+                <Item3 Ref="276" ControlType="XRLabel" Name="label94" Multiline="true" Text="label94" SizeF="719.21,26" LocationFloat="48.74999, 0" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+                  <ExpressionBindings>
+                    <Item1 Ref="277" EventName="BeforePrint" PropertyName="Text" Expression="[sequel_title]" />
+                  </ExpressionBindings>
+                  <StylePriority Ref="278" UseFont="false" />
+                </Item3>
+                <Item4 Ref="279" ControlType="XRLabel" Name="label109" Multiline="true" Text="สรุปเรื่อง" SizeF="133.333328,26" LocationFloat="48.74999, 25.99999" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="280" UseFont="false" />
+                </Item4>
+                <Item5 Ref="281" ControlType="XRLabel" Name="label110" Multiline="true" Text="มติ" SizeF="133.333328,26" LocationFloat="48.74999, 77.99991" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100">
+                  <StylePriority Ref="282" UseFont="false" />
+                </Item5>
+              </Controls>
+            </Item1>
+            <Item2 Ref="283" ControlType="GroupHeaderBand" Name="GroupHeader7" HeightF="36.4583321">
+              <Controls>
+                <Item1 Ref="284" ControlType="XRLabel" Name="label93" Multiline="true" Text="เรื่องสืบเนื่อง" SizeF="720.2502,26" LocationFloat="48.74999, 0" Font="TH Sarabun New, 16pt, style=Bold" Padding="2,2,0,0,100" BorderColor="DarkGray" Borders="All">
+                  <StylePriority Ref="285" UseFont="false" UseBorderColor="false" UseBorders="false" />
+                </Item1>
+              </Controls>
+            </Item2>
+          </Bands>
+        </Item4>
+      </Bands>
+    </Item22>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.ObjectBinding.ObjectDataSource,DevExpress.DataAccess.v19.2" Name="objectDataSource1" Base64="PE9iamVjdERhdGFTb3VyY2UgTmFtZT0ib2JqZWN0RGF0YVNvdXJjZTEiPjxEYXRhU291cmNlIFR5cGU9IlRIRC5Db3JlLkFwaS5Nb2RlbHMuUmVwb3J0TW9kZWxzLm1vZGVsX3JwdF8xNF9yZXBvcnQsIFRIRC5Db3JlLkFwaS5Nb2RlbHMsIFZlcnNpb249MS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsIiAvPjwvT2JqZWN0RGF0YVNvdXJjZT4=" />
+  </ComponentStorage>
+</XtraReportsLayoutSerializer>

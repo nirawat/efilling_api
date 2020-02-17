@@ -16,12 +16,12 @@ namespace THD.Core.Api.Models.ReportModels
     {
         public string doc_head_4 { get; set; }
         public string round { get; set; }
-        public string project_qty { get; set; }
+        public string project_qty  { get; set; }
         public string certificate_meeting { get; set; }
         public string certificate_date { get; set; }
-        public string approve_date { get; set; }
-        public string meet_date { get; set; }
-        public string meet_month { get; set; }
+       public string approve_date { get; set; }
+       public string meet_date { get; set; }
+    public string meet_month { get; set; }
         public string meet_year { get; set; }
 
     }

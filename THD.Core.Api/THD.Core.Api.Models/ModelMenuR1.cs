@@ -18,12 +18,12 @@ namespace THD.Core.Api.Models
     public class ModelMenuR1Data
     {
         public string docid { get; set; }
-        public string meetingrecordname { get; set; }
         public string meetinground { get; set; }
         public string yearofmeeting { get; set; }
         public string meetingdate { get; set; }
         public string meetinglocation { get; set; }
-        public string committeesarray { get; set; }
+        public string meetingstart { get; set; }
+        public string meetingclose { get; set; }
         public bool isclosed { get; set; }
     }
 
@@ -33,6 +33,7 @@ namespace THD.Core.Api.Models
         public string name { get; set; }
         public string email { get; set; }
         public string position { get; set; }
+        public string department { get; set; }
         public string faculty { get; set; }
     }
 

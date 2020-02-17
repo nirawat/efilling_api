@@ -42,5 +42,17 @@ namespace THD.Core.Api.Helpers
             else return _value;
         }
 
+        public static string ReportEmptyValue(string _value)
+        {
+            if (string.IsNullOrEmpty(_value)) return "-";
+            else return _value;
+        }
+
+        public static string ReportEmptyValueInt(int _value)
+        {
+            if (_value <= 0) return "-";
+            else return _value.ToString();
+        }
+
     }
 }
