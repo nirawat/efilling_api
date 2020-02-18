@@ -43,5 +43,8 @@ namespace THD.Core.Api.Models.ReportModels
         public string approvetype1 { get; set; }
         public string approvetype2 { get; set; }
         public string approvetype3 { get; set; }
+        public string day { get; set; }
+        public string month { get; set; }
+        public int year { get; set; }
     }
 }

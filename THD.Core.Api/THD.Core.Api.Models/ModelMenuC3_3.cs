@@ -17,6 +17,7 @@ namespace THD.Core.Api.Models
     }
     public class ModelMenuC33
     {
+        public int docid { get; set; }
         public int meetingid { get; set; } //เอกสารอ้างอิงจากหน้าบันทึกประชุม
         public int agenda3projectcount { get; set; }
         public string agenda3projectnumber { get; set; }
@@ -25,30 +26,53 @@ namespace THD.Core.Api.Models
         public string agenda3Conclusion { get; set; }
         public string agenda3ConclusionName { get; set; }
         public string agenda3Suggestion { get; set; }
+        public string docprocessfrom { get; set; }
         public int safetytype { get; set; }
+        public string safetytypename { get; set; }
 
         //Tab 3 Group 1
-        public string tab3Group1Seq1Input1 { get; set; }
-        public string tab3Group1Seq1Input2 { get; set; }
-        public string tab3Group1Seq1Input3 { get; set; }
-        public string tab3Group1Seq2Input1 { get; set; }
-        public string tab3Group1Seq2Input2 { get; set; }
-        public string tab3Group1Seq2Input3 { get; set; }
-        public string tab3Group1Seq3Input1 { get; set; }
-        public string tab3Group1Seq3Input2 { get; set; }
-        public string tab3Group1Seq3Input3 { get; set; }
+        //public string tab3Group1Seq1Input1 { get; set; }
+        //public string tab3Group1Seq1Input2 { get; set; }
+        //public string tab3Group1Seq1Input3 { get; set; }
+        //public string tab3Group1Seq2Input1 { get; set; }
+        //public string tab3Group1Seq2Input2 { get; set; }
+        //public string tab3Group1Seq2Input3 { get; set; }
+        //public string tab3Group1Seq3Input1 { get; set; }
+        //public string tab3Group1Seq3Input2 { get; set; }
+        //public string tab3Group1Seq3Input3 { get; set; }
 
 
         //Tab 3 Group 2
-        public string tab3Group2Seq1Input1 { get; set; }
-        public string tab3Group2Seq1Input2 { get; set; }
-        public string tab3Group2Seq1Input3 { get; set; }
-        public string tab3Group2Seq2Input1 { get; set; }
-        public string tab3Group2Seq2Input2 { get; set; }
-        public string tab3Group2Seq2Input3 { get; set; }
-        public string tab3Group2Seq3Input1 { get; set; }
-        public string tab3Group2Seq3Input2 { get; set; }
-        public string tab3Group2Seq3Input3 { get; set; }
+        //public string tab3Group2Seq1Input1 { get; set; }
+        //public string tab3Group2Seq1Input2 { get; set; }
+        //public string tab3Group2Seq1Input3 { get; set; }
+        //public string tab3Group2Seq2Input1 { get; set; }
+        //public string tab3Group2Seq2Input2 { get; set; }
+        //public string tab3Group2Seq2Input3 { get; set; }
+        //public string tab3Group2Seq3Input1 { get; set; }
+        //public string tab3Group2Seq3Input2 { get; set; }
+        //public string tab3Group2Seq3Input3 { get; set; }
+
+
+        public string comment1title { get; set; }
+        public string comment1comittee { get; set; }
+        public string comment1note { get; set; }
+        public string comment2title { get; set; }
+        public string comment2comittee { get; set; }
+        public string comment2note { get; set; }
+        public string comment3title { get; set; }
+        public string comment3comittee { get; set; }
+        public string comment3note { get; set; }
+
+        public string sequel1title { get; set; }
+        public string sequel1summary { get; set; }
+        public string sequel1note { get; set; }
+        public string sequel2title { get; set; }
+        public string sequel2summary { get; set; }
+        public string sequel2note { get; set; }
+        public string sequel3title { get; set; }
+        public string sequel3summary { get; set; }
+        public string sequel3note { get; set; }
 
 
         public string createby { get; set; }
@@ -65,15 +89,15 @@ namespace THD.Core.Api.Models
         public IList<ModelSelectOption> ListApprovalType { get; set; }
 
 
-        public string tab3Group1Seq1Input1 { get; set; }
-        public string tab3Group1Seq1Input2 { get; set; }
-        public string tab3Group1Seq1Input3 { get; set; }
-        public string tab3Group1Seq2Input1 { get; set; }
-        public string tab3Group1Seq2Input2 { get; set; }
-        public string tab3Group1Seq2Input3 { get; set; }
-        public string tab3Group1Seq3Input1 { get; set; }
-        public string tab3Group1Seq3Input2 { get; set; }
-        public string tab3Group1Seq3Input3 { get; set; }
+        public string comment1title { get; set; }
+        public string comment1comittee { get; set; }
+        public string comment1note { get; set; }
+        public string comment2title { get; set; }
+        public string comment2comittee { get; set; }
+        public string comment2note { get; set; }
+        public string comment3title { get; set; }
+        public string comment3comittee { get; set; }
+        public string comment3note { get; set; }
     }
 
     public class ModelMenuC33Tab3GroupAll

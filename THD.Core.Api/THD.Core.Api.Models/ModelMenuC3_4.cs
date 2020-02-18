@@ -28,6 +28,7 @@ namespace THD.Core.Api.Models
         public string agenda4ConclusionName { get; set; }
         public string agenda4Suggestion { get; set; }
         public int safetytype { get; set; }
+        public string safetytypename { get; set; }
         public string file1name { get; set; }
         public string file1base64 { get; set; }
 

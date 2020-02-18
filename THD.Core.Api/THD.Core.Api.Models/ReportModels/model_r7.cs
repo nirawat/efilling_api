@@ -41,6 +41,10 @@ namespace THD.Core.Api.Models.ReportModels
         public string headofresearch_fullname { get; set; }
         public string nuibc_no { get; set; }
         public string renew_round { get; set; }
+        public string doc { get; set; }
+        public string day { get; set; }
+        public string month { get; set; }
+        public int year { get; set; }
 
     }
 }

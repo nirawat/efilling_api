@@ -277,7 +277,7 @@ namespace THD.Core.Api.Repository.DataHandler
             ModelPermissionPage user_permission = await _IRegisterUserRepository.GetPermissionPageAsync(user_id, "M001");
 
             string sql = "SELECT A.doc_id, ROW_NUMBER() OVER(PARTITION BY A.project_number ORDER BY A.doc_id ASC) as seq, A.doc_date, " +
-                        "A.assigner_code, B.full_name, A.comment_consider, C.name_thai, (D.name_thai + ' ' + D.name_thai_sub) as approval_name_thai " +
+                        "A.assigner_code, (B.first_name + B.full_name) as full_name, A.comment_consider, C.name_thai, (D.name_thai + ' ' + D.name_thai_sub) as approval_name_thai " +
                         "FROM Doc_MenuC2 A " +
                         "LEFT OUTER JOIN RegisterUser B " +
                         "ON A.assigner_code = B.register_id " +

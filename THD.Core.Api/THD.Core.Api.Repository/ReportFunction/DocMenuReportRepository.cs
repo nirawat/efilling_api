@@ -53,6 +53,7 @@ namespace THD.Core.Api.Repository.DataHandler
             try
             {
                 model_rpt_1_report rptData1_2 = new model_rpt_1_report();
+                model_rpt_16_report rptData16 = new model_rpt_16_report();
 
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
@@ -70,6 +71,7 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             while (await reader.ReadAsync())
                             {
+                                rptData1_2.doccode = reader["project_type"].ToString() == "1" ? "NUIBC01-2" : "NUIBC02-2";
                                 rptData1_2.projecttype = reader["project_type"].ToString();
                                 rptData1_2.title = reader["name_thai"].ToString();
                                 rptData1_2.Doc_head_2 = reader["doc_number"].ToString();
@@ -123,44 +125,30 @@ namespace THD.Core.Api.Repository.DataHandler
 
 
 
-                    //using (SqlCommand cmd = new SqlCommand("sp_report_16", conn))
-                    //{
-                    //    cmd.CommandType = CommandType.StoredProcedure;
+                    using (SqlCommand cmd = new SqlCommand("sp_report_16", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
 
-                    //    cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
+                        cmd.Parameters.Add("@doc_id", SqlDbType.VarChar, 50).Value = doc_id;
 
-                    //    SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
 
-                    //    if (reader.HasRows)
-                    //    {
-                    //        while (await reader.ReadAsync())
-                    //        {
-                    //            rptData.projecttype = reader["project_type"].ToString();
-                    //            rptData.Doc_head_2 = reader["doc_number"].ToString();
-                    //            rptData.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                    //            rptData.Presenter_name = reader["project_head_name"].ToString();
-                    //            rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
-                    //            rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
-                    //            rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
-                    //            rptData.Position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
-                    //            rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
-                    //            rptData.Job_Position = "";
-                    //            rptData.Faculty_name = reader["faculty_name"].ToString();
-                    //            rptData.Research_name_thai = reader["project_name_thai"].ToString();
-                    //            rptData.Research_name_eng = reader["project_name_eng"].ToString();
-                    //            rptData.Faculty_name = reader["faculty_name"].ToString();
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                rptData16.project_head = reader["project_head"].ToString();
+                                rptData16.project_namethai = reader["project_name_thai"].ToString();
+                                rptData16.project_nameeng = reader["project_name_eng"].ToString();
+                                rptData16.fund_source = reader["money_supply"].ToString();
+                                rptData16.fund_amount = Convert.ToDecimal(reader["budget"]);
 
-                    //            rptData.Advisor_fullname = reader["project_consultant"].ToString();
-                    //            rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                    //            rptData.co_research_fullname1 = reader["member_project_1"].ToString();
-                    //            rptData.co_research_fullname2 = reader["member_project_2"].ToString();
+                            }
+                        }
+                        reader.Close();
+                    }
 
-                    //        }
-                    //    }
-                    //    reader.Close();
-                    //}
-
-
+                    conn.Close();
 
                     conn.Close();
                 }
@@ -191,7 +179,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 rptR16 rpt16 = new rptR16();
                 ObjectDataSource ds16 = new ObjectDataSource();
                 ds16.Constructor = new ObjectConstructorInfo();
-                //ds16.DataSource = rptData16;
+                ds16.DataSource = rptData16;
 
                 string R16_title = "";
                 if (rptData1_2 != null && rptData1_2.projecttype == "1") R16_title = "ระดับห้องปฏิบัติการ";
@@ -249,7 +237,9 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 //rptData.projecttype = reader["project_type"].ToString();
                                 //rptData.Doc_head_2 = reader["doc_number"].ToString();
-                                rptData.Doc_head_4 = Convert.ToDateTime(reader["create_date"]).ToString("dd/MM/yyyy");
+                                rptData.day = reader["doc_date"].ToString();
+                                rptData.month = reader["doc_month"].ToString();
+                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                 rptData.Presenter_name = reader["project_head_name"].ToString();
                                 rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
@@ -264,7 +254,7 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
                                 rptData.certificate_date = reader["Certificate_date"].ToString();
                                 rptData.certificate_month = reader["Certificate_month"].ToString();
-                                rptData.certificate_year = reader["Certificate_year"].ToString();
+                                rptData.certificate_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["Certificate_year"])));
                             }
                         }
                         reader.Close();
@@ -310,7 +300,6 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -333,7 +322,9 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 //rptData.projecttype = reader["project_type"].ToString();
                                 //rptData.Doc_head_2 = reader["doc_number"].ToString();
-                                rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+                                rptData.day = reader["doc_date"].ToString();
+                                rptData.month = reader["doc_month"].ToString();
+                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                 rptData.presenter_name = reader["project_head_name"].ToString();
                                 rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
@@ -347,7 +338,7 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.headofresearch_fullname = reader["project_head_name"].ToString();
                                 rptData.certificate_date = reader["Certificate_date"].ToString();
                                 rptData.certificate_month = reader["Certificate_month"].ToString();
-                                rptData.certificate_year = reader["Certificate_year"].ToString();
+                                rptData.certificate_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["Certificate_year"])));
                                 rptData.certificate_type = reader["accept_type_name"].ToString();
 
                             }
@@ -395,7 +386,6 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -418,7 +408,9 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 //rptData.projecttype = reader["project_type"].ToString();
                                 //rptData.Doc_head_2 = reader["doc_number"].ToString();
-                                rptData.doc_head_4 = Convert.ToDateTime(reader["create_date"]).ToString("dd/MM/yyyy");
+                                rptData.day = reader["doc_date"].ToString();
+                                rptData.month = reader["doc_month"].ToString();
+                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                 rptData.presenter_name = reader["project_head_name"].ToString();
                                 rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
@@ -432,7 +424,7 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.headofresearch_fullname = reader["project_head_name"].ToString();
                                 rptData.certificate_date = reader["Certificate_date"].ToString();
                                 rptData.certificate_month = reader["Certificate_month"].ToString();
-                                rptData.certificate_year = reader["Certificate_year"].ToString();
+                                rptData.certificate_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["Certificate_year"])));
                                 rptData.certificate_type = reader["accept_type_name"].ToString();
 
                             }
@@ -480,7 +472,6 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -503,7 +494,9 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 //rptData.projecttype = reader["project_type"].ToString();
                                 //rptData.Doc_head_2 = reader["doc_number"].ToString();
-                                rptData.doc_head_4 = Convert.ToDateTime(reader["create_date"]).ToString("dd/MM/yyyy");
+                                rptData.day = reader["doc_date"].ToString();
+                                rptData.month = reader["doc_month"].ToString();
+                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                 rptData.presenter_name = reader["project_head_name"].ToString();
                                 rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
@@ -515,9 +508,9 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.research_name_thai = "ขอปรับแก้โครงการวิจัยเรื่อง " + reader["project_name_thai"].ToString();
                                 rptData.research_name_eng = reader["project_name_eng"].ToString();
                                 rptData.headofresearch_fullname = reader["project_head_name"].ToString();
-                                rptData.certificate_date = reader["Certificate_date"].ToString();
-                                rptData.certificate_month = reader["Certificate_month"].ToString();
-                                rptData.certificate_year = reader["Certificate_year"].ToString();
+                                rptData.certificate_date = reader["conclusion_date"].ToString();
+                                rptData.certificate_month = reader["conclusion_month"].ToString();
+                                rptData.certificate_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["conclusion_year"])));
                                 //rptData.certificate_type = reader["accept_type_name"].ToString();
 
                             }
@@ -565,7 +558,8 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
+            string report_no = "";
+            int year = System.DateTime.Now.Year;
 
             try
             {
@@ -588,7 +582,10 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 //rptData.projecttype = reader["project_type"].ToString();
                                 //rptData.Doc_head_2 = reader["doc_number"].ToString();
-                                rptData.doc_head_4 = Convert.ToDateTime(reader["create_date"]).ToString("dd/MM/yyyy");
+                                rptData.doc = report_no.PadLeft(4, '0');
+                                rptData.day = reader["doc_date"].ToString();
+                                rptData.month = reader["doc_month"].ToString();
+                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                 rptData.presenter_name = reader["project_head_name"].ToString();
                                 rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
@@ -672,15 +669,18 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             while (await reader.ReadAsync())
                             {
-                                rptData.docno = await CreateReportNumberAsync(year, "R8", doc_id, "Doc_MenuB1");
-                                rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+                                report_no = await CreateReportNumberAsync(year, "R8", doc_id, "Doc_MenuB1");
+                                rptData.docno = report_no.PadLeft(4, '0');
+                                rptData.day = reader["doc_date"].ToString();
+                                rptData.month = reader["doc_month"].ToString();
+                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                 rptData.faculty_name = reader["faculty_name"].ToString();
                                 rptData.research_name_eng = reader["project_name_thai"].ToString() + "   " + reader["project_name_eng"].ToString();
                                 rptData.headofresearch_fullname = reader["project_head"].ToString();
                                 rptData.nuibc_no = reader["project_key_number"].ToString();
-                                rptData.renew_round = reader["round_of_meeting"].ToString();
-                                rptData.month_project = reader["Certificate_month"].ToString();
-                                rptData.year_project = reader["Certificate_year"].ToString();
+                                rptData.renew_round = reader["round_of_meeting"].ToString() + '/' + reader["year_of_meeting"].ToString();
+                                rptData.month_project = reader["meeting_month"].ToString();
+                                rptData.year_project = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["meeting_year"])));
 
                             }
                         }
@@ -727,7 +727,6 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -756,8 +755,12 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.project_no = reader["project_number"].ToString();
                                 rptData.certificate_no = reader["acceptProjectNo"].ToString();
                                 rptData.round = reader["RenewRound"].ToString();
-                                rptData.certificate_date = Convert.ToDateTime(reader["AcceptDate"]).ToString("dd/MM/yyyy");
-                                rptData.expire_date = Convert.ToDateTime(reader["ExpireDate"]).ToString("dd/MM/yyyy");
+                                rptData.certificate_date = reader["accept_date"].ToString();
+                                rptData.certificate_month = reader["accept_month"].ToString();
+                                rptData.certificate_year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["accept_year"]));
+                                rptData.expire_date = reader["expire_date"].ToString();
+                                rptData.expire_month = reader["expire_month"].ToString();
+                                rptData.expire_year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["expire_year"]));
                                 rptData.projecttype = reader["accept_type_name"].ToString();
 
                             }
@@ -840,11 +843,13 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.approvetype2 = (reader["approval_type"].ToString()) == "2" ? reader["approval_type"].ToString() : "-";
                                 rptData.approvetype3 = (reader["approval_type"].ToString()) == "3" ? reader["approval_type"].ToString() : "-";
                                 rptData.assignername = reader["assign_name"].ToString();
-                                rptData.doc_date = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
                                 rptData.commentconsider1 = (reader["check_value"].ToString()) == "1" ? reader["comment_consider"].ToString() : "-";
                                 rptData.commentconsider2 = (reader["check_value"].ToString()) == "2" ? reader["comment_consider"].ToString() : "-";
                                 rptData.commentconsider3 = (reader["check_value"].ToString()) == "3" ? reader["comment_consider"].ToString() : "-";
                                 rptData.commentconsider4 = (reader["check_value"].ToString()) == "4" ? reader["comment_consider"].ToString() : "-";
+                                rptData.day = reader["doc_date"].ToString();
+                                rptData.month = reader["doc_month"].ToString();
+                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                             }
                             reader.Close();
                         }
@@ -890,7 +895,8 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
+            string report_no = "";
+            int year = System.DateTime.Now.Year;
 
             try
             {
@@ -911,11 +917,16 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             while (await reader.ReadAsync())
                             {
-                                rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                                rptData.round = reader["round_of_meeting"].ToString();
+                                report_no = await CreateReportNumberAsync(year, "R11", doc_id, "Doc_MenuC1");
+                                rptData.docno = report_no.PadLeft(4, '0');
+                                rptData.day = reader["doc_date"].ToString();
+                                rptData.month = reader["doc_month"].ToString();
+                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
+                                rptData.round = (reader["round_of_meeting"].ToString() + '/' + reader["year_of_meeting"].ToString());
                                 rptData.meet_date = reader["meet_date"].ToString();
                                 rptData.meet_month = reader["meet_month"].ToString();
-                                rptData.meet_year = reader["meet_year"].ToString();
+                                rptData.meet_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["meet_year"])));
+                                rptData.assign = reader["assigname"].ToString();
                             }
                         }
                         reader.Close();
@@ -998,25 +1009,34 @@ namespace THD.Core.Api.Repository.DataHandler
 
                                 if (type == 3)
                                 {
-                                    rptData.docno = await CreateReportNumberAsync(year, "R12", doc_id, "Doc_MenuC3_Tab3");
-                                    rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+
+                                    report_no = await CreateReportNumberAsync(year, "R13", doc_id, "Doc_MenuC3_Tab3");
+                                    rptData.docno = report_no.PadLeft(4, '0');
+                                    rptData.day = reader["doc_date"].ToString();
+                                    rptData.month = reader["doc_month"].ToString();
+                                    rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
+                                    rptData.research_name_thai = reader["agenda_3_project_name_thai"].ToString();
+                                    rptData.research_name_eng = reader["agenda_3_project_name_eng"].ToString();
+                                    rptData.round = reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
                                     rptData.sender = reader["sender"].ToString();
                                     rptData.projectno = reader["agenda_3_project_number"].ToString();
-                                    rptData.researchname_thai = reader["agenda_3_project_name_thai"].ToString();
-                                    rptData.researchname_eng = reader["agenda_3_project_name_eng"].ToString();
-                                    rptData.comment1 = reader["comment_1_comittee"].ToString();
-                                    rptData.comment2 = reader["comment_2_comittee"].ToString();
+                                    rptData.comment1 = reader["comment_1_note"].ToString();
+                                    rptData.comment2 = reader["comment_2_note"].ToString();
                                 }
                                 else if (type == 4)
                                 {
-                                    rptData.docno = await CreateReportNumberAsync(year, "R12", doc_id, "Doc_MenuC3_Tab4");
-                                    rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                                    rptData.sender = reader["sender"].ToString();
-                                    rptData.projectno = reader["agenda_4_project_number"].ToString();
+                                    report_no = await CreateReportNumberAsync(year, "R12", doc_id, "Doc_MenuC3_Tab4");
+                                    rptData.docno = report_no.PadLeft(4, '0');
+                                    rptData.day = reader["doc_date"].ToString();
+                                    rptData.month = reader["doc_month"].ToString();
+                                    rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                     rptData.researchname_thai = reader["agenda_4_project_name_1"].ToString();
                                     rptData.researchname_eng = reader["agenda_4_project_name_2"].ToString();
-                                    rptData.comment1 = reader["comment_1_comittee"].ToString();
-                                    rptData.comment2 = reader["comment_2_comittee"].ToString();
+                                    rptData.round = reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
+                                    rptData.sender = reader["sender"].ToString();
+                                    rptData.projectno = reader["agenda_4_project_number"].ToString();
+                                    rptData.comment1 = reader["comment_1_note"].ToString();
+                                    rptData.comment2 = reader["comment_2_note"].ToString();
                                 }
 
                             }
@@ -1085,7 +1105,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
                     conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("sp_report_13", conn))
+                    using (SqlCommand cmd = new SqlCommand(store_name, conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
@@ -1099,8 +1119,11 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 if (type == 3)
                                 {
-                                    rptData.docno = await CreateReportNumberAsync(year, "R13", doc_id, "Doc_MenuC3_Tab3");
-                                    rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+                                    report_no = await CreateReportNumberAsync(year, "R13", doc_id, "Doc_MenuC3_Tab3");
+                                    rptData.docno = report_no.PadLeft(4, '0');
+                                    rptData.day = reader["doc_date"].ToString();
+                                    rptData.month = reader["doc_month"].ToString();
+                                    rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                     rptData.researcher = reader["sender"].ToString();
                                     rptData.nuibc = reader["agenda_3_project_number"].ToString();
                                     rptData.research_name_thai = reader["agenda_3_project_name_thai"].ToString();
@@ -1110,8 +1133,11 @@ namespace THD.Core.Api.Repository.DataHandler
                                 }
                                 else if (type == 4)
                                 {
-                                    rptData.docno = await CreateReportNumberAsync(year, "R13", doc_id, "Doc_MenuC3_Tab4");
-                                    rptData.doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
+                                    report_no = await CreateReportNumberAsync(year, "R13", doc_id, "Doc_MenuC3_Tab4");
+                                    rptData.docno = report_no.PadLeft(4, '0');
+                                    rptData.day = reader["doc_date"].ToString();
+                                    rptData.month = reader["doc_month"].ToString();
+                                    rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                     rptData.researcher = reader["sender"].ToString();
                                     rptData.nuibc = reader["agenda_4_project_number"].ToString();
                                     rptData.research_name_thai = reader["agenda_4_project_name_1"].ToString();
@@ -1155,6 +1181,7 @@ namespace THD.Core.Api.Repository.DataHandler
             }
             return resp;
         }
+
 
         // Report 14 --------------------------------------------------------------------------
 
@@ -1351,7 +1378,7 @@ namespace THD.Core.Api.Repository.DataHandler
                     }
 
                     // ระเบียบวารที่ 3 (3.1)
-                    using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_3_1", conn))
+                    using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_3", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
@@ -1380,109 +1407,46 @@ namespace THD.Core.Api.Repository.DataHandler
                                 agenda_3.comment_3_name = "3. " + ParseDataHelper.ReportEmptyValue(reader["comment_3_title"].ToString());
                                 agenda_3.detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["agenda_3_suggestion"].ToString());
 
-                                if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
+                                agenda_3.list_agenda_3_2 = new List<model_list_agenda_3_2>();
+
+                                if (!string.IsNullOrEmpty(reader["sequel_1_title"].ToString()))
                                 {
-
-                                    agenda_3.list_researchers = "";
-
-                                    var member1json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_1"].ToString());
-                                    if (member1json != null)
+                                    model_list_agenda_3_2 item_3_2_1 = new model_list_agenda_3_2()
                                     {
-                                        var member1 = await GetRegisterInforAsync(member1json.projecthead);
-                                        if (member1 != null && member1.Count > 0)
-                                            agenda_3.list_researchers += ("1. " + member1[0].name + Environment.NewLine);
+                                        sequel_title = "3.2.1 " + ParseDataHelper.ReportEmptyValue(reader["sequel_1_title"].ToString()),
+                                        sequel_detail_summary = ParseDataHelper.ReportEmptyValue(reader["sequel_1_summary"].ToString()),
+                                        sequel_detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["sequel_1_note"].ToString()),
+                                    };
+                                    agenda_3.list_agenda_3_2.Add(item_3_2_1);
+
+                                    if (!string.IsNullOrEmpty(reader["sequel_2_title"].ToString()))
+                                    {
+                                        model_list_agenda_3_2 item_3_2_2 = new model_list_agenda_3_2()
+                                        {
+                                            sequel_title = "3.2.2 " + ParseDataHelper.ReportEmptyValue(reader["sequel_2_title"].ToString()),
+                                            sequel_detail_summary = ParseDataHelper.ReportEmptyValue(reader["sequel_2_summary"].ToString()),
+                                            sequel_detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["sequel_2_note"].ToString()),
+                                        };
+                                        agenda_3.list_agenda_3_2.Add(item_3_2_2);
                                     }
 
-                                    var member2json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_2"].ToString());
-                                    if (member2json != null)
+                                    if (!string.IsNullOrEmpty(reader["sequel_3_title"].ToString()))
                                     {
-                                        var member2 = await GetRegisterInforAsync(member2json.projecthead);
-                                        if (member2 != null && member2.Count > 0)
-                                            agenda_3.list_researchers += ("2. " + member2[0].name + Environment.NewLine);
-                                    }
-
-                                    var member3json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_3"].ToString());
-                                    if (member3json != null)
-                                    {
-                                        var member3 = await GetRegisterInforAsync(member3json.projecthead);
-                                        if (member3 != null && member3.Count > 0)
-                                            agenda_3.list_researchers += ("3. " + member3[0].name + Environment.NewLine);
-
-                                    }
-
-                                    var member4json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_4"].ToString());
-                                    if (member4json != null)
-                                    {
-                                        var member4 = await GetRegisterInforAsync(member4json.projecthead);
-                                        if (member4 != null && member4.Count > 0)
-                                            agenda_3.list_researchers += ("4. " + member4[0].name + Environment.NewLine);
-                                    }
-
-                                    var member5json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_5"].ToString());
-                                    if (member5json != null)
-                                    {
-                                        var member5 = await GetRegisterInforAsync(member5json.projecthead);
-                                        if (member5 != null && member5.Count > 0)
-                                            agenda_3.list_researchers += ("5. " + member5[0].name + Environment.NewLine);
-                                    }
-
-                                    var member6json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_6"].ToString());
-                                    if (member6json != null)
-                                    {
-                                        var member6 = await GetRegisterInforAsync(member6json.projecthead);
-                                        if (member6 != null && member6.Count > 0)
-                                            agenda_3.list_researchers += ("6. " + member6[0].name + Environment.NewLine);
-                                    }
-
-                                    var member7json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_7"].ToString());
-                                    if (member7json != null)
-                                    {
-                                        var member7 = await GetRegisterInforAsync(member7json.projecthead);
-                                        if (member7 != null && member7.Count > 0)
-                                            agenda_3.list_researchers += ("7. " + member7[0].name + Environment.NewLine);
-                                    }
-
-                                    var member8json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_8"].ToString());
-                                    if (member8json != null)
-                                    {
-                                        var member8 = await GetRegisterInforAsync(member8json.projecthead);
-                                        if (member8 != null && member8.Count > 0)
-                                            agenda_3.list_researchers += ("8. " + member8[0].name + Environment.NewLine);
-                                    }
-
-                                    var member9json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_9"].ToString());
-                                    if (member9json != null)
-                                    {
-                                        var member9 = await GetRegisterInforAsync(member9json.projecthead);
-                                        if (member9 != null && member9.Count > 0)
-                                            agenda_3.list_researchers += ("9. " + member9[0].name + Environment.NewLine);
-                                    }
-
-                                    var member10json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_10"].ToString());
-                                    if (member10json != null)
-                                    {
-                                        var member10 = await GetRegisterInforAsync(member10json.projecthead);
-                                        if (member10 != null && member10.Count > 0)
-                                            agenda_3.list_researchers += ("10. " + member10[0].name + Environment.NewLine);
-                                    }
-
-                                    var member11json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_11"].ToString());
-                                    if (member11json != null)
-                                    {
-                                        var member11 = await GetRegisterInforAsync(member11json.projecthead);
-                                        if (member11 != null && member11.Count > 0)
-                                            agenda_3.list_researchers += ("11. " + member11[0].name + Environment.NewLine);
-                                    }
-
-                                    var member12json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_12"].ToString());
-                                    if (member12json != null)
-                                    {
-                                        var member12 = await GetRegisterInforAsync(member12json.projecthead);
-                                        if (member12 != null && member12.Count > 0)
-                                            agenda_3.list_researchers += ("12. " + member12[0].name + Environment.NewLine);
+                                        model_list_agenda_3_2 item_3_2_3 = new model_list_agenda_3_2()
+                                        {
+                                            sequel_title = "3.2.3 " + ParseDataHelper.ReportEmptyValue(reader["sequel_3_title"].ToString()),
+                                            sequel_detail_summary = ParseDataHelper.ReportEmptyValue(reader["sequel_3_summary"].ToString()),
+                                            sequel_detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["sequel_3_note"].ToString()),
+                                        };
+                                        agenda_3.list_agenda_3_2.Add(item_3_2_3);
                                     }
 
                                 }
+                                else agenda_3.list_agenda_3_2.Add(new model_list_agenda_3_2());
+
+
+                                if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
+                                    agenda_3.list_researchers = await GetResearchOfProject(reader);
 
                                 rptData.list_agenda_3.Add(agenda_3);
                                 seq++;
@@ -1492,64 +1456,18 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         reader.Close();
 
-
-
-                    }
-
-                    // ระเบียบวารที่ 3 (3.2)
-                    if (rptData.list_agenda_3 != null && rptData.list_agenda_3.Count > 0)
-                    {
-                        foreach (var item in rptData.list_agenda_3)
-                        {
-                            item.list_agenda_3_2 = new List<model_list_agenda_3_2>();
-
-                            using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_3_2", conn))
-                            {
-                                cmd.CommandType = CommandType.StoredProcedure;
-
-                                cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
-                                cmd.Parameters.Add("@project_number", SqlDbType.VarChar, 50).Value = item.project_number;
-
-                                SqlDataReader reader = await cmd.ExecuteReaderAsync();
-
-                                if (reader.HasRows)
-                                {
-                                    while (await reader.ReadAsync())
-                                    {
-                                        model_list_agenda_3_2 item_3_2 = new model_list_agenda_3_2()
-                                        {
-                                            sequel_title = "3.2." + reader["seq"].ToString() + " " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString()),
-                                            sequel_detail_summary = ParseDataHelper.ReportEmptyValue(reader["input2"].ToString()),
-                                            sequel_detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["input3"].ToString()),
-                                        };
-                                        item.list_agenda_3_2.Add(item_3_2);
-                                    }
-                                }
-                                else item.list_agenda_3_2.Add(new model_list_agenda_3_2());
-                                reader.Close();
-                            }
-                        }
                     }
 
                     // ระเบียบวารที่ 4
-                    using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_4", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
-
-                        SqlDataReader reader = await cmd.ExecuteReaderAsync();
-
-                        if (reader.HasRows)
-                        {
-                            while (await reader.ReadAsync())
-                            {
-                                string string_qty = "จำนวน " + ParseDataHelper.ReportEmptyValueInt(Convert.ToInt32(reader["count_4"])) + " โครงการ";
-
-                            }
-                        }
-                        reader.Close();
-                    }
+                    rptData.list_agenda_4_1 = await GetAgenda4Type1To4(conn, doc_id, 1);
+                    rptData.list_agenda_4_2 = await GetAgenda4Type1To4(conn, doc_id, 2);
+                    rptData.list_agenda_4_3 = await GetAgenda4Type1To4(conn, doc_id, 3);
+                    rptData.list_agenda_4_4 = await GetAgenda4Type1To4(conn, doc_id, 4);
+                    rptData.list_agenda_4_5 = await GetAgenda4Type5To9(conn, doc_id, 5);
+                    rptData.list_agenda_4_6 = await GetAgenda4Type5To9(conn, doc_id, 6);
+                    rptData.list_agenda_4_7 = await GetAgenda4Type5To9(conn, doc_id, 7);
+                    rptData.list_agenda_4_8 = await GetAgenda4Type5To9(conn, doc_id, 8);
+                    rptData.list_agenda_4_9 = await GetAgenda4Type5To9(conn, doc_id, 9);
 
                     // ระเบียบวารที่ 5
                     using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_5", conn))
@@ -1616,8 +1534,215 @@ namespace THD.Core.Api.Repository.DataHandler
             return resp;
         }
 
+        private async Task<IList<model_list_agenda_4>> GetAgenda4Type1To4(SqlConnection conn, int doc_id, int safety_type)
+        {
+            IList<model_list_agenda_4> list_agenda_4 = new List<model_list_agenda_4>();
 
+            using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_4_type_1_4", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
 
+                cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+                cmd.Parameters.Add("@safety_type", SqlDbType.Int).Value = safety_type;
+
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                string title = "โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ " + safety_type + " จำนวน ";
+
+                if (reader.HasRows)
+                {
+                    int seq = 0;
+                    while (await reader.ReadAsync())
+                    {
+                        model_list_agenda_4 agenda_4 = new model_list_agenda_4();
+
+                        agenda_4.title = title + ParseDataHelper.ReportEmptyValueInt(Convert.ToInt32(reader["count_4"])) + " โครงการ ดังนี้";
+                        agenda_4.subject = (seq + 1).ToString() + ". เรื่อง :";
+                        agenda_4.project_number = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_number"].ToString());
+                        agenda_4.project_name_thai = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_name_1"].ToString());
+                        agenda_4.project_name_eng = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_name_2"].ToString());
+                        agenda_4.project_safety_type = ParseDataHelper.ReportEmptyValue(reader["safety_type"].ToString());
+                        agenda_4.consultant_name = ParseDataHelper.ReportEmptyValue(reader["consultant_name"].ToString());
+                        agenda_4.comment_1_name = "1. " + ParseDataHelper.ReportEmptyValue(reader["comment_1_title"].ToString());
+                        agenda_4.comment_2_name = "2. " + ParseDataHelper.ReportEmptyValue(reader["comment_2_title"].ToString());
+                        agenda_4.comment_3_name = "3. " + ParseDataHelper.ReportEmptyValue(reader["comment_3_title"].ToString());
+                        agenda_4.detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["agenda_4_suggestion"].ToString());
+
+                        if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
+                            agenda_4.list_researchers = await GetResearchOfProject(reader);
+
+                        list_agenda_4.Add(agenda_4);
+                        seq++;
+                    }
+                }
+                else list_agenda_4.Add(new model_list_agenda_4() { title = title + "0 โครงการ ดังนี้" });
+
+                reader.Close();
+            }
+
+            return list_agenda_4;
+        }
+
+        private async Task<IList<model_list_agenda_4>> GetAgenda4Type5To9(SqlConnection conn, int doc_id, int type)
+        {
+            IList<model_list_agenda_4> list_agenda_4 = new List<model_list_agenda_4>();
+
+            using (SqlCommand cmd = new SqlCommand("sp_report_14_detail_4_type_5_9", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add("@meeting_id", SqlDbType.Int).Value = doc_id;
+                cmd.Parameters.Add("@type", SqlDbType.Int).Value = type;
+
+                SqlDataReader reader = await cmd.ExecuteReaderAsync();
+
+                string title = "";
+
+                if (type == 5) title = "โครงการวิจัยที่แจ้งขอต่ออายุใบรับรอง จำนวน ";
+                if (type == 6) title = "โครงการวิจัยที่ขอแก้ไขโครงการหลังผ่านการรับรองแล้ว จำนวน ";
+                if (type == 7) title = "โครงการวิจัยที่ขอแจ้งปิดโครงการ จำนวน ";
+                if (type == 8) title = "คําขอประเมิณห้องปฏิบัติการ จำนวน ";
+                if (type == 9) title = "ผลการตรวจเยี่ยมติดตามโครงการ จำนวน ";
+
+                if (reader.HasRows)
+                {
+                    int seq = 0;
+                    while (await reader.ReadAsync())
+                    {
+
+                        model_list_agenda_4 agenda_4 = new model_list_agenda_4();
+
+                        agenda_4.title = title + ParseDataHelper.ReportEmptyValueInt(Convert.ToInt32(reader["count_4"])) + " โครงการ ดังนี้";
+                        agenda_4.subject = (seq + 1).ToString() + ". เรื่อง :";
+                        agenda_4.project_number = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_number"].ToString());
+                        agenda_4.project_name_thai = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_name_1"].ToString());
+                        agenda_4.project_name_eng = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_name_2"].ToString());
+                        agenda_4.project_safety_type = ParseDataHelper.ReportEmptyValue(reader["safety_type"].ToString());
+                        agenda_4.consultant_name = ParseDataHelper.ReportEmptyValue(reader["consultant_name"].ToString());
+                        agenda_4.comment_1_name = "1. " + ParseDataHelper.ReportEmptyValue(reader["comment_1_title"].ToString());
+                        agenda_4.comment_2_name = "2. " + ParseDataHelper.ReportEmptyValue(reader["comment_2_title"].ToString());
+                        agenda_4.comment_3_name = "3. " + ParseDataHelper.ReportEmptyValue(reader["comment_3_title"].ToString());
+                        agenda_4.detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["agenda_4_suggestion"].ToString());
+
+                        if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
+                            agenda_4.list_researchers = await GetResearchOfProject(reader);
+
+                        list_agenda_4.Add(agenda_4);
+                        seq++;
+                    }
+                }
+                else list_agenda_4.Add(new model_list_agenda_4() { title = title + "0 โครงการ ดังนี้" });
+
+                reader.Close();
+            }
+
+            return list_agenda_4;
+        }
+
+        private async Task<string> GetResearchOfProject(SqlDataReader reader)
+        {
+            string list_researchers = "";
+
+            var member1json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_1"].ToString());
+            if (member1json != null)
+            {
+                var member1 = await GetRegisterInforAsync(member1json.projecthead);
+                if (member1 != null && member1.Count > 0)
+                    list_researchers += ("1. " + member1[0].name + Environment.NewLine);
+            }
+
+            var member2json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_2"].ToString());
+            if (member2json != null)
+            {
+                var member2 = await GetRegisterInforAsync(member2json.projecthead);
+                if (member2 != null && member2.Count > 0)
+                    list_researchers += ("2. " + member2[0].name + Environment.NewLine);
+            }
+
+            var member3json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_3"].ToString());
+            if (member3json != null)
+            {
+                var member3 = await GetRegisterInforAsync(member3json.projecthead);
+                if (member3 != null && member3.Count > 0)
+                    list_researchers += ("3. " + member3[0].name + Environment.NewLine);
+
+            }
+
+            var member4json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_4"].ToString());
+            if (member4json != null)
+            {
+                var member4 = await GetRegisterInforAsync(member4json.projecthead);
+                if (member4 != null && member4.Count > 0)
+                    list_researchers += ("4. " + member4[0].name + Environment.NewLine);
+            }
+
+            var member5json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_5"].ToString());
+            if (member5json != null)
+            {
+                var member5 = await GetRegisterInforAsync(member5json.projecthead);
+                if (member5 != null && member5.Count > 0)
+                    list_researchers += ("5. " + member5[0].name + Environment.NewLine);
+            }
+
+            var member6json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_6"].ToString());
+            if (member6json != null)
+            {
+                var member6 = await GetRegisterInforAsync(member6json.projecthead);
+                if (member6 != null && member6.Count > 0)
+                    list_researchers += ("6. " + member6[0].name + Environment.NewLine);
+            }
+
+            var member7json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_7"].ToString());
+            if (member7json != null)
+            {
+                var member7 = await GetRegisterInforAsync(member7json.projecthead);
+                if (member7 != null && member7.Count > 0)
+                    list_researchers += ("7. " + member7[0].name + Environment.NewLine);
+            }
+
+            var member8json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_8"].ToString());
+            if (member8json != null)
+            {
+                var member8 = await GetRegisterInforAsync(member8json.projecthead);
+                if (member8 != null && member8.Count > 0)
+                    list_researchers += ("8. " + member8[0].name + Environment.NewLine);
+            }
+
+            var member9json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_9"].ToString());
+            if (member9json != null)
+            {
+                var member9 = await GetRegisterInforAsync(member9json.projecthead);
+                if (member9 != null && member9.Count > 0)
+                    list_researchers += ("9. " + member9[0].name + Environment.NewLine);
+            }
+
+            var member10json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_10"].ToString());
+            if (member10json != null)
+            {
+                var member10 = await GetRegisterInforAsync(member10json.projecthead);
+                if (member10 != null && member10.Count > 0)
+                    list_researchers += ("10. " + member10[0].name + Environment.NewLine);
+            }
+
+            var member11json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_11"].ToString());
+            if (member11json != null)
+            {
+                var member11 = await GetRegisterInforAsync(member11json.projecthead);
+                if (member11 != null && member11.Count > 0)
+                    list_researchers += ("11. " + member11[0].name + Environment.NewLine);
+            }
+
+            var member12json = JsonConvert.DeserializeObject<model_personal>(reader["member_project_12"].ToString());
+            if (member12json != null)
+            {
+                var member12 = await GetRegisterInforAsync(member12json.projecthead);
+                if (member12 != null && member12.Count > 0)
+                    list_researchers += ("12. " + member12[0].name + Environment.NewLine);
+            }
+            return list_researchers;
+        }
+
+        // Report 15 -----------------------------------------------------------------------------
 
         public async Task<model_rpt_15_file> GetReportR15Async(int doc_id)
         {
@@ -1943,6 +2068,7 @@ namespace THD.Core.Api.Repository.DataHandler
         }
 
         // Report 17-18 --------------------------------------------------------------------------
+
         public async Task<model_rpt_17_file> GetReportR17_18Async(int doc_id)
         {
             model_rpt_17_file resp = new model_rpt_17_file();
@@ -2024,7 +2150,6 @@ namespace THD.Core.Api.Repository.DataHandler
             return resp;
         }
 
-
         public async Task<IList<ModelMenuR1RegisterInfo>> GetRegisterInforAsync(string user_id)
         {
 
@@ -2073,6 +2198,7 @@ namespace THD.Core.Api.Repository.DataHandler
         }
 
         // รายงานหลังจากบันทึกมติที่ประชุมครบเรียบร้อย -----------------------------------------------------
+
         public async Task<model_rpt_meeting_file> GetAllReportMeetingAsync(int doc_id)
         {
             model_rpt_meeting_file resp = new model_rpt_meeting_file();

@@ -30,7 +30,6 @@ namespace THD.Core.Api.Repository.ReportFiles {
             this.checkBox2 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRCheckBox>("checkBox2");
             this.checkBox1 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRCheckBox>("checkBox1");
             this.label27 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label27");
-            this.label26 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label26");
             this.label2 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label2");
             this.label33 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label33");
             this.label23 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label23");
@@ -76,7 +75,6 @@ namespace THD.Core.Api.Repository.ReportFiles {
         private DevExpress.XtraReports.UI.XRCheckBox checkBox2;
         private DevExpress.XtraReports.UI.XRCheckBox checkBox1;
         private DevExpress.XtraReports.UI.XRLabel label27;
-        private DevExpress.XtraReports.UI.XRLabel label26;
         private DevExpress.XtraReports.UI.XRLabel label2;
         private DevExpress.XtraReports.UI.XRLabel label33;
         private DevExpress.XtraReports.UI.XRLabel label23;

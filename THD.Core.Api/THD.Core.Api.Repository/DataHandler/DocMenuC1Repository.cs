@@ -45,7 +45,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<ModelMenuC1_InterfaceData> MenuC1InterfaceDataAsync(string userid, string username)
         {
-            string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
+            //string user_id = Encoding.UTF8.GetString(Convert.FromBase64String(userid));
 
             ModelMenuC1_InterfaceData resp = new ModelMenuC1_InterfaceData();
 
@@ -136,7 +136,7 @@ namespace THD.Core.Api.Repository.DataHandler
         public async Task<ModelMenuC1Data> GetProjectNumberWithDataC1Async(string project_number)
         {
 
-            string sql = "SELECT C.full_name AS project_head_name, B.faculty_name, B.project_name_thai, B.project_name_eng " +
+            string sql = "SELECT (C.first_name + C.full_name) AS project_head_name, B.faculty_name, B.project_name_thai, B.project_name_eng " +
                         "FROM Doc_MenuB1 A " +
                         "INNER JOIN Doc_MenuA1 B ON A.project_id = B.doc_id " +
                         "INNER JOIN RegisterUser C ON B.project_head = C.register_id " +

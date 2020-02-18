@@ -57,6 +57,7 @@ namespace THD.Core.Api.Models
 
     public class ModelPrintMeeting
     {
+        public int docid { get; set; }
         public string meetingofround { get; set; }
         public string meetingofyear { get; set; }
     }

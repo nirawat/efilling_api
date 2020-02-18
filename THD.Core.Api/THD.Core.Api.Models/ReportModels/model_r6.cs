@@ -43,6 +43,9 @@ namespace THD.Core.Api.Models.ReportModels
         public string certificate_date { get; set; }
         public string certificate_month { get; set; }
         public string certificate_year { get; set; }
+        public string day { get; set; }
+        public string month { get; set; }
+        public int year { get; set; }
 
     }
 }

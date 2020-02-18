@@ -25,7 +25,11 @@ namespace THD.Core.Api.Models.ReportModels
         public string certificate_type { get; set; }
         public string round { get; set; }
         public string certificate_date { get; set; }
+        public string certificate_month { get; set; }
+        public int certificate_year { get; set; }
         public string expire_date { get; set; }
+        public string expire_month { get; set; }
+        public int expire_year { get; set; }
         public string President { get; set; }
     }
 }

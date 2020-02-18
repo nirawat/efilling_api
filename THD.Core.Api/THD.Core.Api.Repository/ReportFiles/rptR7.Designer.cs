@@ -18,6 +18,9 @@ namespace THD.Core.Api.Repository.ReportFiles {
             this.TopMargin = reportInitializer.GetControl<DevExpress.XtraReports.UI.TopMarginBand>("TopMargin");
             this.BottomMargin = reportInitializer.GetControl<DevExpress.XtraReports.UI.BottomMarginBand>("BottomMargin");
             this.Detail = reportInitializer.GetControl<DevExpress.XtraReports.UI.DetailBand>("Detail");
+            this.label40 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label40");
+            this.label39 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label39");
+            this.label31 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label31");
             this.label12 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label12");
             this.label38 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label38");
             this.label37 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label37");
@@ -25,7 +28,6 @@ namespace THD.Core.Api.Repository.ReportFiles {
             this.label35 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label35");
             this.label34 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label34");
             this.label32 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label32");
-            this.label31 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label31");
             this.label30 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label30");
             this.label29 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label29");
             this.label27 = reportInitializer.GetControl<DevExpress.XtraReports.UI.XRLabel>("label27");
@@ -71,6 +73,9 @@ namespace THD.Core.Api.Repository.ReportFiles {
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.DetailBand Detail;
+        private DevExpress.XtraReports.UI.XRLabel label40;
+        private DevExpress.XtraReports.UI.XRLabel label39;
+        private DevExpress.XtraReports.UI.XRLabel label31;
         private DevExpress.XtraReports.UI.XRLabel label12;
         private DevExpress.XtraReports.UI.XRLabel label38;
         private DevExpress.XtraReports.UI.XRLabel label37;
@@ -78,7 +83,6 @@ namespace THD.Core.Api.Repository.ReportFiles {
         private DevExpress.XtraReports.UI.XRLabel label35;
         private DevExpress.XtraReports.UI.XRLabel label34;
         private DevExpress.XtraReports.UI.XRLabel label32;
-        private DevExpress.XtraReports.UI.XRLabel label31;
         private DevExpress.XtraReports.UI.XRLabel label30;
         private DevExpress.XtraReports.UI.XRLabel label29;
         private DevExpress.XtraReports.UI.XRLabel label27;

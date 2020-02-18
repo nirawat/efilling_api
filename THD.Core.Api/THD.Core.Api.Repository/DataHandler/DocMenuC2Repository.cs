@@ -96,7 +96,7 @@ namespace THD.Core.Api.Repository.DataHandler
         public async Task<ModelMenuC2Data> GetProjectNumberWithDataC2Async(string project_number)
         {
 
-            string sql = "SELECT C.full_name AS project_head_name, B.faculty_name, B.project_name_thai, B.project_name_eng " +
+            string sql = "SELECT (C.first_name + C.full_name) AS project_head_name, B.faculty_name, B.project_name_thai, B.project_name_eng " +
                         "FROM Doc_MenuB1 A " +
                         "INNER JOIN Doc_MenuA1 B ON A.project_id = B.doc_id " +
                         "INNER JOIN RegisterUser C ON B.project_head = C.register_id " +

@@ -29,5 +29,8 @@ namespace THD.Core.Api.Models.ReportModels
         public string renew_round { get; set; }
         public string month_project { get; set; }
         public string year_project { get; set; }
+        public string day { get; set; }
+        public string month { get; set; }
+        public int year { get; set; }
     }
 }

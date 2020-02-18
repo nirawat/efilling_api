@@ -4,24 +4,24 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51492",
-      "sslPort": 44339
+      "applicationUrl": "http://localhost:63085",
+      "sslPort": 44338
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/private",
+      "launchUrl": "api/public",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "THD.Core.Api.Private": {
+    "THD.Core.Api.Public": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/private",
-      "applicationUrl": "https://localhost:7001;http://localhost:7000",
+      "launchUrl": "api/public",
+      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -366,7 +366,7 @@ namespace THD.Core.Api.Business
         {
             ModelResponseC33Message resp = new ModelResponseC33Message();
 
-            if (string.IsNullOrEmpty(model.tab3Group1Seq1Input1))
+            if (string.IsNullOrEmpty(model.comment1title))
             {
                 resp.Status = false;
                 resp.Message = "กรุณาตรวจสอบและลงความเห็นของกรรมการ!";
@@ -402,7 +402,18 @@ namespace THD.Core.Api.Business
 
         public async Task<ModelResponseC33Message> UpdateDocMenuC33EditAsync(ModelMenuC33 model)
         {
-            return await _IDocMenuC3Repository.UpdateDocMenuC33EditAsync(model);
+            ModelResponseC33Message resp = new ModelResponseC33Message();
+
+            if (string.IsNullOrEmpty(model.comment1title))
+            {
+                resp.Status = false;
+                resp.Message = "กรุณาตรวจสอบและลงความเห็นของกรรมการ!";
+            }
+            else
+            {
+                resp = await _IDocMenuC3Repository.UpdateDocMenuC33EditAsync(model);
+            }
+            return resp;
         }
 
 
@@ -494,7 +505,7 @@ namespace THD.Core.Api.Business
             }
 
             model.file1name = string.IsNullOrEmpty(model.file1name) ? "" : GenerateToken.GetGuid() + Path.GetExtension(model.file1name);
-            resp = await _IDocMenuC3Repository.AddDocMenuC34Async(model);
+            resp = await _IDocMenuC3Repository.UpdateDocMenuC34EditAsync(model);
 
             if (resp.Status)
             {

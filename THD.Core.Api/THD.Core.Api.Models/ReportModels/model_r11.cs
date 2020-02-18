@@ -14,6 +14,7 @@ namespace THD.Core.Api.Models.ReportModels
 
     public class model_rpt_11_report
     {
+        public string docno { get; set; }
         public string doc_head_4 { get; set; }
         public string round { get; set; }
         public string project_qty  { get; set; }
@@ -21,8 +22,12 @@ namespace THD.Core.Api.Models.ReportModels
         public string certificate_date { get; set; }
        public string approve_date { get; set; }
        public string meet_date { get; set; }
-    public string meet_month { get; set; }
+       public string meet_month { get; set; }
         public string meet_year { get; set; }
+        public string day { get; set; }
+        public string month { get; set; }
+        public int year { get; set; }
+        public string assign { get; set; }
 
     }
 }

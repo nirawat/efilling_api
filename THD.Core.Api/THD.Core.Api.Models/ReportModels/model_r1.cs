@@ -47,6 +47,7 @@ namespace THD.Core.Api.Models.ReportModels
         public string co_research_signature2 { get; set; }
         public string co_research_fullname2 { get; set; }
         public string co_research_fullname3 { get; set; }
+        public string doccode { get; set; }
 
     }
 }
