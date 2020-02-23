@@ -9,6 +9,7 @@ namespace THD.Core.Api.Repository.Interface
 {
     public interface IRegisterUserRepository
     {
+        Task<ModelRegisterActive_InterfaceData> ActiveUserAccountInterfaceAsync(string RegisterId);
         Task<ModelResponseMessageRegisterUser> AddRegisterUserAsync(EntityRegisterUser entity_model);
         Task<ModelResponseMessageRegisterActive> AddRegisterActiveAsync(EntityRegisterUser entity_model);
         Task<EntityRegisterUser> GetRegisterUserActiveAsync(string RegisterId);

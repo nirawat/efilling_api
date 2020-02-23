@@ -8,6 +8,8 @@ namespace THD.Core.Api.Models
 
     public class ModelMenuF1Edit_InterfaceData
     {
+        public IList<ModelSelectOption> listfirstname { get; set; }
+        public IList<ModelSelectOption> listfaculty { get; set; }
         public ModelRegisterEdit UserData { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
     }
@@ -19,7 +21,10 @@ namespace THD.Core.Api.Models
         public string passw { get; set; }
         public string confirmpassw { get; set; }
         public string email { get; set; }
-        [Required(ErrorMessage = "first name is required.")]
+
+        public string firstname1 { get; set; }
+        public string firstname2 { get; set; }
+        //[Required(ErrorMessage = "first name is required.")]
         public string firstname { get; set; }
         [Required(ErrorMessage = "full name is required.")]
         public string fullname { get; set; }
@@ -54,7 +59,9 @@ namespace THD.Core.Api.Models
         public string passw { get; set; }
         public string confirmpassw { get; set; }
         public string email { get; set; }
-        [Required(ErrorMessage = "first name is required.")]
+        public string firstname1 { get; set; }
+        public string firstname2 { get; set; }
+        //[Required(ErrorMessage = "first name is required.")]
         public string firstname { get; set; }
         [Required(ErrorMessage = "full name is required.")]
         public string fullname { get; set; }

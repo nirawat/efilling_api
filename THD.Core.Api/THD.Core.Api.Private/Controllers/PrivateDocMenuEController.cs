@@ -48,19 +48,15 @@ namespace THD.Core.Api.Private.Controllers
 
             if (e.Status) return Ok(e);
             else return BadRequest();
-
         }
 
-        [HttpGet("GetAllReportDataE1")]
-        public async Task<IActionResult> GetAllReportDataE1()
+        [HttpPost("MenuE1InterfaceReportData")]
+        public async Task<IActionResult> MenuE1InterfaceReportData([FromBody]ModelMenuE1_InterfaceReportData model)
         {
-            ModelMenuE1Report search_data = new ModelMenuE1Report();
+            ModelMenuE1_InterfaceReportData e = await _IDocMenuEService.MenuE1InterfaceReportDataAsync(model);
 
-            IList<ModelMenuE1Report> e = await _IDocMenuEService.GetAllReportDataE1Async(search_data);
-
-            if (e != null) return Ok(e);
-            else return BadRequest();
-
+            return Ok(e);
         }
+
     }
 }

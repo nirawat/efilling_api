@@ -48,6 +48,16 @@ namespace THD.Core.Api.Models.ReportModels
         public string co_research_fullname2 { get; set; }
         public string co_research_fullname3 { get; set; }
         public string doccode { get; set; }
+        public string line1 { get; set; }
+        public string line2 { get; set; }
+        public string line3 { get; set; }
+        public string line4 { get; set; }
+        public string line5 { get; set; }
+        public string line6 { get; set; }
+        public string line7 { get; set; }
+        public string line8 { get; set; }
+        public string line9 { get; set; }
+        public string line10 { get; set; }
 
     }
 }

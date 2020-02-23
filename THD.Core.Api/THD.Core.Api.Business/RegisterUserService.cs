@@ -19,6 +19,11 @@ namespace THD.Core.Api.Business
             _IRegisterUserRepository = RegisterUserRepository;
         }
 
+        public async Task<ModelRegisterActive_InterfaceData> ActiveUserAccountInterfaceAsync(string RegisterId)
+        {
+            return await _IRegisterUserRepository.ActiveUserAccountInterfaceAsync(RegisterId);
+        }
+
         public async Task<ModelResponseMessageRegisterUser> AddRegisterUserAsync(ModelRegisterUser model)
         {
             ModelResponseMessageRegisterUser resp = new ModelResponseMessageRegisterUser();
@@ -48,6 +53,8 @@ namespace THD.Core.Api.Business
             EntityRegisterUser entity_model = new EntityRegisterUser();
 
             entity_model.register_id = Encoding.UTF8.GetString(Convert.FromBase64String(model.registerid));
+            entity_model.first_name_1 = model.firstname1;
+            entity_model.first_name_2 = model.firstname2;
             entity_model.first_name = model.firstname;
             entity_model.full_name = model.fullname;
             entity_model.position = model.position;
@@ -83,6 +90,8 @@ namespace THD.Core.Api.Business
                 model.email = register_user.email;
                 model.registerdate = register_user.register_date;
                 model.registerexpire = register_user.register_expire;
+                model.firstname1 = register_user.first_name_1;
+                model.firstname2 = register_user.first_name_2;
                 model.firstname = register_user.first_name;
                 model.fullname = register_user.full_name;
                 model.faculty = register_user.faculty;

@@ -18,5 +18,6 @@ namespace THD.Core.Api.Business.Interface
         Task<bool> MailTemplate8Async(string ProjectNumber, string rptBase64);
         Task<bool> MailTemplate9Async(string ProjectNumber, string rptBase64);
 
+        Task<bool> MailMeetingCompleteAsync(string round, string year, ModelResponseMessageReportMeeting e);
     }
 }

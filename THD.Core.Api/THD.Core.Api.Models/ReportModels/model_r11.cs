@@ -28,6 +28,11 @@ namespace THD.Core.Api.Models.ReportModels
         public string month { get; set; }
         public int year { get; set; }
         public string assign { get; set; }
+        public string line_head1 { get; set; }
+        public string line1 { get; set; }
+        public string line2 { get; set; }
+        public string line3 { get; set; }
+        public string line4 { get; set; }
 
     }
 }

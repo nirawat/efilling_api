@@ -7,6 +7,9 @@ namespace THD.Core.Api.Models
 {
     public class ModelMenuFAccount_InterfaceData
     {
+
+        public IList<ModelSelectOption> listfirstname { get; set; }
+        public IList<ModelSelectOption> listfaculty { get; set; }
         public ModelMenuAccountUser account { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
     }
@@ -15,6 +18,8 @@ namespace THD.Core.Api.Models
     {
         public string registerid { get; set; }
         public string userid { get; set; }
+        public string firstname1 { get; set; }
+        public string firstname2 { get; set; }
         public string firstname { get; set; }
         public string fullname { get; set; }
         public string email { get; set; }

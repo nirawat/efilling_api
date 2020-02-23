@@ -58,7 +58,7 @@ namespace THD.Core.Api.Repository.DataHandler
         {
 
             string sql = "SELECT * FROM [dbo].[Doc_Process] " +
-                        "WHERE project_number IS NOT NULL AND project_type='PROJECT' AND doc_process_to IN('A3,A5,A6,A7')";
+                        "WHERE project_number IS NOT NULL AND project_type='PROJECT' AND doc_process_to IN('A3,A5,A6,A7') AND is_hold=0 ";
 
             if (!string.IsNullOrEmpty(AssignerCode))
             {
@@ -117,6 +117,7 @@ namespace THD.Core.Api.Repository.DataHandler
                                 e.facultyname = reader[4].ToString();
                                 e.positionname = reader[5].ToString();
                                 e.certificatetype = reader[6].ToString();
+                                e.acceptprojectno = reader[8].ToString();
                                 e.advisorsnamethai = "";
                                 e.accepttypenamethai = reader[6].ToString();
                                 e.dateofapproval = Convert.ToDateTime(reader[7]).ToString("dd/MM/yyyy");
@@ -199,12 +200,13 @@ namespace THD.Core.Api.Repository.DataHandler
                         cmd.Parameters.Add("@acceptProjectNo", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.acceptprojectno);
                         cmd.Parameters.Add("@acceptResult", SqlDbType.Int).Value = model.acceptresult;
                         cmd.Parameters.Add("@acceptCondition", SqlDbType.Int).Value = model.acceptcondition;
-                        cmd.Parameters.Add("@acceptDate", SqlDbType.DateTime).Value = Convert.ToDateTime(model.acceptdate);
 
                         cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
-                        DateTime dtExpire = Convert.ToDateTime(model.acceptdate).AddDays(365);
-                        cmd.Parameters.Add("@expireDate", SqlDbType.DateTime).Value = dtExpire;
+                        // จริงๆไม่ต้องใช้แล้ว ------------------------------------------------------------------------------
+                        cmd.Parameters.Add("@acceptDate", SqlDbType.DateTime).Value = Convert.ToDateTime(DateTime.Now);
+                        cmd.Parameters.Add("@expireDate", SqlDbType.DateTime).Value = Convert.ToDateTime(DateTime.Now);
+                        //---------------------------------------------------------------------------------------------
 
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
@@ -346,12 +348,13 @@ namespace THD.Core.Api.Repository.DataHandler
                     cmd.Parameters.Add("@acceptProjectNo", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.acceptprojectno);
                     cmd.Parameters.Add("@acceptResult", SqlDbType.Int).Value = model.acceptresult;
                     cmd.Parameters.Add("@acceptCondition", SqlDbType.Int).Value = model.acceptcondition;
-                    cmd.Parameters.Add("@acceptDate", SqlDbType.DateTime).Value = Convert.ToDateTime(model.acceptdate);
 
                     cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
-                    DateTime dtExpire = Convert.ToDateTime(model.acceptdate).AddDays(365);
-                    cmd.Parameters.Add("@expireDate", SqlDbType.DateTime).Value = dtExpire;
+                    // จริงๆไม่ต้องใช้แล้ว ------------------------------------------------------------------------------
+                    cmd.Parameters.Add("@acceptDate", SqlDbType.DateTime).Value = Convert.ToDateTime(DateTime.Now);
+                    cmd.Parameters.Add("@expireDate", SqlDbType.DateTime).Value = Convert.ToDateTime(DateTime.Now);
+                    //---------------------------------------------------------------------------------------------
 
                     SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                     rStatus.Direction = ParameterDirection.Output;

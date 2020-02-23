@@ -75,6 +75,11 @@ namespace THD.Core.Api.Repository.DataHandler
             ModelCountOfYear count_of_year = new ModelCountOfYear();
             count_of_year = await _IDocMeetingRoundRepository.GetMeetingRoundOfProjectAsync(Convert.ToInt32(resp.defaultyear));
             resp.defaultround = count_of_year.count.ToString();
+
+            var cultureInfo = new CultureInfo("en-GB");
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
             resp.defaultmeetingdate = "16/" + DateTime.Now.ToString("MM/yyyy");
 
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M013");
@@ -1423,6 +1428,12 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
+                        DateTime dtAlertDate = Convert.ToDateTime(DateTime.Now).AddDays(335);
+                        cmd.Parameters.Add("@alert_date", SqlDbType.VarChar, 50).Value = dtAlertDate.ToString("dd/MM/yyyy");
+
+                        DateTime dtExpireDate = Convert.ToDateTime(DateTime.Now).AddDays(365);
+                        cmd.Parameters.Add("@certificate_expire_date", SqlDbType.VarChar, 50).Value = dtExpireDate.ToString("dd/MM/yyyy");
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
@@ -1436,14 +1447,14 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
 
-                            if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
+                            if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "5")
                             {
                                 model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async((int)cmd.Parameters["@rDocId"].Value, 3);
 
                                 resp.filename = rpt.filename;
                                 resp.filebase64 = rpt.filebase64;
                             }
-                            if (model.agenda3Conclusion == "3")
+                            if (model.agenda3Conclusion == "2" || model.agenda3Conclusion == "3" || model.agenda3Conclusion == "4")
                             {
                                 model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async((int)cmd.Parameters["@rDocId"].Value, 3);
 
@@ -1824,6 +1835,12 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         cmd.Parameters.Add("@create_by", SqlDbType.VarChar, 50).Value = Encoding.UTF8.GetString(Convert.FromBase64String(model.createby));
 
+                        DateTime dtAlertDate = Convert.ToDateTime(DateTime.Now).AddDays(335);
+                        cmd.Parameters.Add("@alert_date", SqlDbType.VarChar, 50).Value = dtAlertDate.ToString("dd/MM/yyyy");
+
+                        DateTime dtExpireDate = Convert.ToDateTime(DateTime.Now).AddDays(365);
+                        cmd.Parameters.Add("@certificate_expire_date", SqlDbType.VarChar, 50).Value = dtExpireDate.ToString("dd/MM/yyyy");
+
                         SqlParameter rStatus = cmd.Parameters.Add("@rStatus", SqlDbType.Int);
                         rStatus.Direction = ParameterDirection.Output;
                         SqlParameter rMessage = cmd.Parameters.Add("@rMessage", SqlDbType.NVarChar, 500);
@@ -1836,14 +1853,14 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
 
-                            if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
+                            if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "5")
                             {
                                 model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async(model.docid, 3);
 
                                 resp.filename = rpt.filename;
                                 resp.filebase64 = rpt.filebase64;
                             }
-                            if (model.agenda3Conclusion == "3")
+                            if (model.agenda3Conclusion == "2" || model.agenda3Conclusion == "3" || model.agenda3Conclusion == "4")
                             {
                                 model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async(model.docid, 3);
 
@@ -1945,14 +1962,14 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
 
-                            if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
+                            if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "5")
                             {
                                 model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async((int)cmd.Parameters["@rDocId"].Value, 4);
 
                                 resp.filename = rpt.filename;
                                 resp.filebase64 = rpt.filebase64;
                             }
-                            if (model.agenda4Conclusion == "3")
+                            if (model.agenda4Conclusion == "2" || model.agenda4Conclusion == "3" || model.agenda4Conclusion == "4")
                             {
                                 model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async((int)cmd.Parameters["@rDocId"].Value, 4);
 
@@ -2421,14 +2438,14 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
 
-                            if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
+                            if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "5")
                             {
                                 model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async(model.docid, 4);
 
                                 resp.filename = rpt.filename;
                                 resp.filebase64 = rpt.filebase64;
                             }
-                            if (model.agenda4Conclusion == "3")
+                            if (model.agenda4Conclusion == "2" || model.agenda4Conclusion == "3" || model.agenda4Conclusion == "4")
                             {
                                 model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async(model.docid, 4);
 
@@ -2761,7 +2778,7 @@ namespace THD.Core.Api.Repository.DataHandler
         }
 
 
-        //พิมพ์รายงานการประชุม -------------------------------------------------------
+        //พิมพ์วาระการประชุม -------------------------------------------------------
         public async Task<ModelResponseMessageReportAgenda> PrintReportAgendaDraftAsync(int DocId, int Round, int Year)
         {
             ModelResponseMessageReportAgenda resp = new ModelResponseMessageReportAgenda();
@@ -2818,9 +2835,9 @@ namespace THD.Core.Api.Repository.DataHandler
 
                 model_rpt_14_file rpt14 = await _IDocMenuReportRepository.GetReportR14Async(DocId);
 
-                resp.filename = rpt14.filename;
+                resp.rpt_14_filename = rpt14.filename;
 
-                resp.filebase64 = rpt14.filebase64;
+                resp.rpt_14_filebase64 = rpt14.filebase64;
 
             }
             catch (Exception ex)
@@ -2839,12 +2856,119 @@ namespace THD.Core.Api.Repository.DataHandler
                 using (SqlConnection conn = new SqlConnection(ConnectionString))
                 {
                     conn.Open();
+
+                    resp.list_reasearch = new List<ModelResponseDataForSendMail>();
+                    resp.list_attendees = new List<ModelResponseDataForSendMail>();
+
+                    string sql = "";
+
+                    // Get Project Header for send mail ------------------------------------------
+                    sql = "SELECT Doc.docid_of_meeting,Doc.doc_process_from,Doc.project_number, A1.project_head,Doc.project_name_thai, Doc.project_name_eng, " +
+                          "(Regis.first_name + ' ' + Regis.full_name) AS project_header_name, Regis.email, " +
+                          "Trans.consider_code " +
+                          "FROM [dbo].[Doc_Process] Doc " +
+                          "LEFT OUTER JOIN [dbo].[Transaction_Document] Trans ON Doc.project_number = Trans.project_number " +
+                          "LEFT OUTER JOIN [dbo].[Doc_MenuA1] A1 ON Doc.project_request_id = A1.doc_id " +
+                          "LEFT OUTER JOIN [dbo].[RegisterUser] Regis ON A1.project_head = Regis.register_id " +
+                          "WHERE Doc.is_hold=1";
+
+                    using (SqlCommand command = new SqlCommand(sql, conn))
+                    {
+                        SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                ModelResponseDataForSendMail item = new ModelResponseDataForSendMail();
+                                item.ReceiveName = reader["project_header_name"].ToString();
+                                item.ReceiveEmail = reader["email"].ToString();
+                                item.ProjectNumber = reader["project_number"].ToString();
+                                item.ProjectNameThai = reader["project_name_thai"].ToString();
+                                item.ProjectNameEng = reader["project_name_eng"].ToString();
+
+                                string doc_process_from = reader["doc_process_from"].ToString();
+                                int docid_of_meeting = Convert.ToInt32(reader["docid_of_meeting"]);
+                                int conclustion = Convert.ToInt32(reader["consider_code"]);
+
+                                if (conclustion == 1 || conclustion == 5)
+                                {
+                                    model_rpt_13_file rpt = await _IDocMenuReportRepository.GetReportR13Async(docid_of_meeting, (doc_process_from == "C34" ? 4 : 3));
+                                    item.rpt_filename = rpt.filename;
+                                    item.rpt_filebase64 = rpt.filebase64;
+                                }
+                                if (conclustion == 2 || conclustion == 3 || conclustion == 4)
+                                {
+                                    model_rpt_12_file rpt = await _IDocMenuReportRepository.GetReportR12Async(docid_of_meeting, (doc_process_from == "C34" ? 4 : 3));
+                                    item.rpt_filename = rpt.filename;
+                                    item.rpt_filebase64 = rpt.filebase64;
+                                }
+
+                                resp.list_reasearch.Add(item);
+                            }
+                        }
+                        reader.Close();
+                    }
+
+                    // Get Project Header for send mail ------------------------------------------
+                    string multi_user = "";
+
+                    sql = "SELECT TOP(1) meeting_user_code_array " +
+                          "FROM Doc_MenuC3 " +
+                          "WHERE meeting_round='" + model.meetingofround + "' AND year_of_meeting='" + model.meetingofyear + "' ";
+
+                    using (SqlCommand command = new SqlCommand(sql, conn))
+                    {
+                        SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                        if (reader.HasRows)
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                multi_user += reader["meeting_user_code_array"].ToString();
+                            }
+                        }
+                        reader.Close();
+                    }
+
+
+                    if (!string.IsNullOrEmpty(multi_user))
+                    {
+                        string multi_user_code = multi_user.Replace(",\r\n", "','");
+
+                        sql = "SELECT email, (first_name + full_name) as full_name " +
+                             "FROM [dbo].[RegisterUser] " +
+                             "WHERE register_id IN ('" + multi_user_code + "')";
+
+                        using (SqlCommand command = new SqlCommand(sql, conn))
+                        {
+                            SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                            if (reader.HasRows)
+                            {
+                                while (await reader.ReadAsync())
+                                {
+                                    ModelResponseDataForSendMail item = new ModelResponseDataForSendMail();
+                                    item.ReceiveName = reader["full_name"].ToString();
+                                    item.ReceiveEmail = reader["email"].ToString();
+                                    resp.list_attendees.Add(item);
+                                }
+                            }
+                            reader.Close();
+                        }
+                    }
+
+
+                    // Close Jobs ----------------------------------------------------------------
                     using (SqlCommand cmd = new SqlCommand("sp_print_report_meeting_real", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
                         cmd.Parameters.Add("@YearOfClose", SqlDbType.Int).Value = model.meetingofyear;
                         cmd.Parameters.Add("@RoundOfClose", SqlDbType.Int).Value = model.meetingofround;
+
+                        string project_number_json = JsonConvert.SerializeObject(resp.list_reasearch);
+                        cmd.Parameters.Add("@ProjectNumberJson", SqlDbType.NVarChar).Value = project_number_json;
 
                         int current_year = CommonData.GetYearOfPeriod();
                         cmd.Parameters.Add("@YearOfNew", SqlDbType.Int).Value = current_year;
@@ -2862,10 +2986,11 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             resp.Status = true;
 
+                            // Get Report ---------------------------------------------------------------------------------------------
                             model_rpt_14_file rpt14 = await _IDocMenuReportRepository.GetReportR14Async(model.docid); // ใช้เลขที่เอกสารเดิม
-                            resp.filename = rpt14.filename;
-                            resp.filebase64 = rpt14.filebase64;
-
+                            resp.rpt_14_filename = rpt14.filename;
+                            resp.rpt_14_filebase64 = rpt14.filebase64;
+                            //---------------------------------------------------------------------------------------------------------
                         }
                         else resp.Message = (string)cmd.Parameters["@rMessage"].Value;
                     }

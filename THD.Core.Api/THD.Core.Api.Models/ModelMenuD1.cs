@@ -55,6 +55,7 @@ namespace THD.Core.Api.Models
         public string advisorsnamethai { get; set; }
         public string accepttypenamethai { get; set; }
         public string certificatetype { get; set; }
+        public string acceptprojectno { get; set; }
         public string remarkapproval { get; set; }
         public string dateofapproval { get; set; }
         public IList<ModelMenuD1RenewTable> listRenewDate { get; set; }

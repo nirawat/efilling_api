@@ -38,7 +38,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<bool> MailTemplate1Async(int DocId, string rptBase64)
         {
-            string mail_subject = "กองการวิจัยและนวัตกรรม ขอแจ้งผลการตรวจสอบข้อเสนอโครงการวิจัยเรื่อง ";
+            string mail_subject = "คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ขอแจ้งผลการตรวจสอบข้อเสนอโครงการวิจัยเรื่อง ";
 
             ModelMail_Template1 data = await GetData_MailTemplate1_Async(DocId);
 
@@ -51,7 +51,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<p>" + data.project_name_thai + "</p>" + Environment.NewLine +
                        "<p>พร้อมแจ้งผลการพิจารณาตามบันทึกแนบนี้</p>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
+                       "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
                 await _EmailHelper.SentGmail(data.email, "NUIBC : แจ้งผลการตรวจสอบข้อเสนอโครงการ", mail_body, rptBase64);
@@ -103,7 +103,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<bool> MailTemplate2Async(string ProjectNumber, string rptBase64)
         {
-            string mail_subject = "กองการวิจัยและนวัตกรรม ขอส่งสำเนาใบรับรองโครงการวิจัยเรื่อง ";
+            string mail_subject = "คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ขอส่งสำเนาใบรับรองโครงการวิจัยเรื่อง ";
 
             ModelMail_Template2 data = await GetData_MailTemplate2_Async(ProjectNumber);
 
@@ -116,7 +116,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<p>" + data.project_name_thai + "</p>" + Environment.NewLine +
                        "<p>แนบมาพร้อม e-mail นี้  ท่านสามารถรับต้นฉบับจริงได้ด้วยตนเอง ณ งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม (อาคารเอกาทศรถ) มหาวิทยาลัยนเรศวร</p>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
+                       "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
                 await _EmailHelper.SentGmail(data.email, "NUIBC : ใบรับรองด้านความปลอดภัยทางชีวภาพ", mail_body, rptBase64);
@@ -168,7 +168,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<bool> MailTemplate3Async(ModelMenuC1 model, string rptBase64)
         {
-            string mail_subject = "กองการวิจัยและนวัตกรรม ขอความอนุเคราะห์จากท่านได้อ่านและพิจารณาการรับรองโครงการ ";
+            string mail_subject = "คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ขอความอนุเคราะห์จากท่านได้อ่านและพิจารณาการรับรองโครงการ ";
 
             IList<ModelMail_Template3> email_to = await GetCommittee_MailTemplate3_Async(model);
 
@@ -183,7 +183,7 @@ namespace THD.Core.Api.Repository.DataHandler
                            "<p>" + model.projectnamethai + "</p>" + Environment.NewLine +
                            "<p>เพื่อขอความอนุเคราะห์จากท่านได้อ่านและพิจารณาการรับรองโครงการดังกล่าว ตามบันทึกแนบนี้  ซึ่งท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ” เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องได้ตั้งแต่บัดนี้เป็นต้นไป</p>" + Environment.NewLine +
                            "</br>" + Environment.NewLine +
-                           "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
+                           "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
                            "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
                     await _EmailHelper.SentGmail(item.email, "NUIBC : ขอความอนุเคราะห์อ่านโครงการ", mail_body, rptBase64);
@@ -194,7 +194,6 @@ namespace THD.Core.Api.Repository.DataHandler
             else return false;
 
         }
-
 
         public async Task<IList<ModelMail_Template3>> GetCommittee_MailTemplate3_Async(ModelMenuC1 model)
         {
@@ -244,7 +243,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<bool> MailTemplate4Async(string ProjectNumber, string rptBase64)
         {
-            string mail_subject = "กองการวิจัยและนวัตกรรม ขอแจ้งผลการพิจารณาของคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ ";
+            string mail_subject = "คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ขอแจ้งผลการพิจารณาของคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ ";
 
             ModelMail_Template4 data = await GetData_MailTemplate4_Async(ProjectNumber);
 
@@ -256,7 +255,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<p>หมายเลขโครงการ " + ProjectNumber + "</p>" + Environment.NewLine +
                        "<p>กองการวิจัยและนวัตกรรม ขอแจ้งผลการพิจารณาของคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ โดยมีมติในโครงการวิจัยของท่านเรื่อง <h2>" + data.project_name_thai + "</h2> พร้อมแจ้งผลการพิจารณาตามบันทึกแนบนี้</p>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
+                       "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
                 await _EmailHelper.SentGmail(data.email, "NUIBC : แจ้งผลการพิจารณา โดยให้แก้ไขโครงการ", mail_body, rptBase64);
@@ -308,7 +307,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
         public async Task<bool> MailTemplate5Async(string ProjectNumber, string rptBase64)
         {
-            string mail_subject = "กองการวิจัยและนวัตกรรม ขอแจ้งผลการพิจารณาของคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ ";
+            string mail_subject = "คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ขอแจ้งผลการพิจารณาของคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ ";
 
             ModelMail_Template5 data = await GetData_MailTemplate5_Async(ProjectNumber);
 
@@ -320,7 +319,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<p>หมายเลขโครงการ " + ProjectNumber + "</p>" + Environment.NewLine +
                        "<p>กองการวิจัยและนวัตกรรม ขอแจ้งผลการพิจารณาของคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ โดยมีมติในโครงการวิจัยของท่านเรื่อง <h3>" + data.project_name_thai + "</h3> พร้อมแจ้งผลการพิจารณาตามบันทึกแนบนี้</p>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
+                       "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
                 await _EmailHelper.SentGmail(data.email, "NUIBC : แจ้งผลการพิจารณา รับรองโครงการ", mail_body, rptBase64);
@@ -380,10 +379,10 @@ namespace THD.Core.Api.Repository.DataHandler
                 {
                     string mail_body = "<h3>เรียน " + item.fullname + "</h3>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<p>กองการวิจัยและนวัตกรรม ขอส่งระเบียบวาระการประชุมครั้งที่ <h3>" + round + " / " + year + "</h3></p>" + Environment.NewLine +
+                       "<p>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ขอส่งระเบียบวาระการประชุมครั้งที่ <h3>" + round + " / " + year + "</h3></p>" + Environment.NewLine +
                        "<p>ตามระเบียบวาระการประชุมแนบ ท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ” เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องกับการประชุมได้ตั้งแต่บัดนี้เป็นต้นไป</p>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
+                       "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
                     await _EmailHelper.SentGmail(item.email, "NUIBC : ขอนำส่งระเบียบวาระการประชุม", mail_body, rptBase64);
@@ -468,10 +467,10 @@ namespace THD.Core.Api.Repository.DataHandler
                 {
                     string mail_body = "<h3>เรียน " + item.fullname + "</h3>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<p>กองการวิจัยและนวัตกรรม ขอส่งรายงานการประชุมครั้งที่ <h3>" + round + " / " + year + "</h3></p>" + Environment.NewLine +
+                       "<p>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ขอส่งรายงานการประชุมครั้งที่ <h3>" + round + " / " + year + "</h3></p>" + Environment.NewLine +
                        "<p>ตามระเบียบวาระการประชุมแนบ ท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ” เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องกับการประชุมได้ตั้งแต่บัดนี้เป็นต้นไป </p> " + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
+                       "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
                     await _EmailHelper.SentGmail(item.email, "NUIBC : ขอนำส่งรายงานการประชุม", mail_body, rptBase64);
@@ -556,7 +555,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<p>หมายเลขโครงการ " + ProjectNumber + "</p>" + Environment.NewLine +
                        "<p>ข้าพเจ้าขอส่งรายงานการแก้ไขโครงการวิจัยเรื่อง <h2>" + data.project_name_thai + "</h2> เพื่อขอความอนุเคราะห์จากท่านได้อ่านและพิจารณาการรับรองโครงการดังกล่าว ตามบันทึกแนบนี้  ซึ่งท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ”เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องได้ตั้งแต่บัดนี้เป็นต้นไป</p>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
+                       "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
                 await _EmailHelper.SentGmail(data.email, "NUIBC : ขอส่งรายงานการแก้ไขโครงการ", mail_body, rptBase64);
@@ -618,7 +617,7 @@ namespace THD.Core.Api.Repository.DataHandler
                        "<p>หมายเลขโครงการ " + ProjectNumber + "</p>" + Environment.NewLine +
                        "<p>ข้าพเจ้าขอส่งรายงานการแก้ไขโครงการตามมติคณะกรรมการ โครงการวิจัยเรื่อง <h2>" + data.project_name_thai + "</h2> เพื่อขอความอนุเคราะห์จากท่านได้อ่านและพิจารณาการรับรองโครงการดังกล่าว ตามบันทึกแนบนี้  ซึ่งท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ”เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องได้ตั้งแต่บัดนี้เป็นต้นไป</p>" + Environment.NewLine +
                        "</br>" + Environment.NewLine +
-                       "<h3>งานจัดการมาตรฐานและเครือข่าย กองการวิจัยและนวัตกรรม</h3>" + Environment.NewLine +
+                       "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
                        "<h3>มหาวิทยาลัยนเรศวร</h3>";
 
                 await _EmailHelper.SentGmail(data.email, "NUIBC : ขอส่งรายงานการแก้ไขโครงการตามมติคณะกรรมการ", mail_body, rptBase64);
@@ -663,6 +662,52 @@ namespace THD.Core.Api.Repository.DataHandler
             return null;
 
         }
+
+        #endregion
+
+
+
+        #region "Send Mail Meeting Complete"
+
+        public async Task<bool> MailMeetingCompleteAsync(string round, string year, ModelResponseMessageReportMeeting e)
+        {
+            if (e != null && e.list_attendees.Count > 0)
+            {
+                foreach (var item in e.list_attendees)
+                {
+                    string mail_body = "<h3>เรียน " + item.ReceiveName + "</h3>" + Environment.NewLine +
+                       "</br>" + Environment.NewLine +
+                       "<p>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ขอส่งรายงานการประชุมครั้งที่ <h3>" + round + " / " + year + "</h3></p>" + Environment.NewLine +
+                       "<p>ตามระเบียบวาระการประชุมแนบ ท่านสามารถล็อกอินเข้า “ระบบรับรองโครงการ” เพื่อดาวน์โหลดเอกสารที่เกี่ยวข้องกับการประชุมได้ตั้งแต่บัดนี้เป็นต้นไป </p> " + Environment.NewLine +
+                       "</br>" + Environment.NewLine +
+                       "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
+                       "<h3>มหาวิทยาลัยนเรศวร</h3>";
+
+                    await _EmailHelper.SentGmail(item.ReceiveEmail, "NUIBC : ขอนำส่งรายงานการประชุม", mail_body, e.rpt_14_filebase64);
+                }
+            }
+
+            if (e != null && e.list_reasearch.Count > 0)
+            {
+                foreach (var item in e.list_reasearch)
+                {
+                    string mail_body = "<h3>เรียน " + item.ReceiveName + "</h3>" + Environment.NewLine +
+                               "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ขอแจ้งผลการพิจารณาของคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
+                               "</br>" + Environment.NewLine +
+                               "<p>หมายเลขโครงการ " + item.ProjectNumber + "</p>" + Environment.NewLine +
+                               "<p>กองการวิจัยและนวัตกรรม ขอแจ้งผลการพิจารณาของคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ โดยมีมติในโครงการวิจัยของท่านเรื่อง <h3>" + item.ProjectNameThai + "</h3> พร้อมแจ้งผลการพิจารณาตามบันทึกแนบนี้</p>" + Environment.NewLine +
+                               "</br>" + Environment.NewLine +
+                               "<h3>คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ</h3>" + Environment.NewLine +
+                               "<h3>มหาวิทยาลัยนเรศวร</h3>";
+
+                    await _EmailHelper.SentGmail(item.ReceiveEmail, "NUIBC : แจ้งผลการพิจารณา รับรองโครงการ", mail_body, item.rpt_filebase64);
+                }
+            }
+
+            return true;
+
+        }
+
 
         #endregion
 

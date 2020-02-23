@@ -28,6 +28,112 @@ namespace THD.Core.Api.Repository.DataHandler
             ConnectionString = Encoding.UTF8.GetString(Convert.FromBase64String(_configuration.GetConnectionString("SqlConnection")));
         }
 
+        public async Task<ModelRegisterActive_InterfaceData> ActiveUserAccountInterfaceAsync(string RegisterId)
+        {
+            ModelRegisterActive_InterfaceData resp = new ModelRegisterActive_InterfaceData();
+
+            resp.listfirstname = await GetAllFirstNameAsync();
+
+            resp.listfaculty = await GetAllFacultyAsync();
+
+            resp.UserAccount = await GetUserAccountInfoByRegisterId(RegisterId);
+
+            return resp;
+        }
+
+        public async Task<IList<ModelSelectOption>> GetAllFirstNameAsync()
+        {
+
+            string sql = "SELECT * FROM MST_FirstName ORDER BY id ASC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelSelectOption> e = new List<ModelSelectOption>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelSelectOption item = new ModelSelectOption();
+                            item.value = reader["name_thai"].ToString();
+                            item.label = reader["name_thai"].ToString();
+                            e.Add(item);
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
+        public async Task<IList<ModelSelectOption>> GetAllFacultyAsync()
+        {
+
+            string sql = "SELECT * FROM MST_Faculty ORDER BY id ASC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelSelectOption> e = new List<ModelSelectOption>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelSelectOption item = new ModelSelectOption();
+                            item.value = reader["id"].ToString();
+                            item.label = reader["name_thai"].ToString();
+                            e.Add(item);
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
+        public async Task<ModelRegisterActive> GetUserAccountInfoByRegisterId(string RegisterId)
+        {
+            //string register_id = Encoding.UTF8.GetString(Convert.FromBase64String(RegisterId));
+
+            string sql = "SELECT * FROM RegisterUser WHERE register_id ='" + RegisterId + "'";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        ModelRegisterActive item = new ModelRegisterActive();
+                        while (await reader.ReadAsync())
+                        {
+                            item.registerid = reader["register_id"].ToString();
+                            item.email = reader["email"].ToString();
+                        }
+                        return item;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+        }
+
+
+
         public async Task<ModelResponseMessageRegisterUser> AddRegisterUserAsync(EntityRegisterUser entity_model)
         {
             ModelResponseMessageRegisterUser resp = new ModelResponseMessageRegisterUser();
@@ -87,6 +193,8 @@ namespace THD.Core.Api.Repository.DataHandler
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@RegisterId", SqlDbType.VarChar, 100).Value = model.register_id;
+                    cmd.Parameters.Add("@FirstName1", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.first_name_1);
+                    cmd.Parameters.Add("@FirstName2", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.first_name_2);
                     cmd.Parameters.Add("@FirstName", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.first_name);
                     cmd.Parameters.Add("@FullName", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.full_name);
                     cmd.Parameters.Add("@Position", SqlDbType.VarChar, 2).Value = ParseDataHelper.ConvertDBNull(model.position);

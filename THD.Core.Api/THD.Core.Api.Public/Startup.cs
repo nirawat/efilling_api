@@ -18,8 +18,6 @@ namespace THD.Core.Api.Public
             Configuration = configuration;
         }
 
-        readonly string MyAllowSpecificOrigins = "AllowHeaders";
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -31,17 +29,13 @@ namespace THD.Core.Api.Public
 
             services.AddCors(options =>
             {
-                options.AddPolicy(MyAllowSpecificOrigins,
+                options.AddPolicy("AllowHeaders",
                 builder =>
                 {
-                    builder.WithOrigins("http://119.59.115.77:7000",
-                                        "http://119.59.115.77:7001",
-                                        "http://119.59.115.77:7007",
-                                        "http://localhost:3000",
-                                        "https://localhost:44338") //Allow * 
-                                        .AllowAnyHeader()
-                                        .AllowAnyMethod()
-                                        .WithHeaders(HeaderNames.ContentType, "application/json");
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .AllowCredentials();
                 });
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -63,7 +57,12 @@ namespace THD.Core.Api.Public
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseCors(MyAllowSpecificOrigins);
+
+            app.UseCors(builder => builder
+                           .AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .AllowCredentials());
             app.UseHttpsRedirection();
             app.UseMvc();
         }

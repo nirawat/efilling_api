@@ -43,6 +43,7 @@ namespace THD.Core.Api.Models.ReportModels
         public bool risk_group_1_3 { get; set; }
         public bool risk_group_1_4 { get; set; }
         public bool risk_group_1_5 { get; set; }
+        public string risk_group_1_5_other { get; set; }
         public bool risk_group_2 { get; set; }
         public bool risk_group_2_1 { get; set; }
         public bool risk_group_2_2 { get; set; }

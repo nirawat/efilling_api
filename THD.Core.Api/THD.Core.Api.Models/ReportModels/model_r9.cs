@@ -31,5 +31,8 @@ namespace THD.Core.Api.Models.ReportModels
         public string expire_month { get; set; }
         public int expire_year { get; set; }
         public string President { get; set; }
+        public string note { get; set; }
+        public string remark { get; set; }
+
     }
 }

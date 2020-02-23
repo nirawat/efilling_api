@@ -17,6 +17,8 @@ namespace THD.Core.Api.Entities.Tables
         public string confirmpassw { get; set; }
         public DateTime register_date { get; set; }
         public DateTime register_expire { get; set; }
+        public string first_name_1 { get; set; }
+        public string first_name_2 { get; set; }
         public string first_name { get; set; }
         public string full_name { get; set; }
         public string position { get; set; }

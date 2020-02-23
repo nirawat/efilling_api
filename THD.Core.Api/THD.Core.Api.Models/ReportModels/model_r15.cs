@@ -24,22 +24,16 @@ namespace THD.Core.Api.Models.ReportModels
         public string title_1 { get; set; }
 
         public string subject_1_1 { get; set; }
-        public string item_1_1_1 { get; set; }
-        public string item_1_1_2 { get; set; }
-        public string item_1_1_3 { get; set; }
+        public IList<model_rpt_15_items> list_item_1_1 { get; set; }
 
         public string subject_1_2 { get; set; }
-        public string item_1_2_1 { get; set; }
-        public string item_1_2_2 { get; set; }
-        public string item_1_2_3 { get; set; }
+        public IList<model_rpt_15_items> list_item_1_2 { get; set; }
 
         // วาระที่ 2 ----------------------------
         public string title_2 { get; set; }
 
         public string subject_2_1 { get; set; }
-        public string item_2_1_1 { get; set; }
-        public string item_2_1_2 { get; set; }
-        public string item_2_1_3 { get; set; }
+        public IList<model_rpt_15_items> list_item_2_1 { get; set; }
 
 
         // วาระที่ 3 ----------------------------
@@ -47,21 +41,34 @@ namespace THD.Core.Api.Models.ReportModels
 
         public string subject_3_1 { get; set; }
         public string subject_3_1_qty { get; set; }
-        public string item_3_1_1 { get; set; }
-        public string item_3_1_2 { get; set; }
-        public string item_3_1_3 { get; set; }
+        public IList<model_rpt_15_items> list_item_3_1 { get; set; }
 
         public string subject_3_2 { get; set; }
-        public string item_3_2_1 { get; set; }
-        public string item_3_2_2 { get; set; }
-        public string item_3_2_3 { get; set; }
+        public IList<model_rpt_15_items> list_item_3_2 { get; set; }
 
 
 
         // วาระที่ 4 ----------------------------
         public string title_4 { get; set; }
-
         public string subject_4_1 { get; set; }
+        public IList<model_rpt_15_4> list_item_4_1 { get; set; }
+
+
+        // วาระที่ 5 ----------------------------
+        public string title_5 { get; set; }
+
+        public string subject_5_1 { get; set; }
+        public IList<model_rpt_15_items> list_item_5_1 { get; set; }
+
+    }
+
+    public class model_rpt_15_items
+    {
+        public string item { get; set; } = "ไม่มี";
+    }
+
+    public class model_rpt_15_4
+    {
         public string item_4_1_1 { get; set; }
         public string item_4_1_2 { get; set; }
         public string item_4_1_3 { get; set; }
@@ -81,15 +88,6 @@ namespace THD.Core.Api.Models.ReportModels
         public string item_4_1_7_qty { get; set; }
         public string item_4_1_8_qty { get; set; }
         public string item_4_1_9_qty { get; set; }
-
-
-        // วาระที่ 5 ----------------------------
-        public string title_5 { get; set; }
-
-        public string subject_5_1 { get; set; }
-        public string item_5_1_1 { get; set; }
-        public string item_5_1_2 { get; set; }
-        public string item_5_1_3 { get; set; }
-
     }
+
 }

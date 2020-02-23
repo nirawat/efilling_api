@@ -116,9 +116,12 @@ namespace THD.Core.Api.Models
         public string DocNumber { get; set; }
         public string Message { get; set; }
         public int DocId { get; set; }
-        // Report Return --------------
-        public string filename { get; set; }
-        public string filebase64 { get; set; }
+        public IList<ModelResponseDataForSendMail> list_reasearch { get; set; }
+        public IList<ModelResponseDataForSendMail> list_attendees { get; set; }
+
+        // Report File
+        public string rpt_14_filename { get; set; }
+        public string rpt_14_filebase64 { get; set; }
     }
 
     public class ModelResponseMessageReportAgenda
@@ -130,6 +133,18 @@ namespace THD.Core.Api.Models
         // Report Return --------------
         public string filename { get; set; }
         public string filebase64 { get; set; }
+    }
+
+    public class ModelResponseDataForSendMail
+    {
+        public string ProjectNumber { get; set; }
+        public string ProjectNameThai { get; set; }
+        public string ProjectNameEng { get; set; }
+        public string ReceiveName { get; set; }
+        public string ReceiveEmail { get; set; }
+
+        public string rpt_filename { get; set; }
+        public string rpt_filebase64 { get; set; }
     }
 
 

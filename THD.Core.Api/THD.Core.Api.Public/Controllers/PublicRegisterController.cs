@@ -22,6 +22,29 @@ namespace THD.Core.Api.Public.Controllers
             _WebApiModel = WebApiModel;
         }
 
+        [HttpGet("ActiveUserAccountInterface/{RegisterId}")]
+        public async Task<IActionResult> ActiveUserAccountInterface(string RegisterId)
+        {
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateRegister"}/{"ActiveUserAccountInterface"}/{RegisterId}";
+            string authHeader = HttpContext.Request?.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Bearer"))
+            {
+                BearerToken = authHeader.Substring("Bearer ".Length).Trim();
+            }
+            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            switch (response.StatusCode)
+            {
+                case HttpStatusCode.Unauthorized:
+                    return Unauthorized(response.ContentAsString());
+                case HttpStatusCode.BadRequest:
+                    return BadRequest(response.ContentAsString());
+                case HttpStatusCode.OK:
+                    return Ok(response.ContentAsString());
+                default:
+                    return StatusCode(500);
+            }
+        }
+
         [HttpPost("RegisterUser")]
         public async Task<IActionResult> RegisterUser([FromBody]ModelRegisterUser model)
         {

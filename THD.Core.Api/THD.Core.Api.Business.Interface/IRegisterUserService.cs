@@ -8,6 +8,7 @@ namespace THD.Core.Api.Business.Interface
 {
     public interface IRegisterUserService
     {
+        Task<ModelRegisterActive_InterfaceData> ActiveUserAccountInterfaceAsync(string RegisterId);
         Task<ModelResponseMessageRegisterUser> AddRegisterUserAsync(ModelRegisterUser model);
         Task<ModelResponseMessageRegisterActive> AddRegisterActiveAsync(ModelRegisterActive model);
         Task<ModelRegisterActive> GetRegisterUserActiveAsync(string RegisterId);

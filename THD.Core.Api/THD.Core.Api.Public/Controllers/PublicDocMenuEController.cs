@@ -73,17 +73,16 @@ namespace THD.Core.Api.Public.Controllers
 
         }
 
-
-        [HttpGet("GetAllReportDataE1")]
-        public async Task<IActionResult> GetAllReportDataE1()
+        [HttpPost("MenuE1InterfaceReportData")]
+        public async Task<IActionResult> MenuE1InterfaceReportData([FromBody]ModelMenuE1_InterfaceReportData model)
         {
-            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuE"}/{"GetAllReportDataE1"}";
+            var requestUri = $"{_WebApiModel.BaseURL}/{"PrivateDocMenuE"}/{"MenuE1InterfaceReportData"}";
             string authHeader = HttpContext.Request?.Headers["Authorization"];
             if (authHeader != null && authHeader.StartsWith("Bearer"))
             {
                 BearerToken = authHeader.Substring("Bearer ".Length).Trim();
             }
-            var response = await HttpRequestFactory.Get(requestUri, BearerToken);
+            var response = await HttpRequestFactory.Post(requestUri, BearerToken, model);
             switch (response.StatusCode)
             {
                 case HttpStatusCode.Unauthorized:
@@ -95,8 +94,8 @@ namespace THD.Core.Api.Public.Controllers
                 default:
                     return StatusCode(500);
             }
-
         }
+
 
 
     }

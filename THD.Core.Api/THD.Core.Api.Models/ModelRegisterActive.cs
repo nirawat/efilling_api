@@ -5,6 +5,13 @@ using System.Text;
 
 namespace THD.Core.Api.Models
 {
+
+    public class ModelRegisterActive_InterfaceData
+    {
+        public IList<ModelSelectOption> listfirstname { get; set; }
+        public IList<ModelSelectOption> listfaculty { get; set; }
+        public ModelRegisterActive UserAccount { get; set; }
+    }
     public class ModelRegisterActive
     {
         [Required(ErrorMessage = "RegisterId is required.")]
@@ -13,7 +20,9 @@ namespace THD.Core.Api.Models
         public string passw { get; set; }
         public string confirmpassw { get; set; }
         public string email { get; set; }
-        [Required(ErrorMessage = "first name is required.")]
+        public string firstname1 { get; set; }
+        public string firstname2 { get; set; }
+        //[Required(ErrorMessage = "first name is required.")]
         public string firstname { get; set; }
         [Required(ErrorMessage = "full name is required.")]
         public string fullname { get; set; }

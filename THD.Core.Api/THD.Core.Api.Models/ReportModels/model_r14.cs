@@ -65,47 +65,47 @@ namespace THD.Core.Api.Models.ReportModels
     public class model_list_agenda_1_1
     {
         public string title { get; set; } = "-";
-        public string subject { get; set; } = "ะเบียบวาระที่ 1.1.1 -";
+        public string subject { get; set; } = "ระเบียบวาระที่ 1.1.1 ไม่มี";
         public string subject_summary { get; set; } = "สรุปเรื่อง";
-        public string detail_summary { get; set; } = "-";
+        public string detail_summary { get; set; } = "ไม่มี";
         public string subject_conclusion { get; set; } = "มติ";
-        public string detail_conclusion { get; set; } = "-";
+        public string detail_conclusion { get; set; } = "ไม่มี";
     }
 
     public class model_list_agenda_1_2
     {
         public string title { get; set; } = "-";
-        public string subject { get; set; } = "ระเบียบวาระที่ 1.2.1 -";
+        public string subject { get; set; } = "ระเบียบวาระที่ 1.2.1 ไม่มี";
         public string subject_summary { get; set; } = "สรุปเรื่อง";
-        public string detail_summary { get; set; } = "-";
+        public string detail_summary { get; set; } = "ไม่มี";
         public string subject_conclusion { get; set; } = "มติ";
-        public string detail_conclusion { get; set; } = "-";
+        public string detail_conclusion { get; set; } = "ไม่มี";
     }
 
     public class model_list_agenda_2
     {
         public string title { get; set; } = "-";
-        public string subject { get; set; } = "ระเบียบวาระที่ 2.1 -";
+        public string subject { get; set; } = "ระเบียบวาระที่ 2.1 ไม่มี";
         public string subject_summary { get; set; } = "สรุปเรื่อง";
-        public string detail_summary { get; set; } = "-";
+        public string detail_summary { get; set; } = "ไม่มี";
         public string subject_conclusion { get; set; } = "มติ";
-        public string detail_conclusion { get; set; } = "-";
+        public string detail_conclusion { get; set; } = "ไม่มี";
     }
 
     public class model_list_agenda_3
     {
         public string title { get; set; } = "โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข จำนวน 0 โครงการ ดังนี้";
         public string subject { get; set; } = "เรื่อง :";
-        public string project_number { get; set; } = "-";
-        public string project_name_thai { get; set; } = "-";
-        public string project_name_eng { get; set; } = "-";
-        public string project_safety_type { get; set; } = "-";
-        public string consultant_name { get; set; } = "-";
-        public string list_researchers { get; set; } = "-";
-        public string comment_1_name { get; set; } = "1. -";
-        public string comment_2_name { get; set; } = "2. -";
-        public string comment_3_name { get; set; } = "3. -";
-        public string detail_conclusion { get; set; } = "-";
+        public string project_number { get; set; } = "ไม่มี";
+        public string project_name_thai { get; set; } = "ไม่มี";
+        public string project_name_eng { get; set; } = "ไม่มี";
+        public string project_safety_type { get; set; } = "ไม่มี";
+        public string consultant_name { get; set; } = "ไม่มี";
+        public string list_researchers { get; set; } = "ไม่มี";
+        public string comment_1_name { get; set; } = "1. ไม่มี";
+        public string comment_2_name { get; set; } = "2. ไม่มี";
+        public string comment_3_name { get; set; } = "3. ไม่มี";
+        public string detail_conclusion { get; set; } = "ไม่มี";
 
         // เรื่องสืบเนื่อง ----------------------------------------
         public IList<model_list_agenda_3_2> list_agenda_3_2 { get; set; }
@@ -113,9 +113,9 @@ namespace THD.Core.Api.Models.ReportModels
 
     public class model_list_agenda_3_2
     {
-        public string sequel_title { get; set; } = "3.2.1. -";
-        public string sequel_detail_summary { get; set; } = "-";
-        public string sequel_detail_conclusion { get; set; } = "-";
+        public string sequel_title { get; set; } = "3.2.1. ไม่มี";
+        public string sequel_detail_summary { get; set; } = "ไม่มี";
+        public string sequel_detail_conclusion { get; set; } = "ไม่มี";
     }
 
     public class model_personal
@@ -133,27 +133,27 @@ namespace THD.Core.Api.Models.ReportModels
     {
         public string title { get; set; } = "-";
         public string subject { get; set; } = "เรื่อง :";
-        public string project_number { get; set; } = "-";
-        public string project_name_thai { get; set; } = "-";
-        public string project_name_eng { get; set; } = "-";
-        public string project_safety_type { get; set; } = "-";
-        public string consultant_name { get; set; } = "-";
-        public string list_researchers { get; set; } = "-";
-        public string comment_1_name { get; set; } = "1. -";
-        public string comment_2_name { get; set; } = "2. -";
-        public string comment_3_name { get; set; } = "3. -";
-        public string detail_conclusion { get; set; } = "-";
+        public string project_number { get; set; } = "ไม่มี";
+        public string project_name_thai { get; set; } = "ไม่มี";
+        public string project_name_eng { get; set; } = "ไม่มี";
+        public string project_safety_type { get; set; } = "ไม่มี";
+        public string consultant_name { get; set; } = "ไม่มี";
+        public string list_researchers { get; set; } = "ไม่มี";
+        public string comment_1_name { get; set; } = "1. ไม่มี";
+        public string comment_2_name { get; set; } = "2. ไม่มี";
+        public string comment_3_name { get; set; } = "3. ไม่มี";
+        public string detail_conclusion { get; set; } = "ไม่มี";
 
     }
 
     public class model_list_agenda_5
     {
         public string title { get; set; } = "-";
-        public string subject { get; set; } = "ระเบียบวาระที่ 5.1 -";
+        public string subject { get; set; } = "ระเบียบวาระที่ 5.1 ไม่มี";
         public string subject_summary { get; set; } = "สรุปเรื่อง";
-        public string detail_summary { get; set; } = "-";
+        public string detail_summary { get; set; } = "ไม่มี";
         public string subject_conclusion { get; set; } = "มติ";
-        public string detail_conclusion { get; set; } = "-";
+        public string detail_conclusion { get; set; } = "ไม่มี";
     }
 
 }

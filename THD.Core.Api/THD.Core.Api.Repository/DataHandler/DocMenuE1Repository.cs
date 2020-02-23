@@ -68,10 +68,23 @@ namespace THD.Core.Api.Repository.DataHandler
                 }
             }
 
+            resp.listfaculty = await GetAllFacultyAsync();
+
             return resp;
         }
 
-        public async Task<IList<ModelMenuE1Report>> GetAllReportDataE1Async(ModelMenuE1Report search_data)
+        public async Task<ModelMenuE1_InterfaceReportData> MenuE1InterfaceReportDataAsync(ModelMenuE1_InterfaceReportData search)
+        {
+            ModelMenuE1_InterfaceReportData resp = new ModelMenuE1_InterfaceReportData();
+
+            resp.listfaculty = await GetAllFacultyAsync();
+
+            resp.listreportdata = await GetAllReportDataE1Async(search);
+
+            return resp;
+        }
+
+        private async Task<IList<ModelMenuE1Report>> GetAllReportDataE1Async(ModelMenuE1_InterfaceReportData search)
         {
             string sql = "SELECT A.*, " +
                         "B.name_thai as group_1_risk_human_name,  " +
@@ -79,7 +92,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         "D.name_thai as group_1_pathogens_name,  " +
                         "E.name_thai as group_2_risk_human_name,  " +
                         "F.name_thai as group_2_risk_animal_name,  " +
-                        "G.name_thai as group_2_pathogens_name " +
+                        "G.name_thai as group_2_pathogens_name, " +
+                        "H.name_thai as faculty_name " +
                         "FROM Doc_MenuE1 A " +
                         "LEFT OUTER JOIN MST_Risk_Human B ON A.group_1_risk_human = B.id " +
                         "LEFT OUTER JOIN MST_Risk_Animal C ON A.group_1_risk_animal = C.id " +
@@ -87,15 +101,37 @@ namespace THD.Core.Api.Repository.DataHandler
                         "LEFT OUTER JOIN MST_Risk_Human E ON A.group_2_risk_human = E.id " +
                         "LEFT OUTER JOIN MST_Risk_Animal F ON A.group_2_risk_animal = F.id " +
                         "LEFT OUTER JOIN MST_Risk_Pathogens G ON A.group_2_pathogens = G.id " +
+                        "LEFT OUTER JOIN MST_Faculty H ON A.faculty = H.id " +
                         "WHERE 1=1 ";
 
-            if (search_data != null)
+            if (search != null)
             {
-                //if (!string.IsNullOrEmpty(search_data.defaultyear) && search_data.defaultyear.ToLower() != "all")
-                //    sql += " AND B.year_of_meeting ='" + search_data.defaultyear + "'";
+                if (!string.IsNullOrEmpty(search.docnumber))
+                    sql += " AND A.doc_number LIKE '%" + search.docnumber + "%'";
 
-                //if (!string.IsNullOrEmpty(search_data.defaultaccepttype) && search_data.defaultaccepttype.ToLower() != "all")
-                //    sql += " AND A.project_according_type_method ='" + search_data.defaultaccepttype + "'";
+                if (!string.IsNullOrEmpty(search.sectionname))
+                    sql += " AND A.section_name LIKE '%" + search.sectionname + "%'";
+
+                if (!string.IsNullOrEmpty(search.faculty))
+                    sql += " AND A.faculty LIKE '%" + search.faculty + "%'";
+
+                if (!string.IsNullOrEmpty(search.group1riskhuman))
+                    sql += " AND A.group_1_risk_human ='" + search.group1riskhuman + "'";
+
+                if (!string.IsNullOrEmpty(search.group1riskanimal))
+                    sql += " AND A.group_1_risk_animal ='" + search.group1riskanimal + "'";
+
+                if (!string.IsNullOrEmpty(search.group1pathogens))
+                    sql += " AND A.group_1_pathogens ='" + search.group1pathogens + "'";
+
+                if (!string.IsNullOrEmpty(search.group2riskhuman))
+                    sql += " AND A.group_2_risk_human ='" + search.group2riskhuman + "'";
+
+                if (!string.IsNullOrEmpty(search.group2riskanimal))
+                    sql += " AND A.group_2_risk_animal ='" + search.group2riskanimal + "'";
+
+                if (!string.IsNullOrEmpty(search.group2pathogens))
+                    sql += " AND A.group_2_pathogens ='" + search.group2pathogens + "'";
 
             }
 
@@ -153,6 +189,37 @@ namespace THD.Core.Api.Repository.DataHandler
 
         }
 
+        public async Task<IList<ModelSelectOption>> GetAllFacultyAsync()
+        {
+
+            string sql = "SELECT * FROM MST_Faculty ORDER BY id ASC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelSelectOption> e = new List<ModelSelectOption>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelSelectOption item = new ModelSelectOption();
+                            item.value = reader["id"].ToString();
+                            item.label = reader["name_thai"].ToString();
+                            e.Add(item);
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
         public async Task<ModelResponseMessage> AddDocMenuE1Async(ModelMenuE1 model)
         {
 
@@ -166,7 +233,7 @@ namespace THD.Core.Api.Repository.DataHandler
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.Add("@section_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.sectionName);
-                    cmd.Parameters.Add("@faculty_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.facultyName);
+                    cmd.Parameters.Add("@faculty", SqlDbType.Int).Value = model.faculty;
                     cmd.Parameters.Add("@department_name", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.departmentName);
                     cmd.Parameters.Add("@phone", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.phone);
                     cmd.Parameters.Add("@fax", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.fax);

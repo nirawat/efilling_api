@@ -66,6 +66,10 @@ namespace THD.Core.Api.Business
             return await _IMailTemplateRepository.MailTemplate9Async(ProjectNumber, rptBase64);
         }
 
+        public async Task<bool> MailMeetingCompleteAsync(string round, string year, ModelResponseMessageReportMeeting e)
+        {
+            return await _IMailTemplateRepository.MailMeetingCompleteAsync(round, year, e);
+        }
 
     }
 }

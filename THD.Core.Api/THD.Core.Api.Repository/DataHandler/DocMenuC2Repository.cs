@@ -176,7 +176,7 @@ namespace THD.Core.Api.Repository.DataHandler
             string register_id_ = Encoding.UTF8.GetString(Convert.FromBase64String(register_id));
 
             string sql = "SELECT A.register_id, A.first_name, A.full_name, A.work_phone, A.mobile, B.name_thai as position_name " +
-                         "FROM RegisterUser A INNER JOIN MST_Position B ON A.position = B.id " +
+                         "FROM RegisterUser A INNER JOIN MST_Character B ON A.position = B.id " +
                          "WHERE register_id='" + register_id_ + "'";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))
@@ -621,7 +621,7 @@ namespace THD.Core.Api.Repository.DataHandler
             string register_id_ = Encoding.UTF8.GetString(Convert.FromBase64String(register_id));
 
             string sql = "SELECT A.register_id, A.first_name, A.full_name, A.work_phone, A.mobile, B.name_thai as position_name " +
-                         "FROM RegisterUser A INNER JOIN MST_Position B ON A.position = B.id " +
+                         "FROM RegisterUser A INNER JOIN MST_Character B ON A.position = B.id " +
                          "WHERE register_id='" + register_id_ + "'";
 
             using (SqlConnection conn = new SqlConnection(ConnectionString))

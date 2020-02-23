@@ -11,6 +11,8 @@ namespace THD.Core.Api.Models
         public string Message { get; set; }
         public DateTime docDate { get; set; }
         public string docNumber { get; set; }
+
+        public IList<ModelSelectOption> listfaculty { get; set; }
         public ModelPermissionPage UserPermission { get; set; }
     }
 
@@ -20,7 +22,7 @@ namespace THD.Core.Api.Models
         public DateTime docDate { get; set; }
         public string docNumber { get; set; }
         public string sectionName { get; set; }
-        public string facultyName { get; set; }
+        public int faculty { get; set; }
         public string departmentName { get; set; }
         public string phone { get; set; }
         public string fax { get; set; }
@@ -47,6 +49,24 @@ namespace THD.Core.Api.Models
         public string group2protein { get; set; }
         public bool editenable { get; set; }
 
+    }
+
+
+    public class ModelMenuE1_InterfaceReportData
+    {
+        public string docnumber { get; set; }
+        public string sectionname { get; set; }
+        public string faculty { get; set; }
+
+        public string group1riskhuman { get; set; }
+        public string group1riskanimal { get; set; }
+        public string group1pathogens { get; set; }
+
+        public string group2riskhuman { get; set; }
+        public string group2riskanimal { get; set; }
+        public string group2pathogens { get; set; }
+        public IList<ModelSelectOption> listfaculty { get; set; }
+        public IList<ModelMenuE1Report> listreportdata { get; set; }
     }
 
     public class ModelMenuE1Report

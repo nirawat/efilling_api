@@ -568,23 +568,6 @@ namespace THD.Core.Api.Private.Controllers
             if (e.Status == true)
             {
                 _result = Ok(e);
-
-                try
-                {
-                    if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
-                    {
-                        await _IMailTemplateService.MailTemplate5Async(model.agenda3projectnumber, e.filebase64);
-                    }
-                    if (model.agenda3Conclusion == "3")
-                    {
-                        await _IMailTemplateService.MailTemplate4Async(model.agenda3projectnumber, e.filebase64);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //Keep
-                }
-
             }
             else _result = BadRequest(e);
 
@@ -643,24 +626,6 @@ namespace THD.Core.Api.Private.Controllers
             if (e.Status == true)
             {
                 _result = Ok(e);
-
-                try
-                {
-                    if (model.agenda3Conclusion == "1" || model.agenda3Conclusion == "2")
-                    {
-                        await _IMailTemplateService.MailTemplate5Async(model.agenda3projectnumber, e.filebase64);
-                    }
-                    if (model.agenda3Conclusion == "3")
-                    {
-                        await _IMailTemplateService.MailTemplate4Async(model.agenda3projectnumber, e.filebase64);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //Keep
-                }
-
-
             }
             else _result = BadRequest(e);
 
@@ -692,22 +657,6 @@ namespace THD.Core.Api.Private.Controllers
             if (e.Status == true)
             {
                 _result = Ok(e);
-
-                try
-                {
-                    if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
-                    {
-                        await _IMailTemplateService.MailTemplate5Async(model.agenda4projectnumber, e.filebase64);
-                    }
-                    if (model.agenda4Conclusion == "3")
-                    {
-                        await _IMailTemplateService.MailTemplate4Async(model.agenda4projectnumber, e.filebase64);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //Keep
-                }
             }
             else _result = BadRequest(e);
 
@@ -767,22 +716,6 @@ namespace THD.Core.Api.Private.Controllers
             if (e.Status == true)
             {
                 _result = Ok(e);
-
-                try
-                {
-                    if (model.agenda4Conclusion == "1" || model.agenda4Conclusion == "2")
-                    {
-                        await _IMailTemplateService.MailTemplate5Async(model.agenda4projectnumber, e.filebase64);
-                    }
-                    if (model.agenda4Conclusion == "3")
-                    {
-                        await _IMailTemplateService.MailTemplate4Async(model.agenda4projectnumber, e.filebase64);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    //Keep
-                }
             }
             else _result = BadRequest(e);
 
@@ -910,7 +843,7 @@ namespace THD.Core.Api.Private.Controllers
             {
                 _result = Ok(e);
 
-                await _IMailTemplateService.MailTemplate7Async(model.meetingofround, model.meetingofyear, e.filebase64);
+                await _IMailTemplateService.MailMeetingCompleteAsync(model.meetingofround, model.meetingofyear, e);
 
             }
             else _result = BadRequest();

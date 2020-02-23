@@ -44,15 +44,21 @@ namespace THD.Core.Api.Helpers
 
         public static string ReportEmptyValue(string _value)
         {
-            if (string.IsNullOrEmpty(_value)) return "-";
+            if (string.IsNullOrEmpty(_value)) return "ไม่มี";
             else return _value;
         }
 
         public static string ReportEmptyValueInt(int _value)
         {
-            if (_value <= 0) return "-";
+            if (_value <= 0) return "0";
             else return _value.ToString();
         }
+
+        public static string ReportTextToHtml(string _value)
+        {
+            return "<div style='font-family:TH Sarabun New; font-size:16pt; '>" + _value + "</div>";
+        }
+
 
     }
 }

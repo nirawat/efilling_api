@@ -50,10 +50,11 @@ namespace THD.Core.Api.Business
             return resp;
         }
 
-        public async Task<IList<ModelMenuE1Report>> GetAllReportDataE1Async(ModelMenuE1Report search_data)
+        public async Task<ModelMenuE1_InterfaceReportData> MenuE1InterfaceReportDataAsync(ModelMenuE1_InterfaceReportData search)
         {
-            return await _IDocMenuE1Repository.GetAllReportDataE1Async(search_data);
+            return await _IDocMenuE1Repository.MenuE1InterfaceReportDataAsync(search);
         }
+
         #endregion
 
 

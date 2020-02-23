@@ -34,6 +34,29 @@ namespace THD.Core.Api.Private.Controllers
             _EmailHelper = EmailHelper;
         }
 
+
+        [HttpGet("ActiveUserAccountInterface/{RegisterId}")]
+        public async Task<IActionResult> ActiveUserAccountInterface(string RegisterId)
+        {
+            string registerId = Encoding.UTF8.GetString(Convert.FromBase64String(RegisterId));
+
+            ModelRegisterActive_InterfaceData e = await _IRegisterUserService.ActiveUserAccountInterfaceAsync(registerId);
+
+            if (e != null) return Ok(e);
+            return BadRequest();
+        }
+
+        [HttpGet("GetRegisterUserActive/{RegisterId}")]
+        public async Task<IActionResult> GetRegisterUserActive(string RegisterId)
+        {
+            string registerId = Encoding.UTF8.GetString(Convert.FromBase64String(RegisterId));
+
+            ModelRegisterActive e = await _IRegisterUserService.GetRegisterUserActiveAsync(registerId);
+
+            if (e != null) return Ok(e);
+            return BadRequest();
+        }
+
         [HttpPost("RegisterUser")]
         public async Task<IActionResult> RegisterUser([FromBody]ModelRegisterUser model)
         {
@@ -61,16 +84,6 @@ namespace THD.Core.Api.Private.Controllers
 
         }
 
-        [HttpGet("GetRegisterUserActive/{RegisterId}")]
-        public async Task<IActionResult> GetRegisterUserActive(string RegisterId)
-        {
-            string registerId = Encoding.UTF8.GetString(Convert.FromBase64String(RegisterId));
-
-            ModelRegisterActive e = await _IRegisterUserService.GetRegisterUserActiveAsync(registerId);
-
-            if (e != null) return Ok(e);
-            return BadRequest();
-        }
 
         [HttpGet("GetFullRegisterUserById/{RegisterId}")]
         public async Task<IActionResult> GetFullRegisterUserById(string RegisterId)

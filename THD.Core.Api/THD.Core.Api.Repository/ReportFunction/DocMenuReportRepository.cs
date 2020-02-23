@@ -76,7 +76,8 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData1_2.title = reader["name_thai"].ToString();
                                 rptData1_2.Doc_head_2 = reader["doc_number"].ToString();
                                 rptData1_2.Doc_head_4 = Convert.ToDateTime(reader["doc_date"]).ToString("dd/MM/yyyy");
-                                rptData1_2.Presenter_name = reader["project_head_name"].ToString();
+                                string presentname = "ข้าพเจ้า " + reader["project_head_name"].ToString() + " สถานะภาพ ";
+                                rptData1_2.Presenter_name = ParseDataHelper.ReportTextToHtml(presentname);
                                 rptData1_2.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData1_2.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
                                 rptData1_2.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
@@ -84,12 +85,15 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData1_2.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
                                 rptData1_2.Job_Position = "";
                                 rptData1_2.Faculty_name = reader["faculty_name"].ToString();
-                                rptData1_2.Research_name_thai = reader["project_name_thai"].ToString();
-                                rptData1_2.Research_name_eng = reader["project_name_eng"].ToString();
+                                rptData1_2.Research_name_thai = "( " + reader["project_name_thai"].ToString() + " )";
+                                rptData1_2.Research_name_eng = "( " + reader["project_name_eng"].ToString() + " )";
                                 rptData1_2.Faculty_name = reader["faculty_name"].ToString();
-                                rptData1_2.HeadofResearch_fullname = reader["project_head_name"].ToString();
-                                rptData1_2.Advisor_fullname = reader["project_consult_name"].ToString();
 
+                                rptData1_2.Advisor_fullname = reader["project_consult_name"].ToString();
+                                rptData1_2.HeadofResearch_fullname = reader["project_head_name"].ToString();
+                                string line1 = "เพื่อขอรับการพิจารณาด้านความปลอดภัยทางชีวภาพ และได้แนบเอกสารประกอบการพิจารณา ดังนี้";
+                                ParseDataHelper.ReportTextToHtml(presentname);
+                                rptData1_2.line1 = ParseDataHelper.ReportTextToHtml(line1);
 
                                 MemberProject member1json = new MemberProject();
                                 member1json = JsonConvert.DeserializeObject<MemberProject>(reader["member_project_1"].ToString());
@@ -124,7 +128,6 @@ namespace THD.Core.Api.Repository.DataHandler
                     }
 
 
-
                     using (SqlCommand cmd = new SqlCommand("sp_report_16", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
@@ -137,11 +140,58 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             while (await reader.ReadAsync())
                             {
-                                rptData16.project_head = reader["project_head"].ToString();
-                                rptData16.project_namethai = reader["project_name_thai"].ToString();
-                                rptData16.project_nameeng = reader["project_name_eng"].ToString();
+                                rptData16.title_report = reader["project_type"].ToString();
+                                rptData16.project_head = reader["project_headname"].ToString();
+                                rptData16.work_location = reader["labroom"].ToString();
+                                rptData16.project_namethai = "(" + reader["project_name_thai"].ToString() + ")";
+                                rptData16.project_nameeng = "(" + reader["project_name_eng"].ToString() + " )";
+                                rptData16.telephone_no = reader["work_phone"].ToString() + '/' + reader["mobile"].ToString();
+                                rptData16.fax_no = reader["fax"].ToString();
+                                rptData16.email_address = reader["email"].ToString();
                                 rptData16.fund_source = reader["money_supply"].ToString();
                                 rptData16.fund_amount = Convert.ToDecimal(reader["budget"]);
+
+                                rptData16.research_group1_type1 = (reader["project_according_type_method"].ToString()) == "1" ? true : false;
+                                rptData16.research_group1_type2 = (reader["project_according_type_method"].ToString()) == "2" ? true : false;
+                                rptData16.research_group1_type3 = (reader["project_according_type_method"].ToString()) == "3" ? true : false;
+                                rptData16.research_group1_type4 = (reader["project_according_type_method"].ToString()) == "4" ? true : false;
+                                rptData16.research_group1_other = (reader["project_according_type_method"].ToString()) == "4" ? reader["project_according_other"].ToString() : "";
+
+                                rptData16.research_group2_type1 = (reader["according_type_method"].ToString()) == "1" ? true : false;
+                                rptData16.research_group2_type2 = (reader["according_type_method"].ToString()) == "2" ? true : false;
+                                rptData16.research_group2_type3 = (reader["according_type_method"].ToString()) == "3" ? true : false;
+                                rptData16.research_group2_type4 = (reader["according_type_method"].ToString()) == "4" ? true : false;
+                                rptData16.research_group2_type5 = (reader["according_type_method"].ToString()) == "5" ? true : false;
+                                rptData16.research_group2_other = (reader["project_according_type_method"].ToString()) == "5" ? reader["project_other"].ToString() : "";
+
+                                rptData16.risk_group_1 = Convert.ToBoolean(reader["risk_group_1"]);
+                                rptData16.risk_group_1_1 = Convert.ToBoolean(reader["risk_group_1_1"]);
+                                rptData16.risk_group_1_2 = Convert.ToBoolean(reader["risk_group_1_2"]);
+                                rptData16.risk_group_1_3 = Convert.ToBoolean(reader["risk_group_1_3"]);
+                                rptData16.risk_group_1_4 = Convert.ToBoolean(reader["risk_group_1_4"]);
+                                rptData16.risk_group_1_5 = Convert.ToBoolean(reader["risk_group_1_5"]);
+                                rptData16.risk_group_1_5_other = (Convert.ToBoolean(reader["risk_group_1_5"]) == true ? reader["risk_group_1_5_other"].ToString() : "");
+
+                                rptData16.risk_group_2 = Convert.ToBoolean(reader["risk_group_2"]);
+                                rptData16.risk_group_2_1 = Convert.ToBoolean(reader["risk_group_2_1"]);
+                                rptData16.risk_group_2_2 = Convert.ToBoolean(reader["risk_group_2_2"]);
+                                rptData16.risk_group_2_3 = Convert.ToBoolean(reader["risk_group_2_3"]);
+                                rptData16.risk_group_2_4 = Convert.ToBoolean(reader["risk_group_2_4"]);
+                                rptData16.risk_group_2_5 = Convert.ToBoolean(reader["risk_group_2_5"]);
+
+                                rptData16.risk_group_3 = Convert.ToBoolean(reader["risk_group_3"]);
+                                rptData16.risk_group_3_1 = Convert.ToBoolean(reader["risk_group_3_1"]);
+                                rptData16.risk_group_3_2 = Convert.ToBoolean(reader["risk_group_3_2"]);
+                                rptData16.risk_group_3_3 = Convert.ToBoolean(reader["risk_group_3_3"]);
+                                rptData16.risk_group_3_4 = Convert.ToBoolean(reader["risk_group_3_4"]);
+                                rptData16.risk_group_3_5 = Convert.ToBoolean(reader["risk_group_3_5"]);
+
+                                rptData16.risk_group_4 = Convert.ToBoolean(reader["risk_group_4"]);
+                                rptData16.risk_group_4_1 = Convert.ToBoolean(reader["risk_group_4_1"]);
+                                rptData16.risk_group_4_2 = Convert.ToBoolean(reader["risk_group_4_2"]);
+                                rptData16.risk_group_4_3 = Convert.ToBoolean(reader["risk_group_4_3"]);
+                                rptData16.risk_group_4_4 = Convert.ToBoolean(reader["risk_group_4_4"]);
+                                rptData16.risk_group_4_5 = Convert.ToBoolean(reader["risk_group_4_5"]);
 
                             }
                         }
@@ -149,9 +199,8 @@ namespace THD.Core.Api.Repository.DataHandler
                     }
 
                     conn.Close();
-
-                    conn.Close();
                 }
+
 
                 rptR1 rpt1 = new rptR1();
 
@@ -180,10 +229,6 @@ namespace THD.Core.Api.Repository.DataHandler
                 ObjectDataSource ds16 = new ObjectDataSource();
                 ds16.Constructor = new ObjectConstructorInfo();
                 ds16.DataSource = rptData16;
-
-                string R16_title = "";
-                if (rptData1_2 != null && rptData1_2.projecttype == "1") R16_title = "ระดับห้องปฏิบัติการ";
-                if (rptData1_2 != null && rptData1_2.projecttype == "2") R16_title = "ระดับภาคสนาม";
 
                 string report_nameR16 = "R16_" + doc_id + DateTime.Now.ToString("_yyyyMMddHHmmss").ToString() + ".pdf";
                 string report_full_pathR16 = _IEnvironmentConfig.PathReport + report_nameR16;
@@ -214,7 +259,6 @@ namespace THD.Core.Api.Repository.DataHandler
             var cultureInfo = new CultureInfo("th-TH");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-            string report_no = await CreateReportNumberAsync(2563, "R8", doc_id, "B1");
 
             try
             {
@@ -237,10 +281,9 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 //rptData.projecttype = reader["project_type"].ToString();
                                 //rptData.Doc_head_2 = reader["doc_number"].ToString();
-                                rptData.day = reader["doc_date"].ToString();
-                                rptData.month = reader["doc_month"].ToString();
-                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
-                                rptData.Presenter_name = reader["project_head_name"].ToString();
+                                rptData.day = reader["doc_date"].ToString() + " " + reader["doc_month"].ToString() + " " + CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
+                                string present_name = "ข้าพเจ้า  " + reader["project_head_name"].ToString() + "  สถานภาพ  ";
+                                rptData.Presenter_name = ParseDataHelper.ReportTextToHtml(present_name);
                                 rptData.Position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.Position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
                                 rptData.Position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
@@ -248,13 +291,14 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.Position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
                                 rptData.Job_Position = "";
                                 rptData.Faculty_name = reader["faculty_name"].ToString();
-                                rptData.Research_name_thai = reader["project_name_thai"].ToString();
-                                rptData.Research_name_eng = reader["project_name_eng"].ToString();
-                                rptData.Faculty_name = reader["faculty_name"].ToString();
                                 rptData.HeadofResearch_fullname = reader["project_head_name"].ToString();
                                 rptData.certificate_date = reader["Certificate_date"].ToString();
                                 rptData.certificate_month = reader["Certificate_month"].ToString();
                                 rptData.certificate_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["Certificate_year"])));
+                                string line1 = "คณะ  " + reader["faculty_name"].ToString() + " ขอปรับแก้โครงการวิจัยเรื่อง " + " (" + reader["project_name_thai"] + ")" + "  (" + reader["project_name_eng"].ToString() + ") " + Environment.NewLine +
+                               "ได้ผ่านการรับรองแบบ/ระดับ                  " + "จากคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร เมื่อวันที่  " + reader["Certificate_date"].ToString() + " เดือน  " + reader["Certificate_month"].ToString() + " พ.ศ. " + Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["Certificate_year"])));
+                                rptData.line1 = ParseDataHelper.ReportTextToHtml(line1);
+
                             }
                         }
                         reader.Close();
@@ -322,24 +366,18 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 //rptData.projecttype = reader["project_type"].ToString();
                                 //rptData.Doc_head_2 = reader["doc_number"].ToString();
-                                rptData.day = reader["doc_date"].ToString();
-                                rptData.month = reader["doc_month"].ToString();
-                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
-                                rptData.presenter_name = reader["project_head_name"].ToString();
+                                rptData.day = reader["doc_date"].ToString() + " " + reader["doc_month"].ToString() + " " + CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
+                                string presenter_name = "ข้าพเจ้า  " + reader["project_head_name"].ToString() + "  สถานภาพ  ";
+                                rptData.presenter_name = ParseDataHelper.ReportTextToHtml(presenter_name);
                                 rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
                                 rptData.position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
                                 rptData.position_4 = (reader["check_value"].ToString()) == "4" ? true : false;
                                 rptData.position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
                                 rptData.Job_Position = "";
-                                rptData.faculty_name = reader["faculty_name"].ToString();
-                                rptData.research_name_thai = reader["project_name_thai"].ToString();
-                                rptData.research_name_eng = reader["project_name_eng"].ToString();
-                                rptData.headofresearch_fullname = reader["project_head_name"].ToString();
-                                rptData.certificate_date = reader["Certificate_date"].ToString();
-                                rptData.certificate_month = reader["Certificate_month"].ToString();
-                                rptData.certificate_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["Certificate_year"])));
-                                rptData.certificate_type = reader["accept_type_name"].ToString();
+                                string line1 = "คณะ  " + reader["faculty_name"].ToString() + " ขอรายงานความก้าวหน้าโครงการวิจัยเรื่อง " + " (" + reader["project_name_thai"] + ")" + "  (" + reader["project_name_eng"].ToString() + ") " + Environment.NewLine +
+                               "ได้ผ่านการรับรองงานวิจัยประเภทที่                  " + "จากคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร เมื่อวันที่  " + reader["Certificate_date"].ToString() + " เดือน  " + reader["Certificate_month"].ToString() + " พ.ศ. " + Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["Certificate_year"])));
+                                rptData.line1 = ParseDataHelper.ReportTextToHtml(line1);
 
                             }
                         }
@@ -411,7 +449,8 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.day = reader["doc_date"].ToString();
                                 rptData.month = reader["doc_month"].ToString();
                                 rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
-                                rptData.presenter_name = reader["project_head_name"].ToString();
+                                string presenter_name = "ข้าพเจ้า  " + reader["project_head_name"].ToString() + "  สถานภาพ  ";
+                                rptData.presenter_name = ParseDataHelper.ReportTextToHtml(presenter_name);
                                 rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
                                 rptData.position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
@@ -419,13 +458,13 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
                                 rptData.Job_Position = "";
                                 rptData.faculty_name = reader["faculty_name"].ToString();
-                                rptData.research_name_thai = "ขอรายงานความก้าวหน้าโครงการวิจัยเรื่อง " + reader["project_name_thai"].ToString();
-                                rptData.research_name_eng = reader["project_name_eng"].ToString();
+                                rptData.research_name_thai = "ขอรายงานความก้าวหน้าโครงการวิจัยเรื่อง " + "( " + reader["project_name_thai"].ToString() + " )";
+                                rptData.research_name_eng = "( " + reader["project_name_eng"].ToString() + " )";
                                 rptData.headofresearch_fullname = reader["project_head_name"].ToString();
-                                rptData.certificate_date = reader["Certificate_date"].ToString();
-                                rptData.certificate_month = reader["Certificate_month"].ToString();
-                                rptData.certificate_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["Certificate_year"])));
                                 rptData.certificate_type = reader["accept_type_name"].ToString();
+                                string line1 = "คณะ  " + reader["faculty_name"].ToString() + " ขอรายงานความก้าวหน้าโครงการวิจัยเรื่อง " + " (" + reader["project_name_thai"] + ")" + "  (" + reader["project_name_eng"].ToString() + ") " + Environment.NewLine +
+                               "ได้ผ่านการรับรองงานวิจัยประเภทที่                  " + "จากคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร เมื่อวันที่  " + reader["Certificate_date"].ToString() + " เดือน  " + reader["Certificate_month"].ToString() + " พ.ศ. " + Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["Certificate_year"])));
+                                rptData.line1 = ParseDataHelper.ReportTextToHtml(line1);
 
                             }
                         }
@@ -494,10 +533,9 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 //rptData.projecttype = reader["project_type"].ToString();
                                 //rptData.Doc_head_2 = reader["doc_number"].ToString();
-                                rptData.day = reader["doc_date"].ToString();
-                                rptData.month = reader["doc_month"].ToString();
-                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
-                                rptData.presenter_name = reader["project_head_name"].ToString();
+                                rptData.day = reader["doc_date"].ToString() + " " + reader["doc_month"].ToString() + " " + CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
+                                string presenter_name = "ข้าพเจ้า  " + reader["project_head_name"].ToString() + "  สถานภาพ  ";
+                                rptData.presenter_name = ParseDataHelper.ReportTextToHtml(presenter_name);
                                 rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
                                 rptData.position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
@@ -505,13 +543,10 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
                                 rptData.Job_Position = "";
                                 rptData.faculty_name = reader["faculty_name"].ToString();
-                                rptData.research_name_thai = "ขอปรับแก้โครงการวิจัยเรื่อง " + reader["project_name_thai"].ToString();
-                                rptData.research_name_eng = reader["project_name_eng"].ToString();
                                 rptData.headofresearch_fullname = reader["project_head_name"].ToString();
-                                rptData.certificate_date = reader["conclusion_date"].ToString();
-                                rptData.certificate_month = reader["conclusion_month"].ToString();
-                                rptData.certificate_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["conclusion_year"])));
-                                //rptData.certificate_type = reader["accept_type_name"].ToString();
+                                string line1 = "คณะ  " + reader["faculty_name"].ToString() + " ขอปรับแก้โครงการวิจัยเรื่อง " + " (" + reader["project_name_thai"] + ")" + "  (" + reader["project_name_eng"].ToString() + ") " + Environment.NewLine +
+                               "ได้รับการพิจรณาจากคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร ครั้งที่          " + " เมื่อวันที่  " + reader["conclusion_date"].ToString() + " เดือน  " + reader["conclusion_month"].ToString() + " พ.ศ. " + Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["conclusion_year"])));
+                                rptData.line1 = ParseDataHelper.ReportTextToHtml(line1);
 
                             }
                         }
@@ -580,13 +615,10 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             while (await reader.ReadAsync())
                             {
-                                //rptData.projecttype = reader["project_type"].ToString();
-                                //rptData.Doc_head_2 = reader["doc_number"].ToString();
                                 rptData.doc = report_no.PadLeft(4, '0');
-                                rptData.day = reader["doc_date"].ToString();
-                                rptData.month = reader["doc_month"].ToString();
-                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
-                                rptData.presenter_name = reader["project_head_name"].ToString();
+                                rptData.day = reader["doc_date"].ToString() + " " + reader["doc_month"].ToString() + " " + CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
+                                string presenter_name = "ข้าพเจ้า  " + reader["project_head_name"].ToString() + "  สถานภาพ  ";
+                                rptData.presenter_name = ParseDataHelper.ReportTextToHtml(presenter_name);
                                 rptData.position_1 = (reader["check_value"].ToString()) == "1" ? true : false;
                                 rptData.position_2 = (reader["check_value"].ToString()) == "2" ? true : false;
                                 rptData.position_3 = (reader["check_value"].ToString()) == "3" ? true : false;
@@ -594,13 +626,10 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.position_5 = (reader["check_value"].ToString()) == "5" ? true : false;
                                 rptData.Job_Position = "";
                                 rptData.faculty_name = reader["faculty_name"].ToString();
-                                rptData.research_name_thai = "ขอต่ออายุโครงการวิจัยเรื่อง " + reader["project_name_thai"].ToString();
-                                rptData.research_name_eng = reader["project_name_eng"].ToString();
                                 rptData.headofresearch_fullname = reader["project_head_name"].ToString();
-                                rptData.projecttype = reader["accept_type_name"].ToString();
-                                rptData.nuibc_no = reader["project_number"].ToString();
-                                rptData.faculty_name = reader["faculty_name"].ToString();
-                                rptData.renew_round = reader["renew_round"].ToString();
+                                string line1 = "คณะ  " + reader["faculty_name"].ToString() + " ขอต่ออายุโครงการวิจัยเรื่อง " + " (" + reader["project_name_thai"] + ")" + "  (" + reader["project_name_eng"].ToString() + ") " + Environment.NewLine +
+                               "เลขที่โครงการ NUIBC no " + reader["project_number"].ToString() + "ซึ่งได้ผ่านการรับรองแบบ  " + reader["accept_type_name"].ToString() + " จากคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ เมื่อการประชุมครั้งที่ " + reader["renew_round"].ToString() + " และได้แนบเอกสารประกอบการพิจรณา ดังนี้ ";
+                                rptData.line1 = ParseDataHelper.ReportTextToHtml(line1);
 
                             }
                         }
@@ -671,17 +700,18 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 report_no = await CreateReportNumberAsync(year, "R8", doc_id, "Doc_MenuB1");
                                 rptData.docno = report_no.PadLeft(4, '0');
-                                rptData.day = reader["doc_date"].ToString();
-                                rptData.month = reader["doc_month"].ToString();
-                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
+                                rptData.day = reader["doc_date"].ToString() + "  " + reader["doc_month"].ToString() + "  " + CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                 rptData.faculty_name = reader["faculty_name"].ToString();
-                                rptData.research_name_eng = reader["project_name_thai"].ToString() + "   " + reader["project_name_eng"].ToString();
                                 rptData.headofresearch_fullname = reader["project_head"].ToString();
-                                rptData.nuibc_no = reader["project_key_number"].ToString();
-                                rptData.renew_round = reader["round_of_meeting"].ToString() + '/' + reader["year_of_meeting"].ToString();
-                                rptData.month_project = reader["meeting_month"].ToString();
-                                rptData.year_project = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["meeting_year"])));
+                                string line1 = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ตามที่  ท่านได้ส่งเอกสารโครงการวิจัยเพื่อขอรับการพิจารณารับรองด้านความปลอดภัยทาง   ชีวภาพ เรื่อง " + "( " + reader["project_name_thai"].ToString() + " )" + "   " + "( " + reader["project_name_eng"].ToString() + " ) " + "  " + reader["project_key_number"].ToString();
+                                string line2 = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ในการนี้ คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ได้รับเอกสารโครงการวิจัยของท่านเป็นที่เรียบร้อยแล้ว จึงขอแจ้งให้ทราบ ดังนี้";
+                                string line3 = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 1. หมายเลขสำคัญโครงการ (NUIBC No.) คือ " + reader["project_name_eng"].ToString() + " ซึ่งในกรณีที่มีการส่งเอกสารใดๆ ที่เกี่ยวข้องกับโครงการนี้ กรุณาระบุหมายเลขสำคัญโครงการ (NUIBC No.) และหากมีการติดตามและสอบถามรายละเอียดเกี่ยวกับโครงการวิจัยขอให้แจ้งหมายเลขสำคัญโครงการ (NUIBC No.) ดังกล่าวทุกครั้ง ";
+                                string line4 = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 2. โครงการวิจัยของท่านจะนำเข้ารับการพิจารณาในรอบการประชุมคณะกรรมการเพื่อ    ความปลอดภัยทางชีวภาพ ครั้งที่ " + reader["round_of_meeting"].ToString() + '/' + reader["year_of_meeting"].ToString() + " ในวันที่ " + reader["meeting_month"].ToString() + Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["meeting_year"])));
 
+                                rptData.line1 = ParseDataHelper.ReportTextToHtml(line1);
+                                rptData.line2 = ParseDataHelper.ReportTextToHtml(line2);
+                                rptData.line3 = ParseDataHelper.ReportTextToHtml(line3);
+                                rptData.line4 = ParseDataHelper.ReportTextToHtml(line4);
                             }
                         }
                         reader.Close();
@@ -758,11 +788,15 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.certificate_date = reader["accept_date"].ToString();
                                 rptData.certificate_month = reader["accept_month"].ToString();
                                 rptData.certificate_year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["accept_year"]));
-                                rptData.expire_date = reader["expire_date"].ToString();
+                                rptData.expire_date = reader["expire_date"].ToString() + " " + reader["expire_month"].ToString() + " " + CommonData.ConvertYearToThai(Convert.ToInt32(reader["expire_year"]));
                                 rptData.expire_month = reader["expire_month"].ToString();
                                 rptData.expire_year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["expire_year"]));
-                                rptData.projecttype = reader["accept_type_name"].ToString();
-
+                                rptData.projecttype = "งานประเภทที่ " + reader["acceptResult"].ToString();
+                                rptData.note = "ข้อเสนอการวิจัยนี้ได้ผ่านการพิจารณาและรับรองจากคณะกรรมการเพื่อความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร" +
+                                               " ครั้งที่ " + reader["RenewRound"].ToString() + " วันที่ " + Convert.ToDateTime(reader["doc_date"]).ToString("dd MMMM") + " " + CommonData.ConvertYearToThai(Convert.ToDateTime(reader["doc_date"]).Year) +
+                                               " เห็นว่ามีความสอดคล้องกับแนวทางปฏิบัติเพื่อความปลอดภัยทางชีวภาพ จึงเห็นควรให้ดำเนินการวิจัยด้านความปลอดภัยทางชีวภาพ ตามข้อเสนอวิจัยนี้ได้";
+                                rptData.remark = "ใบรับรองฉบับนี้ใช้ควบคู่กับหนังสือราขการ เล่มที่ ศธ 0527.01.13(1)/ว " +
+                                    DateTime.Now.ToString("dd MMMM") + " " + CommonData.ConvertYearToThai(DateTime.Now.Year);
                             }
                         }
                         reader.Close();
@@ -830,8 +864,8 @@ namespace THD.Core.Api.Repository.DataHandler
                             while (await reader.ReadAsync())
                             {
 
-                                rptData.projectnamethai = reader["project_name_thai"].ToString();
-                                rptData.projectnameeng = reader["project_name_eng"].ToString();
+                                rptData.projectnamethai = "( " + reader["project_name_thai"].ToString() + " )";
+                                rptData.projectnameeng = "( " + reader["project_name_eng"].ToString() + " )";
                                 rptData.projectheadname = reader["project_head_name"].ToString();
                                 rptData.advisor = reader["consult_name"].ToString();
                                 rptData.facultyname = reader["faculty_name"].ToString();
@@ -847,9 +881,7 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.commentconsider2 = (reader["check_value"].ToString()) == "2" ? reader["comment_consider"].ToString() : "-";
                                 rptData.commentconsider3 = (reader["check_value"].ToString()) == "3" ? reader["comment_consider"].ToString() : "-";
                                 rptData.commentconsider4 = (reader["check_value"].ToString()) == "4" ? reader["comment_consider"].ToString() : "-";
-                                rptData.day = reader["doc_date"].ToString();
-                                rptData.month = reader["doc_month"].ToString();
-                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
+                                rptData.day = reader["doc_date"].ToString() + " " + reader["doc_month"].ToString() + " " + CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                             }
                             reader.Close();
                         }
@@ -919,14 +951,18 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 report_no = await CreateReportNumberAsync(year, "R11", doc_id, "Doc_MenuC1");
                                 rptData.docno = report_no.PadLeft(4, '0');
-                                rptData.day = reader["doc_date"].ToString();
-                                rptData.month = reader["doc_month"].ToString();
-                                rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
-                                rptData.round = (reader["round_of_meeting"].ToString() + '/' + reader["year_of_meeting"].ToString());
-                                rptData.meet_date = reader["meet_date"].ToString();
-                                rptData.meet_month = reader["meet_month"].ToString();
+                                rptData.day = reader["doc_date"].ToString() + " " + reader["doc_month"].ToString() + " " + CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                 rptData.meet_year = Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["meet_year"])));
                                 rptData.assign = reader["assigname"].ToString();
+
+                                string linehead1 = "ขอความอนุเคราะห์พิจารณาโครงการวิจัยด้านความปลอดภัยทางชีวภาพ ครั้งที่ " + (reader["round_of_meeting"].ToString() + '/' + reader["year_of_meeting"].ToString());
+                                string line1 = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ตามที่ คณะกรรมการควบคุมความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร ได้มีกำหนดการประชุมคณะกรรมการควบคุมความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร ครั้งที่ " + (reader["round_of_meeting"].ToString() + '/' + reader["year_of_meeting"].ToString()) + " ในวันที่ " + reader["meet_date"].ToString() + " " + reader["meet_month"].ToString() + " " + Convert.ToString(CommonData.ConvertYearToThai(Convert.ToInt32(reader["meet_year"]))) + " เพื่อลงมติผลการพิจารณารับรองโครงการวิจัยด้านความปลอดภัยทางชีวภาพ นั้น ";
+                                string line2 = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ในการนี้ เพื่อลดระยะเวลาในการประชุม จึงขอความอนุเคราะห์ท่านพิจารณาโครงการวิจัย  ที่ขอรับรองด้านความปลอดภัยทางชีวภาพ <bold> จำนวน 1 โครงการ  คือ " + "หมายเลขโครงการ " + reader["project_number"].ToString() + "( " + reader["project_name_thai"].ToString() + " )" + "( " + reader["project_name_eng"].ToString() + " ) " + " </bold> ทั้งนี้ ขอความกรุณาพิจารณาและส่งผลการพิจารณา <bold> ภายใน ๑ สัปดาห์หลังได้รับอีเมลล์ </bold> เพื่อฝ่ายเลขานุการดำเนินการสรุปผลการพิจารณาโครงการเข้าวาระการประชุมดังกล่าวฯ ต่อไป";
+
+                                rptData.line_head1 = linehead1;
+                                rptData.line1 = ParseDataHelper.ReportTextToHtml(line1);
+                                rptData.line2 = ParseDataHelper.ReportTextToHtml(line2);
+
                             }
                         }
                         reader.Close();
@@ -1015,13 +1051,13 @@ namespace THD.Core.Api.Repository.DataHandler
                                     rptData.day = reader["doc_date"].ToString();
                                     rptData.month = reader["doc_month"].ToString();
                                     rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
-                                    rptData.research_name_thai = reader["agenda_3_project_name_thai"].ToString();
-                                    rptData.research_name_eng = reader["agenda_3_project_name_eng"].ToString();
-                                    rptData.round = reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
                                     rptData.sender = reader["sender"].ToString();
-                                    rptData.projectno = reader["agenda_3_project_number"].ToString();
                                     rptData.comment1 = reader["comment_1_note"].ToString();
                                     rptData.comment2 = reader["comment_2_note"].ToString();
+                                    string line1 = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ตามที่ ท่านได้เสนอโครงการวิจัย " + "( " + reader["agenda_3_project_name_thai"].ToString() + " ) " + " ( " + reader["agenda_3_project_name_eng"].ToString() + "  ) " + "หมายเลขสำคัญโครงการ " + reader["agenda_3_project_number"].ToString() + " มายังคณะกรรมการควบคุมความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร เพื่อขอรับการพิจารณารับรองความปลอดภัยทางชีวภาพ นั้น";
+                                    string line2 = "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ในการนี้ ที่ประชุมคณะกรรมการควบคุมความปลอดภัยทางชีวภาพ ครั้งที่ " + reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
+
+
                                 }
                                 else if (type == 4)
                                 {
@@ -1030,8 +1066,8 @@ namespace THD.Core.Api.Repository.DataHandler
                                     rptData.day = reader["doc_date"].ToString();
                                     rptData.month = reader["doc_month"].ToString();
                                     rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
-                                    rptData.researchname_thai = reader["agenda_4_project_name_1"].ToString();
-                                    rptData.researchname_eng = reader["agenda_4_project_name_2"].ToString();
+                                    rptData.researchname_thai = "( " + reader["agenda_4_project_name_1"].ToString() + " )";
+                                    rptData.researchname_eng = "( " + reader["agenda_4_project_name_2"].ToString() + " )";
                                     rptData.round = reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
                                     rptData.sender = reader["sender"].ToString();
                                     rptData.projectno = reader["agenda_4_project_number"].ToString();
@@ -1126,8 +1162,8 @@ namespace THD.Core.Api.Repository.DataHandler
                                     rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                     rptData.researcher = reader["sender"].ToString();
                                     rptData.nuibc = reader["agenda_3_project_number"].ToString();
-                                    rptData.research_name_thai = reader["agenda_3_project_name_thai"].ToString();
-                                    rptData.research_name_eng = reader["agenda_3_project_name_eng"].ToString();
+                                    rptData.research_name_thai = "( " + reader["agenda_3_project_name_thai"].ToString() + " )";
+                                    rptData.research_name_eng = "( " + reader["agenda_3_project_name_eng"].ToString() + " )";
                                     rptData.round = reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
                                     rptData.approvetype = reader["agenda_3_conclusion_name"].ToString();
                                 }
@@ -1140,8 +1176,8 @@ namespace THD.Core.Api.Repository.DataHandler
                                     rptData.year = CommonData.ConvertYearToThai(Convert.ToInt32(reader["doc_year"]));
                                     rptData.researcher = reader["sender"].ToString();
                                     rptData.nuibc = reader["agenda_4_project_number"].ToString();
-                                    rptData.research_name_thai = reader["agenda_4_project_name_1"].ToString();
-                                    rptData.research_name_eng = reader["agenda_4_project_name_2"].ToString();
+                                    rptData.research_name_thai = "( " + reader["agenda_4_project_name_1"].ToString() + " )";
+                                    rptData.research_name_eng = "( " + reader["agenda_4_project_name_2"].ToString() + " ) ";
                                     rptData.round = reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
                                     rptData.approvetype = reader["agenda_4_conclusion_name"].ToString();
                                 }
@@ -1198,7 +1234,7 @@ namespace THD.Core.Api.Repository.DataHandler
                 model_rpt_14_report rptData = new model_rpt_14_report();
 
                 //Default ----------------------------------------------------------
-                rptData.Doc_head_1 = "ระเบียบวารการประชุมคณะกรรมการพิจารณาฯความปลอดภัยทาชีวะภาพ มหาวิทยาลัยนเรศวร";
+                rptData.Doc_head_1 = "รายงานการประชุมคณะกรรมการควบคุมความปลอดภัยทางชีวภาพ มหาวิทยาลัยนเรศวร";
                 rptData.Doc_head_2 = "ครั้งที่ - ";
                 rptData.Doc_head_3 = "วันที่ -";
                 rptData.Doc_head_4 = "เวลา -";
@@ -1243,7 +1279,7 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.Doc_head_2 = "ครั้งที่ " + reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
 
                                 int year_meeting = Convert.ToInt32(Convert.ToDateTime(reader["meeting_date"]).ToString("yyyy"));
-                                rptData.Doc_head_3 = "วัน" + Convert.ToDateTime(reader["meeting_date"]).ToString("dddd dd MMM ") + CommonData.ConvertYearToThai(year_meeting);
+                                rptData.Doc_head_3 = "วัน" + Convert.ToDateTime(reader["meeting_date"]).ToString("dddd dd MMMM ") + CommonData.ConvertYearToThai(year_meeting);
 
                                 rptData.Doc_head_4 = "เวลา " + ParseDataHelper.ReportEmptyValue(reader["meeting_start"].ToString()) + " เป็นต้นไป";
                                 rptData.Doc_head_5 = ParseDataHelper.ReportEmptyValue(reader["meeting_location"].ToString());
@@ -1388,19 +1424,20 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         if (reader.HasRows)
                         {
+                            int project_count = 0;
                             int seq = 0;
                             while (await reader.ReadAsync())
                             {
-                                string title = "โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข จำนวน ";
-
                                 model_list_agenda_3 agenda_3 = new model_list_agenda_3();
 
-                                agenda_3.title = title + ParseDataHelper.ReportEmptyValueInt(Convert.ToInt32(reader["count_3"])) + " โครงการ";
+                                project_count += Convert.ToInt32(reader["count_3"]);
+
                                 agenda_3.subject = (seq + 1).ToString() + ". เรื่อง :";
                                 agenda_3.project_number = ParseDataHelper.ReportEmptyValue(reader["agenda_3_project_number"].ToString());
                                 agenda_3.project_name_thai = ParseDataHelper.ReportEmptyValue(reader["agenda_3_project_name_thai"].ToString());
                                 agenda_3.project_name_eng = ParseDataHelper.ReportEmptyValue(reader["agenda_3_project_name_eng"].ToString());
                                 agenda_3.project_safety_type = ParseDataHelper.ReportEmptyValue(reader["safety_type"].ToString());
+                                agenda_3.list_researchers = ParseDataHelper.ReportEmptyValue(reader["project_head_name"].ToString());
                                 agenda_3.consultant_name = ParseDataHelper.ReportEmptyValue(reader["consultant_name"].ToString());
                                 agenda_3.comment_1_name = "1. " + ParseDataHelper.ReportEmptyValue(reader["comment_1_title"].ToString());
                                 agenda_3.comment_2_name = "2. " + ParseDataHelper.ReportEmptyValue(reader["comment_2_title"].ToString());
@@ -1444,15 +1481,28 @@ namespace THD.Core.Api.Repository.DataHandler
                                 }
                                 else agenda_3.list_agenda_3_2.Add(new model_list_agenda_3_2());
 
-
-                                if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
-                                    agenda_3.list_researchers = await GetResearchOfProject(reader);
+                                //if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
+                                //agenda_3.list_researchers = await GetResearchOfProject(reader);
 
                                 rptData.list_agenda_3.Add(agenda_3);
                                 seq++;
                             }
+
+                            if (rptData.list_agenda_3 != null && rptData.list_agenda_3.Count > 0)
+                            {
+                                string title = "โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข จำนวน ";
+                                foreach (var item in rptData.list_agenda_3)
+                                {
+                                    item.title = title + ParseDataHelper.ReportEmptyValueInt(project_count) + " โครงการ";
+                                }
+                            }
                         }
-                        else rptData.list_agenda_3.Add(new model_list_agenda_3());
+                        else
+                        {
+                            IList<model_list_agenda_3_2> list_agenda_3_2 = new List<model_list_agenda_3_2>();
+                            list_agenda_3_2.Add(new model_list_agenda_3_2());
+                            rptData.list_agenda_3.Add(new model_list_agenda_3() { list_agenda_3_2 = list_agenda_3_2 });
+                        }
 
                         reader.Close();
 
@@ -1562,14 +1612,15 @@ namespace THD.Core.Api.Repository.DataHandler
                         agenda_4.project_name_thai = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_name_1"].ToString());
                         agenda_4.project_name_eng = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_name_2"].ToString());
                         agenda_4.project_safety_type = ParseDataHelper.ReportEmptyValue(reader["safety_type"].ToString());
+                        agenda_4.list_researchers = ParseDataHelper.ReportEmptyValue(reader["project_head_name"].ToString());
                         agenda_4.consultant_name = ParseDataHelper.ReportEmptyValue(reader["consultant_name"].ToString());
                         agenda_4.comment_1_name = "1. " + ParseDataHelper.ReportEmptyValue(reader["comment_1_title"].ToString());
                         agenda_4.comment_2_name = "2. " + ParseDataHelper.ReportEmptyValue(reader["comment_2_title"].ToString());
                         agenda_4.comment_3_name = "3. " + ParseDataHelper.ReportEmptyValue(reader["comment_3_title"].ToString());
                         agenda_4.detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["agenda_4_suggestion"].ToString());
 
-                        if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
-                            agenda_4.list_researchers = await GetResearchOfProject(reader);
+                        //if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
+                        //    agenda_4.list_researchers = await GetResearchOfProject(reader);
 
                         list_agenda_4.Add(agenda_4);
                         seq++;
@@ -1618,14 +1669,15 @@ namespace THD.Core.Api.Repository.DataHandler
                         agenda_4.project_name_thai = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_name_1"].ToString());
                         agenda_4.project_name_eng = ParseDataHelper.ReportEmptyValue(reader["agenda_4_project_name_2"].ToString());
                         agenda_4.project_safety_type = ParseDataHelper.ReportEmptyValue(reader["safety_type"].ToString());
+                        agenda_4.list_researchers = ParseDataHelper.ReportEmptyValue(reader["project_head_name"].ToString());
                         agenda_4.consultant_name = ParseDataHelper.ReportEmptyValue(reader["consultant_name"].ToString());
                         agenda_4.comment_1_name = "1. " + ParseDataHelper.ReportEmptyValue(reader["comment_1_title"].ToString());
                         agenda_4.comment_2_name = "2. " + ParseDataHelper.ReportEmptyValue(reader["comment_2_title"].ToString());
                         agenda_4.comment_3_name = "3. " + ParseDataHelper.ReportEmptyValue(reader["comment_3_title"].ToString());
                         agenda_4.detail_conclusion = ParseDataHelper.ReportEmptyValue(reader["agenda_4_suggestion"].ToString());
 
-                        if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
-                            agenda_4.list_researchers = await GetResearchOfProject(reader);
+                        //if (!string.IsNullOrEmpty(reader["member_project_1"].ToString()))
+                        //    agenda_4.list_researchers = await GetResearchOfProject(reader);
 
                         list_agenda_4.Add(agenda_4);
                         seq++;
@@ -1757,56 +1809,47 @@ namespace THD.Core.Api.Repository.DataHandler
                 model_rpt_15_report rptData = new model_rpt_15_report();
 
                 //Default ----------------------------------------------------------
-                rptData.Doc_head_1 = "ระเบียบวารการประชุมคณะกรรมการพิจารณาฯความปลอดภัยทาชีวะภาพ มหาวิทยาลัยนเรศวร";
+                rptData.Doc_head_1 = "ระเบียบวารการประชุมคณะกรรมการควบคุมความปลอดภัยทาชีวภาพ มหาวิทยาลัยนเรศวร";
                 rptData.Doc_head_2 = "ครั้งที่ - ";
                 rptData.Doc_head_3 = "วันที่ -";
                 rptData.Doc_head_4 = "เวลา -";
                 rptData.Doc_head_5 = "สถานที่ -";
 
                 rptData.subject_1_1 = "1.1 เรื่องที่ประธานแจ้งให้ที่ประชุมทราบ";
-                rptData.item_1_1_1 = "1.1.1 -";
-                rptData.item_1_1_2 = "1.1.2 -";
-                rptData.item_1_1_3 = "1.1.3 -";
-
                 rptData.subject_1_2 = "1.2 เรื่องที่ฝ่ายเลขานุการแจ้งให้ที่ประชุมทราบ";
-                rptData.item_1_2_1 = "1.2.1 -";
-                rptData.item_1_2_2 = "1.2.2 -";
-                rptData.item_1_2_3 = "1.2.3 -";
-
-                rptData.item_2_1_1 = "2.1 -";
-                rptData.item_2_1_2 = "2.2 -";
-                rptData.item_2_1_3 = "2.3 -";
-
                 rptData.subject_3_1 = "3.1 โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข";
                 rptData.subject_3_1_qty = "จำนวน " + 0 + " โครงการ";
                 rptData.subject_3_2 = "3.2 เรื่องสืบเนื่อง";
-                rptData.item_3_2_1 = "3.2.1 -";
-                rptData.item_3_2_2 = "3.2.2 -";
-                rptData.item_3_2_3 = "3.2.3 -";
 
-                rptData.item_4_1_1 = "4.1 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 1";
-                rptData.item_4_1_2 = "4.2 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 2";
-                rptData.item_4_1_3 = "4.3 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 3";
-                rptData.item_4_1_4 = "4.4 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 4";
-                rptData.item_4_1_5 = "4.5 โครงการวิจัยที่แจ้งขอต่ออายุใบรับรอง";
-                rptData.item_4_1_6 = "4.6 โครงการวิจัยที่ขอแก้ไขโครงการหลังผ่านการรับรองแล้ว";
-                rptData.item_4_1_7 = "4.7 โครงการวิจัยที่ขอแจ้งปิดโครงการ";
-                rptData.item_4_1_8 = "4.8 คำขอประเมิณห้องปฏิบัติการ";
-                rptData.item_4_1_9 = "4.9 ผลการตรวจเยี่ยมติดตามโครงการ";
 
-                rptData.item_4_1_1_qty = "จำนวน " + 0 + " โครงการ";
-                rptData.item_4_1_2_qty = "จำนวน " + 0 + " โครงการ";
-                rptData.item_4_1_3_qty = "จำนวน " + 0 + " โครงการ";
-                rptData.item_4_1_4_qty = "จำนวน " + 0 + " โครงการ";
-                rptData.item_4_1_5_qty = "จำนวน " + 0 + " โครงการ";
-                rptData.item_4_1_6_qty = "จำนวน " + 0 + " โครงการ";
-                rptData.item_4_1_7_qty = "จำนวน " + 0 + " โครงการ";
-                rptData.item_4_1_8_qty = "จำนวน " + 0 + " โครงการ";
-                rptData.item_4_1_9_qty = "จำนวน " + 0 + " โครงการ";
+                rptData.list_item_1_1 = new List<model_rpt_15_items>();
+                rptData.list_item_1_2 = new List<model_rpt_15_items>();
+                rptData.list_item_2_1 = new List<model_rpt_15_items>();
+                rptData.list_item_3_2 = new List<model_rpt_15_items>();
+                rptData.list_item_4_1 = new List<model_rpt_15_4>();
+                rptData.list_item_5_1 = new List<model_rpt_15_items>();
 
-                rptData.item_5_1_1 = "5.1 -";
-                rptData.item_5_1_2 = "5.2 -";
-                rptData.item_5_1_3 = "5.3 -";
+                model_rpt_15_4 item_4_1 = new model_rpt_15_4()
+                {
+                    item_4_1_1 = "4.1 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 1",
+                    item_4_1_2 = "4.2 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 2",
+                    item_4_1_3 = "4.3 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 3",
+                    item_4_1_4 = "4.4 โครงการวิจัยใหม่ที่เข้าข่ายการพิจารณางานประเภทที่ 4",
+                    item_4_1_5 = "4.5 โครงการวิจัยที่แจ้งขอต่ออายุใบรับรอง",
+                    item_4_1_6 = "4.6 โครงการวิจัยที่ขอแก้ไขโครงการหลังผ่านการรับรองแล้ว",
+                    item_4_1_7 = "4.7 โครงการวิจัยที่ขอแจ้งปิดโครงการ",
+                    item_4_1_8 = "4.8 คำขอประเมิณห้องปฏิบัติการ",
+                    item_4_1_9 = "4.9 ผลการตรวจเยี่ยมติดตามโครงการ",
+                    item_4_1_1_qty = "จำนวน " + 0 + " โครงการ",
+                    item_4_1_2_qty = "จำนวน " + 0 + " โครงการ",
+                    item_4_1_3_qty = "จำนวน " + 0 + " โครงการ",
+                    item_4_1_4_qty = "จำนวน " + 0 + " โครงการ",
+                    item_4_1_5_qty = "จำนวน " + 0 + " โครงการ",
+                    item_4_1_6_qty = "จำนวน " + 0 + " โครงการ",
+                    item_4_1_7_qty = "จำนวน " + 0 + " โครงการ",
+                    item_4_1_8_qty = "จำนวน " + 0 + " โครงการ",
+                    item_4_1_9_qty = "จำนวน " + 0 + " โครงการ",
+                };
 
                 //--------------------------------------------------------------------
 
@@ -1831,7 +1874,7 @@ namespace THD.Core.Api.Repository.DataHandler
                                 rptData.Doc_head_2 = "ครั้งที่ " + reader["meeting_round"].ToString() + "/" + reader["year_of_meeting"].ToString();
 
                                 int year_meeting = Convert.ToInt32(Convert.ToDateTime(reader["meeting_date"]).ToString("yyyy"));
-                                rptData.Doc_head_3 = "วัน" + Convert.ToDateTime(reader["meeting_date"]).ToString("dddd dd MMM ") + CommonData.ConvertYearToThai(year_meeting);
+                                rptData.Doc_head_3 = "วัน" + Convert.ToDateTime(reader["meeting_date"]).ToString("dddd dd MMMM ") + CommonData.ConvertYearToThai(year_meeting);
 
                                 rptData.Doc_head_4 = "เวลา " + ParseDataHelper.ReportEmptyValue(reader["meeting_start"].ToString()) + " เป็นต้นไป";
                                 rptData.Doc_head_5 = ParseDataHelper.ReportEmptyValue(reader["meeting_location"].ToString());
@@ -1857,32 +1900,30 @@ namespace THD.Core.Api.Repository.DataHandler
                                 string string_value = ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
 
                                 rptData.subject_1_1 = "1.1 เรื่องที่ประธานแจ้งให้ที่ประชุมทราบ";
-
                                 if (reader["group_data"].ToString() == "1.1")
                                 {
-                                    if (reader["seq"].ToString() == "1")
-                                        rptData.item_1_1_1 = "1.1.1 " + string_value;
-
-                                    if (reader["seq"].ToString() == "2")
-                                        rptData.item_1_1_2 = "1.1.2 " + string_value;
-
-                                    if (reader["seq"].ToString() == "3")
-                                        rptData.item_1_1_3 = "1.1.3 " + string_value;
-                                }
+                                    model_rpt_15_items agenda_1_1 = new model_rpt_15_items()
+                                    {
+                                        item = "1.1." + reader["seq"].ToString() + " " + string_value,
+                                    };
+                                    rptData.list_item_1_1.Add(agenda_1_1);
+                                };
 
                                 rptData.subject_1_2 = "1.2 เรื่องที่ฝ่ายเลขานุการแจ้งให้ที่ประชุมทราบ";
                                 if (reader["group_data"].ToString() == "1.2")
                                 {
-                                    if (reader["seq"].ToString() == "1")
-                                        rptData.item_1_2_1 = "1.2.1 " + string_value;
-
-                                    if (reader["seq"].ToString() == "2")
-                                        rptData.item_1_2_2 = "1.2.2 " + string_value;
-
-                                    if (reader["seq"].ToString() == "3")
-                                        rptData.item_1_2_3 = "1.2.3 " + string_value;
-                                }
+                                    model_rpt_15_items agenda_1_2 = new model_rpt_15_items()
+                                    {
+                                        item = "1.2." + reader["seq"].ToString() + " " + string_value,
+                                    };
+                                    rptData.list_item_1_2.Add(agenda_1_2);
+                                };
                             }
+                        }
+                        else
+                        {
+                            rptData.list_item_1_1.Add(new model_rpt_15_items());
+                            rptData.list_item_1_2.Add(new model_rpt_15_items());
                         }
                         reader.Close();
                     }
@@ -1902,21 +1943,21 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 if (reader["group_data"].ToString() == "2.1")
                                 {
-                                    if (reader["seq"].ToString() == "1")
-                                        rptData.item_2_1_1 = "2.1 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
-
-                                    if (reader["seq"].ToString() == "2")
-                                        rptData.item_2_1_2 = "2.2 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
-
-                                    if (reader["seq"].ToString() == "3")
-                                        rptData.item_2_1_3 = "2.3 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                    string string_value = ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                    if (reader["group_data"].ToString() == "2.1")
+                                    {
+                                        model_rpt_15_items agenda_2_1 = new model_rpt_15_items()
+                                        {
+                                            item = "2.1." + reader["seq"].ToString() + " " + string_value,
+                                        };
+                                        rptData.list_item_2_1.Add(agenda_2_1);
+                                    };
                                 }
                             }
                         }
+                        else rptData.list_item_2_1.Add(new model_rpt_15_items());
+
                         reader.Close();
-
-
-
                     }
 
                     // ระเบียบวารที่ 3
@@ -1930,28 +1971,51 @@ namespace THD.Core.Api.Repository.DataHandler
 
                         if (reader.HasRows)
                         {
+                            int project_count = 0;
                             while (await reader.ReadAsync())
                             {
                                 rptData.subject_3_1 = "3.1 โครงการวิจัยที่รับรองหลังจากปรับปรุง/แก้ไข";
                                 if (reader["group_data"].ToString() == "3.1")
                                 {
-                                    rptData.subject_3_1_qty = "จำนวน " + ParseDataHelper.ReportEmptyValueInt(Convert.ToInt32(reader["count_3"])) + " โครงการ";
+                                    project_count += Convert.ToInt32(reader["count_3"]);
+
+                                    rptData.subject_3_1_qty = "จำนวน " + ParseDataHelper.ReportEmptyValueInt(project_count) + " โครงการ";
                                 }
 
                                 rptData.subject_3_2 = "3.2 เรื่องสืบเนื่อง";
-                                if (reader["group_data"].ToString() == "3.2")
+
+                                if (!string.IsNullOrEmpty(reader["sequel_1_title"].ToString()))
                                 {
-                                    if (reader["seq"].ToString() == "1")
-                                        rptData.item_3_2_1 = "3.2.1 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                    model_rpt_15_items agenda_3_2_1 = new model_rpt_15_items()
+                                    {
+                                        item = "3.2." + reader["seq"].ToString() + " " + ParseDataHelper.ReportEmptyValue(reader["sequel_1_title"].ToString()),
+                                    };
+                                    rptData.list_item_3_2.Add(agenda_3_2_1);
 
-                                    if (reader["seq"].ToString() == "2")
-                                        rptData.item_3_2_2 = "3.2.2 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                    if (!string.IsNullOrEmpty(reader["sequel_2_title"].ToString()))
+                                    {
+                                        model_rpt_15_items agenda_3_2_2 = new model_rpt_15_items()
+                                        {
+                                            item = "3.2." + reader["seq"].ToString() + " " + ParseDataHelper.ReportEmptyValue(reader["sequel_2_title"].ToString()),
+                                        };
+                                        rptData.list_item_3_2.Add(agenda_3_2_2);
+                                    }
 
-                                    if (reader["seq"].ToString() == "3")
-                                        rptData.item_3_2_3 = "3.2.3 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                    if (!string.IsNullOrEmpty(reader["sequel_3_title"].ToString()))
+                                    {
+                                        model_rpt_15_items agenda_3_2_3 = new model_rpt_15_items()
+                                        {
+                                            item = "3.2." + reader["seq"].ToString() + " " + ParseDataHelper.ReportEmptyValue(reader["sequel_3_title"].ToString()),
+                                        };
+                                        rptData.list_item_3_2.Add(agenda_3_2_3);
+                                    }
+
                                 }
+                                else rptData.list_item_3_2.Add(new model_rpt_15_items());
                             }
                         }
+                        else rptData.list_item_3_2.Add(new model_rpt_15_items());
+
                         reader.Close();
                     }
 
@@ -1973,36 +2037,38 @@ namespace THD.Core.Api.Repository.DataHandler
                                 switch (reader["agenda_4_term"].ToString())
                                 {
                                     case "1":
-                                        rptData.item_4_1_1_qty = string_qty;
+                                        item_4_1.item_4_1_1_qty = string_qty;
                                         break;
                                     case "2":
-                                        rptData.item_4_1_2_qty = string_qty;
+                                        item_4_1.item_4_1_2_qty = string_qty;
                                         break;
                                     case "3":
-                                        rptData.item_4_1_3_qty = string_qty;
+                                        item_4_1.item_4_1_3_qty = string_qty;
                                         break;
                                     case "4":
-                                        rptData.item_4_1_4_qty = string_qty;
+                                        item_4_1.item_4_1_4_qty = string_qty;
                                         break;
                                     case "5":
-                                        rptData.item_4_1_5_qty = string_qty;
+                                        item_4_1.item_4_1_5_qty = string_qty;
                                         break;
                                     case "6":
-                                        rptData.item_4_1_6_qty = string_qty;
+                                        item_4_1.item_4_1_6_qty = string_qty;
                                         break;
                                     case "7":
-                                        rptData.item_4_1_7_qty = string_qty;
+                                        item_4_1.item_4_1_7_qty = string_qty;
                                         break;
                                     case "8":
-                                        rptData.item_4_1_8_qty = string_qty;
+                                        item_4_1.item_4_1_8_qty = string_qty;
                                         break;
                                     case "9":
-                                        rptData.item_4_1_9_qty = string_qty;
+                                        item_4_1.item_4_1_9_qty = string_qty;
                                         break;
                                 }
                             }
                         }
                         reader.Close();
+
+                        rptData.list_item_4_1.Add(item_4_1);
                     }
 
                     // ระเบียบวารที่ 5
@@ -2020,17 +2086,18 @@ namespace THD.Core.Api.Repository.DataHandler
                             {
                                 if (reader["group_data"].ToString() == "5.1")
                                 {
-                                    if (reader["seq"].ToString() == "1")
-                                        rptData.item_5_1_1 = "5.1 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                    string string_value = ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
 
-                                    if (reader["seq"].ToString() == "2")
-                                        rptData.item_5_1_2 = "5.2 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
-
-                                    if (reader["seq"].ToString() == "3")
-                                        rptData.item_5_1_3 = "5.3 " + ParseDataHelper.ReportEmptyValue(reader["input1"].ToString());
+                                    model_rpt_15_items agenda_5_1 = new model_rpt_15_items()
+                                    {
+                                        item = "5." + reader["seq"].ToString() + " " + string_value,
+                                    };
+                                    rptData.list_item_5_1.Add(agenda_5_1);
                                 }
                             }
                         }
+                        else rptData.list_item_5_1.Add(new model_rpt_15_items());
+
                         reader.Close();
                     }
 
@@ -2361,6 +2428,7 @@ namespace THD.Core.Api.Repository.DataHandler
 
             return report_no;
         }
+
     }
 
 }

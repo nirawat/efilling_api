@@ -109,11 +109,77 @@ namespace THD.Core.Api.Repository.DataHandler
         {
             ModelMenuF1Edit_InterfaceData resp = new ModelMenuF1Edit_InterfaceData();
 
+            resp.listfirstname = await GetAllFirstNameAsync();
+
+            resp.listfaculty = await GetAllFacultyAsync();
+
             resp.UserData = await GetEditDataByRegisterId(UserId);
 
             resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M023");
 
             return resp;
+        }
+
+        public async Task<IList<ModelSelectOption>> GetAllFirstNameAsync()
+        {
+
+            string sql = "SELECT * FROM MST_FirstName ORDER BY id ASC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelSelectOption> e = new List<ModelSelectOption>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelSelectOption item = new ModelSelectOption();
+                            item.value = reader["name_thai"].ToString();
+                            item.label = reader["name_thai"].ToString();
+                            e.Add(item);
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
+        }
+
+        public async Task<IList<ModelSelectOption>> GetAllFacultyAsync()
+        {
+
+            string sql = "SELECT * FROM MST_Faculty ORDER BY id ASC";
+
+            using (SqlConnection conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = new SqlCommand(sql, conn))
+                {
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        IList<ModelSelectOption> e = new List<ModelSelectOption>();
+                        while (await reader.ReadAsync())
+                        {
+                            ModelSelectOption item = new ModelSelectOption();
+                            item.value = reader["id"].ToString();
+                            item.label = reader["name_thai"].ToString();
+                            e.Add(item);
+                        }
+                        return e;
+                    }
+                }
+                conn.Close();
+            }
+            return null;
+
         }
 
         public async Task<ModelRegisterEdit> GetEditDataByRegisterId(string UserId)
@@ -145,6 +211,8 @@ namespace THD.Core.Api.Repository.DataHandler
                             item.userid = reader["userid"].ToString();
                             item.passw = reader["passw"].ToString();
                             item.confirmpassw = reader["confirmpassw"].ToString();
+                            item.firstname1 = reader["first_name_1"].ToString();
+                            item.firstname2 = reader["first_name_2"].ToString();
                             item.firstname = reader["first_name"].ToString();
                             item.fullname = reader["full_name"].ToString();
                             item.position = reader["position"].ToString();
@@ -184,6 +252,8 @@ namespace THD.Core.Api.Repository.DataHandler
 
                     cmd.Parameters.Add("@RegisterId", SqlDbType.VarChar, 100).Value = model.registerid;
                     cmd.Parameters.Add("@Email", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.email);
+                    cmd.Parameters.Add("@FirstName1", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.firstname1);
+                    cmd.Parameters.Add("@FirstName2", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.firstname2);
                     cmd.Parameters.Add("@FirstName", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.firstname);
                     cmd.Parameters.Add("@FullName", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.fullname);
                     cmd.Parameters.Add("@WorkPhone", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.workphone);
@@ -224,9 +294,13 @@ namespace THD.Core.Api.Repository.DataHandler
         {
             ModelMenuFAccount_InterfaceData resp = new ModelMenuFAccount_InterfaceData();
 
+            resp.listfirstname = await GetAllFirstNameAsync();
+
+            resp.listfaculty = await GetAllFacultyAsync();
+
             resp.account = await GetEditDataAccountAsync(RegisterId);
 
-            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M023");
+            resp.UserPermission = await _IRegisterUserRepository.GetPermissionPageAsync(RegisterId, "M037");
 
             return resp;
         }
@@ -259,6 +333,8 @@ namespace THD.Core.Api.Repository.DataHandler
                         {
                             item.registerid = reader["register_id"].ToString();
                             item.userid = reader["userid"].ToString();
+                            item.firstname1 = reader["first_name_1"].ToString();
+                            item.firstname2 = reader["first_name_2"].ToString();
                             item.firstname = reader["first_name"].ToString();
                             item.fullname = reader["full_name"].ToString();
                             item.email = reader["email"].ToString();
@@ -303,6 +379,8 @@ namespace THD.Core.Api.Repository.DataHandler
 
                     cmd.Parameters.Add("@RegisterId", SqlDbType.VarChar, 100).Value = userid;
                     cmd.Parameters.Add("@Email", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.email);
+                    cmd.Parameters.Add("@FirstName1", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.firstname1);
+                    cmd.Parameters.Add("@FirstName2", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.firstname2);
                     cmd.Parameters.Add("@FirstName", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.firstname);
                     cmd.Parameters.Add("@FullName", SqlDbType.VarChar, 200).Value = ParseDataHelper.ConvertDBNull(model.fullname);
                     cmd.Parameters.Add("@WorkPhone", SqlDbType.VarChar, 50).Value = ParseDataHelper.ConvertDBNull(model.workphone);
