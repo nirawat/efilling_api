@@ -13594,23 +13594,27 @@
   },
   "packageFolders": {
     "C:\\Users\\niraw\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj",
+      "projectUniqueName": "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj",
       "projectName": "THD.Core.Api.Private",
-      "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj",
+      "projectPath": "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\THD.Core.Api.Private.csproj",
       "packagesPath": "C:\\Users\\niraw\\.nuget\\packages\\",
-      "outputPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\obj\\",
+      "outputPath": "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Private\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\Offline Packages",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\niraw\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.1.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 20.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13618,26 +13622,30 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
+        "C:\\Program Files (x86)\\DevExpress 20.1\\Components\\System\\Components\\Packages": {},
+        "C:\\Program Files (x86)\\DevExpress 20.2\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.devexpress.com/dZgA7YrU1ubsj6ggl4XmJ4zGnTIPivtaC79sXqKN3afoW7mTfc/api": {}
       },
       "frameworks": {
         "netcoreapp2.2": {
+          "targetAlias": "netcoreapp2.2",
           "projectReferences": {
-            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj": {
-              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj"
+            "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business.Interface\\THD.Core.Api.Business.Interface.csproj"
             },
-            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj": {
-              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj"
+            "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Business\\THD.Core.Api.Business.csproj"
             },
-            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
-              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
+            "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Helpers\\THD.Core.Api.Helpers.csproj"
             },
-            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
-              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
+            "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj"
             },
-            "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj": {
-              "projectPath": "C:\\Work Project\\GitHub\\Efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj"
+            "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj": {
+              "projectPath": "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Repository\\THD.Core.Api.Repository.csproj"
             }
           }
         }
@@ -13650,6 +13658,7 @@
     },
     "frameworks": {
       "netcoreapp2.2": {
+        "targetAlias": "netcoreapp2.2",
         "dependencies": {
           "DevExpress.Reporting.Core": {
             "target": "Package",
@@ -13703,7 +13712,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
       }
     }
   }

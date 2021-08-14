@@ -10,6 +10,9 @@
     <Compile Update="ReportFiles\Report14\rptR14_1.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="ReportFiles\rptDemoExcel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="ReportFiles\rptR1.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -29,6 +32,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="ReportFiles\rptR17.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="ReportFiles\rptR18 - Copy.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="ReportFiles\rptR18.cs">

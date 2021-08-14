@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "XQ3O7XBGK/98KPwNwj7SK/4hoPUP3ExcKLdmjcnA3gfzZL2sC/YBlcUM9AUClf1hzAqmuZuCU8Zs6W08jfww+g==",
+  "success": true,
+  "projectFilePath": "C:\\Work Project\\GitHub\\efilling\\efilling_api\\THD.Core.Api\\THD.Core.Api.Models\\THD.Core.Api.Models.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\niraw\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
